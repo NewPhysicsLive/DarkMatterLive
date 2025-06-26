@@ -1,0 +1,26 @@
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+}
+#plot {
+  width: 60vw;
+  height: 80vh;
+}
+svg {
+  display: block;
+}
+.axis-label {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.x-axis text {
+  font-size: 14px;     /* or whatever size you like */
+  /* font-weight, font-family, etc., can go here too */
+}
+
+.y-axis text {
+  font-size: 14px;     /* or whatever size you like */
+  /* font-weight, font-family, etc., can go here too */
+}
