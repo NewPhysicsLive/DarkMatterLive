@@ -4,16 +4,37 @@ body {
   padding: 0;
 }
 #plot {
-  width: 60vw;
+  width: 50vw;
   height: 80vh;
 }
 svg {
   display: block;
 }
 .axis-label {
-  font-size: 14px;
-  font-weight: bold;
+  font-size: 18px;
+  margin: 0;
+  padding: 0;
+  text-align: center;
 }
+
+.axis-label div {
+  display: flex;
+  height: 100%;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
+.sources {
+  width: 40vw
+}
+
 
 .x-axis text {
   font-size: 14px;     /* or whatever size you like */
@@ -23,4 +44,8 @@ svg {
 .y-axis text {
   font-size: 14px;     /* or whatever size you like */
   /* font-weight, font-family, etc., can go here too */
+}
+.plot-title {
+  font-family: "KaTeX_Main", sans-serif;
+  font-size: 22px;
 }

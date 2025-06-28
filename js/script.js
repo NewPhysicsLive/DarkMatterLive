@@ -1,6 +1,6 @@
 /* script.js */
 // Set up margins and dimensions
-const margin = { top: 20, right: 20, bottom: 60, left: 80 };
+const margin = { top: 60, right: 20, bottom: 80, left: 80 };
 const container = d3.select('#plot');
 const width = container.node().clientWidth;
 const height = container.node().clientHeight;
@@ -21,24 +21,45 @@ const y0 = d3.scaleLog().domain([1e-15, 1e-1]).range([height - margin.bottom, ma
 // Create axis generators
 const xAxis = d3.axisBottom(x0)
       .ticks(10, function(d) { return 10 + formatPower(Math.round(Math.log(d) / Math.LN10)); })
-      .tickSize(10);
+      .tickSize(7);
 const yAxis = d3.axisLeft(y0)
-      .ticks(10, function(d) { return 10 + "⁻" + formatPower(Math.round(Math.log(d) / Math.LN10)); });
+      .ticks(10, function(d) { return 10 + "⁻" + formatPower(Math.round(Math.log(d) / Math.LN10)); })
+      .tickSize(7);
+
+const xAxisTop = d3.axisTop(x0)
+      .ticks(10)
+      .tickFormat("")
+      .tickSize(7);
+const yAxisRight = d3.axisRight(y0)
+      .ticks(10)
+      .tickFormat("")
+      .tickSize(7);
+
 
 // Append axes groups
-svg.append('g')
+const xAxisG = svg.append('g')
   .attr('class', 'x-axis')
   .attr('transform', `translate(0,${height - margin.bottom})`)
   .call(xAxis);
 
-svg.append('g')
+const yAxisG = svg.append('g')
   .attr('class', 'y-axis')
   .attr('transform', `translate(${margin.left},0)`)
   .call(yAxis);
 
+const xAxisGtop = svg.append('g')
+  .attr('class', 'x-axis-top')
+  .attr('transform', `translate(0,${margin.top})`)
+  .call(xAxisTop);
+
+const yAxisGright = svg.append('g')
+  .attr('class', 'y-axis-right')
+  .attr('transform', `translate(${width-margin.right},0)`)
+  .call(yAxisRight);
+
 // Add X axis label\svg.append('text')
 
-svg.append('text')
+/* svg.append('text')
   .attr('class', 'axis-label')
   .attr('x', width / 2)
   .attr('y', height - margin.bottom / 3)
@@ -50,7 +71,52 @@ svg.append("text")
   .attr("class", "axis-label")
   .attr("transform", `translate(${margin.left / 3}, ${height / 2}) rotate(-90)`)
   .attr("text-anchor", "middle")
-  .text("Coupling");
+  .text("Coupling"); */
+
+svg
+  .append("text")
+  .attr("class", "plot-title")
+  .attr("x", width / 2 + 20)
+  .attr("y", margin.top - 25)
+  .attr("text-anchor", "middle")
+  .text("Dark Photon into invisible final states (BC2)");
+
+const foX = xAxisG.append('foreignObject')
+  .attr('x', width/2-60)
+  .attr('y', 40)
+  .attr('width', 220)
+  .attr('class', 'axis-label') 
+  .attr('text-anchor', 'middle')
+  .attr('height', 30);
+  // DOMParser to turn that string into actual nodes
+foX.append("xhtml:div").html(
+  katex.renderToString("\\mathrm{Mass\\,of\\,DM},\\,m_{\\chi}\\,[\\mathrm{GeV}]", {
+    throwOnError: false,
+  })
+);
+
+const foY = yAxisG
+  .append("foreignObject")
+  .attr("x", -height/2-100)
+  .attr("y", -margin.left)
+  .style("transform", "rotate(-90deg)")
+  .attr("width", 200)
+  .attr("class", "axis-label")
+  .attr("text-anchor", "middle")
+  .attr("height", 50);
+// DOMParser to turn that string into actual nodes
+foY
+  .append("xhtml:div")
+  .html(
+    katex.renderToString(
+      "y=\\varepsilon^2\\alpha_\\mathrm{D} (m_\\chi / m_{A'})^4",
+      {
+        throwOnError: false,
+      }
+    )
+  );
+
+
 
 // Clip path for plotting area
 svg.append('clipPath')
@@ -200,14 +266,25 @@ d3.csv("../data/CMS.csv", d3.autoType) // autoType will convert numeric strings 
       .attr("stroke", "green")
       .attr("class", "line")
       .attr("stroke-width", 2)
-      .attr("d", line);
+      .attr("d", line) 
 
+    
     plotArea
       .append("path")
       .datum(cms_data)
       .attr("class", "area")
       .attr("fill", "lightgreen")
-      .attr("d", areaGen);
+      .attr("d", areaGen)
+      .attr("id", "cms-area");
+
+    plotArea
+      .append("text")
+      .attr("class", "line-label")
+      .append("textPath")
+      .attr("href", "#cms-area") // ← match the path’s id
+      .attr("startOffset", "50%") // ← halfway along the path
+      .attr("text-anchor", "middle") // ← center the text there
+      .text("CMS");
       
   })
   .catch((err) => console.error(err));
@@ -281,7 +358,9 @@ const zoom = d3.zoom()
     const zy = transform.rescaleY(y0);
 
     svg.select('.x-axis').call(xAxis.scale(zx));
+    svg.select(".x-axis-top").call(xAxisTop.scale(zx));
     svg.select('.y-axis').call(yAxis.scale(zy));
+    svg.select(".y-axis-right").call(yAxisRight.scale(zy));
 
     const zoomedLine = d3.line()
       .x((d) => zx(d.x))
