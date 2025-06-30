@@ -1,6 +1,6 @@
 /* script.js */
 // Set up margins and dimensions
-const margin = { top: 60, right: 20, bottom: 80, left: 80 };
+const margin = { top: 60, right: 200, bottom: 80, left: 80 };
 const container = d3.select('#plot');
 const width = container.node().clientWidth;
 const height = container.node().clientHeight;
@@ -165,49 +165,9 @@ const areaGen = d3.area()
   .y0(y0(0.2))
   .y1(d => y0(d.y));
 
-/* const expLineGen = d3.line()
-  .x(d => x0(d.x))
-  .y(d => y0(d.y));
-
-plotArea.append('path')
-  .datum(data.sort((a, b) => d3.ascending(a.x, b.x)))
-  .attr('class', 'area')
-  .attr('fill', 'lightsteelblue')
-  .attr('d', areaGen);
-
-plotArea.append("path")
-  .datum(exampleData)
-  .attr("class", "area")
-  .attr("fill", "lightsteelblue")
-  .attr("d", areaGen);
-
-// Draw initial line
-plotArea.append('path')
-  .datum(data.sort((a, b) => d3.ascending(a.x, b.x)))
-  .attr('fill', 'none')
-  .attr('stroke', 'steelblue')
-  .attr('stroke-width', 1.5)
-  .attr('d', line);
-
-plotArea.append('path')
-  .datum(expData)
-  .attr('fill', 'none')
-  .attr('stroke', 'crimson')
-  .attr('stroke-width', 2)
-  .attr('stroke-dasharray', '5 3')
-  .attr('d', expLineGen);
-
-plotArea.append("path")
-  .datum(exampleData)
-  .attr("fill", "none")
-  .attr("stroke", "blue")
-  .attr("stroke-width", 2)
-  .attr("stroke-dasharray", "5 3")
-  .attr("d", line); */
-
 let babar_data;
 
-d3.csv("../data/BaBar.csv", d3.autoType) // autoType will convert numeric strings to numbers
+d3.csv("data/BaBar.csv", d3.autoType) // autoType will convert numeric strings to numbers
   .then((data) => {
     // data is now an array of { x: Number, y: Number } objects\
     babar_data = data;
@@ -234,7 +194,7 @@ d3.csv("../data/BaBar.csv", d3.autoType) // autoType will convert numeric string
 
 let relic_density_data;
 
-d3.csv("../data/Relic Density.csv", d3.autoType) // autoType will convert numeric strings to numbers
+d3.csv("data/Relic Density.csv", d3.autoType) // autoType will convert numeric strings to numbers
   .then((data) => {
     // data is now an array of { x: Number, y: Number } objects\
     relic_density_data = data;
@@ -254,7 +214,7 @@ d3.csv("../data/Relic Density.csv", d3.autoType) // autoType will convert numeri
 
 let cms_data;
 
-d3.csv("../data/CMS.csv", d3.autoType) // autoType will convert numeric strings to numbers
+d3.csv("data/CMS.csv", d3.autoType) // autoType will convert numeric strings to numbers
   .then((data) => {
     // data is now an array of { x: Number, y: Number } objects\
     cms_data = data;
@@ -282,7 +242,7 @@ d3.csv("../data/CMS.csv", d3.autoType) // autoType will convert numeric strings 
       .attr("class", "line-label")
       .append("textPath")
       .attr("href", "#cms-area") // ← match the path’s id
-      .attr("startOffset", "50%") // ← halfway along the path
+      .attr("startOffset", "40%") // ← halfway along the path
       .attr("text-anchor", "middle") // ← center the text there
       .text("CMS");
       
@@ -291,7 +251,7 @@ d3.csv("../data/CMS.csv", d3.autoType) // autoType will convert numeric strings 
 
 let na64_data;
 
-d3.csv("../data/NA64.csv", d3.autoType) // autoType will convert numeric strings to numbers
+d3.csv("data/NA64.csv", d3.autoType) // autoType will convert numeric strings to numbers
   .then((data) => {
     // data is now an array of { x: Number, y: Number } objects\
     na64_data = data;
@@ -312,7 +272,7 @@ d3.csv("../data/NA64.csv", d3.autoType) // autoType will convert numeric strings
 
 let belle2_data;
 
-d3.csv("../data/Belle 2.csv", d3.autoType) // autoType will convert numeric strings to numbers
+d3.csv("data/Belle 2.csv", d3.autoType) // autoType will convert numeric strings to numbers
   .then((data) => {
     // data is now an array of { x: Number, y: Number } objects\
     belle2_data = data;
@@ -332,7 +292,7 @@ d3.csv("../data/Belle 2.csv", d3.autoType) // autoType will convert numeric stri
 
   let hllhc_data;
 
-  d3.csv("../data/HL-LHC.csv", d3.autoType) // autoType will convert numeric strings to numbers
+  d3.csv("data/HL-LHC.csv", d3.autoType) // autoType will convert numeric strings to numbers
     .then((data) => {
       // data is now an array of { x: Number, y: Number } objects\
       hllhc_data = data;
@@ -348,6 +308,56 @@ d3.csv("../data/Belle 2.csv", d3.autoType) // autoType will convert numeric stri
 
     })
     .catch((err) => console.error(err));    
+
+const legendData = [
+  { name: "BaBar", color: "gray", areaColor: "lightgray", dash: null },
+  { name: "Relic Density", color: "black", dash: null },
+  { name: "CMS", color: "green", areaColor: "lightgreen", dash: null },
+  { name: "NA64", color: "rgb(26, 255, 0)", dash: "20,7" },
+  { name: "Belle 2", color: "rgb(255, 0, 255)", dash: "20,7" },
+  { name: "HL-LHC", color: "rgb(5, 133, 46)", dash: null },
+];
+
+const legendX = width - margin.right + 50;
+const legendY = margin.top;
+
+const legend = svg.append("g")
+  .attr("class", "legend")
+  .attr("transform", `translate(${legendX},${legendY})`);
+
+const itemHeight = 25;
+const swatchSize = 30;
+const item = legend
+  .selectAll(".legend-item")
+  .data(legendData)
+  .enter().append("g")
+    .attr("class", "legend-item")
+    .attr("transform", (d,i) => `translate(0, ${i * itemHeight})`);
+
+item
+  .filter((d) => d.areaColor) // only those entries
+  .append("rect")
+  .attr("width", swatchSize)
+  .attr("height", 16)
+  .attr("y", 0) // vertical centering
+  .attr("fill", (d) => d.areaColor);
+
+item
+  .append("line")
+  .attr("x1", 0)
+  .attr("x2", swatchSize)
+  .attr("y1", 8)
+  .attr("y2", 8)
+  .attr("stroke", (d) => d.color)
+  .attr("stroke-width", 2)
+  .attr("stroke-dasharray", d => d.dash || null);
+
+item
+  .append("text")
+  .attr("x", swatchSize + 6)
+  .attr("y", 8)
+  .attr("dy", "0.35em")
+  .text((d) => d.name);
 
 // Zoom behavior
 const zoom = d3.zoom()
