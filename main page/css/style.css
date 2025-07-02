@@ -4,10 +4,10 @@ body {
   padding: 0;
 }
 #plot {
-  width: 70vw;
+  width: 75vw;
   height: 80vh;
-  z-index: 1;
 }
+
 svg {
   display: block;
 }
