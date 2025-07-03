@@ -1,3 +1,7 @@
+html.loading body {
+  visibility: hidden;
+}
+
 body {
   font-family: sans-serif;
   margin: 0;

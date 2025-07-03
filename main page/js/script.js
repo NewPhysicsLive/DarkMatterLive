@@ -1,6 +1,13 @@
 /* script.js */
+
+document.documentElement.classList.add("loading");
+window.addEventListener("load", () => {
+  // when all CSS, images, fonts, scripts are done, show the page
+  document.documentElement.classList.remove("loading");
+});
+
 // Set up margins and dimensions
-const margin = { top: 60, right: 320, bottom: 80, left: 80 };
+const margin = { top: 60, right: 320, bottom: 80, left: 95 };
 const container = d3.select('#plot');
 const width = container.node().clientWidth;
 const height = container.node().clientHeight;
@@ -74,72 +81,6 @@ const yAxisRight = d3.axisRight(y0)
       .tickFormat("")
       .tickSize(7);
 
-
-
-// Append axes groups
-const xAxisG = svg.append('g')
-  .attr('class', 'x-axis')
-  .attr('transform', `translate(0,${height - margin.bottom})`)
-  .call(xAxis);
-
-const yAxisG = svg.append('g')
-  .attr('class', 'y-axis')
-  .attr('transform', `translate(${margin.left},0)`)
-  .call(yAxis);
-
-const xAxisGtop = svg.append('g')
-  .attr('class', 'x-axis-top')
-  .attr('transform', `translate(0,${margin.top})`)
-  .call(xAxisTop);
-
-const yAxisGright = svg.append('g')
-  .attr('class', 'y-axis-right')
-  .attr('transform', `translate(${width-margin.right},0)`)
-  .call(yAxisRight);
-
-svg
-  .append("text")
-  .attr("class", "plot-title")
-  .attr("x", (width - margin.left - margin.right) / 2 + margin.left)
-  .attr("y", margin.top - 25)
-  .attr("text-anchor", "middle")
-  .text("Dark Photon into invisible final states (BC2)");
-
-const foX = xAxisG
-  .append("foreignObject")
-  .attr("x", (width - margin.left-margin.right) / 2 + margin.left - 110)
-  .attr("y", 40)
-  .attr("width", 220)
-  .attr("class", "axis-label")
-  .attr("text-anchor", "middle")
-  .attr("height", 30);
-  // DOMParser to turn that string into actual nodes
-foX.append("xhtml:div").html(
-  katex.renderToString("\\mathrm{Mass\\,of\\,DM},\\,m_{\\chi}\\,[\\mathrm{GeV}]", {
-    throwOnError: false,
-  })
-);
-
-const foY = yAxisG
-  .append("foreignObject")
-  .attr("x", -(height - margin.top - margin.bottom) / 2 - margin.top - 100)
-  .attr("y", -margin.left)
-  .style("transform", "rotate(-90deg)")
-  .attr("width", 200)
-  .attr("class", "axis-label")
-  .attr("text-anchor", "middle")
-  .attr("height", 50);
-// DOMParser to turn that string into actual nodes
-foY
-  .append("xhtml:div")
-  .html(
-    katex.renderToString(
-      "y=\\varepsilon^2\\alpha_\\mathrm{D} (m_\\chi / m_{A'})^4",
-      {
-        throwOnError: false,
-      }
-    )
-  );
 
 
 
@@ -294,18 +235,41 @@ d3.csv("data/BaBar.csv", d3.autoType) // autoType will convert numeric strings t
     dataLayer
       .append("path")
       .datum(babar_data)
+      .attr("class", "area")
+      .attr("fill", "lightgray")
+      .attr("d", areaGen);
+
+    dataLayer
+      .append("path")
+      .datum(babar_data)
       .attr("fill", "none")
       .attr("stroke", "gray")
       .attr("class", "line")
       .attr("stroke-width", 2)
       .attr("d", line);
 
-    dataLayer
-      .append("path")
-      .datum(babar_data)
-      .attr("class", "area")
-      .attr("fill", "lightgray")
-      .attr("d", areaGen);
+    dataLayer.selectAll("path.line")
+      .attr("pointer-events", "stroke")
+      .on("mouseover", function(event, d) {
+
+        if (!event.relatedTarget) return;
+
+        d3.select(this)
+          .raise()
+          .transition()
+          .duration(100)
+          .attr("stroke-width", 4)
+          .attr("opacity", 1);
+      })
+      .on("mouseout", function(event, d) {
+
+        if (!event.relatedTarget) return;
+    // 3) Revert styling
+        d3.select(this)
+          .transition().duration(100)
+          .attr("stroke-width", 2)
+          .attr("opacity", 0.7);
+      });
 
   })
   .catch((err) => console.error(err));
@@ -330,15 +294,19 @@ d3.csv("data/Relic Density.csv", d3.autoType) // autoType will convert numeric s
     dataLayer.selectAll("path.line")
       .attr("pointer-events", "stroke")
       .on("mouseover", function(event, d) {
-    // 1) Bring this line to front
-        d3.select(this).raise();
-    // 2) Highlight it
+
+        if (!event.relatedTarget) return;
+
         d3.select(this)
-          .transition().duration(100)
+          .raise()
+          .transition()
+          .duration(100)
           .attr("stroke-width", 4)
           .attr("opacity", 1);
       })
       .on("mouseout", function(event, d) {
+
+        if (!event.relatedTarget) return;
     // 3) Revert styling
         d3.select(this)
           .transition().duration(100)
@@ -385,16 +353,21 @@ d3.csv("data/CMS.csv", d3.autoType) // autoType will convert numeric strings to 
       .text("CMS");
 
     dataLayer.selectAll("path.line")
+      .attr("pointer-events", "stroke")
       .on("mouseover", function(event, d) {
-    // 1) Bring this line to front
-        d3.select(this).raise();
-    // 2) Highlight it
+
+        if (!event.relatedTarget) return;
+
         d3.select(this)
-          .transition().duration(100)
+          .raise()
+          .transition()
+          .duration(100)
           .attr("stroke-width", 4)
           .attr("opacity", 1);
       })
       .on("mouseout", function(event, d) {
+
+        if (!event.relatedTarget) return;
     // 3) Revert styling
         d3.select(this)
           .transition().duration(100)
@@ -424,16 +397,21 @@ d3.csv("data/NA64.csv", d3.autoType) // autoType will convert numeric strings to
       .attr("d", line);
 
     dataLayer.selectAll("path.line")
+      .attr("pointer-events", "stroke")
       .on("mouseover", function(event, d) {
-    // 1) Bring this line to front
-        d3.select(this).raise();
-    // 2) Highlight it
+
+        if (!event.relatedTarget) return;
+
         d3.select(this)
-          .transition().duration(100)
+          .raise()
+          .transition()
+          .duration(100)
           .attr("stroke-width", 4)
           .attr("opacity", 1);
       })
       .on("mouseout", function(event, d) {
+
+        if (!event.relatedTarget) return;
     // 3) Revert styling
         d3.select(this)
           .transition().duration(100)
@@ -464,16 +442,21 @@ d3.csv("data/Belle 2.csv", d3.autoType) // autoType will convert numeric strings
       .attr("d", line);
 
     dataLayer.selectAll("path.line")
+      .attr("pointer-events", "stroke")
       .on("mouseover", function(event, d) {
-    // 1) Bring this line to front
-        d3.select(this).raise();
-    // 2) Highlight it
+
+        if (!event.relatedTarget) return;
+
         d3.select(this)
-          .transition().duration(100)
+          .raise()
+          .transition()
+          .duration(100)
           .attr("stroke-width", 4)
           .attr("opacity", 1);
       })
       .on("mouseout", function(event, d) {
+
+        if (!event.relatedTarget) return;
     // 3) Revert styling
         d3.select(this)
           .transition().duration(100)
@@ -502,16 +485,21 @@ d3.csv("data/Belle 2.csv", d3.autoType) // autoType will convert numeric strings
         .attr("d", line);
 
       dataLayer.selectAll("path.line")
+      .attr("pointer-events", "stroke")
       .on("mouseover", function(event, d) {
-    // 1) Bring this line to front
-        d3.select(this).raise();
-    // 2) Highlight it
+
+        if (!event.relatedTarget) return;
+
         d3.select(this)
-          .transition().duration(100)
+          .raise()
+          .transition()
+          .duration(100)
           .attr("stroke-width", 4)
           .attr("opacity", 1);
       })
       .on("mouseout", function(event, d) {
+
+        if (!event.relatedTarget) return;
     // 3) Revert styling
         d3.select(this)
           .transition().duration(100)
@@ -581,32 +569,137 @@ text.append("a")
     .text((d,i) => `[${i+1}]`)
     .style("text-decoration", "underline")
     .style("cursor", "pointer");
+
+
+d3.selectAll('.legend-item a')
+  .each(function(d) {
+    const el = this;
+    tippy(el, {
+      content: 'Loading…',
+      allowHTML: true,
+      onShow(instance) {
+        // only fetch once
+        if (instance.props.content === 'Loading…') {
+          fetch(`http://localhost:3000/preview?url=${encodeURIComponent(d.paperUrl)}`)
+            .then(r => r.json())
+            .then(meta => {
+              console.log(meta);
+              instance.setContent(`
+                <div style="max-width:300px; font-family: sans-serif;">
+                  ${
+                    meta.image
+                      ? `<img src="${meta.image[0].url}"
+                               alt="${meta.siteName} logo"
+                               style="width:100%; height:auto; margin-bottom:8px;"/>`
+                      : ""
+                  }
+                  <strong>${meta.title}</strong><br>
+                  ${
+                    meta.authors && meta.authors.length
+                      ? `<em>By ${meta.authors.join(", ")}</em><br>`
+                      : ""
+                  }
+                  <p style="margin:4px 0;">${meta.description}</p>
+                </div>
+              `);
+            });
+        }
+      }
+    });
+  });
+
+// Append axes groups
+const xAxisG = svg.append('g')
+  .attr('class', 'x-axis')
+  .attr('transform', `translate(0,${height - margin.bottom})`)
+  .call(xAxis);
+
+const yAxisG = svg.append('g')
+  .attr('class', 'y-axis')
+  .attr('transform', `translate(${margin.left},0)`)
+  .call(yAxis);
+
+const xAxisGtop = svg.append('g')
+  .attr('class', 'x-axis-top')
+  .attr('transform', `translate(0,${margin.top})`)
+  .call(xAxisTop);
+
+const yAxisGright = svg.append('g')
+  .attr('class', 'y-axis-right')
+  .attr('transform', `translate(${width-margin.right},0)`)
+  .call(yAxisRight);
+  
+
+svg
+  .append("text")
+  .attr("class", "plot-title")
+  .attr("x", (width - margin.left - margin.right) / 2 + margin.left)
+  .attr("y", margin.top - 25)
+  .attr("text-anchor", "middle")
+  .text("Dark Photon into invisible final states (BC2)");
+
+const foX = xAxisG
+  .append("foreignObject")
+  .attr("x", (width - margin.left-margin.right) / 2 + margin.left - 110)
+  .attr("y", 40)
+  .attr("width", 220)
+  .attr("class", "axis-label")
+  .attr("text-anchor", "middle")
+  .attr("height", 30);
+  // DOMParser to turn that string into actual nodes
+foX.append("xhtml:div").html(
+  katex.renderToString("\\mathrm{Mass\\,of\\,DM},\\,m_{\\chi}\\,[\\mathrm{GeV}]", {
+    throwOnError: false,
+  })
+);
+
+const foY = yAxisG
+  .append("foreignObject")
+  .attr("x", -(height - margin.top - margin.bottom) / 2 - margin.top - 100)
+  .attr("y", -margin.left)
+  .style("transform", "rotate(-90deg)")
+  .attr("width", 200)
+  .attr("class", "axis-label")
+  .attr("text-anchor", "middle")
+  .attr("height", 50);
+// DOMParser to turn that string into actual nodes
+foY
+  .append("xhtml:div")
+  .html(
+    katex.renderToString(
+      "y=\\varepsilon^2\\alpha_\\mathrm{D} (m_\\chi / m_{A'})^4",
+      {
+        throwOnError: false,
+      }
+    )
+  );
   
 // Zoom behavior
 const zoom = d3.zoom()
-  .scaleExtent([0.2, 1e6])
+  .scaleExtent([0.2, 1e4])
   .on('zoom', ({ transform }) => {
 
     const zx = transform.rescaleX(x0);
     const zy = transform.rescaleY(y0);
 
-    const zoomFactor = transform.k; // ≥1 means zoomed in
     const [xMin, xMax] = zx.domain();
-    const spanRatio = xMax / xMin; 
+    const spanRatioX = xMax / xMin; 
+    const [yMin, yMax] = zy.domain();
+    const spanRatioY = yMax / yMin; 
     
-    console.log(`Zoom factor: ${zoomFactor}, xMin: ${xMin}, xMax: ${xMax}, spanRatio: ${spanRatio}`);
+    console.log(`spanRatioX: ${spanRatioX}`);
 
-    let xTicks, xFormat;
+    let xTicks, xFormat, yTicks, yFormat;
 
-    if (spanRatio > 50) {
+    if (spanRatioX > 50) {
       // Wide view → only decades, 10ⁿ labels
       xFormat = (d) => {
         const e = Math.floor(Math.log10(d));
-        if (d/Math.pow(10, e) === 1) {
-        return `10${toSuperscript(e)}`;
-        } else return ""; 
-      };  // others blank
-      } else if (spanRatio > 5) {
+        if (d / Math.pow(10, e) === 1) {
+          return `10${toSuperscript(e)}`;
+        } else return "";
+      }; // others blank
+    } else if (spanRatioX > 5) {
       // Medium zoom → decades + first‐digit ticks (2×10ⁿ, 5×10ⁿ)
       xFormat = (d) => {
         const e = Math.floor(Math.log10(d));
@@ -617,54 +710,54 @@ const zoom = d3.zoom()
         if (m === 2 || m === 5) return `${m}×10${supExp}`;
         return ""; // others blank
       };
-      } else if (xMax - xMin < 0.1 && xMax > 0.01) {
-        xTicks = 6; // number of ticks
-        xFormat = d3.format(".8~f");
-      } else if (xMax < 0.01 && spanRatio > 2) {
-        xTicks = 6; // number of ticks
-        xFormat = (d) => {
-          const e = Math.floor(Math.log10(d));
-          const m = d / Math.pow(10, e);
-          const supExp = toSuperscript(e);
-          // label only exact decades or 2×,5×
-          if (m === 1) return `10${supExp}`;
-          return `${m.toFixed(0)}×10${supExp}`;
-        };
-      } else if (xMax < 0.01 && xMax - xMin < 0.01 && spanRatio > 1.05) {
-        xTicks = 6; // number of ticks
-        xFormat = (d) => {
-          const e = Math.floor(Math.log10(d));
-          const m = d / Math.pow(10, e);
-          const supExp = toSuperscript(e);
-          // label only exact decades or 2×,5×
-          if (m === 1) return `10${supExp}`;
-          return `${m.toFixed(2)}×10${supExp}`;
-        };
-      } else if (xMax < 0.01 && xMax - xMin < 0.01 && spanRatio > 1.001) {
-        xTicks = 4; // number of ticks
-        xFormat = (d) => {
-          const e = Math.floor(Math.log10(d));
-          const m = d / Math.pow(10, e);
-          const supExp = toSuperscript(e);
-          // label only exact decades or 2×,5×
-          if (m === 1) return `10${supExp}`;
-          return `${m.toFixed(4)}×10${supExp}`;
-        };
-      } else if (xMax < 0.01 && xMax - xMin < 0.01) {
-        xTicks = 3; // number of ticks
-        xFormat = (d) => {
-          const e = Math.floor(Math.log10(d));
-          const m = d / Math.pow(10, e);
-          const supExp = toSuperscript(e);
-          // label only exact decades or 2×,5×
-          if (m === 1) return `10${supExp}`;
-          return `${m.toFixed(6)}×10${supExp}`;
-        };
-      } else {
-        // Deep zoom → linear ticks in current window
-        xTicks = 6; // number of ticks
-        xFormat = d3.format(".2~f"); // e.g. “1234.56”
-      }
+    } else if (xMax - xMin < 0.1 && xMax > 0.01) {
+      xTicks = 6; // number of ticks
+      xFormat = d3.format(".8~f");
+    } else if ((xMax < 0.01) && spanRatioX > 2) {
+      xTicks = 6; // number of ticks
+      xFormat = (d) => {
+        const e = Math.floor(Math.log10(d));
+        const m = d / Math.pow(10, e);
+        const supExp = toSuperscript(e);
+        // label only exact decades or 2×,5×
+        if (m === 1) return `10${supExp}`;
+        return `${m.toFixed(0)}×10${supExp}`;
+      };
+    } else if (xMax < 0.01 && xMax - xMin < 0.01 && spanRatioX > 1.05) {
+      xTicks = 6; // number of ticks
+      xFormat = (d) => {
+        const e = Math.floor(Math.log10(d));
+        const m = d / Math.pow(10, e);
+        const supExp = toSuperscript(e);
+        // label only exact decades or 2×,5×
+        if (m === 1) return `10${supExp}`;
+        return `${m.toFixed(2)}×10${supExp}`;
+      };
+    } else if (xMax < 0.01 && xMax - xMin < 0.01 && spanRatioX > 1.001) {
+      xTicks = 4; // number of ticks
+      xFormat = (d) => {
+        const e = Math.floor(Math.log10(d));
+        const m = d / Math.pow(10, e);
+        const supExp = toSuperscript(e);
+        // label only exact decades or 2×,5×
+        if (m === 1) return `10${supExp}`;
+        return `${m.toFixed(4)}×10${supExp}`;
+      };
+    } else if (xMax < 0.01 && xMax - xMin < 0.01) {
+      xTicks = 3; // number of ticks
+      xFormat = (d) => {
+        const e = Math.floor(Math.log10(d));
+        const m = d / Math.pow(10, e);
+        const supExp = toSuperscript(e);
+        // label only exact decades or 2×,5×
+        if (m === 1) return `10${supExp}`;
+        return `${m.toFixed(6)}×10${supExp}`;
+      };
+    } else {
+      // Deep zoom → linear ticks in current window
+      xTicks = 6; // let D3 pick ~6 linear ticks
+      xFormat = d3.format(",.2~f"); // e.g. “1234.56”
+    }
 
 
     svg.select('.x-axis').call(
@@ -681,9 +774,59 @@ const zoom = d3.zoom()
       .tickSize(7)
     );
 
+    if (spanRatioY > 50) {
+      // Wide view → only decades, 10ⁿ labels
+      yFormat = (d) => {
+        const e = Math.floor(Math.log10(d));
+        if (d / Math.pow(10, e) === 1) {
+          return `10${toSuperscript(e)}`;
+        } else return "";
+      }; // others blank
+    } else if (spanRatioY > 5) {
+      // Medium zoom → decades + first‐digit ticks (2×10ⁿ, 5×10ⁿ)
+      yFormat = (d) => {
+        const e = Math.floor(Math.log10(d));
+        const m = d / Math.pow(10, e);
+        const supExp = toSuperscript(e);
+        // label only exact decades or 2×,5×
+        if (m === 1) return `10${supExp}`;
+        if (m === 2 || m === 5) return `${m}×10${supExp}`;
+        return ""; // others blank
+      };
+    } else if (spanRatioY > 3) {
+      // Medium zoom → decades + first‐digit ticks (2×10ⁿ, 5×10ⁿ)
+      yFormat = (d) => {
+        yTicks = 4;
+        const e = Math.floor(Math.log10(d));
+        const m = d / Math.pow(10, e);
+        const supExp = toSuperscript(e);
+        // label only exact decades or 2×,5×
+        if (m === 1) return `10${supExp}`;
+        return `${m.toFixed(0)}×10${supExp}`;
+      };
+    } else {
+      // Medium zoom → decades + first‐digit ticks (2×10ⁿ, 5×10ⁿ)
+      yTicks = 3; // number of ticks
+      yFormat = d3.format(".4~e"); // e.g. “1234.56”
+    }
+
 
     svg.select('.y-axis').call(yAxis.scale(zy));
     svg.select(".y-axis-right").call(yAxisRight.scale(zy));
+
+    svg.select('.y-axis').call(
+      yAxis
+        .scale(zy)
+        .ticks(yTicks)
+        .tickFormat(yFormat)
+        .tickSize(7));
+      
+    svg.select(".y-axis-right").call(
+      yAxisRight
+      .scale(zy)
+      .ticks(yTicks)
+      .tickSize(7)
+    );
 
     const zoomedLine = d3.line()
       .x((d) => zx(d.x))
