@@ -258,8 +258,7 @@ d3.csv("data/BaBar.csv", d3.autoType) // autoType will convert numeric strings t
           .raise()
           .transition()
           .duration(100)
-          .attr("stroke-width", 4)
-          .attr("opacity", 1);
+          .attr("stroke-width", 4);
       })
       .on("mouseout", function(event, d) {
 
@@ -267,8 +266,7 @@ d3.csv("data/BaBar.csv", d3.autoType) // autoType will convert numeric strings t
     // 3) Revert styling
         d3.select(this)
           .transition().duration(100)
-          .attr("stroke-width", 2)
-          .attr("opacity", 0.7);
+          .attr("stroke-width", 2);
       });
 
   })
@@ -301,8 +299,7 @@ d3.csv("data/Relic Density.csv", d3.autoType) // autoType will convert numeric s
           .raise()
           .transition()
           .duration(100)
-          .attr("stroke-width", 4)
-          .attr("opacity", 1);
+          .attr("stroke-width", 4);
       })
       .on("mouseout", function(event, d) {
 
@@ -310,8 +307,7 @@ d3.csv("data/Relic Density.csv", d3.autoType) // autoType will convert numeric s
     // 3) Revert styling
         d3.select(this)
           .transition().duration(100)
-          .attr("stroke-width", 2)
-          .attr("opacity", 0.7);
+          .attr("stroke-width", 3);
       });
 
 
@@ -362,8 +358,7 @@ d3.csv("data/CMS.csv", d3.autoType) // autoType will convert numeric strings to 
           .raise()
           .transition()
           .duration(100)
-          .attr("stroke-width", 4)
-          .attr("opacity", 1);
+          .attr("stroke-width", 4);
       })
       .on("mouseout", function(event, d) {
 
@@ -371,8 +366,7 @@ d3.csv("data/CMS.csv", d3.autoType) // autoType will convert numeric strings to 
     // 3) Revert styling
         d3.select(this)
           .transition().duration(100)
-          .attr("stroke-width", 2)
-          .attr("opacity", 0.7);
+          .attr("stroke-width", 2);
       });
 
       
@@ -406,8 +400,7 @@ d3.csv("data/NA64.csv", d3.autoType) // autoType will convert numeric strings to
           .raise()
           .transition()
           .duration(100)
-          .attr("stroke-width", 4)
-          .attr("opacity", 1);
+          .attr("stroke-width", 4);
       })
       .on("mouseout", function(event, d) {
 
@@ -415,8 +408,7 @@ d3.csv("data/NA64.csv", d3.autoType) // autoType will convert numeric strings to
     // 3) Revert styling
         d3.select(this)
           .transition().duration(100)
-          .attr("stroke-width", 2)
-          .attr("opacity", 0.7);
+          .attr("stroke-width", 2);
       });
 
 
@@ -451,8 +443,7 @@ d3.csv("data/Belle 2.csv", d3.autoType) // autoType will convert numeric strings
           .raise()
           .transition()
           .duration(100)
-          .attr("stroke-width", 4)
-          .attr("opacity", 1);
+          .attr("stroke-width", 4);
       })
       .on("mouseout", function(event, d) {
 
@@ -460,8 +451,7 @@ d3.csv("data/Belle 2.csv", d3.autoType) // autoType will convert numeric strings
     // 3) Revert styling
         d3.select(this)
           .transition().duration(100)
-          .attr("stroke-width", 2)
-          .attr("opacity", 0.7);
+          .attr("stroke-width", 2);
       });
 
 
@@ -495,7 +485,6 @@ d3.csv("data/Belle 2.csv", d3.autoType) // autoType will convert numeric strings
           .transition()
           .duration(100)
           .attr("stroke-width", 4)
-          .attr("opacity", 1);
       })
       .on("mouseout", function(event, d) {
 
@@ -504,7 +493,6 @@ d3.csv("data/Belle 2.csv", d3.autoType) // autoType will convert numeric strings
         d3.select(this)
           .transition().duration(100)
           .attr("stroke-width", 2)
-          .attr("opacity", 0.7);
       });
 
 
@@ -512,12 +500,12 @@ d3.csv("data/Belle 2.csv", d3.autoType) // autoType will convert numeric strings
     .catch((err) => console.error(err));
   
 const legendData = [
-  { name: "BaBar", color: "gray", areaColor: "lightgray", dash: null, paperUrl: "https://arxiv.org/abs/2305.13953" },
+  { name: "BaBar", color: "gray", areaColor: "lightgray", dash: null, paperUrl: "https://arxiv.org/abs/2505.14229" },
   { name: "Relic Density", color: "black", dash: null, paperUrl: "https://arxiv.org/abs/2305.13953" },
-  { name: "CMS", color: "green", areaColor: "lightgreen", dash: null, paperUrl: "https://arxiv.org/abs/2305.13953" },
-  { name: "NA64", color: "rgb(26, 255, 0)", dash: "20,7", paperUrl: "https://arxiv.org/abs/2305.13953" },
-  { name: "Belle 2", color: "rgb(255, 0, 255)", dash: "20,7", paperUrl: "https://arxiv.org/abs/2305.13953" },
-  { name: "HL-LHC", color: "rgb(5, 133, 46)", dash: null, paperUrl: "https://arxiv.org/abs/2305.13953" },
+  { name: "CMS", color: "green", areaColor: "lightgreen", dash: null, paperUrl: "https://arxiv.org/abs/2107.13021" },
+  { name: "NA64", color: "rgb(26, 255, 0)", dash: "20,7", paperUrl: "https://link.springer.com/article/10.1007/JHEP11(2021)153" },
+  { name: "Belle 2", color: "rgb(255, 0, 255)", dash: "20,7", paperUrl: "https://link.springer.com/article/10.1140/epjc/s10052-024-13480-4" },
+  { name: "HL-LHC", color: "rgb(5, 133, 46)", dash: null, paperUrl: "https://www.worldscientific.com/doi/10.1142/S0218301324500186" },
 ];
 
 const legendX = width - margin.right + 50;
@@ -583,23 +571,38 @@ d3.selectAll('.legend-item a')
           fetch(`http://localhost:3000/preview?url=${encodeURIComponent(d.paperUrl)}`)
             .then(r => r.json())
             .then(meta => {
-              console.log(meta);
+
+              const fullTitle = meta.title || "";
+              const maxTitleChars = 120; // “specific number of symbols”
+              const shortTitle =
+                fullTitle.length > maxTitleChars
+                  ? fullTitle.slice(0, maxTitleChars).trim() + "…"
+                  : fullTitle;
+              
+              const fullDesc = meta.description || "";
+              const maxChars = 240; // “specific number of symbols”
+              const shortDesc =
+                fullDesc.length > maxChars
+                  ? fullDesc.slice(0, maxChars).trim() + "…"
+                  : fullDesc;
+
               instance.setContent(`
-                <div style="max-width:300px; font-family: sans-serif;">
+                <div class="wordbreaker" style="max-width:250px; font-family: sans-serif; display: flex; align-items: center;
+                  justify-content: start;flex-direction: column;gap:0.5rem">
                   ${
                     meta.image
                       ? `<img src="${meta.image[0].url}"
                                alt="${meta.siteName} logo"
-                               style="width:100%; height:auto; margin-bottom:8px;"/>`
+                               style="width:50%; height:auto;margin:0; padding:0;"/>`
                       : ""
                   }
-                  <strong>${meta.title}</strong><br>
+                  <strong style="margin:0; padding:0;">${shortTitle}</strong>
                   ${
                     meta.authors && meta.authors.length
-                      ? `<em>By ${meta.authors.join(", ")}</em><br>`
+                      ? `<em>By ${meta.authors.join(", ")}</em>`
                       : ""
                   }
-                  <p style="margin:4px 0;">${meta.description}</p>
+                  <p class="wordbreaker" style="margin:0; padding:0;">${shortDesc}</p>
                 </div>
               `);
             });

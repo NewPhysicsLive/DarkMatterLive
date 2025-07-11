@@ -9,6 +9,14 @@
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <!-- Link to our JS file -->
   <link rel="stylesheet" href="./css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
   <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/dist/tippy.css" />
   <script src="https://unpkg.com/@popperjs/core@2"></script>
@@ -17,10 +25,19 @@
   <script defer src="./js/script.js"></script>
 </head>
 <body>
-  <header>
+  <header class="header">
+    <ul class="navbar">
+      <li class="logo havbar-link"><a href="">Dark Matter live</a></li>
+      <li class="havbar-link"><a href="">Choose your model</a></li>
+      <li class="havbar-link"><a href="">How to add your results</a></li>
+    </ul>
   </header>
   <div class="wrapper">
+    <h1 class="model-title">Light DM coupled to dark photon (BC2)</h1>
     <div id="plot"></div>
+    <div class="description">
+      <h2 class="description-title">Description of the model</h2>
+    </div>
   </div>
   <footer>
   </footer>
