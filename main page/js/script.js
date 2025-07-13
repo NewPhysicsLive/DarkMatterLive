@@ -12,7 +12,7 @@ const container = d3.select('#plot');
 const width = container.node().clientWidth;
 const height = container.node().clientHeight;
 
-var superscript = "⁰¹²³⁴⁵⁶⁷⁸⁹",
+let superscript = "⁰¹²³⁴⁵⁶⁷⁸⁹",
     formatPower = function(d) { return (d + "").split("").map(function(c) { return superscript[c]; }).join("");
  };
 
@@ -26,6 +26,7 @@ function toSuperscript(n) {
     .join("");
 }
 
+//initial formatting of tick labels
 function powerTickFormatter({ labelEveryMantissa = false } = {}) {
   return function (d) {
     // protect against zero or negative
@@ -83,7 +84,6 @@ const yAxisRight = d3.axisRight(y0)
 
 
 
-
 // Clip path for plotting area
 svg.append('clipPath')
   .attr('id', 'clip')
@@ -111,7 +111,7 @@ const areaGen = d3.area()
   .y1(d => y0(d.y));
 
 
-//white background
+//white filling background
 dataLayer
   .append("rect")
   .attr("x", margin.left)
@@ -121,7 +121,7 @@ dataLayer
   .attr("fill", "white")
   .attr("pointer-events", "all");
 
-
+//building all the plots from the plotData
 function plotBuilder(plotData) {
   for (const element of plotData) {
     if (element.url) {
@@ -129,35 +129,133 @@ function plotBuilder(plotData) {
         .then((data) => {
           // data is now an array of { x: Number, y: Number } objects\
           
-          if (plotData.area.color) {
+          
+          if (element.area.color) {
             dataLayer
               .append("path")
               .datum(data)
               .attr("class", "area")
-              .attr("fill", `${plotData.area.color}`)
-              .attr("d", areaGen);
+              .attr("fill", `${element.area.color}`)
+              .attr("d", areaGen)
+              .attr("id", `${element.id}-area`);
           }
-          if (plotData.line.color) {
+          if (element.line.color) {
             dataLayer
               .append("path")
               .datum(data)
               .attr("fill", "none")
-              .attr("stroke", `${plotData.line.color}`)
+              .attr("stroke", `${element.line.color}`)
               .attr("class", "line")
-              .attr("stroke-width", plotData.line.width)
-              .attr("stroke-dasharray", plotData.line.dash || null)
-              .attr("d", line);
+              .attr("stroke-width", element.line.width)
+              .attr("stroke-dasharray", element.line.dash || null)
+              .attr("d", line)
+              .attr("id", `${element.id}-line`);
           }
-          if (plotData.text.elementName) {
+          if (element.text.elementName) {
             dataLayer
               .append("text")
               .attr("class", "element-label")
               .append("textPath")
-              .attr("href", `#${plotData.labelName}-area`) // ← match the path’s id
+              .attr("href", `#${element.id}-area`) // ← match the path’s id
               .attr("startOffset", "40%") // ← halfway along the path
               .attr("text-anchor", "middle") // ← center the text there
-              .text(plotData.text.elementName);
-          }
+              .text(element.text.elementName);
+          } 
+
+          dataLayer
+            .select(`#${element.id}-line`)
+            .attr("pointer-events", "stroke")
+            .on("mouseover", function (event, d) {
+              if (!event.relatedTarget) return;
+
+              d3.select(this)
+                .raise()
+                .transition()
+                .duration(100)
+                .attr("stroke-width", element.line.width*2);
+            })
+            .on("mouseout", function (event, d) {
+              if (!event.relatedTarget) return;
+              // 3) Revert styling
+              d3.select(this)
+                .transition()
+                .duration(100)
+                .attr("stroke-width", element.line.width);
+            });
+
+            dataLayer
+              .select(`#${element.id}-area`)
+              .on("mouseover", function (event, d) {
+                if (!event.relatedTarget) return;
+                dataLayer
+                  .select(`#${element.id}-line`)
+                  .raise()
+                  .transition()
+                  .duration(100)
+                  .attr("stroke-width", element.line.width * 2);
+
+                d3.select(this)
+                .raise()
+                .transition()
+                .duration(100);
+              })
+              .on("mouseout", function (event, d) {
+                if (!event.relatedTarget) return;
+                // 3) Revert styling
+                dataLayer
+                  .select(`#${element.id}-line`)
+                  .transition()
+                  .duration(100)
+                  .attr("stroke-width", element.line.width);
+                
+              }); 
+
+            dataLayer.select(`#${element.id}-line`).each(function (d) {
+              const el = this;
+              tippy(el, {
+                followCursor: true,
+                content: "Loading…",
+                allowHTML: true,
+                onShow(instance) {
+                  // only fetch once
+                  if (instance.props.content === "Loading…") {
+                    fetch(
+                      `http://localhost:3000/preview?url=${encodeURIComponent(
+                        element.paperUrls
+                      )}`
+                    )
+                      .then((r) => r.json())
+                      .then((meta) => {
+                        const fullTitle = meta.title || "";
+                        const maxTitleChars = 120; // “specific number of symbols”
+                        const shortTitle =
+                          fullTitle.length > maxTitleChars
+                            ? fullTitle.slice(0, maxTitleChars).trim() + "…"
+                            : fullTitle;
+
+                        const fullDesc = meta.description || "";
+                        const maxChars = 240; // “specific number of symbols”
+                        const shortDesc =
+                          fullDesc.length > maxChars
+                            ? fullDesc.slice(0, maxChars).trim() + "…"
+                            : fullDesc;
+
+                        instance.setContent(`
+                <div class="wordbreaker" style="max-width:250px; font-family: sans-serif; display: flex; align-items: center;
+                  justify-content: start;flex-direction: column;gap:0.5rem">
+                  <strong style="margin:0; padding:0;">${shortTitle}</strong>
+                  ${
+                    meta.authors && meta.authors.length
+                      ? `<em>By ${meta.authors.join(", ")}</em>`
+                      : ""
+                  }
+                </div>
+              `);
+                      });
+                  }
+                },
+              });
+            });
         })
         .catch((err) => console.error(err));
     } else {
@@ -168,19 +266,22 @@ function plotBuilder(plotData) {
 }
 
 
+
 const plotData = [
   {
     labelName: "BaBar", // label for the legend
     longName: "BaBar", // long name for possible reference
+    id: "babar",
     text: { elementName: null }, // text to be placed on the plot
     line: { color: "gray", dash: null, width: 2 }, // line style
     area: { color: "lightgray" }, // area style
-    paperUrls: "https://arxiv.org/abs/2305.13953", // URL to the source paper
+    paperUrls: "https://arxiv.org/abs/2505.14229", // URL to the source paper
     url: "data/BaBar.csv", // URL to the data file
   },
   {
     labelName: "Relic Density",
     longName: "Relic Density",
+    id: "relic-density",
     text: { elementName: null },
     line: { color: "black", dash: null, width: 3 },
     area: { color: null },
@@ -190,42 +291,49 @@ const plotData = [
   {
     labelName: "CMS",
     longName: "CMS",
+    id: "cms",
     text: { elementName: "CMS" },
     line: { color: "green", dash: null, width: 2 },
     area: { color: "lightgreen" },
-    paperUrls: "https://arxiv.org/abs/2305.13953",
+    paperUrls: "https://arxiv.org/abs/2107.13021",
     url: "data/CMS.csv",
   },
   {
     labelName: "NA64", // label for the legend
     longName: "NA64", // long name for possible reference
+    id: "na64",
     text: { elementName: null }, // text to be placed on the plot
     line: { color: "rgb(26, 255, 0)", dash: "20,7", width: 2 },
     area: { color: null },
-    paperUrls: "https://arxiv.org/abs/2305.13953",
+    paperUrls: "https://link.springer.com/article/10.1007/JHEP11(2021)153",
     url: "data/NA64.csv",
   },
   {
     labelName: "Belle 2", // label for the legend
     longName: "Belle 2", // long name for possible reference
+    id: "belle2",
     text: { elementName: null }, // text to be placed on the plot
     line: { color: "rgb(255, 0, 255)", dash: "20,7", width: 2 },
     area: { color: null },
-    paperUrls: "https://arxiv.org/abs/2305.13953",
+    paperUrls: "https://link.springer.com/article/10.1140/epjc/s10052-024-13480-4",
     url: "data/Belle 2.csv",
   },
   {
     labelName: "HL-LHC", // label for the legend
     longName: "HL-LHC", // long name for possible reference
+    id: "hl-lhc",
     text: { elementName: null }, // text to be placed on the plot
     line: { color: "rgb(5, 133, 46)", dash: null, width: 2 },
     area: { color: null },
-    paperUrls: "https://arxiv.org/abs/2305.13953",
+    paperUrls: "https://www.worldscientific.com/doi/10.1142/S0218301324500186",
     url: "data/HL-LHC.csv",
   },
 ];
 
-let babar_data;
+
+plotBuilder(plotData);
+
+/* let babar_data;
 
 d3.csv("data/BaBar.csv", d3.autoType) // autoType will convert numeric strings to numbers
   .then((data) => {
@@ -244,11 +352,11 @@ d3.csv("data/BaBar.csv", d3.autoType) // autoType will convert numeric strings t
       .datum(babar_data)
       .attr("fill", "none")
       .attr("stroke", "gray")
-      .attr("class", "line")
+      .attr("class", "line babar")
       .attr("stroke-width", 2)
       .attr("d", line);
 
-    dataLayer.selectAll("path.line")
+     dataLayer.selectAll("path.line")
       .attr("pointer-events", "stroke")
       .on("mouseover", function(event, d) {
 
@@ -267,7 +375,27 @@ d3.csv("data/BaBar.csv", d3.autoType) // autoType will convert numeric strings t
         d3.select(this)
           .transition().duration(100)
           .attr("stroke-width", 2);
-      });
+      }); 
+
+     dataLayer.selectAll("path.area")
+      .on("mouseover", function(event, d) {
+
+        if (!event.relatedTarget) return;
+        dataLayer
+          .selectAll("path.line.babar")
+          .raise()
+          .transition()
+          .duration(100)
+          .attr("stroke-width", 4);
+      })
+      .on("mouseout", function(event, d) {
+
+        if (!event.relatedTarget) return;
+    // 3) Revert styling
+        d3.select(this)
+          .transition().duration(100)
+          .attr("stroke-width", 2);
+      }); 
 
   })
   .catch((err) => console.error(err));
@@ -308,7 +436,7 @@ d3.csv("data/Relic Density.csv", d3.autoType) // autoType will convert numeric s
         d3.select(this)
           .transition().duration(100)
           .attr("stroke-width", 3);
-      });
+      }); 
 
 
   })
@@ -348,7 +476,7 @@ d3.csv("data/CMS.csv", d3.autoType) // autoType will convert numeric strings to 
       .attr("text-anchor", "middle") // ← center the text there
       .text("CMS");
 
-    dataLayer.selectAll("path.line")
+     dataLayer.selectAll("path.line")
       .attr("pointer-events", "stroke")
       .on("mouseover", function(event, d) {
 
@@ -367,7 +495,7 @@ d3.csv("data/CMS.csv", d3.autoType) // autoType will convert numeric strings to 
         d3.select(this)
           .transition().duration(100)
           .attr("stroke-width", 2);
-      });
+      }); 
 
       
   })
@@ -390,7 +518,7 @@ d3.csv("data/NA64.csv", d3.autoType) // autoType will convert numeric strings to
       .attr("stroke-dasharray", "20 7")
       .attr("d", line);
 
-    dataLayer.selectAll("path.line")
+     dataLayer.selectAll("path.line")
       .attr("pointer-events", "stroke")
       .on("mouseover", function(event, d) {
 
@@ -433,7 +561,7 @@ d3.csv("data/Belle 2.csv", d3.autoType) // autoType will convert numeric strings
       .attr("stroke-dasharray", "20 7")
       .attr("d", line);
 
-    dataLayer.selectAll("path.line")
+     dataLayer.selectAll("path.line")
       .attr("pointer-events", "stroke")
       .on("mouseover", function(event, d) {
 
@@ -452,7 +580,7 @@ d3.csv("data/Belle 2.csv", d3.autoType) // autoType will convert numeric strings
         d3.select(this)
           .transition().duration(100)
           .attr("stroke-width", 2);
-      });
+      }); 
 
 
   })
@@ -474,7 +602,7 @@ d3.csv("data/Belle 2.csv", d3.autoType) // autoType will convert numeric strings
         .attr("stroke-width", 2)
         .attr("d", line);
 
-      dataLayer.selectAll("path.line")
+       dataLayer.selectAll("path.line")
       .attr("pointer-events", "stroke")
       .on("mouseover", function(event, d) {
 
@@ -497,8 +625,9 @@ d3.csv("data/Belle 2.csv", d3.autoType) // autoType will convert numeric strings
 
 
     })
-    .catch((err) => console.error(err));
-  
+    .catch((err) => console.error(err)); */
+
+
 const legendData = [
   { name: "BaBar", color: "gray", areaColor: "lightgray", dash: null, paperUrl: "https://arxiv.org/abs/2505.14229" },
   { name: "Relic Density", color: "black", dash: null, paperUrl: "https://arxiv.org/abs/2305.13953" },
@@ -519,18 +648,19 @@ const itemHeight = 25;
 const swatchSize = 30;
 const item = legend
   .selectAll(".legend-item")
-  .data(legendData)
-  .enter().append("g")
-    .attr("class", "legend-item")
-    .attr("transform", (d,i) => `translate(0, ${i * itemHeight})`);
+  .data(plotData)
+  .enter()
+  .append("g")
+  .attr("class", "legend-item")
+  .attr("transform", (d, i) => `translate(0, ${i * itemHeight})`);
 
 item
-  .filter((d) => d.areaColor) // only those entries
+  .filter((d) => d.area.color) // only those entries
   .append("rect")
   .attr("width", swatchSize)
   .attr("height", 16)
   .attr("y", 0) // vertical centering
-  .attr("fill", (d) => d.areaColor);
+  .attr("fill", (d) => d.area.color);
 
 item
   .append("line")
@@ -538,17 +668,16 @@ item
   .attr("x2", swatchSize)
   .attr("y1", 8)
   .attr("y2", 8)
-  .attr("stroke", (d) => d.color)
-  .attr("stroke-width", 2)
-  .attr("stroke-dasharray", d => d.dash || null);
+  .attr("stroke", (d) => d.line.color)
+  .attr("stroke-width", (d) => d.line.width)
+  .attr("stroke-dasharray", (d) => d.line.dash || null);
 
 const text = item.append("text")
   .attr("x", swatchSize + 6)
   .attr("y", 8)
   .attr("dy", "0.35em")
 
-text.append("tspan")
-    .text(d => `${d.name} `);
+text.append("tspan").text((d) => `${d.labelName} `);
 
 text.append("a")
     .attr("xlink:href", d => d.paperUrl)  // your URL here
@@ -568,17 +697,20 @@ d3.selectAll('.legend-item a')
       onShow(instance) {
         // only fetch once
         if (instance.props.content === 'Loading…') {
-          fetch(`http://localhost:3000/preview?url=${encodeURIComponent(d.paperUrl)}`)
-            .then(r => r.json())
-            .then(meta => {
-
+          fetch(
+            `http://localhost:3000/preview?url=${encodeURIComponent(
+              d.paperUrls
+            )}`
+          )
+            .then((r) => r.json())
+            .then((meta) => {
               const fullTitle = meta.title || "";
               const maxTitleChars = 120; // “specific number of symbols”
               const shortTitle =
                 fullTitle.length > maxTitleChars
                   ? fullTitle.slice(0, maxTitleChars).trim() + "…"
                   : fullTitle;
-              
+
               const fullDesc = meta.description || "";
               const maxChars = 240; // “specific number of symbols”
               const shortDesc =
@@ -611,6 +743,7 @@ d3.selectAll('.legend-item a')
     });
   });
 
+
 // Append axes groups
 const xAxisG = svg.append('g')
   .attr('class', 'x-axis')
@@ -632,7 +765,7 @@ const yAxisGright = svg.append('g')
   .attr('transform', `translate(${width-margin.right},0)`)
   .call(yAxisRight);
   
-
+//Adding plot title
 svg
   .append("text")
   .attr("class", "plot-title")
@@ -641,6 +774,7 @@ svg
   .attr("text-anchor", "middle")
   .text("Dark Photon into invisible final states (BC2)");
 
+//Adding plot labels with TeX content
 const foX = xAxisG
   .append("foreignObject")
   .attr("x", (width - margin.left-margin.right) / 2 + margin.left - 110)
@@ -682,18 +816,19 @@ const zoom = d3.zoom()
   .scaleExtent([0.2, 1e4])
   .on('zoom', ({ transform }) => {
 
+    //changed axes
     const zx = transform.rescaleX(x0);
     const zy = transform.rescaleY(y0);
 
+    //supplementary variables for checking the values of zoom
     const [xMin, xMax] = zx.domain();
     const spanRatioX = xMax / xMin; 
     const [yMin, yMax] = zy.domain();
     const spanRatioY = yMax / yMin; 
-    
-    console.log(`spanRatioX: ${spanRatioX}`);
 
     let xTicks, xFormat, yTicks, yFormat;
 
+    //zoom behavior to x axis (very messy, but I dont have idea how to make it work better)
     if (spanRatioX > 50) {
       // Wide view → only decades, 10ⁿ labels
       xFormat = (d) => {
@@ -777,6 +912,7 @@ const zoom = d3.zoom()
       .tickSize(7)
     );
 
+    //zoom behavior to y axis
     if (spanRatioY > 50) {
       // Wide view → only decades, 10ⁿ labels
       yFormat = (d) => {
@@ -812,10 +948,6 @@ const zoom = d3.zoom()
       yTicks = 3; // number of ticks
       yFormat = d3.format(".4~e"); // e.g. “1234.56”
     }
-
-
-    svg.select('.y-axis').call(yAxis.scale(zy));
-    svg.select(".y-axis-right").call(yAxisRight.scale(zy));
 
     svg.select('.y-axis').call(
       yAxis

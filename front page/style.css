@@ -1,3 +1,7 @@
+html.loading body {
+  visibility: hidden;
+}
+
 * { 
   margin: 0; 
   padding: 0; 
