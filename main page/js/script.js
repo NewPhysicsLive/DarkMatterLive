@@ -6,6 +6,16 @@ window.addEventListener("load", () => {
   document.documentElement.classList.remove("loading");
 });
 
+function getSecondLevelDomain(url) {
+  try {
+    const host = new URL(url).hostname; // e.g. "arxiv.org" or "sub.example.co.uk"
+    // remove the final ".something"
+    return host.replace(/\.[^.]+$/, ""); // → "arxiv" or "sub.example.co"
+  } catch {
+    return null;
+  }
+}
+
 // Set up margins and dimensions
 const margin = { top: 60, right: 320, bottom: 80, left: 95 };
 const container = d3.select('#plot');
@@ -187,6 +197,12 @@ function plotBuilder(plotData) {
               .select(`#${element.id}-area`)
               .on("mouseover", function (event, d) {
                 if (!event.relatedTarget) return;
+
+                d3.select(this)
+                  .raise()
+                  .transition()
+                  .duration(100);
+
                 dataLayer
                   .select(`#${element.id}-line`)
                   .raise()
@@ -194,10 +210,6 @@ function plotBuilder(plotData) {
                   .duration(100)
                   .attr("stroke-width", element.line.width * 2);
 
-                d3.select(this)
-                .raise()
-                .transition()
-                .duration(100);
               })
               .on("mouseout", function (event, d) {
                 if (!event.relatedTarget) return;
@@ -210,52 +222,48 @@ function plotBuilder(plotData) {
                 
               }); 
 
-            dataLayer.select(`#${element.id}-line`).each(function (d) {
-              const el = this;
-              tippy(el, {
-                followCursor: true,
-                content: "Loading…",
-                allowHTML: true,
-                onShow(instance) {
-                  // only fetch once
-                  if (instance.props.content === "Loading…") {
-                    fetch(
-                      `http://localhost:3000/preview?url=${encodeURIComponent(
-                        element.paperUrls
-                      )}`
-                    )
-                      .then((r) => r.json())
-                      .then((meta) => {
-                        const fullTitle = meta.title || "";
-                        const maxTitleChars = 120; // “specific number of symbols”
-                        const shortTitle =
-                          fullTitle.length > maxTitleChars
-                            ? fullTitle.slice(0, maxTitleChars).trim() + "…"
-                            : fullTitle;
+            dataLayer
+              .selectAll(`#${element.id}-line, #${element.id}-area`)
+              .each(function (d) {
+                const el = this;
+                tippy(el, {
+                  trigger: "mouseenter",
+                  followCursor: "initial",
+                  interactive: true,
+                  interactiveBorder: 10,
+                  delay: [200, 200],
+                  hideOnClick: false,
+                  appendTo: document.body,
+                  content: "Loading…",
+                  allowHTML: true,
+                  onShow(instance) {
+                    // only fetch once
+                    if (instance.props.content === "Loading…") {
+                      fetch(
+                        `http://localhost:3000/preview?url=${encodeURIComponent(
+                          element.paperUrls
+                        )}`
+                      )
+                        .then((r) => r.json())
+                        .then((meta) => {
+                          const fullTitle = meta.title || "";
 
-                        const fullDesc = meta.description || "";
-                        const maxChars = 240; // “specific number of symbols”
-                        const shortDesc =
-                          fullDesc.length > maxChars
-                            ? fullDesc.slice(0, maxChars).trim() + "…"
-                            : fullDesc;
-
-                        instance.setContent(`
+                          instance.setContent(`
                 <div class="wordbreaker" style="max-width:250px; font-family: sans-serif; display: flex; align-items: center;
                   justify-content: start;flex-direction: column;gap:0.5rem">
-                  <strong style="margin:0; padding:0;">${shortTitle}</strong>
-                  ${
-                    meta.authors && meta.authors.length
-                      ? `<em>By ${meta.authors.join(", ")}</em>`
-                      : ""
-                  }
+                  <p style="margin:0; padding:0;">${fullTitle}  <span class="no-break"> [ <a href="${
+                            element.paperUrls
+                          }" target="_blank"
+                          rel="noopener noreferrer">${getSecondLevelDomain(
+                            element.paperUrls
+                          )}</a> ] </span> </p>
                 </div>
               `);
-                      });
-                  }
-                },
+                        });
+                    }
+                  },
+                });
               });
-            });
         })
         .catch((err) => console.error(err));
     } else {
@@ -680,7 +688,7 @@ const text = item.append("text")
 text.append("tspan").text((d) => `${d.labelName} `);
 
 text.append("a")
-    .attr("xlink:href", d => d.paperUrl)  // your URL here
+    .attr("xlink:href", d => d.paperUrls)  // your URL here
     .attr("target", "_blank")
   .append("tspan")
     .text((d,i) => `[${i+1}]`)

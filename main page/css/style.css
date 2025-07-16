@@ -108,3 +108,7 @@ svg {
   overflow-wrap: break-word;   /* standard */
   word-wrap: break-word;  
 }
+
+.no-break {
+    white-space: nowrap;
+  }
