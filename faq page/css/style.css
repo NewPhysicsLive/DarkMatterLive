@@ -43,25 +43,6 @@ header {
   font-size: 1.2rem;
 }
 
-.interacting-buttons ul{
-  list-style: none;
-  width: 80%;
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  flex-direction: row;
-  margin-top: 20px;
-}
-
-.option-button {
-  background-color: #3c096c;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
 .legend-item {
   display: flex;
   align-items: center;
