@@ -324,7 +324,8 @@ const plotData = [
     text: { elementName: null }, // text to be placed on the plot
     line: { color: "rgb(255, 0, 255)", dash: "20,7", width: 2 },
     area: { color: null },
-    paperUrls: "https://link.springer.com/article/10.1140/epjc/s10052-024-13480-4",
+    paperUrls:
+      "https://link.springer.com/article/10.1140/epjc/s10052-024-13480-4",
     url: "data/Belle 2.csv",
   },
   {
@@ -336,6 +337,76 @@ const plotData = [
     area: { color: null },
     paperUrls: "https://www.worldscientific.com/doi/10.1142/S0218301324500186",
     url: "data/HL-LHC.csv",
+  },
+  {
+    labelName: "AFM test", // label for the legend
+    longName: "AFM test of Coulomb force", // long name for possible reference
+    id: "AFM-test",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: "https://arxiv.org/abs/2008.02209",
+    url: "data/AxionLimits-csv/AFM.csv",
+  },
+  {
+    labelName: "ALPS", // label for the legend
+    longName: "ALPS", // long name for possible reference
+    id: "ALPS",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: "https://arxiv.org/abs/1004.1313",
+    url: "data/AxionLimits-csv/ALPS.csv",
+  },
+  {
+    labelName: "AMAILS", // label for the legend
+    longName: "AMAILS", // long name for possible reference
+    id: "AMAILS",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: "https://arxiv.org/abs/2305.00890",
+    url: "data/AxionLimits-csv/AMAILS.csv",
+  },
+  {
+    labelName: "Arias et al. (2012)", // label for the legend
+    longName: "Arias et al. (2012) (Cosmology)", // long name for possible reference
+    id: "Arias2012",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: "https://arxiv.org/abs/1201.5902",
+    url: "data/AxionLimits-csv/Cosmology_Arias.csv",
+  },
+  {
+    labelName: "Caputo et al. (2020)", // label for the legend
+    longName: "Caputo et al. (2020) (HeII reionisation)", // long name for possible reference
+    id: "Caputo2020",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: "https://arxiv.org/abs/2002.05165",
+    url: "data/AxionLimits-csv/Cosmology_Caputo_HeII_.csv",
+  },
+  {
+    labelName: "Witte et al. (2020)", // label for the legend
+    longName: "Witte et al. (2020) (inhomogeneous plasma)", // long name for possible reference
+    id: "Witte2020",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: "https://arxiv.org/abs/2003.13698",
+    url: "data/AxionLimits-csv/Cosmology_Witte_inhomogeneous.csv",
+  },
+  {
+    labelName: "Crab Nebula", // label for the legend
+    longName: "Crab Nebula", // long name for possible reference
+    id: "Crab-Nebula",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: "https://arxiv.org/abs/0810.5501",
+    url: "data/AxionLimits-csv/Crab.csv",
   },
 ];
 
