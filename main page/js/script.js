@@ -17,7 +17,7 @@ function getSecondLevelDomain(url) {
 }
 
 // Set up margins and dimensions
-const margin = { top: 60, right: 320, bottom: 80, left: 95 };
+const margin = { top: 60, right: 350, bottom: 80, left: 95 };
 const container = d3.select('#plot');
 const width = container.node().clientWidth;
 const height = container.node().clientHeight;
@@ -182,8 +182,9 @@ function plotBuilder(plotData) {
               d3.select(this)
                 .raise()
                 .transition()
+                .delay(200)
                 .duration(100)
-                .attr("stroke-width", element.line.width*2);
+                .attr("stroke-width", element.line.width * 2);
             })
             .on("mouseout", function (event, d) {
               if (!event.relatedTarget) return;
@@ -202,12 +203,14 @@ function plotBuilder(plotData) {
                 d3.select(this)
                   .raise()
                   .transition()
+                  .delay(200)
                   .duration(100);
 
                 dataLayer
                   .select(`#${element.id}-line`)
                   .raise()
                   .transition()
+                  .delay(200)
                   .duration(100)
                   .attr("stroke-width", element.line.width * 2);
 
@@ -242,7 +245,7 @@ function plotBuilder(plotData) {
                     if (instance.props.content === "Loading…") {
                       fetch(
                         `http://localhost:3000/preview?url=${encodeURIComponent(
-                          element.paperUrls
+                          element.paperUrls[0]
                         )}`
                       )
                         .then((r) => r.json())
@@ -253,10 +256,10 @@ function plotBuilder(plotData) {
                 <div class="wordbreaker" style="max-width:250px; font-family: sans-serif; display: flex; align-items: center;
                   justify-content: start;flex-direction: column;gap:0.5rem">
                   <p style="margin:0; padding:0;">${fullTitle}  <span class="no-break"> [ <a href="${
-                            element.paperUrls
+                            element.paperUrls[0]
                           }" target="_blank"
                           rel="noopener noreferrer">${getSecondLevelDomain(
-                            element.paperUrls
+                            element.paperUrls[0]
                           )}</a> ] </span> </p>
                 </div>
               `);
@@ -284,7 +287,7 @@ const plotData = [
     text: { elementName: null }, // text to be placed on the plot
     line: { color: "gray", dash: null, width: 2 }, // line style
     area: { color: "lightgray" }, // area style
-    paperUrls: "https://arxiv.org/abs/2505.14229", // URL to the source paper
+    paperUrls: ["https://arxiv.org/abs/2505.14229"], // URL to the source paper
     url: "data/BaBar.csv", // URL to the data file
   },
   {
@@ -294,7 +297,7 @@ const plotData = [
     text: { elementName: null },
     line: { color: "black", dash: null, width: 3 },
     area: { color: null },
-    paperUrls: "https://arxiv.org/abs/2305.13953",
+    paperUrls: ["https://arxiv.org/abs/2305.13953"],
     url: "data/Relic Density.csv",
   },
   {
@@ -304,7 +307,7 @@ const plotData = [
     text: { elementName: "CMS" },
     line: { color: "green", dash: null, width: 2 },
     area: { color: "lightgreen" },
-    paperUrls: "https://arxiv.org/abs/2107.13021",
+    paperUrls: ["https://arxiv.org/abs/2107.13021"],
     url: "data/CMS.csv",
   },
   {
@@ -314,7 +317,7 @@ const plotData = [
     text: { elementName: null }, // text to be placed on the plot
     line: { color: "rgb(26, 255, 0)", dash: "20,7", width: 2 },
     area: { color: null },
-    paperUrls: "https://link.springer.com/article/10.1007/JHEP11(2021)153",
+    paperUrls: ["https://link.springer.com/article/10.1007/JHEP11(2021)153"],
     url: "data/NA64.csv",
   },
   {
@@ -324,8 +327,9 @@ const plotData = [
     text: { elementName: null }, // text to be placed on the plot
     line: { color: "rgb(255, 0, 255)", dash: "20,7", width: 2 },
     area: { color: null },
-    paperUrls:
+    paperUrls: [
       "https://link.springer.com/article/10.1140/epjc/s10052-024-13480-4",
+    ],
     url: "data/Belle 2.csv",
   },
   {
@@ -335,47 +339,49 @@ const plotData = [
     text: { elementName: null }, // text to be placed on the plot
     line: { color: "rgb(5, 133, 46)", dash: null, width: 2 },
     area: { color: null },
-    paperUrls: "https://www.worldscientific.com/doi/10.1142/S0218301324500186",
+    paperUrls: [
+      "https://www.worldscientific.com/doi/10.1142/S0218301324500186",
+    ],
     url: "data/HL-LHC.csv",
   },
   {
     labelName: "AFM test", // label for the legend
     longName: "AFM test of Coulomb force", // long name for possible reference
-    id: "AFM-test",
+    id: "afm-test",
     text: { elementName: null }, // text to be placed on the plot
     line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
     area: { color: "rgba(57, 130, 232, 1)" },
-    paperUrls: "https://arxiv.org/abs/2008.02209",
+    paperUrls: ["https://arxiv.org/abs/2008.02209"],
     url: "data/AxionLimits-csv/AFM.csv",
   },
   {
     labelName: "ALPS", // label for the legend
     longName: "ALPS", // long name for possible reference
-    id: "ALPS",
+    id: "alps",
     text: { elementName: null }, // text to be placed on the plot
     line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
     area: { color: "rgba(57, 130, 232, 1)" },
-    paperUrls: "https://arxiv.org/abs/1004.1313",
+    paperUrls: ["https://arxiv.org/abs/1004.1313"],
     url: "data/AxionLimits-csv/ALPS.csv",
   },
   {
     labelName: "AMAILS", // label for the legend
     longName: "AMAILS", // long name for possible reference
-    id: "AMAILS",
+    id: "amails",
     text: { elementName: null }, // text to be placed on the plot
     line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
     area: { color: "rgba(57, 130, 232, 1)" },
-    paperUrls: "https://arxiv.org/abs/2305.00890",
+    paperUrls: ["https://arxiv.org/abs/2305.00890"],
     url: "data/AxionLimits-csv/AMAILS.csv",
   },
   {
     labelName: "Arias et al. (2012)", // label for the legend
     longName: "Arias et al. (2012) (Cosmology)", // long name for possible reference
-    id: "Arias2012",
+    id: "arias2012",
     text: { elementName: null }, // text to be placed on the plot
     line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
     area: { color: "rgba(57, 130, 232, 1)" },
-    paperUrls: "https://arxiv.org/abs/1201.5902",
+    paperUrls: ["https://arxiv.org/abs/1201.5902"],
     url: "data/AxionLimits-csv/Cosmology_Arias.csv",
   },
   {
@@ -385,348 +391,371 @@ const plotData = [
     text: { elementName: null }, // text to be placed on the plot
     line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
     area: { color: "rgba(57, 130, 232, 1)" },
-    paperUrls: "https://arxiv.org/abs/2002.05165",
+    paperUrls: ["https://arxiv.org/abs/2002.05165"],
     url: "data/AxionLimits-csv/Cosmology_Caputo_HeII_.csv",
   },
   {
     labelName: "Witte et al. (2020)", // label for the legend
     longName: "Witte et al. (2020) (inhomogeneous plasma)", // long name for possible reference
-    id: "Witte2020",
+    id: "witte2020",
     text: { elementName: null }, // text to be placed on the plot
     line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
     area: { color: "rgba(57, 130, 232, 1)" },
-    paperUrls: "https://arxiv.org/abs/2003.13698",
+    paperUrls: ["https://arxiv.org/abs/2003.13698"],
     url: "data/AxionLimits-csv/Cosmology_Witte_inhomogeneous.csv",
   },
   {
     labelName: "Crab Nebula", // label for the legend
     longName: "Crab Nebula", // long name for possible reference
-    id: "Crab-Nebula",
+    id: "crab-nebula",
     text: { elementName: null }, // text to be placed on the plot
     line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
     area: { color: "rgba(57, 130, 232, 1)" },
-    paperUrls: "https://arxiv.org/abs/0810.5501",
+    paperUrls: ["https://arxiv.org/abs/0810.5501"],
     url: "data/AxionLimits-csv/Crab.csv",
+  },
+  {
+    labelName: "CROWS", // label for the legend
+    longName: "CROWS", // long name for possible reference
+    id: "crows",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: ["https://arxiv.org/abs/1310.8098"],
+    url: "data/AxionLimits-csv/CROWS.csv",
+  },
+  {
+    labelName: "DAMIC", // label for the legend
+    longName: "DAMIC", // long name for possible reference
+    id: "damic",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: ["https://arxiv.org/abs/1907.12628"],
+    url: "data/AxionLimits-csv/DAMIC.csv",
+  },
+  {
+    labelName: "DarkSide-50", // label for the legend
+    longName: "DarkSide-50", // long name for possible reference
+    id: "darkside-50",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: ["https://arxiv.org/abs/2207.11968"],
+    url: "data/AxionLimits-csv/DarkSide.csv",
+  },
+  {
+    labelName: "Dark SRF", // label for the legend
+    longName: "Dark SRF", // long name for possible reference
+    id: "Dark-SRF",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: ["https://arxiv.org/abs/2301.11512"],
+    url: "data/AxionLimits-csv/DarkSRF.csv",
+  },
+  {
+    labelName: "Haloscopes 1", // label for the legend
+    longName: "Haloscopes 1", // long name for possible reference
+    id: "haloscopes1",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: ["https://arxiv.org/abs/2105.04565"],
+    url: "data/AxionLimits-csv/DP_Combined_AxionSearchesRescaled.csv",
+  },
+  {
+    labelName: "Haloscopes 2", // label for the legend
+    longName: "Haloscopes 2", // long name for possible reference
+    id: "haloscopes2",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: ["https://arxiv.org/abs/2105.04565"],
+    url: "data/AxionLimits-csv/DP_Combined_DarkMatterSearches.csv",
+  },
+  {
+    labelName: "Earth", // label for the legend
+    longName: "Earth", // long name for possible reference
+    id: "earth",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: ["https://arxiv.org/abs/2110.02875"],
+    url: "data/AxionLimits-csv/Earth.csv",
+  },
+  {
+    labelName: "FUNK", // label for the legend
+    longName: "FUNK", // long name for possible reference
+    id: "funk",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: ["https://arxiv.org/abs/2003.13144"],
+    url: "data/AxionLimits-csv/FUNK.csv",
+  },
+  {
+    labelName: "G33.4-8.0", // label for the legend
+    longName: "G33.4-8.0", // long name for possible reference
+    id: "g33",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: ["https://arxiv.org/abs/1903.12190"],
+    url: "data/AxionLimits-csv/GasClouds.csv",
+  },
+  {
+    labelName: "Globular Clusters", // label for the legend
+    longName: "Globular Clusters", // long name for possible reference
+    id: "globular-clusters",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: ["https://arxiv.org/abs/2306.13335"],
+    url: "data/AxionLimits-csv/GlobularClusters.csv",
+  },
+  {
+    labelName: "Hinode", // label for the legend
+    longName: "Hinode", // long name for possible reference
+    id: "hinode",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: ["https://arxiv.org/abs/2211.00022"],
+    url: "data/AxionLimits-csv/HINODE.csv",
+  },
+  {
+    labelName: "INTEGRAL", // label for the legend
+    longName: "INTEGRAL", // long name for possible reference
+    id: "integral",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: [
+      "https://arxiv.org/abs/2406.19445",
+      "https://arxiv.org/abs/2412.00180",
+    ],
+    url: "data/AxionLimits-csv/INTEGRAL.csv",
+  },
+  {
+    labelName: "Jupiter", // label for the legend
+    longName: "Jupiter", // long name for possible reference
+    id: "jupiter",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: ["https://arxiv.org/abs/2312.06746"],
+    url: "data/AxionLimits-csv/Jupiter.csv",
+  },
+  {
+    labelName: "JWST", // label for the legend
+    longName: "JWST", // long name for possible reference
+    id: "jwst",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: ["https://arxiv.org/abs/2402.17140"],
+    url: "data/AxionLimits-csv/JWST.csv",
+  },
+  {
+    labelName: "Leo T", // label for the legend
+    longName: "Leo T", // long name for possible reference
+    id: "leo-t",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: ["https://arxiv.org/abs/1903.12190"],
+    url: "data/AxionLimits-csv/LeoT.csv",
+  },
+  {
+    labelName: "ADMX", // label for the legend
+    longName: "ADMX", // long name for possible reference
+    id: "admx",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: ["https://arxiv.org/abs/1903.12190"],
+    url: "data/AxionLimits-csv/LSW_ADMX.csv",
+  },
+  {
+    labelName: "UWA", // label for the legend
+    longName: "UWA", // long name for possible reference
+    id: "uwa",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: ["https://arxiv.org/abs/1410.5244"],
+    url: "data/AxionLimits-csv/LSW_UWA.csv",
+  },
+  {
+    labelName: "MuDHI", // label for the legend
+    longName: "MuDHI", // long name for possible reference
+    id: "mudhi",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: ["https://arxiv.org/abs/2110.10497"],
+    url: "data/AxionLimits-csv/MuDHI.csv",
+  },
+  {
+    labelName: "Cas A", // label for the legend
+    longName: "Cas A", // long name for possible reference
+    id: "cas-a",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: ["https://arxiv.org/abs/2012.05427"],
+    url: "data/AxionLimits-csv/NeutronStarCooling.csv",
+  },
+  {
+    labelName: "Planck + unWISE", // label for the legend
+    longName: "Planck + unWISE CMB", // long name for possible reference
+    id: "planck-unwise",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: ["https://arxiv.org/abs/2406.02546"],
+    url: "data/AxionLimits-csv/Planck_unWISE.csv",
+  },
+  {
+    labelName: "Plimpton-Lawton", // label for the legend
+    longName: "Plimpton-Lawton experiment", // long name for possible reference
+    id: "plimpton-lawton",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: ["https://arxiv.org/abs/2008.02209"],
+    url: "data/AxionLimits-csv/PlimptonLawton.csv",
+  },
+  {
+    labelName: "SENSEI", // label for the legend
+    longName: "SENSEI", // long name for possible reference
+    id: "sensei",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: ["https://arxiv.org/abs/2004.11378"],
+    url: "data/AxionLimits-csv/SENSEI.csv",
+  },
+  {
+    labelName: "SHIPS", // label for the legend
+    longName: "SHIPS", // long name for possible reference
+    id: "ships",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: ["https://arxiv.org/abs/1502.04490"],
+    url: "data/AxionLimits-csv/Planck_unWISE.csv",
+  },
+  {
+    labelName: "SNIPE", // label for the legend
+    longName: "SNIPE Hunt", // long name for possible reference
+    id: "snipe",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: ["https://arxiv.org/abs/2306.11575"],
+    url: "data/AxionLimits-csv/SNIPE.csv",
+  },
+  {
+    labelName: "Solar", // label for the legend
+    longName: "Solar", // long name for possible reference
+    id: "solar",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: ["https://arxiv.org/abs/2304.12907"],
+    url: "data/AxionLimits-csv/Solar.csv",
+  },
+  {
+    labelName: "Spectroscopy", // label for the legend
+    longName: "Spectroscopy", // long name for possible reference
+    id: "spectroscopy",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: ["https://arxiv.org/abs/1008.3536"],
+    url: "data/AxionLimits-csv/Spectroscopy.csv",
+  },
+  {
+    labelName: "SPring-8", // label for the legend
+    longName: "SPring-8", // long name for possible reference
+    id: "spring-8",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: ["https://arxiv.org/abs/1301.6557"],
+    url: "data/AxionLimits-csv/SPring-8.csv",
+  },
+  {
+    labelName: "SuperCDMS", // label for the legend
+    longName: "SuperCDMS", // long name for possible reference
+    id: "supercdms",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: ["https://arxiv.org/abs/1911.11905"],
+    url: "data/AxionLimits-csv/SuperCDMS.csv",
+  },
+  {
+    labelName: "SuperMAG", // label for the legend
+    longName: "SuperMAG Combined", // long name for possible reference
+    id: "supermag-combined",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: [
+      "https://arxiv.org/abs/2106.00022",
+      "https://arxiv.org/pdf/2408.16045",
+      "https://arxiv.org/pdf/2108.08852",
+    ],
+    url: "data/AxionLimits-csv/SuperMAG_Combined.csv",
+  },
+  {
+    labelName: "TEXONO", // label for the legend
+    longName: "TEXONO", // long name for possible reference
+    id: "texono",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: ["https://arxiv.org/abs/1301.6557"],
+    url: "data/AxionLimits-csv/SPring-8.csv",
   },
 ];
 
-
 plotBuilder(plotData);
-
-/* let babar_data;
-
-d3.csv("data/BaBar.csv", d3.autoType) // autoType will convert numeric strings to numbers
-  .then((data) => {
-    // data is now an array of { x: Number, y: Number } objects\
-    babar_data = data;
-
-    dataLayer
-      .append("path")
-      .datum(babar_data)
-      .attr("class", "area")
-      .attr("fill", "lightgray")
-      .attr("d", areaGen);
-
-    dataLayer
-      .append("path")
-      .datum(babar_data)
-      .attr("fill", "none")
-      .attr("stroke", "gray")
-      .attr("class", "line babar")
-      .attr("stroke-width", 2)
-      .attr("d", line);
-
-     dataLayer.selectAll("path.line")
-      .attr("pointer-events", "stroke")
-      .on("mouseover", function(event, d) {
-
-        if (!event.relatedTarget) return;
-
-        d3.select(this)
-          .raise()
-          .transition()
-          .duration(100)
-          .attr("stroke-width", 4);
-      })
-      .on("mouseout", function(event, d) {
-
-        if (!event.relatedTarget) return;
-    // 3) Revert styling
-        d3.select(this)
-          .transition().duration(100)
-          .attr("stroke-width", 2);
-      }); 
-
-     dataLayer.selectAll("path.area")
-      .on("mouseover", function(event, d) {
-
-        if (!event.relatedTarget) return;
-        dataLayer
-          .selectAll("path.line.babar")
-          .raise()
-          .transition()
-          .duration(100)
-          .attr("stroke-width", 4);
-      })
-      .on("mouseout", function(event, d) {
-
-        if (!event.relatedTarget) return;
-    // 3) Revert styling
-        d3.select(this)
-          .transition().duration(100)
-          .attr("stroke-width", 2);
-      }); 
-
-  })
-  .catch((err) => console.error(err));
-
-
-let relic_density_data;
-
-d3.csv("data/Relic Density.csv", d3.autoType) // autoType will convert numeric strings to numbers
-  .then((data) => {
-    // data is now an array of { x: Number, y: Number } objects\
-    relic_density_data = data;
-    
-    dataLayer
-      .append("path")
-      .datum(relic_density_data)
-      .attr("fill", "none")
-      .attr("stroke", "black")
-      .attr("class", "line")
-      .attr("stroke-width", 3)
-      .attr("d", line);
-
-    dataLayer.selectAll("path.line")
-      .attr("pointer-events", "stroke")
-      .on("mouseover", function(event, d) {
-
-        if (!event.relatedTarget) return;
-
-        d3.select(this)
-          .raise()
-          .transition()
-          .duration(100)
-          .attr("stroke-width", 4);
-      })
-      .on("mouseout", function(event, d) {
-
-        if (!event.relatedTarget) return;
-    // 3) Revert styling
-        d3.select(this)
-          .transition().duration(100)
-          .attr("stroke-width", 3);
-      }); 
-
-
-  })
-  .catch((err) => console.error(err));
-
-
-let cms_data;
-
-d3.csv("data/CMS.csv", d3.autoType) // autoType will convert numeric strings to numbers
-  .then((data) => {
-    // data is now an array of { x: Number, y: Number } objects\
-    cms_data = data;
-
-    dataLayer
-      .append("path")
-      .datum(cms_data)
-      .attr("class", "area")
-      .attr("fill", "lightgreen")
-      .attr("d", areaGen)
-      .attr("id", "cms-area");
-
-    dataLayer
-      .append("path")
-      .datum(cms_data)
-      .attr("fill", "none")
-      .attr("stroke", "green")
-      .attr("class", "line")
-      .attr("stroke-width", 2)
-      .attr("d", line) 
-
-    dataLayer
-      .append("text")
-      .attr("class", "line-label")
-      .append("textPath")
-      .attr("href", "#cms-area") // ← match the path’s id
-      .attr("startOffset", "40%") // ← halfway along the path
-      .attr("text-anchor", "middle") // ← center the text there
-      .text("CMS");
-
-     dataLayer.selectAll("path.line")
-      .attr("pointer-events", "stroke")
-      .on("mouseover", function(event, d) {
-
-        if (!event.relatedTarget) return;
-
-        d3.select(this)
-          .raise()
-          .transition()
-          .duration(100)
-          .attr("stroke-width", 4);
-      })
-      .on("mouseout", function(event, d) {
-
-        if (!event.relatedTarget) return;
-    // 3) Revert styling
-        d3.select(this)
-          .transition().duration(100)
-          .attr("stroke-width", 2);
-      }); 
-
-      
-  })
-  .catch((err) => console.error(err));
-
-let na64_data;
-
-d3.csv("data/NA64.csv", d3.autoType) // autoType will convert numeric strings to numbers
-  .then((data) => {
-    // data is now an array of { x: Number, y: Number } objects\
-    na64_data = data;
-
-    dataLayer
-      .append("path")
-      .datum(na64_data)
-      .attr("fill", "none")
-      .attr("stroke", "rgb(26, 255, 0)")
-      .attr("stroke-width", 2)
-      .attr("class", "line")
-      .attr("stroke-dasharray", "20 7")
-      .attr("d", line);
-
-     dataLayer.selectAll("path.line")
-      .attr("pointer-events", "stroke")
-      .on("mouseover", function(event, d) {
-
-        if (!event.relatedTarget) return;
-
-        d3.select(this)
-          .raise()
-          .transition()
-          .duration(100)
-          .attr("stroke-width", 4);
-      })
-      .on("mouseout", function(event, d) {
-
-        if (!event.relatedTarget) return;
-    // 3) Revert styling
-        d3.select(this)
-          .transition().duration(100)
-          .attr("stroke-width", 2);
-      });
-
-
-  })
-  .catch((err) => console.error(err));
-
-
-let belle2_data;
-
-d3.csv("data/Belle 2.csv", d3.autoType) // autoType will convert numeric strings to numbers
-  .then((data) => {
-    // data is now an array of { x: Number, y: Number } objects\
-    belle2_data = data;
-
-    dataLayer
-      .append("path")
-      .datum(belle2_data)
-      .attr("fill", "none")
-      .attr("stroke", "rgb(255, 0, 255)")
-      .attr("stroke-width", 2)
-      .attr("class", "line")
-      .attr("stroke-dasharray", "20 7")
-      .attr("d", line);
-
-     dataLayer.selectAll("path.line")
-      .attr("pointer-events", "stroke")
-      .on("mouseover", function(event, d) {
-
-        if (!event.relatedTarget) return;
-
-        d3.select(this)
-          .raise()
-          .transition()
-          .duration(100)
-          .attr("stroke-width", 4);
-      })
-      .on("mouseout", function(event, d) {
-
-        if (!event.relatedTarget) return;
-    // 3) Revert styling
-        d3.select(this)
-          .transition().duration(100)
-          .attr("stroke-width", 2);
-      }); 
-
-
-  })
-  .catch((err) => console.error(err));
-
-  let hllhc_data;
-
-  d3.csv("data/HL-LHC.csv", d3.autoType) // autoType will convert numeric strings to numbers
-    .then((data) => {
-      // data is now an array of { x: Number, y: Number } objects\
-      hllhc_data = data;
-
-      dataLayer
-        .append("path")
-        .datum(hllhc_data)
-        .attr("fill", "none")
-        .attr("stroke", "rgb(5, 133, 46)")
-        .attr("class", "line")
-        .attr("stroke-width", 2)
-        .attr("d", line);
-
-       dataLayer.selectAll("path.line")
-      .attr("pointer-events", "stroke")
-      .on("mouseover", function(event, d) {
-
-        if (!event.relatedTarget) return;
-
-        d3.select(this)
-          .raise()
-          .transition()
-          .duration(100)
-          .attr("stroke-width", 4)
-      })
-      .on("mouseout", function(event, d) {
-
-        if (!event.relatedTarget) return;
-    // 3) Revert styling
-        d3.select(this)
-          .transition().duration(100)
-          .attr("stroke-width", 2)
-      });
-
-
-    })
-    .catch((err) => console.error(err)); */
-
-
-const legendData = [
-  { name: "BaBar", color: "gray", areaColor: "lightgray", dash: null, paperUrl: "https://arxiv.org/abs/2505.14229" },
-  { name: "Relic Density", color: "black", dash: null, paperUrl: "https://arxiv.org/abs/2305.13953" },
-  { name: "CMS", color: "green", areaColor: "lightgreen", dash: null, paperUrl: "https://arxiv.org/abs/2107.13021" },
-  { name: "NA64", color: "rgb(26, 255, 0)", dash: "20,7", paperUrl: "https://link.springer.com/article/10.1007/JHEP11(2021)153" },
-  { name: "Belle 2", color: "rgb(255, 0, 255)", dash: "20,7", paperUrl: "https://link.springer.com/article/10.1140/epjc/s10052-024-13480-4" },
-  { name: "HL-LHC", color: "rgb(5, 133, 46)", dash: null, paperUrl: "https://www.worldscientific.com/doi/10.1142/S0218301324500186" },
-];
 
 const legendX = width - margin.right + 50;
 const legendY = margin.top;
-
-const legend = svg.append("g")
-  .attr("class", "legend")
-  .attr("transform", `translate(${legendX},${legendY})`);
-
+const legendHeight = height - margin.top - margin.bottom;
+const legendWidth  = 300;   // adjust to your needs
 const itemHeight = 25;
 const swatchSize = 30;
-const item = legend
+
+const legend_wrapper = svg
+  .append("foreignObject")
+  .attr("class", "legend-fo")
+  .attr("x", legendX) // place to the right of plot
+  .attr("y", legendY)
+  .style("width", `${legendWidth}px`)
+  .style("height", `${legendHeight}px`)
+  .style("overflow-x", "none")
+  .append("xhtml:div") // enter the XHTML namespace
+  .style("width", "100%")
+  .style("height", "100%")
+  .style("padding", "0")
+  .style("margin", "0")
+  .style("overflow-x", "none")
+  .style("overflow-y", "scroll");
+
+
+const legendSvg = legend_wrapper
+  .append("svg")
+  .style("width", "100%")
+  .style("height", itemHeight * plotData.length)
+  .attr("class", "legend");
+
+const item = legendSvg
   .selectAll(".legend-item")
   .data(plotData)
   .enter()
@@ -759,13 +788,26 @@ const text = item.append("text")
 
 text.append("tspan").text((d) => `${d.labelName} `);
 
-text.append("a")
-    .attr("xlink:href", d => d.paperUrls)  // your URL here
-    .attr("target", "_blank")
+paper_num=0
+
+text
+  // 1) pretend we already have a bunch of <a>’s under each text
+  .selectAll("a")
+  // 2) bind each d.paperUrls array to that pretend selection
+  .data((d) => d.paperUrls)
+  // 3) for each array‐element that has no <a> yet, append one
+  .enter()
+  .append("a")
+  .attr("xlink:href", (url) => url)
+  .attr("target", "_blank")
   .append("tspan")
-    .text((d,i) => `[${i+1}]`)
-    .style("text-decoration", "none")
-    .style("cursor", "pointer");
+  .text(function (d, i) {
+    paper_num++;
+    return `${i > 0 ? ", " : ""}[${paper_num}]`;
+  })
+  .style("text-decoration", "none")
+  .style("cursor", "pointer");
+
 
 item.each(function (d) {
   const node = this; // `this` is the DOM element
@@ -783,7 +825,7 @@ item.each(function (d) {
     .append("input")
     .attr("style", "width:15px; height:15px; margin:0; padding:0")
     .attr("type", "checkbox")
-    .attr("id", (d) => `${d.labelName}-hidden`)
+    .attr("id", (d) => `${d.id}-hidden`)
     .attr("class", "hidden-box")
     .property("checked", true)
     .on("change", function (d) {
@@ -817,7 +859,7 @@ d3.selectAll('.legend-item a')
         if (instance.props.content === 'Loading…') {
           fetch(
             `http://localhost:3000/preview?url=${encodeURIComponent(
-              d.paperUrls
+              d
             )}`
           )
             .then((r) => r.json())
@@ -890,7 +932,7 @@ svg
   .attr("x", (width - margin.left - margin.right) / 2 + margin.left)
   .attr("y", margin.top - 25)
   .attr("text-anchor", "middle")
-  .text("Dark Photon into invisible final states (BC2)");
+  .text("Dark Photon into invisible final states (BC1)");
 
 //Adding plot labels with TeX content
 const foX = xAxisG
