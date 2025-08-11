@@ -718,8 +718,78 @@ const plotData = [
     text: { elementName: null }, // text to be placed on the plot
     line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
     area: { color: "rgba(57, 130, 232, 1)" },
-    paperUrls: ["https://arxiv.org/abs/1301.6557"],
-    url: "data/AxionLimits-csv/SPring-8.csv",
+    paperUrls: ["https://arxiv.org/abs/1804.10777"],
+    url: "data/AxionLimits-csv/TEXONO.csv",
+  },
+  {
+    labelName: "Tokyo", // label for the legend
+    longName: "Tokyo-dish", // long name for possible reference
+    id: "tokyo",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: ["https://arxiv.org/abs/2003.13144"],
+    url: "data/AxionLimits-csv/Tokyo-Dish.csv",
+  },
+  {
+    labelName: "XENON1T S2", // label for the legend
+    longName: "XENON1T S2", // long name for possible reference
+    id: "xenon1t-s2",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: ["https://arxiv.org/abs/1907.11485"],
+    url: "data/AxionLimits-csv/Xenon1T.csv",
+  },
+  {
+    labelName: "XENON1T S2S1", // label for the legend
+    longName: "XENON1T S2S1", // long name for possible reference
+    id: "xenon1t-s2s1",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: ["https://arxiv.org/abs/2006.09721"],
+    url: "data/AxionLimits-csv/Xenon1T_S1S2.csv",
+  },
+  {
+    labelName: "XENON1T SE", // label for the legend
+    longName: "XENON1T SE", // long name for possible reference
+    id: "xenon1t-se",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: ["https://arxiv.org/abs/2112.12116"],
+    url: "data/AxionLimits-csv/XENON1T_SE.csv",
+  },
+  {
+    labelName: "XENON1T Solar S2", // label for the legend
+    longName: "XENON1T Solar S2", // long name for possible reference
+    id: "xenon1t-solar-s2",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: ["https://arxiv.org/abs/2006.13929"],
+    url: "data/AxionLimits-csv/XENON1T_Solar_S2.csv",
+  },
+  {
+    labelName: "XENONnT", // label for the legend
+    longName: "XENONnT", // long name for possible reference
+    id: "xenonnt",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: ["https://arxiv.org/abs/2207.11330"],
+    url: "data/AxionLimits-csv/XENONnT.csv",
+  },
+  {
+    labelName: "SHiP", // label for the legend
+    longName: "SHiP", // long name for possible reference
+    id: "ship",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: ["https://arxiv.org/abs/2504.06692v1"],
+    url: "data/Rescaled/SHiP_rescaled.csv",
   },
 ];
 
