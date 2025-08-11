@@ -131,6 +131,57 @@ dataLayer
   .attr("fill", "white")
   .attr("pointer-events", "all");
 
+  
+const hiddenPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
+hiddenPath.style.visibility = "hidden";
+document.body.appendChild(hiddenPath);
+
+function computeAreaFromPath(areaGenerator, data) {
+  // Create a temporary path element to measure pixel area
+  const pathStr = areaGenerator(data);
+  if (!pathStr) return 0;
+
+  hiddenPath.setAttribute("d", pathStr);
+
+  // Use the path to compute polygon area in pixel space
+  const length = hiddenPath.getTotalLength();
+  if (length === 0) return 0;
+
+  // Approximate area by sampling along the path
+  const samples = 100; // more samples = better accuracy
+  const points = [];
+  for (let i = 0; i <= samples; i++) {
+    const p = hiddenPath.getPointAtLength((i / samples) * length);
+    points.push([p.x, p.y]);
+  }
+
+  // Compute signed polygon area
+  let area = 0;
+  for (let i = 0; i < points.length; i++) {
+    const [x0, y0] = points[i];
+    const [x1, y1] = points[(i + 1) % points.length];
+    area += x0 * y1 - x1 * y0;
+  }
+  return Math.abs(area) / 2;
+}
+
+function computeLineLength(data, xScale, yScale) {
+  let length = 0;
+  for (let i = 0; i < data.length - 1; i++) {
+    const x1 = xScale(data[i].x);
+    const y1 = yScale(data[i].y);
+    const x2 = xScale(data[i + 1].x);
+    const y2 = yScale(data[i + 1].y);
+
+    const dx = x2 - x1;
+    const dy = y2 - y1;
+
+    length += Math.sqrt(dx * dx + dy * dy);
+  }
+  return length;
+}
+
+
 //building all the plots from the plotData
 function plotBuilder(plotData) {
   for (const element of plotData) {
@@ -277,7 +328,18 @@ function plotBuilder(plotData) {
   } 
 }
 
-
+const colorSet = [
+  "#1f77b4", // Blue
+  "#ff7f0e", // Orange
+  "#2ca02c", // Green
+  "#d62728", // Red
+  "#9467bd", // Purple
+  "#8c564b", // Brown
+  "#e377c2", // Pink
+  "#7f7f7f", // Gray
+  "#bcbd22", // Olive
+  "#17becf", // Cyan
+];
 
 const plotData = [
   {
@@ -289,6 +351,8 @@ const plotData = [
     area: { color: "lightgray" }, // area style
     paperUrls: ["https://arxiv.org/abs/2505.14229"], // URL to the source paper
     url: "data/BaBar.csv", // URL to the data file
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
   {
     labelName: "Relic Density",
@@ -299,6 +363,8 @@ const plotData = [
     area: { color: null },
     paperUrls: ["https://arxiv.org/abs/2305.13953"],
     url: "data/Relic Density.csv",
+    curveType: "line", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
   {
     labelName: "CMS",
@@ -309,6 +375,8 @@ const plotData = [
     area: { color: "lightgreen" },
     paperUrls: ["https://arxiv.org/abs/2107.13021"],
     url: "data/CMS.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
   {
     labelName: "NA64", // label for the legend
@@ -319,6 +387,8 @@ const plotData = [
     area: { color: null },
     paperUrls: ["https://link.springer.com/article/10.1007/JHEP11(2021)153"],
     url: "data/NA64.csv",
+    curveType: "line", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
   {
     labelName: "Belle 2", // label for the legend
@@ -331,6 +401,8 @@ const plotData = [
       "https://link.springer.com/article/10.1140/epjc/s10052-024-13480-4",
     ],
     url: "data/Belle 2.csv",
+    curveType: "line", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
   {
     labelName: "HL-LHC", // label for the legend
@@ -343,6 +415,8 @@ const plotData = [
       "https://www.worldscientific.com/doi/10.1142/S0218301324500186",
     ],
     url: "data/HL-LHC.csv",
+    curveType: "line", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
   {
     labelName: "AFM test", // label for the legend
@@ -353,6 +427,8 @@ const plotData = [
     area: { color: "rgba(57, 130, 232, 1)" },
     paperUrls: ["https://arxiv.org/abs/2008.02209"],
     url: "data/AxionLimits-csv/AFM.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
   {
     labelName: "ALPS", // label for the legend
@@ -363,6 +439,8 @@ const plotData = [
     area: { color: "rgba(57, 130, 232, 1)" },
     paperUrls: ["https://arxiv.org/abs/1004.1313"],
     url: "data/AxionLimits-csv/ALPS.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
   {
     labelName: "AMAILS", // label for the legend
@@ -373,6 +451,8 @@ const plotData = [
     area: { color: "rgba(57, 130, 232, 1)" },
     paperUrls: ["https://arxiv.org/abs/2305.00890"],
     url: "data/AxionLimits-csv/AMAILS.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
   {
     labelName: "Arias et al. (2012)", // label for the legend
@@ -383,6 +463,8 @@ const plotData = [
     area: { color: "rgba(57, 130, 232, 1)" },
     paperUrls: ["https://arxiv.org/abs/1201.5902"],
     url: "data/AxionLimits-csv/Cosmology_Arias.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
   {
     labelName: "Caputo et al. (2020)", // label for the legend
@@ -393,6 +475,8 @@ const plotData = [
     area: { color: "rgba(57, 130, 232, 1)" },
     paperUrls: ["https://arxiv.org/abs/2002.05165"],
     url: "data/AxionLimits-csv/Cosmology_Caputo_HeII_.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
   {
     labelName: "Witte et al. (2020)", // label for the legend
@@ -403,6 +487,8 @@ const plotData = [
     area: { color: "rgba(57, 130, 232, 1)" },
     paperUrls: ["https://arxiv.org/abs/2003.13698"],
     url: "data/AxionLimits-csv/Cosmology_Witte_inhomogeneous.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
   {
     labelName: "Crab Nebula", // label for the legend
@@ -413,6 +499,8 @@ const plotData = [
     area: { color: "rgba(57, 130, 232, 1)" },
     paperUrls: ["https://arxiv.org/abs/0810.5501"],
     url: "data/AxionLimits-csv/Crab.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
   {
     labelName: "CROWS", // label for the legend
@@ -423,6 +511,8 @@ const plotData = [
     area: { color: "rgba(57, 130, 232, 1)" },
     paperUrls: ["https://arxiv.org/abs/1310.8098"],
     url: "data/AxionLimits-csv/CROWS.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
   {
     labelName: "DAMIC", // label for the legend
@@ -433,6 +523,8 @@ const plotData = [
     area: { color: "rgba(57, 130, 232, 1)" },
     paperUrls: ["https://arxiv.org/abs/1907.12628"],
     url: "data/AxionLimits-csv/DAMIC.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
   {
     labelName: "DarkSide-50", // label for the legend
@@ -443,16 +535,20 @@ const plotData = [
     area: { color: "rgba(57, 130, 232, 1)" },
     paperUrls: ["https://arxiv.org/abs/2207.11968"],
     url: "data/AxionLimits-csv/DarkSide.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
   {
     labelName: "Dark SRF", // label for the legend
     longName: "Dark SRF", // long name for possible reference
-    id: "Dark-SRF",
+    id: "dark-srf",
     text: { elementName: null }, // text to be placed on the plot
     line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
     area: { color: "rgba(57, 130, 232, 1)" },
     paperUrls: ["https://arxiv.org/abs/2301.11512"],
     url: "data/AxionLimits-csv/DarkSRF.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
   {
     labelName: "Haloscopes 1", // label for the legend
@@ -463,6 +559,8 @@ const plotData = [
     area: { color: "rgba(57, 130, 232, 1)" },
     paperUrls: ["https://arxiv.org/abs/2105.04565"],
     url: "data/AxionLimits-csv/DP_Combined_AxionSearchesRescaled.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
   {
     labelName: "Haloscopes 2", // label for the legend
@@ -473,6 +571,8 @@ const plotData = [
     area: { color: "rgba(57, 130, 232, 1)" },
     paperUrls: ["https://arxiv.org/abs/2105.04565"],
     url: "data/AxionLimits-csv/DP_Combined_DarkMatterSearches.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
   {
     labelName: "Earth", // label for the legend
@@ -483,6 +583,8 @@ const plotData = [
     area: { color: "rgba(57, 130, 232, 1)" },
     paperUrls: ["https://arxiv.org/abs/2110.02875"],
     url: "data/AxionLimits-csv/Earth.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
   {
     labelName: "FUNK", // label for the legend
@@ -493,6 +595,8 @@ const plotData = [
     area: { color: "rgba(57, 130, 232, 1)" },
     paperUrls: ["https://arxiv.org/abs/2003.13144"],
     url: "data/AxionLimits-csv/FUNK.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
   {
     labelName: "G33.4-8.0", // label for the legend
@@ -503,6 +607,8 @@ const plotData = [
     area: { color: "rgba(57, 130, 232, 1)" },
     paperUrls: ["https://arxiv.org/abs/1903.12190"],
     url: "data/AxionLimits-csv/GasClouds.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
   {
     labelName: "Globular Clusters", // label for the legend
@@ -513,6 +619,8 @@ const plotData = [
     area: { color: "rgba(57, 130, 232, 1)" },
     paperUrls: ["https://arxiv.org/abs/2306.13335"],
     url: "data/AxionLimits-csv/GlobularClusters.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
   {
     labelName: "Hinode", // label for the legend
@@ -523,6 +631,8 @@ const plotData = [
     area: { color: "rgba(57, 130, 232, 1)" },
     paperUrls: ["https://arxiv.org/abs/2211.00022"],
     url: "data/AxionLimits-csv/HINODE.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
   {
     labelName: "INTEGRAL", // label for the legend
@@ -536,6 +646,8 @@ const plotData = [
       "https://arxiv.org/abs/2412.00180",
     ],
     url: "data/AxionLimits-csv/INTEGRAL.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
   {
     labelName: "Jupiter", // label for the legend
@@ -546,6 +658,8 @@ const plotData = [
     area: { color: "rgba(57, 130, 232, 1)" },
     paperUrls: ["https://arxiv.org/abs/2312.06746"],
     url: "data/AxionLimits-csv/Jupiter.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
   {
     labelName: "JWST", // label for the legend
@@ -556,6 +670,8 @@ const plotData = [
     area: { color: "rgba(57, 130, 232, 1)" },
     paperUrls: ["https://arxiv.org/abs/2402.17140"],
     url: "data/AxionLimits-csv/JWST.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
   {
     labelName: "Leo T", // label for the legend
@@ -566,6 +682,8 @@ const plotData = [
     area: { color: "rgba(57, 130, 232, 1)" },
     paperUrls: ["https://arxiv.org/abs/1903.12190"],
     url: "data/AxionLimits-csv/LeoT.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
   {
     labelName: "ADMX", // label for the legend
@@ -576,6 +694,8 @@ const plotData = [
     area: { color: "rgba(57, 130, 232, 1)" },
     paperUrls: ["https://arxiv.org/abs/1903.12190"],
     url: "data/AxionLimits-csv/LSW_ADMX.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
   {
     labelName: "UWA", // label for the legend
@@ -586,6 +706,8 @@ const plotData = [
     area: { color: "rgba(57, 130, 232, 1)" },
     paperUrls: ["https://arxiv.org/abs/1410.5244"],
     url: "data/AxionLimits-csv/LSW_UWA.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
   {
     labelName: "MuDHI", // label for the legend
@@ -596,6 +718,8 @@ const plotData = [
     area: { color: "rgba(57, 130, 232, 1)" },
     paperUrls: ["https://arxiv.org/abs/2110.10497"],
     url: "data/AxionLimits-csv/MuDHI.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
   {
     labelName: "Cas A", // label for the legend
@@ -606,6 +730,8 @@ const plotData = [
     area: { color: "rgba(57, 130, 232, 1)" },
     paperUrls: ["https://arxiv.org/abs/2012.05427"],
     url: "data/AxionLimits-csv/NeutronStarCooling.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
   {
     labelName: "Planck + unWISE", // label for the legend
@@ -616,6 +742,8 @@ const plotData = [
     area: { color: "rgba(57, 130, 232, 1)" },
     paperUrls: ["https://arxiv.org/abs/2406.02546"],
     url: "data/AxionLimits-csv/Planck_unWISE.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
   {
     labelName: "Plimpton-Lawton", // label for the legend
@@ -626,6 +754,8 @@ const plotData = [
     area: { color: "rgba(57, 130, 232, 1)" },
     paperUrls: ["https://arxiv.org/abs/2008.02209"],
     url: "data/AxionLimits-csv/PlimptonLawton.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
   {
     labelName: "SENSEI", // label for the legend
@@ -636,6 +766,8 @@ const plotData = [
     area: { color: "rgba(57, 130, 232, 1)" },
     paperUrls: ["https://arxiv.org/abs/2004.11378"],
     url: "data/AxionLimits-csv/SENSEI.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
   {
     labelName: "SHIPS", // label for the legend
@@ -646,6 +778,8 @@ const plotData = [
     area: { color: "rgba(57, 130, 232, 1)" },
     paperUrls: ["https://arxiv.org/abs/1502.04490"],
     url: "data/AxionLimits-csv/Planck_unWISE.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
   {
     labelName: "SNIPE", // label for the legend
@@ -656,6 +790,8 @@ const plotData = [
     area: { color: "rgba(57, 130, 232, 1)" },
     paperUrls: ["https://arxiv.org/abs/2306.11575"],
     url: "data/AxionLimits-csv/SNIPE.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
   {
     labelName: "Solar", // label for the legend
@@ -666,6 +802,8 @@ const plotData = [
     area: { color: "rgba(57, 130, 232, 1)" },
     paperUrls: ["https://arxiv.org/abs/2304.12907"],
     url: "data/AxionLimits-csv/Solar.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
   {
     labelName: "Spectroscopy", // label for the legend
@@ -676,6 +814,8 @@ const plotData = [
     area: { color: "rgba(57, 130, 232, 1)" },
     paperUrls: ["https://arxiv.org/abs/1008.3536"],
     url: "data/AxionLimits-csv/Spectroscopy.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
   {
     labelName: "SPring-8", // label for the legend
@@ -686,6 +826,8 @@ const plotData = [
     area: { color: "rgba(57, 130, 232, 1)" },
     paperUrls: ["https://arxiv.org/abs/1301.6557"],
     url: "data/AxionLimits-csv/SPring-8.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
   {
     labelName: "SuperCDMS", // label for the legend
@@ -696,6 +838,8 @@ const plotData = [
     area: { color: "rgba(57, 130, 232, 1)" },
     paperUrls: ["https://arxiv.org/abs/1911.11905"],
     url: "data/AxionLimits-csv/SuperCDMS.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
   {
     labelName: "SuperMAG", // label for the legend
@@ -710,6 +854,8 @@ const plotData = [
       "https://arxiv.org/pdf/2108.08852",
     ],
     url: "data/AxionLimits-csv/SuperMAG_Combined.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
   {
     labelName: "TEXONO", // label for the legend
@@ -720,6 +866,8 @@ const plotData = [
     area: { color: "rgba(57, 130, 232, 1)" },
     paperUrls: ["https://arxiv.org/abs/1804.10777"],
     url: "data/AxionLimits-csv/TEXONO.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
   {
     labelName: "Tokyo", // label for the legend
@@ -730,6 +878,8 @@ const plotData = [
     area: { color: "rgba(57, 130, 232, 1)" },
     paperUrls: ["https://arxiv.org/abs/2003.13144"],
     url: "data/AxionLimits-csv/Tokyo-Dish.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
   {
     labelName: "XENON1T S2", // label for the legend
@@ -740,6 +890,8 @@ const plotData = [
     area: { color: "rgba(57, 130, 232, 1)" },
     paperUrls: ["https://arxiv.org/abs/1907.11485"],
     url: "data/AxionLimits-csv/Xenon1T.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
   {
     labelName: "XENON1T S2S1", // label for the legend
@@ -750,6 +902,8 @@ const plotData = [
     area: { color: "rgba(57, 130, 232, 1)" },
     paperUrls: ["https://arxiv.org/abs/2006.09721"],
     url: "data/AxionLimits-csv/Xenon1T_S1S2.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
   {
     labelName: "XENON1T SE", // label for the legend
@@ -760,6 +914,8 @@ const plotData = [
     area: { color: "rgba(57, 130, 232, 1)" },
     paperUrls: ["https://arxiv.org/abs/2112.12116"],
     url: "data/AxionLimits-csv/XENON1T_SE.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
   {
     labelName: "XENON1T Solar S2", // label for the legend
@@ -770,6 +926,8 @@ const plotData = [
     area: { color: "rgba(57, 130, 232, 1)" },
     paperUrls: ["https://arxiv.org/abs/2006.13929"],
     url: "data/AxionLimits-csv/XENON1T_Solar_S2.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
   {
     labelName: "XENONnT", // label for the legend
@@ -780,6 +938,8 @@ const plotData = [
     area: { color: "rgba(57, 130, 232, 1)" },
     paperUrls: ["https://arxiv.org/abs/2207.11330"],
     url: "data/AxionLimits-csv/XENONnT.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
   {
     labelName: "SHiP", // label for the legend
@@ -790,10 +950,60 @@ const plotData = [
     area: { color: "rgba(57, 130, 232, 1)" },
     paperUrls: ["https://arxiv.org/abs/2504.06692v1"],
     url: "data/Rescaled/SHiP_rescaled.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
 ];
 
-plotBuilder(plotData);
+const curvePriority = {
+  excluded: 0,
+  projection: 1,
+  line: 2,
+};
+
+Promise.all(
+  plotData.map((el) => {
+    return new Promise((resolve, reject) => {
+      if (!el.url) return resolve({ ...el, _size: 0 });
+      d3.csv(el.url, d3.autoType)
+        .then((data) => {
+          let size;
+          if (el.curveType === "excluded" || el.curveType === "projection") {
+            size = computeAreaFromPath(areaGen, data);
+          } else if (el.curveType === "line") {
+            size = computeLineLength(data, x0, y0);
+          }
+          resolve({ ...el, _data: data, _size: size || 0 });
+        })
+        .catch(reject);
+    });
+  })
+).then((dataWithSizes) => {
+  dataWithSizes.sort((a, b) => {
+    const typeDiff = curvePriority[a.curveType] - curvePriority[b.curveType];
+    if (typeDiff !== 0) return typeDiff;
+    return b._size - a._size; // biggest first
+  });
+
+  plotBuilder(dataWithSizes);
+
+  if (hiddenPath.parentNode) {
+    hiddenPath.parentNode.removeChild(hiddenPath);
+  }
+});
+
+
+plotData.forEach((el, i) => {
+  el.line.color = colorSet[i % colorSet.length];
+
+  if (el.area.color != null) {
+    const c = d3.color(colorSet[i % colorSet.length]);
+    c.opacity = 0.8; // make area color more transparent
+    el.area.color = c.formatRgb();
+  }
+});
+
+//plotBuilder(plotData);
 
 const legendX = width - margin.right + 50;
 const legendY = margin.top;
