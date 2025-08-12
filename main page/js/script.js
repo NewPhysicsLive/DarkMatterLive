@@ -181,6 +181,23 @@ function computeLineLength(data, xScale, yScale) {
   return length;
 }
 
+function getZIndex(selection) {
+  const node = selection.node();
+  return Array.prototype.indexOf.call(node.parentNode.children, node);
+}
+
+function setZIndex(selection, index) {
+  const node = selection.node();
+  const parent = node.parentNode;
+  const children = parent.children;
+
+  if (index >= children.length) {
+    parent.appendChild(node); // move to top
+  } else {
+    parent.insertBefore(node, children[index]); // move to target position
+  }
+}
+
 
 //building all the plots from the plotData
 function plotBuilder(plotData) {
@@ -222,7 +239,15 @@ function plotBuilder(plotData) {
               .attr("startOffset", "40%") // ← halfway along the path
               .attr("text-anchor", "middle") // ← center the text there
               .text(element.text.elementName);
-          } 
+          }
+          
+          if (element.area.color) {
+            dataLayer.select(`#${element.id}-area`).node().__originalIndex__ =
+              getZIndex(dataLayer.select(`#${element.id}-area`));
+          }
+
+          dataLayer.select(`#${element.id}-line`).node().__originalIndex__ =
+            getZIndex(dataLayer.select(`#${element.id}-line`));
 
           dataLayer
             .select(`#${element.id}-line`)
@@ -230,20 +255,62 @@ function plotBuilder(plotData) {
             .on("mouseover", function (event, d) {
               if (!event.relatedTarget) return;
 
+              if (element.area.color) {
+
+                dataLayer
+                  .select(`#${element.id}-area`)
+                  .transition()
+                  .delay(200)
+                  .duration(200)
+                  .on("start", function () {
+                    dataLayer.select(`#${element.id}-area`).raise(); // z-order change after the delay
+                  });
+              }
+
               d3.select(this)
-                .raise()
                 .transition()
                 .delay(200)
-                .duration(100)
+                .duration(200)
+                .on("start", function () {
+                  d3.select(this).raise(); // z-order change after the delay
+                })
                 .attr("stroke-width", element.line.width * 2);
+                           
+
             })
             .on("mouseout", function (event, d) {
               if (!event.relatedTarget) return;
               // 3) Revert styling
+
+              if (element.area.color) {
+                dataLayer
+                  .select(`#${element.id}-area`)
+                  .transition()
+                  .duration(200)
+                  .on("end", function () {
+                    if (
+                      typeof dataLayer.select(`#${element.id}-area`).node()
+                        .__originalIndex__ === "number"
+                    ) {
+                      setZIndex(
+                        dataLayer.select(`#${element.id}-area`),
+                        dataLayer.select(`#${element.id}-area`).node()
+                          .__originalIndex__
+                      );
+                    }
+                  });
+              }
+
               d3.select(this)
                 .transition()
-                .duration(100)
+                .duration(200)
+                .on("end", function () {
+                  if (typeof this.__originalIndex__ === "number") {
+                    setZIndex(d3.select(this), this.__originalIndex__);
+                  }
+                })
                 .attr("stroke-width", element.line.width);
+              
             });
 
             dataLayer
@@ -252,27 +319,53 @@ function plotBuilder(plotData) {
                 if (!event.relatedTarget) return;
 
                 d3.select(this)
-                  .raise()
                   .transition()
                   .delay(200)
-                  .duration(100);
+                  .duration(200)
+                  .on("start", function () {
+                    d3.select(this).raise(); // z-order change after the delay
+                  });
+
 
                 dataLayer
                   .select(`#${element.id}-line`)
-                  .raise()
                   .transition()
                   .delay(200)
-                  .duration(100)
+                  .duration(200)
+                  .on("start", function () {
+                    dataLayer.select(`#${element.id}-line`).raise(); // z-order change after the delay
+                  })
                   .attr("stroke-width", element.line.width * 2);
 
               })
               .on("mouseout", function (event, d) {
                 if (!event.relatedTarget) return;
+
+                d3.select(this)
+                  .transition()
+                  .duration(200)
+                  .on("end", function () {
+                    if (typeof this.__originalIndex__ === "number") {
+                      setZIndex(d3.select(this), this.__originalIndex__);
+                    }
+                  });
                 // 3) Revert styling
+                
                 dataLayer
                   .select(`#${element.id}-line`)
                   .transition()
-                  .duration(100)
+                  .duration(200)
+                  .on("end", function () {
+                    if (
+                      typeof dataLayer.select(`#${element.id}-line`).node()
+                      .__originalIndex__ === "number"
+                    ) {
+                      setZIndex(
+                        dataLayer.select(`#${element.id}-line`),
+                        dataLayer.select(`#${element.id}-line`).node().__originalIndex__
+                      );
+                    }
+                  })
                   .attr("stroke-width", element.line.width);
                 
               }); 
@@ -950,6 +1043,30 @@ const plotData = [
     area: { color: "rgba(57, 130, 232, 1)" },
     paperUrls: ["https://arxiv.org/abs/2504.06692v1"],
     url: "data/Rescaled/SHiP_rescaled.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
+  },
+  {
+    labelName: "HIKE", // label for the legend
+    longName: "HIKE", // long name for possible reference
+    id: "hike",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: ["https://arxiv.org/abs/2311.08231"],
+    url: "data/HIKE.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
+  },
+  {
+    labelName: "HIKE1", // label for the legend
+    longName: "HIKE1", // long name for possible reference
+    id: "hike1",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: ["https://arxiv.org/abs/2311.08231"],
+    url: "data/HIKE1.csv",
     curveType: "excluded", // type of the plot
     categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
