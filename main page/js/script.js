@@ -1039,11 +1039,11 @@ const plotData = [
     longName: "SHiP", // long name for possible reference
     id: "ship",
     text: { elementName: null }, // text to be placed on the plot
-    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
-    area: { color: "rgba(57, 130, 232, 1)" },
+    line: { color: "rgba(5, 58, 133, 1)", dash: "20,7", width: 2 },
+    area: { color: null },
     paperUrls: ["https://arxiv.org/abs/2504.06692v1"],
     url: "data/Rescaled/SHiP_rescaled.csv",
-    curveType: "excluded", // type of the plot
+    curveType: "projection", // type of the plot
     categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
   {
@@ -1051,22 +1051,142 @@ const plotData = [
     longName: "HIKE", // long name for possible reference
     id: "hike",
     text: { elementName: null }, // text to be placed on the plot
-    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
-    area: { color: "rgba(57, 130, 232, 1)" },
+    line: { color: "rgba(5, 58, 133, 1)", dash: "20,7", width: 2 },
+    area: { color: null },
     paperUrls: ["https://arxiv.org/abs/2311.08231"],
     url: "data/HIKE.csv",
+    curveType: "projection", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
+  },
+  {
+    labelName: "CHARM", // label for the legend
+    longName: "CHARM", // long name for possible reference
+    id: "charm",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: ["https://arxiv.org/abs/1204.3583"],
+    url: "data/CHARM.csv",
     curveType: "excluded", // type of the plot
     categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
   {
-    labelName: "HIKE1", // label for the legend
-    longName: "HIKE1", // long name for possible reference
-    id: "hike1",
+    labelName: "NA64(e)", // label for the legend
+    longName: "NA64(e)", // long name for possible reference
+    id: "na64",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: "20,7", width: 2 },
+    area: { color: null },
+    paperUrls: ["https://arxiv.org/abs/1204.3583"],
+    url: "data/NA64(e).csv",
+    curveType: "projection", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
+  },
+  {
+    labelName: "DarkQuest (2023)", // label for the legend
+    longName: "DarkQuest (2023)", // long name for possible reference
+    id: "darkquest-2023",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: "20,7", width: 2 },
+    area: { color: null },
+    paperUrls: ["https://arxiv.org/abs/2203.08322"],
+    url: "data/DarkQuest(2023).csv",
+    curveType: "projection", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
+  },
+  {
+    labelName: "DarkQuest (2026+)", // label for the legend
+    longName: "DarkQuest (2026+)", // long name for possible reference
+    id: "arkquest-2026",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: "20,7", width: 2 },
+    area: { color: null },
+    paperUrls: ["https://arxiv.org/abs/2203.08322"],
+    url: "data/DarkQuest(2026).csv",
+    curveType: "projection", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
+  },
+  {
+    labelName: "FACET", // label for the legend
+    longName: "FACET", // long name for possible reference
+    id: "facet",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: "20,7", width: 2 },
+    area: { color: null },
+    paperUrls: ["https://arxiv.org/abs/2201.00019"],
+    url: "data/FACET.csv",
+    curveType: "projection", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
+  },
+  {
+    labelName: "FASER (57fb)", // label for the legend
+    longName: "FASER (57fb)", // long name for possible reference
+    id: "faser-57",
     text: { elementName: null }, // text to be placed on the plot
     line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
     area: { color: "rgba(57, 130, 232, 1)" },
-    paperUrls: ["https://arxiv.org/abs/2311.08231"],
-    url: "data/HIKE1.csv",
+    paperUrls: ["https://arxiv.org/abs/2410.10363"],
+    url: "data/FASER(58fb).csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
+  },
+  {
+    labelName: "NA62", // label for the legend
+    longName: "NA62", // long name for possible reference
+    id: "na62",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: ["https://arxiv.org/abs/2502.04241"],
+    url: "data/NA62.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
+  },
+  {
+    labelName: "E774", // label for the legend
+    longName: "E774", // long name for possible reference
+    id: "e774",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: ["https://arxiv.org/abs/1802.03794"],
+    url: "data/E774.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
+  },
+  {
+    labelName: "E141", // label for the legend
+    longName: "E141", // long name for possible reference
+    id: "e141",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: ["https://arxiv.org/abs/1802.03794"],
+    url: "data/E141.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
+  },
+  {
+    labelName: "Orsay", // label for the legend
+    longName: "Orsay", // long name for possible reference
+    id: "orsay",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: ["https://arxiv.org/abs/1802.03794"],
+    url: "data/Orsay.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
+  },
+  {
+    labelName: "E137", // label for the legend
+    longName: "E137", // long name for possible reference
+    id: "e137",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: ["https://arxiv.org/abs/1802.03794"],
+    url: "data/E137.csv",
     curveType: "excluded", // type of the plot
     categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
