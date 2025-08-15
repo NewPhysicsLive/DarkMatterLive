@@ -1190,6 +1190,54 @@ const plotData = [
     curveType: "excluded", // type of the plot
     categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
+  {
+    labelName: "A1", // label for the legend
+    longName: "A1", // long name for possible reference
+    id: "a1",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: ["https://arxiv.org/abs/1404.5502"],
+    url: "data/A1_rescaled.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
+  },
+  {
+    labelName: "FASER (Run 3)", // label for the legend
+    longName: "FASER (Run 3)", // long name for possible reference
+    id: "faser-run3",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: "20,7", width: 2 },
+    area: { color: null },
+    paperUrls: ["https://arxiv.org/abs/1811.12522"],
+    url: "data/FASER(Run3).csv",
+    curveType: "projection", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
+  },
+  {
+    labelName: "FASER (HL-LHC)", // label for the legend
+    longName: "FASER (HL-LHC)", // long name for possible reference
+    id: "faser-hl-lhc",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: "20,7", width: 2 },
+    area: { color: null },
+    paperUrls: ["https://arxiv.org/abs/1811.12522"],
+    url: "data/FASER(HL-LHC).csv",
+    curveType: "projection", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
+  },
+  {
+    labelName: "LHCb", // label for the legend
+    longName: "LHCb", // long name for possible reference
+    id: "lhcb",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: ["https://arxiv.org/abs/1910.06926"],
+    url: "data/LHCb_rescaled.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
+  },
 ];
 
 const curvePriority = {
