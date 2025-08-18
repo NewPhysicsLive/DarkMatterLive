@@ -442,7 +442,7 @@ const plotData = [
     text: { elementName: null }, // text to be placed on the plot
     line: { color: "gray", dash: null, width: 2 }, // line style
     area: { color: "lightgray" }, // area style
-    paperUrls: ["https://arxiv.org/abs/2505.14229"], // URL to the source paper
+    paperUrls: ["https://arxiv.org/abs/1406.2980"], // URL to the source paper
     url: "data/BaBar.csv", // URL to the data file
     curveType: "excluded", // type of the plot
     categories: { experementType: "collider", assumption: "None" }, // category for grouping
@@ -1235,6 +1235,69 @@ const plotData = [
     area: { color: "rgba(57, 130, 232, 1)" },
     paperUrls: ["https://arxiv.org/abs/1910.06926"],
     url: "data/LHCb_rescaled.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
+  },
+  {
+    labelName: "(g-2)e", // label for the legend
+    longName: "(g-2)e", // long name for possible reference
+    id: "g-2-e",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: [
+      "https://arxiv.org/abs/0811.1030",
+      "https://arxiv.org/abs/1209.2558",
+    ],
+    url: "data/g-2e_updated_rescaled.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
+  },
+  {
+    labelName: "nu-Cal", // label for the legend
+    longName: "nu-Cal", // long name for possible reference
+    id: "nu-cal",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: ["https://arxiv.org/abs/1311.3870"],
+    url: "data/nu-Cal.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
+  },
+  {
+    labelName: "Mu3e (Phase 1)", // label for the legend
+    longName: "Mu3e (Phase 1)", // long name for possible reference
+    id: "mu3e-phase1",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: "20,7", width: 2 },
+    area: { color: null },
+    paperUrls: ["https://arxiv.org/abs/1411.1770"],
+    url: "data/Mu3e(Phase1)_rescaled.csv",
+    curveType: "projection", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
+  },
+  {
+    labelName: "Mu3e (Phase 2)", // label for the legend
+    longName: "Mu3e (Phase 2)", // long name for possible reference
+    id: "mu3e-phase2",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: "20,7", width: 2 },
+    area: { color: null },
+    paperUrls: ["https://arxiv.org/abs/1411.1770"],
+    url: "data/Mu3e(Phase2)_rescaled.csv",
+    curveType: "projection", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
+  },
+  {
+    labelName: "NA48/2", // label for the legend
+    longName: "NA48/2", // long name for possible reference
+    id: "na48-2",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: ["https://arxiv.org/abs/1311.3870"],
+    url: "data/NA48-2_rescaled.csv",
     curveType: "excluded", // type of the plot
     categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
