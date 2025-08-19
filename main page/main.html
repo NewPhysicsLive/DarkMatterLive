@@ -23,6 +23,8 @@
   <script src="https://unpkg.com/@tippyjs/plugin-follow-cursor/dist/umd/index.all.min.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/dist/tippy.css" />
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body);"></script>
   <script defer src="./js/script.js"></script>
 </head>
 <body>
@@ -45,7 +47,24 @@
       <li><button class="option-button add-data">Add your data</button></li>
     </ul></div>
     <div class="description">
-      <h2 class="description-title">Description of the model</h2>
+      <div class="description-box">
+        <h2 class="description-title">Description of the model</h2>
+      <p>In the minimal dark photon framework, the Standard Model (SM) is extended by an additional 
+      \(\mathrm{U}(1)_D\) gauge symmetry under which all SM particles are neutral. The new gauge field,
+      typically denoted \(A'_\mu\), mixes kinetically with the SM hypercharge gauge field \(B_\mu\).
+      The most compact Lagrangian capturing this minimal extension reads:</p>
+      \[
+      \mathcal{L} \;\supset\; -\tfrac14\,F'_{\mu\nu}F'^{\mu\nu} + \tfrac12\,m_{A'}^2\,A'_\mu A'^\mu 
+      + \epsilon\,e\,A'^\mu J_{\mu}^{\mathrm{EM}} \, ,
+      \]
+      <p>where \(F'_{\mu\nu}\) is the dark photon field strength, \(m_{A'}\) is its mass (generatarion might be not specified, commonly accepted 
+      a Stueckelberg or dark Higgs mechanism), and \(\epsilon\) parametrizes the strength of kinetic
+      mixing with the electromagnetic current \(J_{\mu}^{\mathrm{EM}} = \sum_f Q_f \, \bar{f} \gamma_\mu f\).</p>
+      <p>The dark photon originates from the new \(\mathrm{U}(1)_D\) gauge symmetry. 
+      If \(\mathrm{U}(1)_D\) remains unbroken, the dark photon is massless and its interactions with the SM
+      are extremely suppressed. More commonly, the symmetry is broken (e.g., via the Stueckelberg or dark Higgs mechanism), leading to a massive dark photon. The two central free parameters of the minimal model are
+      \(m_{A'}\) and \(\epsilon \).</p>
+      </div>
     </div>
   </div>
   <footer>

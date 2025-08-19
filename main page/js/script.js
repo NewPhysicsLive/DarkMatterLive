@@ -460,18 +460,6 @@ const plotData = [
     categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
   {
-    labelName: "CMS",
-    longName: "CMS",
-    id: "cms",
-    text: { elementName: "CMS" },
-    line: { color: "green", dash: null, width: 2 },
-    area: { color: "lightgreen" },
-    paperUrls: ["https://arxiv.org/abs/2107.13021"],
-    url: "data/CMS.csv",
-    curveType: "excluded", // type of the plot
-    categories: { experementType: "collider", assumption: "None" }, // category for grouping
-  },
-  {
     labelName: "NA64", // label for the legend
     longName: "NA64", // long name for possible reference
     id: "na64",
@@ -1301,6 +1289,18 @@ const plotData = [
     curveType: "excluded", // type of the plot
     categories: { experementType: "collider", assumption: "None" }, // category for grouping
   },
+  {
+    labelName: "KLOE", // label for the legend
+    longName: "KLOE", // long name for possible reference
+    id: "kloe",
+    text: { elementName: null }, // text to be placed on the plot
+    line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
+    area: { color: "rgba(57, 130, 232, 1)" },
+    paperUrls: ["https://arxiv.org/abs/1603.06086"],
+    url: "data/KLOE_rescaled.csv",
+    curveType: "excluded", // type of the plot
+    categories: { experementType: "collider", assumption: "None" }, // category for grouping
+  },
 ];
 
 const curvePriority = {
@@ -1592,7 +1592,7 @@ foY
   .append("xhtml:div")
   .html(
     katex.renderToString(
-      "y=\\varepsilon^2\\alpha_\\mathrm{D} (m_\\chi / m_{A'})^4",
+      "\\varepsilon",
       {
         throwOnError: false,
       }

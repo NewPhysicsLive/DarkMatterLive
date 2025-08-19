@@ -106,6 +106,15 @@ svg {
   font-size: 2rem;
 }
 
+.description {
+  width: 60vw;
+  margin: 40px 0 auto auto;
+  padding: 20px;
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 .description-title {
   text-align: center;
   font-size: 1.8rem;
