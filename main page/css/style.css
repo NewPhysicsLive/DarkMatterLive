@@ -8,8 +8,8 @@ body {
   padding: 0;
 }
 #plot {
-  width: 70vw;
-  height: 80vh;
+  width: 90vw;
+  height: 90vh;
 }
 
 header {
@@ -45,12 +45,13 @@ header {
 
 .interacting-buttons ul{
   list-style: none;
-  width: 80%;
   display: flex;
   justify-content: center;
   gap: 2rem;
+  padding-right: 300px;
   flex-direction: row;
   margin-top: 20px;
+  margin-bottom: 40px;
 }
 
 .option-button {
@@ -91,8 +92,10 @@ svg {
 
 .wrapper {
   display: flex;
+  width: 100%;
   flex-direction: column;
   height: 100%;
+  align-items: center;
   justify-self: center;
 }
 
@@ -107,17 +110,38 @@ svg {
 }
 
 .description {
-  width: 60vw;
-  margin: 40px 0 auto auto;
+  width: 100%;
+  border-top : 2px solid #808080;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.description-box {
+  display: block;
+  width: 60%;
   padding: 20px;
   background-color: #f0f0f0;
-  border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: justify;           /* spreads words across each line */
+  text-justify: inter-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+
+  /* fallback for very long words/URLs */
+  overflow-wrap: break-word;   /* standard */
+  word-wrap: break-word;  
 }
 
 .description-title {
   text-align: center;
   font-size: 1.8rem;
+  font-weight: 600;
+}
+.description-subtitle {
+  text-align: center;
+  font-size: 1.4rem;
   font-weight: 600;
 }
 
