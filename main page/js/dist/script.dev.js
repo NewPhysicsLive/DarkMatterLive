@@ -22,6 +22,63 @@ window.addEventListener("load", function () {
   // when all CSS, images, fonts, scripts are done, show the page
   document.documentElement.classList.remove("loading");
 });
+document.addEventListener("DOMContentLoaded", function () {
+  // toggle each category on click (useful for touch / mobile)
+  document.querySelectorAll(".nav-dropdown .category-btn").forEach(function (btn) {
+    btn.addEventListener("click", function (e) {
+      var li = btn.parentElement;
+      var isOpen = li.classList.toggle("open");
+      btn.setAttribute("aria-expanded", isOpen ? "true" : "false"); // close siblings so only one subpanel is open at a time (optional)
+
+      Array.from(li.parentElement.children).forEach(function (sib) {
+        if (sib !== li) {
+          sib.classList.remove("open");
+          var b = sib.querySelector(".category-btn");
+          if (b) b.setAttribute("aria-expanded", "false");
+        }
+      });
+    });
+  }); // close panels when clicking outside
+
+  document.addEventListener("click", function (e) {
+    if (!e.target.closest(".nav-dropdown")) {
+      document.querySelectorAll(".nav-dropdown .open").forEach(function (el) {
+        el.classList.remove("open");
+        var b = el.querySelector(".category-btn");
+        if (b) b.setAttribute("aria-expanded", "false");
+      });
+      document.querySelectorAll(".nav-dropdown.menu-open").forEach(function (nd) {
+        return nd.classList.remove("menu-open");
+      });
+    }
+  }); // pressing Escape closes everything
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") {
+      document.querySelectorAll(".nav-dropdown .open").forEach(function (el) {
+        el.classList.remove("open");
+        var b = el.querySelector(".category-btn");
+        if (b) b.setAttribute("aria-expanded", "false");
+      });
+      document.querySelectorAll(".nav-dropdown.menu-open").forEach(function (nd) {
+        return nd.classList.remove("menu-open");
+      });
+    }
+  }); // on small screens, clicking the "Choose your model" link toggles the whole menu
+
+  var navModels = document.querySelector(".nav-models");
+  var navDropdown = document.querySelector(".nav-dropdown");
+
+  if (navModels && navDropdown) {
+    navModels.addEventListener("click", function (e) {
+      if (window.matchMedia("(max-width:900px)").matches) {
+        e.preventDefault(); // prevent navigation on small screens; keep the link for desktop
+
+        navDropdown.classList.toggle("menu-open");
+      }
+    });
+  }
+});
 
 function getSecondLevelDomain(url) {
   try {
@@ -382,11 +439,10 @@ Example plotData structure:
 
 curveType: "excluded" or "projection", // type of the plot
     categories: {
-      detectionType: "direct" or "indirect",
-      channelType: "visible" or  "invisible",
-      experimentType: "Collider" or "Cosmology" or "astrophysical" or "laboratory" or "modeling?",
-      timeType: "old" or "recent" or "future",
-      assumption: null or "dark matter" or "other",
+      detectionType: "Direct detection" or "Indirect detection",
+      experimentType: "Collider experiments" or "Cosmological measurements" or "Astrophysical observations" or "Precision experiments/Laboratory?",
+      timeType: "Past constraints" or "Recent constraints" or "Planned/future constraints",
+      assumption: "None" or "Dark Matter" or "Other",
     }, // category for grouping 
 
 
@@ -420,70 +476,9 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
-    assumption: null
-  } // category for grouping
-
-}, {
-  labelName: "Belle 2",
-  // label for the legend
-  longName: "Belle 2",
-  // long name for possible reference
-  id: "belle2",
-  text: {
-    elementName: null
-  },
-  // text to be placed on the plot
-  line: {
-    color: "rgb(255, 0, 255)",
-    dash: "20,7",
-    width: 2
-  },
-  area: {
-    color: null
-  },
-  paperUrls: ["https://link.springer.com/article/10.1140/epjc/s10052-024-13480-4"],
-  url: "data/Belle 2.csv",
-  curveType: "projection",
-  // type of the plot
-  categories: {
-    detectionType: "direct",
-    channelType: "visible",
-    experimentType: "Collider",
-    timeType: "future",
-    assumption: null
-  } // category for grouping
-
-}, {
-  labelName: "HL-LHC",
-  // label for the legend
-  longName: "HL-LHC",
-  // long name for possible reference
-  id: "hl-lhc",
-  text: {
-    elementName: null
-  },
-  // text to be placed on the plot
-  line: {
-    color: "rgb(5, 133, 46)",
-    dash: null,
-    width: 2
-  },
-  area: {
-    color: null
-  },
-  paperUrls: ["https://www.worldscientific.com/doi/10.1142/S0218301324500186"],
-  url: "data/HL-LHC.csv",
-  curveType: "projection",
-  // type of the plot
-  categories: {
-    detectionType: "indirect",
-    channelType: "visible",
-    experimentType: "Collider",
-    timeType: "future",
     assumption: null
   } // category for grouping
 
@@ -510,8 +505,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Laboratory",
     timeType: "new",
     assumption: null
@@ -540,8 +534,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -570,8 +563,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -600,8 +592,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Cosmology",
     timeType: "old",
     assumption: null
@@ -630,8 +621,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -660,8 +650,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -690,8 +679,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -720,8 +708,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -750,8 +737,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -780,8 +766,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -810,8 +795,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -840,8 +824,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -870,8 +853,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -900,8 +882,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -930,8 +911,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -960,8 +940,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -990,8 +969,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -1020,8 +998,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -1050,8 +1027,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -1080,8 +1056,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -1110,8 +1085,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -1140,8 +1114,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -1170,8 +1143,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -1200,8 +1172,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -1230,8 +1201,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -1260,8 +1230,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -1290,8 +1259,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -1320,8 +1288,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -1350,8 +1317,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -1380,8 +1346,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -1410,8 +1375,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -1440,8 +1404,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -1470,8 +1433,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -1500,8 +1462,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -1530,8 +1491,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -1560,8 +1520,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -1590,8 +1549,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -1620,8 +1578,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -1650,8 +1607,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -1680,8 +1636,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -1710,8 +1665,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -1740,8 +1694,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -1770,8 +1723,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -1854,8 +1806,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -1992,8 +1943,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -2022,8 +1972,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -2052,8 +2001,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -2082,8 +2030,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -2112,8 +2059,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -2142,8 +2088,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -2172,8 +2117,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -2310,8 +2254,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -2340,8 +2283,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -2370,8 +2312,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -2454,8 +2395,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -2484,8 +2424,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -2514,8 +2453,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -2679,8 +2617,7 @@ var plotData = [{
   curveType: "excluded",
   // type of the plot
   categories: {
-    detectionType: "direct",
-    channelType: "visible",
+    detectionType: "Direct detection",
     experimentType: "Collider",
     timeType: "old",
     assumption: null
@@ -2916,17 +2853,29 @@ select
     renderLegend(groupedData);
   }); */
 
-var legendSvg = legend_wrapper.append("svg").style("width", "100%").attr("class", "legend"); // === groups (accordion sections) ===
+var legendSvg = legend_wrapper.append("svg").style("width", "100%").attr("class", "legend");
+legendSvg.append("g").attr("class", "legend-group-select-all").append("text").attr("class", "legend-group-select-all-text").attr("x", 0).attr("y", 16) // baseline; avoids clipping at y=0
+.text("Select All").style("font-weight", "600").style("font-size", "1em");
+selectAllWidth = legendSvg.select(".legend-group-select-all-text").node().getBBox().width;
+legendSvg.select(".legend-group-select-all").append("foreignObject").attr("x", selectAllWidth + 6).attr("y", 2).attr("width", 15).attr("height", 15).append("xhtml:div").attr("style", "width:100%; height:100%; margin:0; padding:0").append("input").attr("style", "width:15px; height:15px; margin:0; padding:0").attr("type", "checkbox").attr("class", "hidden-box").property("checked", true).on("change", function () {
+  var isChecked = d3.select(this).property("checked");
+  d3.selectAll(".hidden-box").each(function (d) {
+    d3.select(this).property("checked", isChecked);
+    this.dispatchEvent(new Event("change", {
+      bubbles: true
+    }));
+  });
+}); // === groups (accordion sections) ===
 
 var groups = legendSvg.selectAll(".legend-group").data(grouped, function (d) {
   return d.group;
 }).enter().append("g").attr("class", "legend-group").attr("expanded", "false"); // collapsed by default
 // --- group title (click to toggle) ---
 
-groups.append("text").attr("class", "legend-group-title").attr("x", 0).attr("y", 12) // baseline; avoids clipping at y=0
+groups.append("text").attr("class", "legend-group-title").attr("x", 0).attr("y", 48) // baseline; avoids clipping at y=0
 .text(function (d) {
   return d.group;
-}).style("font-weight", "bold").style("cursor", "pointer").on("click", function () {
+}).style("font-weight", "600").style("font-size", "1.2em").style("cursor", "pointer").on("click", function () {
   var g = d3.select(this.parentNode);
   var isExpanded = g.attr("expanded") === "true";
   g.attr("expanded", String(!isExpanded));
@@ -2935,7 +2884,7 @@ groups.append("text").attr("class", "legend-group-title").attr("x", 0).attr("y",
 var items = groups.selectAll(".legend-item").data(function (d) {
   return d.items;
 }).enter().append("g").attr("class", "legend-item").attr("transform", function (d, i) {
-  return "translate(0, ".concat((i + 1) * itemHeight, ")");
+  return "translate(0, ".concat((i + 1) * itemHeight + 32, ")");
 }); // swatch (if area has fill color)
 
 items.filter(function (d) {
@@ -3000,7 +2949,7 @@ function updateLegendLayout() {
   }); // Adjust legend height
 
   var tSvg = firstRun ? legendSvg : legendSvg.transition().duration(250);
-  tSvg.style("height", yOffset + "px");
+  tSvg.style("height", yOffset + 40 + "px");
   firstRun = false;
 } // initial layout
 

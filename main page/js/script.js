@@ -6,6 +6,67 @@ window.addEventListener("load", () => {
   document.documentElement.classList.remove("loading");
 });
 
+
+document.addEventListener("DOMContentLoaded", function () {
+  // toggle each category on click (useful for touch / mobile)
+  document.querySelectorAll(".nav-dropdown .category-btn").forEach((btn) => {
+    btn.addEventListener("click", function (e) {
+      const li = btn.parentElement;
+      const isOpen = li.classList.toggle("open");
+      btn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+
+      // close siblings so only one subpanel is open at a time (optional)
+      Array.from(li.parentElement.children).forEach((sib) => {
+        if (sib !== li) {
+          sib.classList.remove("open");
+          const b = sib.querySelector(".category-btn");
+          if (b) b.setAttribute("aria-expanded", "false");
+        }
+      });
+    });
+  });
+
+  // close panels when clicking outside
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest(".nav-dropdown")) {
+      document.querySelectorAll(".nav-dropdown .open").forEach((el) => {
+        el.classList.remove("open");
+        const b = el.querySelector(".category-btn");
+        if (b) b.setAttribute("aria-expanded", "false");
+      });
+      document
+        .querySelectorAll(".nav-dropdown.menu-open")
+        .forEach((nd) => nd.classList.remove("menu-open"));
+    }
+  });
+
+  // pressing Escape closes everything
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      document.querySelectorAll(".nav-dropdown .open").forEach((el) => {
+        el.classList.remove("open");
+        const b = el.querySelector(".category-btn");
+        if (b) b.setAttribute("aria-expanded", "false");
+      });
+      document
+        .querySelectorAll(".nav-dropdown.menu-open")
+        .forEach((nd) => nd.classList.remove("menu-open"));
+    }
+  });
+
+  // on small screens, clicking the "Choose your model" link toggles the whole menu
+  const navModels = document.querySelector(".nav-models");
+  const navDropdown = document.querySelector(".nav-dropdown");
+  if (navModels && navDropdown) {
+    navModels.addEventListener("click", function (e) {
+      if (window.matchMedia("(max-width:900px)").matches) {
+        e.preventDefault(); // prevent navigation on small screens; keep the link for desktop
+        navDropdown.classList.toggle("menu-open");
+      }
+    });
+  }
+});
+
 function getSecondLevelDomain(url) {
   try {
     const host = new URL(url).hostname; // e.g. "arxiv.org" or "sub.example.co.uk"
@@ -450,11 +511,10 @@ Example plotData structure:
 
 curveType: "excluded" or "projection", // type of the plot
     categories: {
-      detectionType: "direct" or "indirect",
-      channelType: "visible" or  "invisible",
-      experimentType: "Collider" or "Cosmology" or "astrophysical" or "laboratory" or "modeling?",
-      timeType: "old" or "recent" or "future",
-      assumption: null or "dark matter" or "other",
+      detectionType: "Direct detection" or "Indirect detection",
+      experimentType: "Collider experiments" or "Cosmological measurements" or "Astrophysical observations" or "Precision experiments/Laboratory?",
+      timeType: "Past constraints" or "Recent constraints" or "Planned/future constraints",
+      assumption: "None" or "Dark Matter" or "Other",
     }, // category for grouping 
 
 
@@ -474,50 +534,9 @@ const plotData = [
     url: "data/BaBar.csv", // URL to the data file
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
-      assumption: null,
-    }, // category for grouping
-  },
-  {
-    labelName: "Belle 2", // label for the legend
-    longName: "Belle 2", // long name for possible reference
-    id: "belle2",
-    text: { elementName: null }, // text to be placed on the plot
-    line: { color: "rgb(255, 0, 255)", dash: "20,7", width: 2 },
-    area: { color: null },
-    paperUrls: [
-      "https://link.springer.com/article/10.1140/epjc/s10052-024-13480-4",
-    ],
-    url: "data/Belle 2.csv",
-    curveType: "projection", // type of the plot
-    categories: {
-      detectionType: "direct",
-      channelType: "visible",
-      experimentType: "Collider",
-      timeType: "future",
-      assumption: null,
-    }, // category for grouping
-  },
-  {
-    labelName: "HL-LHC", // label for the legend
-    longName: "HL-LHC", // long name for possible reference
-    id: "hl-lhc",
-    text: { elementName: null }, // text to be placed on the plot
-    line: { color: "rgb(5, 133, 46)", dash: null, width: 2 },
-    area: { color: null },
-    paperUrls: [
-      "https://www.worldscientific.com/doi/10.1142/S0218301324500186",
-    ],
-    url: "data/HL-LHC.csv",
-    curveType: "projection", // type of the plot
-    categories: {
-      detectionType: "indirect",
-      channelType: "visible",
-      experimentType: "Collider",
-      timeType: "future",
       assumption: null,
     }, // category for grouping
   },
@@ -532,8 +551,7 @@ const plotData = [
     url: "data/AxionLimits-csv/AFM.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Laboratory",
       timeType: "new",
       assumption: null,
@@ -550,8 +568,7 @@ const plotData = [
     url: "data/AxionLimits-csv/ALPS.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -568,8 +585,7 @@ const plotData = [
     url: "data/AxionLimits-csv/AMAILS.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -586,8 +602,7 @@ const plotData = [
     url: "data/AxionLimits-csv/Cosmology_Arias.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Cosmology",
       timeType: "old",
       assumption: null,
@@ -604,8 +619,7 @@ const plotData = [
     url: "data/AxionLimits-csv/Cosmology_Caputo_HeII_.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -622,8 +636,7 @@ const plotData = [
     url: "data/AxionLimits-csv/Cosmology_Witte_inhomogeneous.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -640,8 +653,7 @@ const plotData = [
     url: "data/AxionLimits-csv/Crab.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -658,8 +670,7 @@ const plotData = [
     url: "data/AxionLimits-csv/CROWS.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -676,8 +687,7 @@ const plotData = [
     url: "data/AxionLimits-csv/DAMIC.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -694,8 +704,7 @@ const plotData = [
     url: "data/AxionLimits-csv/DarkSide.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -712,8 +721,7 @@ const plotData = [
     url: "data/AxionLimits-csv/DarkSRF.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -730,8 +738,7 @@ const plotData = [
     url: "data/AxionLimits-csv/DP_Combined_AxionSearchesRescaled.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -748,8 +755,7 @@ const plotData = [
     url: "data/AxionLimits-csv/DP_Combined_DarkMatterSearches.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -766,8 +772,7 @@ const plotData = [
     url: "data/AxionLimits-csv/Earth.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -784,8 +789,7 @@ const plotData = [
     url: "data/AxionLimits-csv/FUNK.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -802,8 +806,7 @@ const plotData = [
     url: "data/AxionLimits-csv/GasClouds.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -820,8 +823,7 @@ const plotData = [
     url: "data/AxionLimits-csv/GlobularClusters.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -838,8 +840,7 @@ const plotData = [
     url: "data/AxionLimits-csv/HINODE.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -859,8 +860,7 @@ const plotData = [
     url: "data/AxionLimits-csv/INTEGRAL.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -877,8 +877,7 @@ const plotData = [
     url: "data/AxionLimits-csv/Jupiter.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -895,8 +894,7 @@ const plotData = [
     url: "data/AxionLimits-csv/JWST.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -913,8 +911,7 @@ const plotData = [
     url: "data/AxionLimits-csv/LeoT.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -931,8 +928,7 @@ const plotData = [
     url: "data/AxionLimits-csv/LSW_ADMX.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -949,8 +945,7 @@ const plotData = [
     url: "data/AxionLimits-csv/LSW_UWA.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -967,8 +962,7 @@ const plotData = [
     url: "data/AxionLimits-csv/MuDHI.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -985,8 +979,7 @@ const plotData = [
     url: "data/AxionLimits-csv/NeutronStarCooling.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -1003,8 +996,7 @@ const plotData = [
     url: "data/AxionLimits-csv/Planck_unWISE.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -1021,8 +1013,7 @@ const plotData = [
     url: "data/AxionLimits-csv/PlimptonLawton.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -1039,8 +1030,7 @@ const plotData = [
     url: "data/AxionLimits-csv/SENSEI.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -1057,8 +1047,7 @@ const plotData = [
     url: "data/AxionLimits-csv/Planck_unWISE.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -1075,8 +1064,7 @@ const plotData = [
     url: "data/AxionLimits-csv/SNIPE.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -1093,8 +1081,7 @@ const plotData = [
     url: "data/AxionLimits-csv/Solar.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -1111,8 +1098,7 @@ const plotData = [
     url: "data/AxionLimits-csv/Spectroscopy.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -1129,8 +1115,7 @@ const plotData = [
     url: "data/AxionLimits-csv/SPring-8.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -1147,8 +1132,7 @@ const plotData = [
     url: "data/AxionLimits-csv/SuperCDMS.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -1169,8 +1153,7 @@ const plotData = [
     url: "data/AxionLimits-csv/SuperMAG_Combined.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -1187,8 +1170,7 @@ const plotData = [
     url: "data/AxionLimits-csv/TEXONO.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -1205,8 +1187,7 @@ const plotData = [
     url: "data/AxionLimits-csv/Tokyo-Dish.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -1223,8 +1204,7 @@ const plotData = [
     url: "data/AxionLimits-csv/Xenon1T.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -1241,8 +1221,7 @@ const plotData = [
     url: "data/AxionLimits-csv/Xenon1T_S1S2.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -1259,8 +1238,7 @@ const plotData = [
     url: "data/AxionLimits-csv/XENON1T_SE.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -1277,8 +1255,7 @@ const plotData = [
     url: "data/AxionLimits-csv/XENON1T_Solar_S2.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -1295,8 +1272,7 @@ const plotData = [
     url: "data/AxionLimits-csv/XENONnT.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -1337,8 +1313,7 @@ const plotData = [
     url: "data/CHARM.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -1403,8 +1378,7 @@ const plotData = [
     url: "data/FASER(58fb).csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -1421,8 +1395,7 @@ const plotData = [
     url: "data/NA62.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -1439,8 +1412,7 @@ const plotData = [
     url: "data/E774.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -1457,8 +1429,7 @@ const plotData = [
     url: "data/E141.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -1475,8 +1446,7 @@ const plotData = [
     url: "data/Orsay.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -1493,8 +1463,7 @@ const plotData = [
     url: "data/E137.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -1511,8 +1480,7 @@ const plotData = [
     url: "data/A1_rescaled.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -1577,8 +1545,7 @@ const plotData = [
     url: "data/LHCb_rescaled.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -1598,8 +1565,7 @@ const plotData = [
     url: "data/g-2e_updated_rescaled.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -1616,8 +1582,7 @@ const plotData = [
     url: "data/nu-Cal.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -1658,8 +1623,7 @@ const plotData = [
     url: "data/NA48-2_rescaled.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -1676,8 +1640,7 @@ const plotData = [
     url: "data/KLOE_combined_rescaled.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -1694,8 +1657,7 @@ const plotData = [
     url: "data/SN1987A.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -1772,8 +1734,7 @@ const plotData = [
     url: "data/CMS_rescaled.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "direct",
-      channelType: "visible",
+      detectionType: "Direct detection",
       experimentType: "Collider",
       timeType: "old",
       assumption: null,
@@ -2053,6 +2014,41 @@ const legendSvg = legend_wrapper
   .style("width", "100%")
   .attr("class", "legend");
 
+legendSvg
+  .append("g")
+  .attr("class", "legend-group-select-all")
+  .append("text")
+  .attr("class", "legend-group-select-all-text")
+  .attr("x", 0)
+  .attr("y", 16) // baseline; avoids clipping at y=0
+  .text("Select All")
+  .style("font-weight", "600")
+  .style("font-size", "1em")
+
+selectAllWidth = legendSvg.select(".legend-group-select-all-text").node().getBBox().width;
+
+legendSvg
+  .select(".legend-group-select-all")
+  .append("foreignObject")
+  .attr("x", selectAllWidth + 6)
+  .attr("y", 2)
+  .attr("width", 15)
+  .attr("height", 15)
+  .append("xhtml:div")
+  .attr("style", "width:100%; height:100%; margin:0; padding:0")
+  .append("input")
+  .attr("style", "width:15px; height:15px; margin:0; padding:0")
+  .attr("type", "checkbox")
+  .attr("class", "hidden-box")
+  .property("checked", true)
+  .on("change", function () {
+      const isChecked = d3.select(this).property("checked");
+      d3.selectAll(".hidden-box").each(function(d) {
+          d3.select(this).property("checked", isChecked);
+          this.dispatchEvent(new Event("change", { bubbles: true }));
+        });
+    });
+
 // === groups (accordion sections) ===
 const groups = legendSvg
   .selectAll(".legend-group")
@@ -2067,9 +2063,10 @@ const groups = legendSvg
 groups.append("text")
   .attr("class", "legend-group-title")
   .attr("x", 0)
-  .attr("y", 12) // baseline; avoids clipping at y=0
+  .attr("y", 48) // baseline; avoids clipping at y=0
   .text(d => d.group)
-  .style("font-weight", "bold")
+  .style("font-weight", "600")
+  .style("font-size", "1.2em")
   .style("cursor", "pointer")
   .on("click", function () {
     const g = d3.select(this.parentNode);
@@ -2085,7 +2082,7 @@ const items = groups
   .enter()
   .append("g")
   .attr("class", "legend-item")
-  .attr("transform", (d, i) => `translate(0, ${(i + 1) * itemHeight})`);
+  .attr("transform", (d, i) => `translate(0, ${(i + 1) * itemHeight + 32})`);
 
 // swatch (if area has fill color)
 items.filter(d => d.area.color)
@@ -2194,7 +2191,7 @@ function updateLegendLayout() {
 
   // Adjust legend height
   const tSvg = firstRun ? legendSvg : legendSvg.transition().duration(250);
-  tSvg.style("height", yOffset + "px");
+  tSvg.style("height", yOffset + 40 + "px");
 
   firstRun = false;
 }

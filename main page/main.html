@@ -31,8 +31,55 @@
   <header class="header">
     <ul class="navbar">
       <li class="logo navbar-link"><a href="../front%20page/front.html">Dark Matter live</a></li>
-      <li class="navbar-link">
+      <li class="navbar-link nav-dropdown">
         <a class="nav-models active" href="../main%20page/main.html">Choose your model</a>
+
+        <!-- Dropdown panel (hidden by default, shows on hover / focus-within) -->
+        <div class="dropdown" aria-label="Choose model menu">
+          <ul class="model-categories">
+            <li class="category">
+              <button class="category-btn" aria-expanded="false">Vector portal models (BC1-BC3)</button>
+              <ul class="submodels">
+                <li><a class="model-link" href="#">Minimal dark photon model (BC1)</a></li>
+                <li><a class="model-link" href="../main%20page/main.html">Light DM coupled to dark photon (BC2)</a></li>
+                <li><a class="model-link" href="#">Millicharged particles (BC3)</a></li>
+              </ul>
+            </li>
+
+            <li class="category">
+              <button class="category-btn" aria-expanded="false">Scalar portal models (BC4-BC5)</button>
+              <ul class="submodels">
+                <li><a class="model-link" href="#">Higgs-mixed scalar (BC4)</a></li>
+                <li><a class="model-link" href="#">Higgs-mixed scalar w/ large pair-production (BC5)</a></li>
+              </ul>
+            </li>
+
+            <li class="category">
+              <button class="category-btn" aria-expanded="false">Neutrino portal models (BC6-BC8)</button>
+              <ul class="submodels">
+                <li><a class="model-link" href="#">Single HNL, electron dominance (BC6)</a></li>
+                <li><a class="model-link" href="#">Single HNL, muon dominance (BC7)</a></li>
+                <li><a class="model-link" href="#">Single HNL, tau dominance (BC8)</a></li>
+              </ul>
+            </li>
+
+            <li class="category">
+              <button class="category-btn" aria-expanded="false">Axion portal models (BC9-BC11)</button>
+              <ul class="submodels">
+                <li><a class="model-link" href="#">ALP with photon dominance (BC9)</a></li>
+                <li><a class="model-link" href="#">ALP with fermion dominance (BC10)</a></li>
+                <li><a class="model-link" href="#">ALP with gluon dominance (BC11)</a></li>
+              </ul>
+            </li>
+
+            <li class="category">
+              <button class="category-btn" aria-expanded="false">Other models</button>
+              <ul class="submodels">
+                <li><a class="model-link" href="#">SUSY extension models</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
       </li>
       <li class="navbar-link"><a href="../faq%20page/faq.html">How to add your results</a></li>
     </ul>
@@ -66,16 +113,63 @@
       \(m_{A'}\) and \(\epsilon \).</p>
 
       <h3 class="description-subtitle">Detection</h3>
-      <p>There are two types of channels that are usually considered: visible (\(m_{A'} > 2 m_e \)) and invisible (\(m_{A'} < 2 m_e\)). 
+      <p>There are two types of channels that are usually considered: visible (\(m_{A'} > 2 m_e \)) and invisible (\(m_{A'} < 2 m_e\)). </p>
+
+      <p>
         In the first case, seaches concentrated on detection of SM signatures related to the dark photon in detector, e.g., dijet and missing energy/momentum searches. 
-        These experiments are usually built around colliders, like LHC, SPS, Fermilab etc. In the second case, the dark photon, 
-        in minimal dark photon model, do not have obvious visible SM decay channels, exept neutrinos, which are suppressed, 
-        and so-called photon trident decay (\(A' \rightarrow 3 \gamma \)), which is one-loop processes and highly suppressed. 
+        These experiments are usually built around colliders, like LHC, SPS, Fermilab etc. </p>
+      <p>
+        
+      <p>
+        In the second case, the dark photon, in minimal dark photon model, do not have obvious visible SM decay channels, exept neutrinos, which are suppressed and extremely hard to detect, 
+        and so-called photon trident decay (\(A' \rightarrow 3 \gamma \)), which is one-loop processes and highly suppressed.
         Therefore, these particles are long-lived and escape the detector, leading to missing energy/momentum signatures, 
-        which are extremely weak compared to the background and imposible to track at current resolution. So, most seaches 
-        at sub-MeV range are based on indirect detection methods.
-      
+        which are extremely weak compared to the background and imposible to track at current resolution. 
       </p>
+      <p>
+        So, most seaches at sub-MeV range are based on indirect detection methods.
+      </p>
+      <p>
+        Indirect detection methods include astrophysical observations, cosmological measurements, and precision experiments. The first two methods look for deviations 
+        from the expected behavior of astrophysical objects or cosmological phenomena that could be explained by the presence of dark photons. 
+        These methods often use strong assumptions, like \(\rho_{DM} = \rho_{A'}\) and are model-dependent, so they often impose less strict restrictins, 
+        compared to model indepent constraints, and should be treat with caution. Precision experiments, on the other hand, can provide robust constraints on dark photons by looking for
+        tiny deviations from the SM predictions in laboratory settings. 
+      </p>
+      <p>
+        In the context of dark photons, direct detection methods are almost interchangeable with collider experiments, 
+        as any signature of dark photons in colliders would be considered a direct detection of them.
+      </p>
+      <p>
+        Let's consider our proposed clasification of experiments in the context of dark photon searches:
+      </p>
+      <p>By detection type:</p>
+      <ul>
+        <li>Direct detection: Collider experiments looking for visible decays of dark photons (e.g., \(A' \rightarrow e^+ e^-\)) or missing energy/momentum signatures.</li>
+        <li>Indirect detection: Astrophysical observations (e.g., stellar cooling, supernovae), cosmological measurements (e.g., CMB, BBN), and precision experiments (e.g., anomalous magnetic moments).</li>
+      </ul>
+      <p>By experiment type:</p>
+      <ul>
+        <li>Collider experiments (e.g., LHCb, BaBar, Belle II, NA64, APEX, HPS, DarkLight, PADME);</li>
+        <li>Fixed-target experiments (e.g., NA64, APEX, HPS, DarkLight);</li>
+        <li>Beam dump experiments: E137, E141, E774, Orsay, CHARM.</li>
+        <li>Precision experiments: Muon g-2 (Brookhaven E821, Fermilab), Electron g-2 (Harvard).</li>
+        <li>Astrophysical observations: Stellar cooling (e.g., white dwarfs, red giants), Supernova 1987A.</li>
+        <li>Cosmological measurements: Cosmic Microwave Background (CMB) anisotropies (e.g., Planck), Big Bang Nucleosynthesis (BBN).</li>
+      </ul>
+      <p>By time of the results:</p>
+      <ul>
+        <li>Past constraints (before 2015), e.g., E137, E141, E774, Orsay, CHARM;</li>
+        <li>Recent constraints (after 2015 due to today), e.g., LHCb, BaBar, NA64;</li>
+        <li>Planned/future constraints (in future), e.g., Belle II, NA64 (upgraded), APEX, HPS, DarkLight, PADME.</li>
+      </ul>
+      
+      <p>By used assumptions</p>
+      <ul>
+        <li>None (model-independent constraints, e.g., collider experiments, precision experiments);</li>
+        <li>Dark matter (constraints assuming dark photon constitutes all or part of dark matter, e.g., astrophysical observations, cosmological measurements);</li>
+        <li>Other (constraints based on specific theoretical models).</li>
+      </ul>
       </div>
     </div>
   </div>
