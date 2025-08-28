@@ -78,7 +78,7 @@ function getSecondLevelDomain(url) {
 }
 
 // Set up margins and dimensions
-const margin = { top: 60, right: 350, bottom: 80, left: 95 };
+const margin = { top: 60, right: 370, bottom: 80, left: 95 };
 const container = d3.select('#plot');
 const width = container.node().clientWidth;
 const height = container.node().clientHeight;
@@ -512,7 +512,7 @@ Example plotData structure:
 curveType: "excluded" or "projection", // type of the plot
     categories: {
       detectionType: "Direct detection" or "Indirect detection",
-      experimentType: "Collider experiments" or "Cosmological measurements" or "Astrophysical observations" or "Precision experiments/Laboratory?",
+      experimentType: "Collider experiments" or "Cosmological measurements" or "Astrophysical observations" or "Laboratory experiments",
       timeType: "Past constraints" or "Recent constraints" or "Planned/future constraints",
       assumption: "None" or "Dark Matter" or "Other",
     }, // category for grouping 
@@ -535,9 +535,9 @@ const plotData = [
     curveType: "excluded", // type of the plot
     categories: {
       detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      experimentType: "Collider experiments",
+      timeType: "Past constraints",
+      assumption: "None",
     }, // category for grouping
   },
   {
@@ -552,9 +552,9 @@ const plotData = [
     curveType: "excluded", // type of the plot
     categories: {
       detectionType: "Direct detection",
-      experimentType: "Laboratory",
-      timeType: "new",
-      assumption: null,
+      experimentType: "Laboratory experiments",
+      timeType: "Recent constraints",
+      assumption: "None",
     }, // category for grouping
   },
   {
@@ -569,9 +569,9 @@ const plotData = [
     curveType: "excluded", // type of the plot
     categories: {
       detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      experimentType: "Laboratory experiments",
+      timeType: "Past constraints",
+      assumption: "None",
     }, // category for grouping
   },
   {
@@ -586,9 +586,9 @@ const plotData = [
     curveType: "excluded", // type of the plot
     categories: {
       detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      experimentType: "Laboratory experiments",
+      timeType: "Recent constraints",
+      assumption: "Dark Matter",
     }, // category for grouping
   },
   {
@@ -602,10 +602,10 @@ const plotData = [
     url: "data/AxionLimits-csv/Cosmology_Arias.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "Direct detection",
-      experimentType: "Cosmology",
-      timeType: "old",
-      assumption: null,
+      detectionType: "Indirect detection",
+      experimentType: "Astrophysical observations",
+      timeType: "Past constraints",
+      assumption: "Dark Matter",
     }, // category for grouping
   },
   {
@@ -619,10 +619,10 @@ const plotData = [
     url: "data/AxionLimits-csv/Cosmology_Caputo_HeII_.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      detectionType: "Indirect detection",
+      experimentType: "Cosmological measurements",
+      timeType: "Recent constraints",
+      assumption: "Dark Matter",
     }, // category for grouping
   },
   {
@@ -636,10 +636,10 @@ const plotData = [
     url: "data/AxionLimits-csv/Cosmology_Witte_inhomogeneous.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      detectionType: "Indirect detection",
+      experimentType: "Cosmological measurements",
+      timeType: "Recent constraints",
+      assumption: "Dark Matter",
     }, // category for grouping
   },
   {
@@ -653,10 +653,10 @@ const plotData = [
     url: "data/AxionLimits-csv/Crab.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      detectionType: "Indirect detection",
+      experimentType: "Astrophysical observations",
+      timeType: "Past constraints",
+      assumption: "None",
     }, // category for grouping
   },
   {
@@ -671,9 +671,9 @@ const plotData = [
     curveType: "excluded", // type of the plot
     categories: {
       detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      experimentType: "Laboratory experiments",
+      timeType: "Past constraints",
+      assumption: "None",
     }, // category for grouping
   },
   {
@@ -688,9 +688,9 @@ const plotData = [
     curveType: "excluded", // type of the plot
     categories: {
       detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      experimentType: "Laboratory experiments",
+      timeType: "Recent constraints",
+      assumption: "Dark Matter",
     }, // category for grouping
   },
   {
@@ -705,9 +705,9 @@ const plotData = [
     curveType: "excluded", // type of the plot
     categories: {
       detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      experimentType: "Laboratory experiments",
+      timeType: "Recent constraints",
+      assumption: "Dark Matter",
     }, // category for grouping
   },
   {
@@ -722,9 +722,9 @@ const plotData = [
     curveType: "excluded", // type of the plot
     categories: {
       detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      experimentType: "Laboratory experiments",
+      timeType: "Recent constraints",
+      assumption: "None",
     }, // category for grouping
   },
   {
@@ -738,10 +738,10 @@ const plotData = [
     url: "data/AxionLimits-csv/DP_Combined_AxionSearchesRescaled.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      detectionType: "Indirect detection",
+      experimentType: "Laboratory experiments",
+      timeType: "Recent constraints",
+      assumption: "Dark Matter",
     }, // category for grouping
   },
   {
@@ -755,10 +755,10 @@ const plotData = [
     url: "data/AxionLimits-csv/DP_Combined_DarkMatterSearches.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      detectionType: "Indirect detection",
+      experimentType: "Laboratory experiments",
+      timeType: "Recent constraints",
+      assumption: "Dark Matter",
     }, // category for grouping
   },
   {
@@ -772,10 +772,10 @@ const plotData = [
     url: "data/AxionLimits-csv/Earth.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      detectionType: "Indirect detection",
+      experimentType: "Astrophysical observations",
+      timeType: "Recent constraints",
+      assumption: "None",
     }, // category for grouping
   },
   {
@@ -790,9 +790,9 @@ const plotData = [
     curveType: "excluded", // type of the plot
     categories: {
       detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      experimentType: "Laboratory experiments",
+      timeType: "Recent constraints",
+      assumption: "None",
     }, // category for grouping
   },
   {
@@ -806,10 +806,10 @@ const plotData = [
     url: "data/AxionLimits-csv/GasClouds.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      detectionType: "Indirect detection",
+      experimentType: "Astrophysical observations",
+      timeType: "Recent constraints",
+      assumption: "Dark Matter",
     }, // category for grouping
   },
   {
@@ -823,10 +823,10 @@ const plotData = [
     url: "data/AxionLimits-csv/GlobularClusters.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      detectionType: "Indirect detection",
+      experimentType: "Astrophysical observations",
+      timeType: "Recent constraints",
+      assumption: "None",
     }, // category for grouping
   },
   {
@@ -840,10 +840,10 @@ const plotData = [
     url: "data/AxionLimits-csv/HINODE.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      detectionType: "Indirect detection",
+      experimentType: "Astrophysical observations",
+      timeType: "Recent constraints",
+      assumption: "None",
     }, // category for grouping
   },
   {
@@ -860,10 +860,10 @@ const plotData = [
     url: "data/AxionLimits-csv/INTEGRAL.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      detectionType: "Indirect detection",
+      experimentType: "Astrophysical observations",
+      timeType: "Recent constraints",
+      assumption: "Dark Matter",
     }, // category for grouping
   },
   {
@@ -877,10 +877,10 @@ const plotData = [
     url: "data/AxionLimits-csv/Jupiter.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      detectionType: "Indirect detection",
+      experimentType: "Astrophysical observations",
+      timeType: "Recent constraints",
+      assumption: "None",
     }, // category for grouping
   },
   {
@@ -895,9 +895,9 @@ const plotData = [
     curveType: "excluded", // type of the plot
     categories: {
       detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      experimentType: "Laboratory experiments",
+      timeType: "Recent constraints",
+      assumption: "Dark Matter",
     }, // category for grouping
   },
   {
@@ -911,10 +911,10 @@ const plotData = [
     url: "data/AxionLimits-csv/LeoT.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      detectionType: "Indirect detection",
+      experimentType: "Astrophysical observations",
+      timeType: "Recent constraints",
+      assumption: "Dark Matter",
     }, // category for grouping
   },
   {
@@ -924,14 +924,14 @@ const plotData = [
     text: { elementName: null }, // text to be placed on the plot
     line: { color: "rgba(5, 58, 133, 1)", dash: null, width: 2 },
     area: { color: "rgba(57, 130, 232, 1)" },
-    paperUrls: ["https://arxiv.org/abs/1903.12190"],
+    paperUrls: ["https://arxiv.org/abs/1007.3766"],
     url: "data/AxionLimits-csv/LSW_ADMX.csv",
     curveType: "excluded", // type of the plot
     categories: {
       detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      experimentType: "Laboratory experiments",
+      timeType: "Past constraints",
+      assumption: "None",
     }, // category for grouping
   },
   {
@@ -946,9 +946,9 @@ const plotData = [
     curveType: "excluded", // type of the plot
     categories: {
       detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      experimentType: "Laboratory experiments",
+      timeType: "Past constraints",
+      assumption: "None",
     }, // category for grouping
   },
   {
@@ -963,9 +963,9 @@ const plotData = [
     curveType: "excluded", // type of the plot
     categories: {
       detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      experimentType: "Laboratory experiments",
+      timeType: "Recent constraints",
+      assumption: "Dark Matter",
     }, // category for grouping
   },
   {
@@ -979,10 +979,10 @@ const plotData = [
     url: "data/AxionLimits-csv/NeutronStarCooling.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      detectionType: "Indirect detection",
+      experimentType: "Astrophysical observations",
+      timeType: "Recent constraints",
+      assumption: "None",
     }, // category for grouping
   },
   {
@@ -996,10 +996,10 @@ const plotData = [
     url: "data/AxionLimits-csv/Planck_unWISE.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      detectionType: "Indirect detection",
+      experimentType: "Astrophysical observations",
+      timeType: "Recent constraints",
+      assumption: "None",
     }, // category for grouping
   },
   {
@@ -1014,9 +1014,9 @@ const plotData = [
     curveType: "excluded", // type of the plot
     categories: {
       detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      experimentType: "Laboratory experiments",
+      timeType: "Recent constraints",
+      assumption: "None",
     }, // category for grouping
   },
   {
@@ -1031,9 +1031,9 @@ const plotData = [
     curveType: "excluded", // type of the plot
     categories: {
       detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      experimentType: "Laboratory experiments",
+      timeType: "Recent constraints",
+      assumption: "None",
     }, // category for grouping
   },
   {
@@ -1048,9 +1048,9 @@ const plotData = [
     curveType: "excluded", // type of the plot
     categories: {
       detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      experimentType: "Astrophysical observations",
+      timeType: "Recent constraints",
+      assumption: "None",
     }, // category for grouping
   },
   {
@@ -1065,9 +1065,9 @@ const plotData = [
     curveType: "excluded", // type of the plot
     categories: {
       detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      experimentType: "Astrophysical observations",
+      timeType: "Recent constraints",
+      assumption: "None",
     }, // category for grouping
   },
   {
@@ -1081,10 +1081,10 @@ const plotData = [
     url: "data/AxionLimits-csv/Solar.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      detectionType: "Indirect detection",
+      experimentType: "Astrophysical observations",
+      timeType: "Recent constraints",
+      assumption: "None",
     }, // category for grouping
   },
   {
@@ -1098,10 +1098,10 @@ const plotData = [
     url: "data/AxionLimits-csv/Spectroscopy.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      detectionType: "Indirect detection",
+      experimentType: "Laboratory experiments",
+      timeType: "Past constraints",
+      assumption: "None",
     }, // category for grouping
   },
   {
@@ -1116,9 +1116,9 @@ const plotData = [
     curveType: "excluded", // type of the plot
     categories: {
       detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      experimentType: "Laboratory experiments",
+      timeType: "Past constraints",
+      assumption: "None",
     }, // category for grouping
   },
   {
@@ -1133,9 +1133,9 @@ const plotData = [
     curveType: "excluded", // type of the plot
     categories: {
       detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      experimentType: "Laboratory experiments",
+      timeType: "Recent constraints",
+      assumption: "Dark Matter",
     }, // category for grouping
   },
   {
@@ -1147,16 +1147,16 @@ const plotData = [
     area: { color: "rgba(57, 130, 232, 1)" },
     paperUrls: [
       "https://arxiv.org/abs/2106.00022",
-      "https://arxiv.org/pdf/2408.16045",
-      "https://arxiv.org/pdf/2108.08852",
+      "https://arxiv.org/abs/2408.16045",
+      "https://arxiv.org/abs/2108.08852",
     ],
     url: "data/AxionLimits-csv/SuperMAG_Combined.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      detectionType: "Indirect detection",
+      experimentType: "Astrophysical observations",
+      timeType: "Recent constraints",
+      assumption: "None",
     }, // category for grouping
   },
   {
@@ -1170,10 +1170,10 @@ const plotData = [
     url: "data/AxionLimits-csv/TEXONO.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      detectionType: "Indirect detection",
+      experimentType: "Laboratory experiments",
+      timeType: "Recent constraints",
+      assumption: "None",
     }, // category for grouping
   },
   {
@@ -1188,9 +1188,9 @@ const plotData = [
     curveType: "excluded", // type of the plot
     categories: {
       detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      experimentType: "Laboratory experiments",
+      timeType: "Recent constraints",
+      assumption: "None",
     }, // category for grouping
   },
   {
@@ -1205,9 +1205,9 @@ const plotData = [
     curveType: "excluded", // type of the plot
     categories: {
       detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      experimentType: "Laboratory experiments",
+      timeType: "Recent constraints",
+      assumption: "None",
     }, // category for grouping
   },
   {
@@ -1222,9 +1222,9 @@ const plotData = [
     curveType: "excluded", // type of the plot
     categories: {
       detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      experimentType: "Laboratory experiments",
+      timeType: "Recent constraints",
+      assumption: "None",
     }, // category for grouping
   },
   {
@@ -1239,9 +1239,9 @@ const plotData = [
     curveType: "excluded", // type of the plot
     categories: {
       detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      experimentType: "Laboratory experiments",
+      timeType: "Recent constraints",
+      assumption: "None",
     }, // category for grouping
   },
   {
@@ -1256,9 +1256,9 @@ const plotData = [
     curveType: "excluded", // type of the plot
     categories: {
       detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      experimentType: "Laboratory experiments",
+      timeType: "Recent constraints",
+      assumption: "None",
     }, // category for grouping
   },
   {
@@ -1273,9 +1273,9 @@ const plotData = [
     curveType: "excluded", // type of the plot
     categories: {
       detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      experimentType: "Laboratory experiments",
+      timeType: "Recent constraints",
+      assumption: "None",
     }, // category for grouping
   },
   {
@@ -1288,7 +1288,12 @@ const plotData = [
     paperUrls: ["https://arxiv.org/abs/2504.06692v1"],
     url: "data/Rescaled/SHiP_rescaled.csv",
     curveType: "projection", // type of the plot
-    categories: { experimentType: "Collider", assumption: "None" }, // category for grouping
+    categories: {
+      detectionType: "Direct detection",
+      experimentType: "Collider experiments",
+      timeType: "Planned/future constraints",
+      assumption: "None",
+    }, // category for grouping // category for grouping
   },
   {
     labelName: "HIKE", // label for the legend
@@ -1300,7 +1305,12 @@ const plotData = [
     paperUrls: ["https://arxiv.org/abs/2311.08231"],
     url: "data/HIKE.csv",
     curveType: "projection", // type of the plot
-    categories: { experimentType: "Collider", assumption: "None" }, // category for grouping
+    categories: {
+      detectionType: "Direct detection",
+      experimentType: "Collider experiments",
+      timeType: "Planned/future constraints",
+      assumption: "None",
+    }, // category for grouping
   },
   {
     labelName: "CHARM", // label for the legend
@@ -1314,9 +1324,9 @@ const plotData = [
     curveType: "excluded", // type of the plot
     categories: {
       detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      experimentType: "Collider experiments",
+      timeType: "Past constraints",
+      assumption: "None",
     }, // category for grouping
   },
   {
@@ -1329,7 +1339,12 @@ const plotData = [
     paperUrls: ["https://arxiv.org/abs/1204.3583"],
     url: "data/NA64(e).csv",
     curveType: "projection", // type of the plot
-    categories: { experimentType: "Collider", assumption: "None" }, // category for grouping
+    categories: {
+      detectionType: "Direct detection",
+      experimentType: "Collider experiments",
+      timeType: "Planned/future constraints",
+      assumption: "None",
+    }, // category for grouping
   },
   {
     labelName: "DarkQuest (2023)", // label for the legend
@@ -1341,7 +1356,12 @@ const plotData = [
     paperUrls: ["https://arxiv.org/abs/2203.08322"],
     url: "data/DarkQuest(2023).csv",
     curveType: "projection", // type of the plot
-    categories: { experimentType: "Collider", assumption: "None" }, // category for grouping
+    categories: {
+      detectionType: "Direct detection",
+      experimentType: "Collider experiments",
+      timeType: "Planned/future constraints",
+      assumption: "None",
+    }, // category for grouping
   },
   {
     labelName: "DarkQuest (2026+)", // label for the legend
@@ -1353,7 +1373,12 @@ const plotData = [
     paperUrls: ["https://arxiv.org/abs/2203.08322"],
     url: "data/DarkQuest(2026).csv",
     curveType: "projection", // type of the plot
-    categories: { experimentType: "Collider", assumption: "None" }, // category for grouping
+    categories: {
+      detectionType: "Direct detection",
+      experimentType: "Collider experiments",
+      timeType: "Planned/future constraints",
+      assumption: "None",
+    }, // category for grouping
   },
   {
     labelName: "FACET", // label for the legend
@@ -1365,7 +1390,12 @@ const plotData = [
     paperUrls: ["https://arxiv.org/abs/2201.00019"],
     url: "data/FACET.csv",
     curveType: "projection", // type of the plot
-    categories: { experimentType: "Collider", assumption: "None" }, // category for grouping
+    categories: {
+      detectionType: "Direct detection",
+      experimentType: "Collider experiments",
+      timeType: "Planned/future constraints",
+      assumption: "None",
+    }, // category for grouping
   },
   {
     labelName: "FASER (57fb)", // label for the legend
@@ -1379,9 +1409,9 @@ const plotData = [
     curveType: "excluded", // type of the plot
     categories: {
       detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      experimentType: "Collider experiments",
+      timeType: "Recent constraints",
+      assumption: "None",
     }, // category for grouping
   },
   {
@@ -1396,9 +1426,9 @@ const plotData = [
     curveType: "excluded", // type of the plot
     categories: {
       detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      experimentType: "Collider experiments",
+      timeType: "Recent constraints",
+      assumption: "None",
     }, // category for grouping
   },
   {
@@ -1413,9 +1443,9 @@ const plotData = [
     curveType: "excluded", // type of the plot
     categories: {
       detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      experimentType: "Collider experiments",
+      timeType: "Past constraints",
+      assumption: "None",
     }, // category for grouping
   },
   {
@@ -1430,9 +1460,9 @@ const plotData = [
     curveType: "excluded", // type of the plot
     categories: {
       detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      experimentType: "Collider experiments",
+      timeType: "Past constraints",
+      assumption: "None",
     }, // category for grouping
   },
   {
@@ -1447,9 +1477,9 @@ const plotData = [
     curveType: "excluded", // type of the plot
     categories: {
       detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      experimentType: "Collider experiments",
+      timeType: "Past constraints",
+      assumption: "None",
     }, // category for grouping
   },
   {
@@ -1464,9 +1494,9 @@ const plotData = [
     curveType: "excluded", // type of the plot
     categories: {
       detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      experimentType: "Collider experiments",
+      timeType: "Past constraints",
+      assumption: "None",
     }, // category for grouping
   },
   {
@@ -1481,9 +1511,9 @@ const plotData = [
     curveType: "excluded", // type of the plot
     categories: {
       detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      experimentType: "Collider experiments",
+      timeType: "Past constraints",
+      assumption: "None",
     }, // category for grouping
   },
   {
@@ -1493,22 +1523,15 @@ const plotData = [
     text: { elementName: null }, // text to be placed on the plot
     line: { color: "rgba(5, 58, 133, 1)", dash: "20,7", width: 2 },
     area: { color: null },
-    paperUrls: ["https://arxiv.org/abs/1811.12522"],
+    paperUrls: ["https://arxiv.org/abs/2203.05090"],
     url: "data/FASER(Run3).csv",
     curveType: "projection", // type of the plot
-    categories: { experimentType: "Collider", assumption: "None" }, // category for grouping
-  },
-  {
-    labelName: "FASER (Run 3)3", // label for the legend
-    longName: "FASER (Run 3)3", // long name for possible reference
-    id: "faser-run33",
-    text: { elementName: null }, // text to be placed on the plot
-    line: { color: "rgba(5, 58, 133, 1)", dash: "20,7", width: 2 },
-    area: { color: null },
-    paperUrls: ["https://arxiv.org/abs/2203.05090"],
-    url: "data/FASER(Run3)3.csv",
-    curveType: "projection", // type of the plot
-    categories: { experimentType: "Collider", assumption: "None" }, // category for grouping
+    categories: {
+      detectionType: "Direct detection",
+      experimentType: "Collider experiments",
+      timeType: "Planned/future constraints",
+      assumption: "None",
+    }, // category for grouping
   },
   {
     labelName: "FASER (HL-LHC)", // label for the legend
@@ -1517,22 +1540,15 @@ const plotData = [
     text: { elementName: null }, // text to be placed on the plot
     line: { color: "rgba(5, 58, 133, 1)", dash: "20,7", width: 2 },
     area: { color: null },
-    paperUrls: ["https://arxiv.org/abs/1811.12522"],
+    paperUrls: ["https://arxiv.org/abs/2203.05090"],
     url: "data/FASER(HL-LHC).csv",
     curveType: "projection", // type of the plot
-    categories: { experimentType: "Collider", assumption: "None" }, // category for grouping
-  },
-  {
-    labelName: "FASER (HL-LHC)3", // label for the legend
-    longName: "FASER (HL-LHC)3", // long name for possible reference
-    id: "faser-hl-lhc4",
-    text: { elementName: null }, // text to be placed on the plot
-    line: { color: "rgba(5, 58, 133, 1)", dash: "20,7", width: 2 },
-    area: { color: null },
-    paperUrls: ["https://arxiv.org/abs/2203.05090"],
-    url: "data/FASER(HL-LHC)3.csv",
-    curveType: "projection", // type of the plot
-    categories: { experimentType: "Collider", assumption: "None" }, // category for grouping
+    categories: {
+      detectionType: "Direct detection",
+      experimentType: "Collider experiments",
+      timeType: "Planned/future constraints",
+      assumption: "None",
+    }, // category for grouping
   },
   {
     labelName: "LHCb", // label for the legend
@@ -1546,9 +1562,9 @@ const plotData = [
     curveType: "excluded", // type of the plot
     categories: {
       detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      experimentType: "Collider experiments",
+      timeType: "Recent constraints",
+      assumption: "None",
     }, // category for grouping
   },
   {
@@ -1566,9 +1582,9 @@ const plotData = [
     curveType: "excluded", // type of the plot
     categories: {
       detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      experimentType: "Collider experiments",
+      timeType: "Past constraints",
+      assumption: "None",
     }, // category for grouping
   },
   {
@@ -1583,9 +1599,9 @@ const plotData = [
     curveType: "excluded", // type of the plot
     categories: {
       detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      experimentType: "Collider experiments",
+      timeType: "Past constraints",
+      assumption: "None",
     }, // category for grouping
   },
   {
@@ -1598,7 +1614,12 @@ const plotData = [
     paperUrls: ["https://arxiv.org/abs/1411.1770"],
     url: "data/Mu3e(Phase1)_rescaled.csv",
     curveType: "projection", // type of the plot
-    categories: { experimentType: "Collider", assumption: "None" }, // category for grouping
+    categories: {
+      detectionType: "Direct detection",
+      experimentType: "Collider experiments",
+      timeType: "Planned/future constraints",
+      assumption: "None",
+    }, // category for grouping
   },
   {
     labelName: "Mu3e (Phase 2)", // label for the legend
@@ -1610,7 +1631,12 @@ const plotData = [
     paperUrls: ["https://arxiv.org/abs/1411.1770"],
     url: "data/Mu3e(Phase2)_rescaled.csv",
     curveType: "projection", // type of the plot
-    categories: { experimentType: "Collider", assumption: "None" }, // category for grouping
+    categories: {
+      detectionType: "Direct detection",
+      experimentType: "Collider experiments",
+      timeType: "Planned/future constraints",
+      assumption: "None",
+    }, // category for grouping
   },
   {
     labelName: "NA48/2", // label for the legend
@@ -1624,9 +1650,9 @@ const plotData = [
     curveType: "excluded", // type of the plot
     categories: {
       detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      experimentType: "Collider experiments",
+      timeType: "Recent constraints",
+      assumption: "None",
     }, // category for grouping
   },
   {
@@ -1641,9 +1667,9 @@ const plotData = [
     curveType: "excluded", // type of the plot
     categories: {
       detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      experimentType: "Collider experiments",
+      timeType: "Recent constraints",
+      assumption: "None",
     }, // category for grouping
   },
   {
@@ -1657,10 +1683,10 @@ const plotData = [
     url: "data/SN1987A.csv",
     curveType: "excluded", // type of the plot
     categories: {
-      detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      detectionType: "Indirect detection",
+      experimentType: "Astrophysical observations",
+      timeType: "Recent constraints",
+      assumption: "None",
     }, // category for grouping
   },
   {
@@ -1673,7 +1699,12 @@ const plotData = [
     paperUrls: ["https://arxiv.org/abs/1807.01730"],
     url: "data/LDMX_combined.csv",
     curveType: "projection", // type of the plot
-    categories: { experimentType: "Collider", assumption: "None" }, // category for grouping
+    categories: {
+      detectionType: "Direct detection",
+      experimentType: "Collider experiments",
+      timeType: "Planned/future constraints",
+      assumption: "None",
+    }, // category for grouping
   },
   {
     labelName: "MESA", // label for the legend
@@ -1685,7 +1716,12 @@ const plotData = [
     paperUrls: ["https://arxiv.org/abs/1908.07921"],
     url: "data/MESA.csv",
     curveType: "projection", // type of the plot
-    categories: { experimentType: "Collider", assumption: "None" }, // category for grouping
+    categories: {
+      detectionType: "Direct detection",
+      experimentType: "Collider experiments",
+      timeType: "Planned/future constraints",
+      assumption: "None",
+    }, // category for grouping
   },
   {
     labelName: "Gamma Factory (20MeV)", // label for the legend
@@ -1697,7 +1733,12 @@ const plotData = [
     paperUrls: ["https://arxiv.org/abs/2105.10289"],
     url: "data/Gamma Factory (20MeV).csv",
     curveType: "projection", // type of the plot
-    categories: { experimentType: "Collider", assumption: "None" }, // category for grouping
+    categories: {
+      detectionType: "Direct detection",
+      experimentType: "Collider experiments",
+      timeType: "Planned/future constraints",
+      assumption: "None",
+    }, // category for grouping
   },
   {
     labelName: "Gamma Factory (200MeV)", // label for the legend
@@ -1709,7 +1750,12 @@ const plotData = [
     paperUrls: ["https://arxiv.org/abs/2105.10289"],
     url: "data/Gamma Factory (200MeV).csv",
     curveType: "projection", // type of the plot
-    categories: { experimentType: "Collider", assumption: "None" }, // category for grouping
+    categories: {
+      detectionType: "Direct detection",
+      experimentType: "Collider experiments",
+      timeType: "Planned/future constraints",
+      assumption: "None",
+    }, // category for grouping
   },
   {
     labelName: "Gamma Factory (1600MeV)", // label for the legend
@@ -1721,7 +1767,12 @@ const plotData = [
     paperUrls: ["https://arxiv.org/abs/2105.10289"],
     url: "data/Gamma Factory (1600MeV).csv",
     curveType: "projection", // type of the plot
-    categories: { experimentType: "Collider", assumption: "None" }, // category for grouping
+    categories: {
+      detectionType: "Direct detection",
+      experimentType: "Collider experiments",
+      timeType: "Planned/future constraints",
+      assumption: "None",
+    }, // category for grouping
   },
   {
     labelName: "CMS", // label for the legend
@@ -1735,9 +1786,9 @@ const plotData = [
     curveType: "excluded", // type of the plot
     categories: {
       detectionType: "Direct detection",
-      experimentType: "Collider",
-      timeType: "old",
-      assumption: null,
+      experimentType: "Collider experiments",
+      timeType: "Recent constraints",
+      assumption: "None",
     }, // category for grouping
   },
 ];
@@ -1779,186 +1830,11 @@ Promise.all(
   }
 });
 
-
-plotData.forEach((el, i) => {
-  el.line.color = colorSet[i % colorSet.length];
-
-  if (el.area.color != null) {
-    const c = d3.color(colorSet[i % colorSet.length]);
-    c.opacity = 0.8; // make area color more transparent
-    el.area.color = c.formatRgb();
-  }
-});
-
-
-//plotBuilder(plotData);
-
-// const legendX = width - margin.right + 50;
-// const legendY = margin.top;
-// const legendHeight = height - margin.top - margin.bottom;
-// const legendWidth  = 300;   // adjust to your needs
-// const itemHeight = 25;
-// const swatchSize = 30;
-
-// const legend_wrapper = svg
-//   .append("foreignObject")
-//   .attr("class", "legend-fo")
-//   .attr("x", legendX) // place to the right of plot
-//   .attr("y", legendY)
-//   .style("width", `${legendWidth}px`)
-//   .style("height", `${legendHeight}px`)
-//   .style("overflow-x", "hidden")
-//   .append("xhtml:div") // enter the XHTML namespace
-//   .style("width", "100%")
-//   .style("height", "100%")
-//   .style("padding", "0")
-//   .style("margin", "0")
-//   .style("overflow-x", "hidden")
-//   .style("overflow-y", "scroll");
-
-
-// const legendSvg = legend_wrapper
-//   .append("svg")
-//   .style("width", "100%")
-//   .style("height", itemHeight * plotData.length)
-//   .attr("class", "legend");
-
-// const experimentSorted = groupByCategory(plotData, "experimentType");
-// console.log("Grouped by experimentType:", experimentSorted);
-
-// const experimentGroups = legendSvg
-//   .selectAll(".legend-group")
-//   .data(experimentSorted)
-//   .enter()
-//   .append("g")
-//   .attr("class", "legend-group")
-//   .attr("expanded", "false");
-
-// experimentGroups
-//   .append("text")
-//   .text((d) => d.group)
-//   .attr("class", "legend-group-title")
-//   .attr("x", 0)
-//   .attr("y", (d, i) => i * itemHeight+16) // stack group headers
-//   .style("font-weight", "bold")
-//   .style("cursor", "pointer")
-//   .on("click", function (event, d) {
-//     const parent = d3.select(this.parentNode);
-//     const expanded = parent.classed("expanded");
-//     parent.classed("expanded", !expanded);
-//     parent
-//       .selectAll(".legend-item")
-//       .style("display", expanded ? "none" : "flex");
-//   });
-
-// let paper_num = 0;
-
-// experimentGroups.each(function (groupData, groupIndex) {
-//   const parentG = d3.select(this);
-
-//   const items = parentG
-//     .selectAll(".legend-item")
-//     .data(groupData.items)
-//     .enter()
-//     .append("g")
-//     .attr("class", "legend-item")
-//     .attr(
-//       "transform",
-//       (d, i) =>
-//         `translate(0, ${(groupIndex + 1) * itemHeight + i * itemHeight})`
-//     )
-//     .style("display", "none"); // hidden until expanded
-
-//   // --- area swatch
-//   items
-//     .filter((d) => d.area.color)
-//     .append("rect")
-//     .attr("width", swatchSize)
-//     .attr("height", 16)
-//     .attr("y", 0)
-//     .attr("fill", (d) => d.area.color);
-
-//   // --- line style
-//   items
-//     .append("line")
-//     .attr("x1", 0)
-//     .attr("x2", swatchSize)
-//     .attr("y1", 8)
-//     .attr("y2", 8)
-//     .attr("stroke", (d) => d.line.color)
-//     .attr("stroke-width", (d) => d.line.width)
-//     .attr("stroke-dasharray", (d) => d.line.dash || null);
-
-//   // --- text labels
-//   const text = items
-//     .append("text")
-//     .attr("x", swatchSize + 6)
-//     .attr("y", 8)
-//     .attr("dy", "0.35em");
-
-//   text.append("tspan").text((d) => `${d.labelName} `);
-
-//   // --- paper references
-//   text
-//     .selectAll("a")
-//     .data((d) => d.paperUrls)
-//     .enter()
-//     .append("a")
-//     .attr("xlink:href", (url) => url)
-//     .attr("target", "_blank")
-//     .append("tspan")
-//     .text(function (d, i) {
-//       paper_num++;
-//       return `${i > 0 ? ", " : ""}[${paper_num}]`;
-//     })
-//     .style("text-decoration", "none")
-//     .style("cursor", "pointer");
-
-//   // --- checkboxes
-//   items.each(function (d) {
-//     const node = this;
-//     let labelWidth = node.getBBox().width;
-//     console.log("Label width:", labelWidth);
-//     const data = d;
-
-//     d3.select(node)
-//       .append("foreignObject")
-//       .attr("x", labelWidth + 6)
-//       .attr("y", 2)
-//       .attr("width", 15)
-//       .attr("height", 15)
-//       .append("xhtml:div")
-//       .attr("style", "width:100%; height:100%; margin:0; padding:0")
-//       .append("input")
-//       .attr("style", "width:15px; height:15px; margin:0; padding:0")
-//       .attr("type", "checkbox")
-//       .attr("id", (d) => `${d.id}-hidden`)
-//       .attr("class", "hidden-box")
-//       .property("checked", true)
-//       .on("change", function () {
-//         const isChecked = d3.select(this).property("checked");
-
-//         dataLayer
-//           .select(`#${data.id}-line`)
-//           .style("display", isChecked ? "block" : "none");
-
-//         dataLayer
-//           .select(`#${data.id}-area`)
-//           .style("display", isChecked ? "block" : "none");
-
-//         dataLayer
-//           .select(`#${data.id}-text`)
-//           .style("display", isChecked ? "block" : "none");
-//       });
-//   });
-// });
-
-
 // === config ===
 const legendX = width - margin.right + 50;
-const legendY = margin.top;
-const legendHeight = height - margin.top - margin.bottom;
-const legendWidth  = 300;
+const legendY = 0;
+const legendHeight = height - margin.bottom;
+const legendWidth  = 320;
 const itemHeight   = 25;  // row height for title/items
 const swatchSize   = 30;
 
@@ -1979,21 +1855,31 @@ const legend_wrapper = svg
   .style("height", "100%")
   .style("padding", "0")
   .style("margin", "0")
+  .style("position", "relative")
   .style("overflow-y", "auto");
 
-/* // Add select element (HTML, not SVG)
+legend_wrapper
+  .append("label")
+  .attr("for", "grouping-select")
+  .style("position", "absolute")
+  .style("top", "0px") // position above the select
+  .style("left", "0px")
+  .text("Group plots by:");
+
+// Add select element (HTML, not SVG)
 const select = legend_wrapper
   .append("select")
   .attr("id", "grouping-select")
   .style("position", "absolute")
-  .style("top", "10px")
-  .style("left", "10px");
+  .style("top", "30px")
+  .style("left", "0px");
 
 // Add options
 const groupingOptions = [
   { value: "experimentType", label: "Experiment Type" },
   { value: "detectionType", label: "Detection Type" },
-  { value: "channelType", label: "Channel Type" },
+  { value: "timeType", label: "Time Frame" },
+  { value: "assumption", label: "Assumptions" },
 ];
 
 select
@@ -2002,12 +1888,12 @@ select
   .enter()
   .append("option")
   .attr("value", (d) => d.value)
-  .text((d) => d.label)
-  .on("change", (e) => {
-    const key = e.target.value;
-    const groupedData = groupByCategory(plotData, key);
-    renderLegend(groupedData);
-  }); */
+  .text((d) => d.label);
+  // .on("change", (e) => {
+  //   const key = e.target.value;
+  //   const groupedData = groupByCategory(plotData, key);
+  //   renderLegend(groupedData);
+  // });
 
 const legendSvg = legend_wrapper
   .append("svg")
@@ -2020,18 +1906,21 @@ legendSvg
   .append("text")
   .attr("class", "legend-group-select-all-text")
   .attr("x", 0)
-  .attr("y", 16) // baseline; avoids clipping at y=0
+  .attr("y", 75) // baseline; avoids clipping at y=0
   .text("Select All")
   .style("font-weight", "600")
   .style("font-size", "1em")
 
-selectAllWidth = legendSvg.select(".legend-group-select-all-text").node().getBBox().width;
+const selectAllWidth = legendSvg
+  .select(".legend-group-select-all-text")
+  .node()
+  .getBBox().width;
 
 legendSvg
   .select(".legend-group-select-all")
   .append("foreignObject")
   .attr("x", selectAllWidth + 6)
-  .attr("y", 2)
+  .attr("y", 62)
   .attr("width", 15)
   .attr("height", 15)
   .append("xhtml:div")
@@ -2039,126 +1928,19 @@ legendSvg
   .append("input")
   .attr("style", "width:15px; height:15px; margin:0; padding:0")
   .attr("type", "checkbox")
-  .attr("class", "hidden-box")
+  .attr("class", "select-all-checkbox")
   .property("checked", true)
   .on("change", function () {
-      const isChecked = d3.select(this).property("checked");
-      d3.selectAll(".hidden-box").each(function(d) {
-          d3.select(this).property("checked", isChecked);
-          this.dispatchEvent(new Event("change", { bubbles: true }));
-        });
+    const isChecked = d3.select(this).property("checked");
+    d3.selectAll(".hidden-box").each(function (d) {
+      d3.select(this).property("checked", isChecked);
+      this.dispatchEvent(new Event("change", { bubbles: true }));
     });
-
-// === groups (accordion sections) ===
-const groups = legendSvg
-  .selectAll(".legend-group")
-  .data(grouped, d => d.group)
-  .enter()
-  .append("g")
-  .attr("class", "legend-group")
-  .attr("expanded", "false"); // collapsed by default
-
-
-// --- group title (click to toggle) ---
-groups.append("text")
-  .attr("class", "legend-group-title")
-  .attr("x", 0)
-  .attr("y", 48) // baseline; avoids clipping at y=0
-  .text(d => d.group)
-  .style("font-weight", "600")
-  .style("font-size", "1.2em")
-  .style("cursor", "pointer")
-  .on("click", function () {
-    const g = d3.select(this.parentNode);
-    const isExpanded = g.attr("expanded") === "true";
-    g.attr("expanded", String(!isExpanded));
-    updateLegendLayout();
   });
 
 
-const items = groups
-  .selectAll(".legend-item")
-  .data((d) => d.items)
-  .enter()
-  .append("g")
-  .attr("class", "legend-item")
-  .attr("transform", (d, i) => `translate(0, ${(i + 1) * itemHeight + 32})`);
-
-// swatch (if area has fill color)
-items.filter(d => d.area.color)
-  .append("rect")
-  .attr("width", swatchSize)
-  .attr("height", 16)
-  .attr("y", 4)
-  .attr("fill", d => d.area.color);
-
-// line symbol
-items.append("line")
-  .attr("x1", 0)
-  .attr("x2", swatchSize)
-  .attr("y1", 12)
-  .attr("y2", 12)
-  .attr("stroke", d => d.line.color)
-  .attr("stroke-width", d => d.line.width)
-  .attr("stroke-dasharray", d => d.line.dash || null);
-
-// text label
-const text = items.append("text")
-  .attr("x", swatchSize + 6)
-  .attr("y", 12)
-  .attr("dy", "0.35em");
-
-text.append("tspan").text(d => `${d.labelName} `);
-
-let paper_num = 0;
-text
-  .selectAll("a")
-  .data((d) => d.paperUrls)
-  .enter()
-  .append("a")
-  .attr("xlink:href", (url) => url)
-  .attr("target", "_blank")
-  .append("tspan")
-  .text((d, i) => {
-    paper_num++;
-    return `${i > 0 ? ", " : ""}[${paper_num}]`;
-  })
-  .style("text-decoration", "none")
-  .style("cursor", "pointer");
-
-// checkboxes at end of text (need proper width measurement)
-items.each(function (d) {
-  const node = this;
-  const labelWidth = node.getBBox().width;
-
-  d3.select(node)
-    .append("foreignObject")
-    .attr("x", labelWidth + 6)
-    .attr("y", 6)
-    .attr("width", 15)
-    .attr("height", 15)
-    .append("xhtml:div")
-    .attr("style", "width:100%; height:100%; margin:0; padding:0")
-    .append("input")
-    .attr("style", "width:15px; height:15px; margin:0; padding:0")
-    .attr("type", "checkbox")
-    .attr("id", (d) => `${d.id}-hidden`)
-    .attr("class", "hidden-box")
-    .property("checked", true)
-
-    .on("change", function () {
-      const isChecked = d3.select(this).property("checked");
-      dataLayer
-        .select(`#${d.id}-line`)
-        .style("display", isChecked ? "block" : "none");
-      dataLayer
-        .select(`#${d.id}-area`)
-        .style("display", isChecked ? "block" : "none");
-      dataLayer
-        .select(`#${d.id}-text`)
-        .style("display", isChecked ? "block" : "none");
-    });
-});
+///////////////////////////////////////////
+const groupsRoot = legendSvg.append("g").attr("class", "legend-groups-root");
 
 let firstRun = true;
 function updateLegendLayout() {
@@ -2191,123 +1973,169 @@ function updateLegendLayout() {
 
   // Adjust legend height
   const tSvg = firstRun ? legendSvg : legendSvg.transition().duration(250);
-  tSvg.style("height", yOffset + 40 + "px");
+  tSvg.style("height", yOffset + 80 + "px");
 
   firstRun = false;
 }
 
-// initial layout
-updateLegendLayout();
+function renderLegend(grouped) {
+  groupsRoot.selectAll("*").remove();
 
+  // Groups
+  const groups = groupsRoot
+    .selectAll(".legend-group")
+    .data(grouped, (d) => d.group)
+    .enter()
+    .append("g")
+    .attr("class", "legend-group")
+    .attr("expanded", "false"); // collapsed by default
 
-
-/* const item = legendSvg
-  .selectAll(".legend-item")
-  .data(plotData)
-  .enter()
-  .append("g")
-  .attr("class", "legend-item")
-  .attr("transform", (d, i) => `translate(0, ${i * itemHeight})`);
-
-item
-  .filter((d) => d.area.color) // only those entries
-  .append("rect")
-  .attr("width", swatchSize)
-  .attr("height", 16)
-  .attr("y", 0) // vertical centering
-  .attr("fill", (d) => d.area.color);
-
-item
-  .append("line")
-  .attr("x1", 0)
-  .attr("x2", swatchSize)
-  .attr("y1", 8)
-  .attr("y2", 8)
-  .attr("stroke", (d) => d.line.color)
-  .attr("stroke-width", (d) => d.line.width)
-  .attr("stroke-dasharray", (d) => d.line.dash || null);
-
-const text = item.append("text")
-  .attr("x", swatchSize + 6)
-  .attr("y", 8)
-  .attr("dy", "0.35em")
-
-text.append("tspan").text((d) => `${d.labelName} `);
-
-paper_num=0
-
-text
-  // 1) pretend we already have a bunch of <a>’s under each text
-  .selectAll("a")
-  // 2) bind each d.paperUrls array to that pretend selection
-  .data((d) => d.paperUrls)
-  // 3) for each array‐element that has no <a> yet, append one
-  .enter()
-  .append("a")
-  .attr("xlink:href", (url) => url)
-  .attr("target", "_blank")
-  .append("tspan")
-  .text(function (d, i) {
-    paper_num++;
-    return `${i > 0 ? ", " : ""}[${paper_num}]`;
-  })
-  .style("text-decoration", "none")
-  .style("cursor", "pointer");
-
-
-item.each(function (d) {
-  const node = this; // `this` is the DOM element
-  let labelWidth = node.getBoundingClientRect().width;
-  const data = d;
-  
-  d3.select(node)
-    .append("foreignObject")
-    .attr("x", labelWidth + 6)
-    .attr("y", 2)
-    .attr("width", 15)
-    .attr("height", 15)
-    .append("xhtml:div")
-    .attr("style", "width:100%; height:100%; margin:0; padding:0")
-    .append("input")
-    .attr("style", "width:15px; height:15px; margin:0; padding:0")
-    .attr("type", "checkbox")
-    .attr("id", (d) => `${d.id}-hidden`)
-    .attr("class", "hidden-box")
-    .property("checked", true)
-    .on("change", function (d) {
-      const isChecked = d3.select(this).property("checked");
-
-      // assume you want to hide/show a sibling with class '.detail'
-      dataLayer.select(`#${data.id}-line`)
-        .style("display", isChecked ? "block" : "none");
-
-      dataLayer
-        .select(`#${data.id}-area`)
-        .style("display", isChecked ? "block" : "none");
-      dataLayer
-        .select(`#${data.id}-text`)
-        .style("display", isChecked ? "block" : "none");
+  groups
+    .append("text")
+    .attr("class", "legend-group-title")
+    .attr("x", 0)
+    .attr("y", 100) // baseline; avoids clipping at y=0
+    .text((d) => d.group)
+    .style("font-weight", "600")
+    .style("font-size", "1.1em")
+    .style("cursor", "pointer")
+    .on("click", function () {
+      const g = d3.select(this.parentNode);
+      const isExpanded = g.attr("expanded") === "true";
+      g.attr("expanded", String(!isExpanded));
+      updateLegendLayout();
     });
-}); */
 
+  groups.each(function () {
+    const g = d3.select(this);
+    const titleWidth = g.select(".legend-group-title").node().getBBox().width;
 
+    g.append("foreignObject")
+      .attr("x", titleWidth + 6)
+      .attr("y", 87) // aligned with your previous y
+      .attr("width", 15)
+      .attr("height", 15)
+      .append("xhtml:div")
+      .attr("style", "width:100%; height:100%; margin:0; padding:0")
+      .append("input")
+      .attr("style", "width:15px; height:15px; margin:0; padding:0")
+      .attr("type", "checkbox")
+      .attr("class", "group-checkbox hidden-box")
+      .property("checked", true)
+      .on("change", function () {
+        const isChecked = d3.select(this).property("checked");
+        const group = d3.select(this.closest(".legend-group"));
+        group.selectAll(".legend-item .hidden-box").each(function () {
+          d3.select(this).property("checked", isChecked);
+          this.dispatchEvent(new Event("change", { bubbles: true }));
+        });
+      });
+  });
 
+  const items = groups
+    .selectAll(".legend-item")
+    .data((d) => d.items)
+    .enter()
+    .append("g")
+    .attr("class", "legend-item")
+    .attr("transform", (d, i) => `translate(0, ${(i + 1) * itemHeight + 82})`);
 
+  // swatch (if area has fill color)
+  items
+    .filter((d) => d.area.color)
+    .append("rect")
+    .attr("width", swatchSize)
+    .attr("height", 16)
+    .attr("y", 4)
+    .attr("fill", (d) => d.area.color);
 
-d3.selectAll('.legend-item a')
-  .each(function(d) {
+  // line symbol
+  items
+    .append("line")
+    .attr("x1", 0)
+    .attr("x2", swatchSize)
+    .attr("y1", 12)
+    .attr("y2", 12)
+    .attr("stroke", (d) => d.line.color)
+    .attr("stroke-width", (d) => d.line.width)
+    .attr("stroke-dasharray", (d) => d.line.dash || null);
+
+  // text label
+  const text = items
+    .append("text")
+    .attr("x", swatchSize + 6)
+    .attr("y", 12)
+    .attr("dy", "0.35em");
+
+  text.append("tspan").text(d => `${d.labelName} `);
+
+  let paper_num = 0;
+  text
+    .selectAll("a")
+    .data((d) => d.paperUrls)
+    .enter()
+    .append("a")
+    .attr("xlink:href", (url) => url)
+    .attr("target", "_blank")
+    .append("tspan")
+    .text((d, i) => {
+      paper_num++;
+      return `${i > 0 ? ", " : ""}[${paper_num}]`;
+    })
+    .style("text-decoration", "none")
+    .style("cursor", "pointer");
+
+  // checkboxes at end of text (need proper width measurement)
+  items.each(function (d) {
+    const node = this;
+    const labelWidth = node.getBBox().width;
+
+    d3.select(node)
+      .append("foreignObject")
+      .attr("x", labelWidth + 6)
+      .attr("y", 6)
+      .attr("width", 15)
+      .attr("height", 15)
+      .append("xhtml:div")
+      .attr("style", "width:100%; height:100%; margin:0; padding:0")
+      .append("input")
+      .attr("style", "width:15px; height:15px; margin:0; padding:0")
+      .attr("type", "checkbox")
+      .attr("id", (d) => `${d.id}-hidden`)
+      .attr("class", "hidden-box")
+      .property("checked", true)
+
+      .on("change", function () {
+        const isChecked = d3.select(this).property("checked");
+        dataLayer
+          .select(`#${d.id}-line`)
+          .style("display", isChecked ? "block" : "none");
+        dataLayer
+          .select(`#${d.id}-area`)
+          .style("display", isChecked ? "block" : "none");
+        dataLayer
+          .select(`#${d.id}-text`)
+          .style("display", isChecked ? "block" : "none");
+      });
+  });
+
+  attachPaperPreviews(groupsRoot);
+
+  firstRun = true; // smooth first layout of a fresh build
+  updateLegendLayout();
+
+}
+
+function attachPaperPreviews(scopeSelection) {
+  scopeSelection.selectAll(".legend-item a").each(function (d) {
     const el = this;
     tippy(el, {
-      content: 'Loading…',
+      content: "Loading…",
       allowHTML: true,
       onShow(instance) {
         // only fetch once
-        if (instance.props.content === 'Loading…') {
-          fetch(
-            `http://localhost:3000/preview?url=${encodeURIComponent(
-              d
-            )}`
-          )
+        if (instance.props.content === "Loading…") {
+          fetch(`http://localhost:3000/preview?url=${encodeURIComponent(d)}`)
             .then((r) => r.json())
             .then((meta) => {
               const fullTitle = meta.title || "";
@@ -2345,9 +2173,305 @@ d3.selectAll('.legend-item a')
               `);
             });
         }
-      }
+      },
     });
   });
+
+}
+//"Collider experiments" or "Cosmological measurements" or "Astrophysical observations" or "Laboratory experiments"
+// === INITIAL RENDER ===
+const defaultKey = "experimentType";
+renderLegend(groupByCategory(plotData, defaultKey));
+select.property("value", defaultKey);
+
+plotData.forEach((el, i) => {
+
+  if (el.categories.experimentType == "Collider experiments") {
+
+    el.line.color = colorSet[0];
+
+    if (el.area.color != null) {
+      const c = d3.color(colorSet[0]);
+      c.opacity = 0.8; // make area color more transparent
+      el.area.color = c.formatRgb();
+  }
+  }
+
+  if (el.categories.experimentType == "Cosmological measurements") {
+    el.line.color = colorSet[2];
+
+    if (el.area.color != null) {
+      const c = d3.color(colorSet[2]);
+      c.opacity = 0.8; // make area color more transparent
+      el.area.color = c.formatRgb();
+    }
+  }
+
+  if (el.categories.experimentType == "Astrophysical observations") {
+    el.line.color = colorSet[4];
+
+    if (el.area.color != null) {
+      const c = d3.color(colorSet[4]);
+      c.opacity = 0.8; // make area color more transparent
+      el.area.color = c.formatRgb();
+    }
+  }
+
+  if (el.categories.experimentType == "Laboratory experiments") {
+    el.line.color = colorSet[6];
+
+    if (el.area.color != null) {
+      const c = d3.color(colorSet[6]);
+      c.opacity = 0.8; // make area color more transparent
+      el.area.color = c.formatRgb();
+    }
+  }
+});
+
+// === WIRE THE SELECT ===
+select.on("change", function () {
+  const key = this.value;
+  const groupedData = groupByCategory(plotData, key);
+  renderLegend(groupedData);
+});
+
+
+
+///////////////////////////////////////////
+
+// // === groups (accordion sections) ===
+// const groups = legendSvg
+//   .selectAll(".legend-group")
+//   .data(grouped, d => d.group)
+//   .enter()
+//   .append("g")
+//   .attr("class", "legend-group")
+//   .attr("expanded", "false"); // collapsed by default
+
+
+// // --- group title (click to toggle) ---
+// groups.append("text")
+//   .attr("class", "legend-group-title")
+//   .attr("x", 0)
+//   .attr("y", 100) // baseline; avoids clipping at y=0
+//   .text(d => d.group)
+//   .style("font-weight", "600")
+//   .style("font-size", "1.1em")
+//   .style("cursor", "pointer")
+//   .on("click", function () {
+//     const g = d3.select(this.parentNode);
+//     const isExpanded = g.attr("expanded") === "true";
+//     g.attr("expanded", String(!isExpanded));
+//     updateLegendLayout();
+//   });
+
+// groupTitleWidth = [];
+
+// legendSvg.selectAll(".legend-group-title").each(function (d) {
+//   groupTitleWidth.push(this.getBBox().width);
+// });
+
+// groups
+//   .append("foreignObject")
+//   .attr("x", (d, i) => groupTitleWidth[i] + 6)
+//   .attr("y", 87)
+//   .attr("width", 15)
+//   .attr("height", 15)
+//   .append("xhtml:div")
+//   .attr("style", "width:100%; height:100%; margin:0; padding:0")
+//   .append("input")
+//   .attr("style", "width:15px; height:15px; margin:0; padding:0")
+//   .attr("type", "checkbox")
+//   .attr("class", "hidden-box")
+//   .property("checked", true)
+//   .on("change", function () {
+//     const isChecked = d3.select(this).property("checked");
+//     const group = d3.select(this.closest(".legend-group"));
+
+//     // select only the child checkboxes of this group
+//     group.selectAll(".hidden-box").each(function () {
+//       d3.select(this).property("checked", isChecked);
+//       this.dispatchEvent(new Event("change", { bubbles: true }));
+//     });
+//   });
+
+// const items = groups
+//   .selectAll(".legend-item")
+//   .data((d) => d.items)
+//   .enter()
+//   .append("g")
+//   .attr("class", "legend-item")
+//   .attr("transform", (d, i) => `translate(0, ${(i + 1) * itemHeight + 82})`);
+
+// // swatch (if area has fill color)
+// items.filter(d => d.area.color)
+//   .append("rect")
+//   .attr("width", swatchSize)
+//   .attr("height", 16)
+//   .attr("y", 4)
+//   .attr("fill", d => d.area.color);
+
+// // line symbol
+// items.append("line")
+//   .attr("x1", 0)
+//   .attr("x2", swatchSize)
+//   .attr("y1", 12)
+//   .attr("y2", 12)
+//   .attr("stroke", d => d.line.color)
+//   .attr("stroke-width", d => d.line.width)
+//   .attr("stroke-dasharray", d => d.line.dash || null);
+
+// // text label
+// const text = items.append("text")
+//   .attr("x", swatchSize + 6)
+//   .attr("y", 12)
+//   .attr("dy", "0.35em");
+
+// text.append("tspan").text(d => `${d.labelName} `);
+
+// let paper_num = 0;
+// text
+//   .selectAll("a")
+//   .data((d) => d.paperUrls)
+//   .enter()
+//   .append("a")
+//   .attr("xlink:href", (url) => url)
+//   .attr("target", "_blank")
+//   .append("tspan")
+//   .text((d, i) => {
+//     paper_num++;
+//     return `${i > 0 ? ", " : ""}[${paper_num}]`;
+//   })
+//   .style("text-decoration", "none")
+//   .style("cursor", "pointer");
+
+// // checkboxes at end of text (need proper width measurement)
+// items.each(function (d) {
+//   const node = this;
+//   const labelWidth = node.getBBox().width;
+
+//   d3.select(node)
+//     .append("foreignObject")
+//     .attr("x", labelWidth + 6)
+//     .attr("y", 6)
+//     .attr("width", 15)
+//     .attr("height", 15)
+//     .append("xhtml:div")
+//     .attr("style", "width:100%; height:100%; margin:0; padding:0")
+//     .append("input")
+//     .attr("style", "width:15px; height:15px; margin:0; padding:0")
+//     .attr("type", "checkbox")
+//     .attr("id", (d) => `${d.id}-hidden`)
+//     .attr("class", "hidden-box")
+//     .property("checked", true)
+
+//     .on("change", function () {
+//       const isChecked = d3.select(this).property("checked");
+//       dataLayer
+//         .select(`#${d.id}-line`)
+//         .style("display", isChecked ? "block" : "none");
+//       dataLayer
+//         .select(`#${d.id}-area`)
+//         .style("display", isChecked ? "block" : "none");
+//       dataLayer
+//         .select(`#${d.id}-text`)
+//         .style("display", isChecked ? "block" : "none");
+//     });
+// });
+
+// let firstRun = true;
+// function updateLegendLayout() {
+//   let yOffset = 0;
+
+//   legendSvg.selectAll(".legend-group").each(function () {
+//     const g = d3.select(this);
+//     const isExpanded = g.attr("expanded") === "true";
+
+//     // Move group
+//     const t = firstRun ? g : g.transition().duration(250);
+//     t.attr("transform", `translate(0, ${yOffset})`);
+
+//     // Items: fade in/out instead of show/hide instantly
+//     g.selectAll(".legend-item")
+//       .transition()
+//       .duration(250)
+//       .style("opacity", isExpanded ? 1 : 0)
+//       .on("end", function (_, i, nodes) {
+//         // hide from layout only after fade-out finishes
+//         if (!isExpanded) d3.select(this).style("display", "none");
+//       })
+//       .style("display", isExpanded ? "block" : null);
+
+//     // Height calculation
+//     const itemCount = g.selectAll(".legend-item").size();
+//     const groupHeight = (isExpanded ? 1.3 + itemCount : 1) * itemHeight;
+//     yOffset += groupHeight;
+//   });
+
+//   // Adjust legend height
+//   const tSvg = firstRun ? legendSvg : legendSvg.transition().duration(250);
+//   tSvg.style("height", yOffset + 80 + "px");
+
+//   firstRun = false;
+// }
+
+// // initial layout
+// updateLegendLayout();
+
+// d3.selectAll('.legend-item a')
+//   .each(function(d) {
+//     const el = this;
+//     tippy(el, {
+//       content: 'Loading…',
+//       allowHTML: true,
+//       onShow(instance) {
+//         // only fetch once
+//         if (instance.props.content === 'Loading…') {
+//           fetch(
+//             `http://localhost:3000/preview?url=${encodeURIComponent(
+//               d
+//             )}`
+//           )
+//             .then((r) => r.json())
+//             .then((meta) => {
+//               const fullTitle = meta.title || "";
+//               const maxTitleChars = 120; // “specific number of symbols”
+//               const shortTitle =
+//                 fullTitle.length > maxTitleChars
+//                   ? fullTitle.slice(0, maxTitleChars).trim() + "…"
+//                   : fullTitle;
+
+//               const fullDesc = meta.description || "";
+//               const maxChars = 240; // “specific number of symbols”
+//               const shortDesc =
+//                 fullDesc.length > maxChars
+//                   ? fullDesc.slice(0, maxChars).trim() + "…"
+//                   : fullDesc;
+
+//               instance.setContent(`
+//                 <div class="wordbreaker" style="max-width:250px; font-family: sans-serif; display: flex; align-items: center;
+//                   justify-content: start;flex-direction: column;gap:0.5rem">
+//                   ${
+//                     meta.image
+//                       ? `<img src="${meta.image[0].url}"
+//                                alt="${meta.siteName} logo"
+//                                style="width:50%; height:auto;margin:0; padding:0;"/>`
+//                       : ""
+//                   }
+//                   <strong style="margin:0; padding:0;">${shortTitle}</strong>
+//                   ${
+//                     meta.authors && meta.authors.length
+//                       ? `<em>By ${meta.authors.join(", ")}</em>`
+//                       : ""
+//                   }
+//                   <p class="wordbreaker" style="margin:0; padding:0;">${shortDesc}</p>
+//                 </div>
+//               `);
+//             });
+//         }
+//       }
+//     });
+//   });
 
 
 // Append axes groups
