@@ -1862,7 +1862,7 @@ legend_wrapper
   .append("label")
   .attr("for", "grouping-select")
   .style("position", "absolute")
-  .style("top", "0px") // position above the select
+  .style("top", "5px") // position above the select
   .style("left", "0px")
   .text("Group plots by:");
 
@@ -1871,11 +1871,12 @@ const select = legend_wrapper
   .append("select")
   .attr("id", "grouping-select")
   .style("position", "absolute")
-  .style("top", "30px")
+  .style("top", "35px")
   .style("left", "0px");
 
 // Add options
 const groupingOptions = [
+  { value: "none", label: "All data" },
   { value: "experimentType", label: "Experiment Type" },
   { value: "detectionType", label: "Detection Type" },
   { value: "timeType", label: "Time Frame" },
@@ -1900,7 +1901,7 @@ const legendSvg = legend_wrapper
   .style("width", "100%")
   .attr("class", "legend");
 
-legendSvg
+/* legendSvg
   .append("g")
   .attr("class", "legend-group-select-all")
   .append("text")
@@ -1936,7 +1937,7 @@ legendSvg
       d3.select(this).property("checked", isChecked);
       this.dispatchEvent(new Event("change", { bubbles: true }));
     });
-  });
+  }); */
 
 
 ///////////////////////////////////////////
@@ -1973,7 +1974,7 @@ function updateLegendLayout() {
 
   // Adjust legend height
   const tSvg = firstRun ? legendSvg : legendSvg.transition().duration(250);
-  tSvg.style("height", yOffset + 80 + "px");
+  tSvg.style("height", yOffset + 60 + "px");
 
   firstRun = false;
 }
@@ -1994,7 +1995,7 @@ function renderLegend(grouped) {
     .append("text")
     .attr("class", "legend-group-title")
     .attr("x", 0)
-    .attr("y", 100) // baseline; avoids clipping at y=0
+    .attr("y", 80) // baseline; avoids clipping at y=0
     .text((d) => d.group)
     .style("font-weight", "600")
     .style("font-size", "1.1em")
@@ -2012,7 +2013,7 @@ function renderLegend(grouped) {
 
     g.append("foreignObject")
       .attr("x", titleWidth + 6)
-      .attr("y", 87) // aligned with your previous y
+      .attr("y", 67) // aligned with your previous y
       .attr("width", 15)
       .attr("height", 15)
       .append("xhtml:div")
@@ -2038,7 +2039,7 @@ function renderLegend(grouped) {
     .enter()
     .append("g")
     .attr("class", "legend-item")
-    .attr("transform", (d, i) => `translate(0, ${(i + 1) * itemHeight + 82})`);
+    .attr("transform", (d, i) => `translate(0, ${(i + 1) * itemHeight + 64})`);
 
   // swatch (if area has fill color)
   items
@@ -2180,59 +2181,122 @@ function attachPaperPreviews(scopeSelection) {
 }
 //"Collider experiments" or "Cosmological measurements" or "Astrophysical observations" or "Laboratory experiments"
 // === INITIAL RENDER ===
+
+
+const GROUP_PALETTES = {
+  experimentType: new Map([
+    ["Collider experiments", "#d62728"],
+    ["Cosmological measurements", "#1f77b4"],
+    ["Astrophysical observations", "#2ca02c"],
+    ["Laboratory experiments", "#ff7f0e"],
+  ]),
+
+  detectionType: new Map([
+    ["Direct detection", "#d62728"],
+    ["Indirect detection", "#1f77b4"],
+  ]),
+
+  timeType: new Map([
+    ["Past constraints", "#7f7f7f"],
+    ["Recent constraints", "#1f77b4"],
+    ["Planned/future constraints", "#d62728"],
+  ]),
+  assumption: new Map([
+    ["None", "#d62728"],
+    ["Dark Matter", "#1f77b4"],
+  ]),
+};
+
+const fallbackOrdinal = d3.scaleOrdinal(d3.schemeTableau10);
+
+const colormap = d3.scaleSequential(d3.interpolateTurbo)
+                     .domain([0, plotData.length - 1]);
+
+const AREA_OPACITY = 0.6;
+
+function hashToUnit(str) {
+  let h = 2166136261; // FNV-1a
+  for (let i = 0; i < str.length; i++) {
+    h ^= str.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return (h >>> 0) / 4294967295;
+}
+
+function colorForCategory(key, category) {
+  const map = GROUP_PALETTES[key];
+  if (map && map.has(category)) return map.get(category);
+  return colormap(category);
+}
+
+function applyElementColors(el, baseColor) {
+  el.line = el.line || {};
+  el.line.color = baseColor;
+
+  if (el.area && el.area.color != null) {
+    const c = d3.color(baseColor);
+    if (c) {
+      c.opacity = AREA_OPACITY;
+      el.area.color = c.formatRgb();
+    }
+  }
+}
+
+function updatePlotColorsInDOM(plotData, dataLayer) {
+  plotData.forEach(d => {
+    const line = dataLayer.select(`#${d.id}-line`);
+    if (!line.empty()) line.attr("stroke", (d.line && d.line.color) ? d.line.color : null);
+
+    const area = dataLayer.select(`#${d.id}-area`);
+    if (!area.empty()) area.attr("fill", (d.area && d.area.color) ? d.area.color : "none");
+
+    const text = dataLayer.select(`#${d.id}-text`);
+    if (!text.empty()) text.attr("fill", (d.line && d.line.color) ? d.line.color : null);
+  });
+}
+
+function applyColors(plotData, key) {
+  if (key === "none") {
+
+  plotData.forEach((el, i) => {
+    const col = colormap(i);
+    applyElementColors(el, col);
+  });
+} else {
+    plotData.forEach(el => {
+      // replace optional chaining with standard check
+      const category = (el.categories && el.categories[key]) ? el.categories[key] : null;
+
+      // replace nullish coalescing
+      const col = colorForCategory(key, category != null ? category : "∅");
+
+      applyElementColors(el, col);
+    });
+  }
+}
+
+function rerenderLegendForKey(key) {
+
+  applyColors(plotData, key);
+
+
+  updatePlotColorsInDOM(plotData, dataLayer);
+
+  const groupedData = (key === "none")
+    ? [{ group: "All data", items: plotData }]
+    : groupByCategory(plotData, key);
+
+  renderLegend(groupedData);
+}
+
 const defaultKey = "experimentType";
-renderLegend(groupByCategory(plotData, defaultKey));
 select.property("value", defaultKey);
-
-plotData.forEach((el, i) => {
-
-  if (el.categories.experimentType == "Collider experiments") {
-
-    el.line.color = colorSet[0];
-
-    if (el.area.color != null) {
-      const c = d3.color(colorSet[0]);
-      c.opacity = 0.8; // make area color more transparent
-      el.area.color = c.formatRgb();
-  }
-  }
-
-  if (el.categories.experimentType == "Cosmological measurements") {
-    el.line.color = colorSet[2];
-
-    if (el.area.color != null) {
-      const c = d3.color(colorSet[2]);
-      c.opacity = 0.8; // make area color more transparent
-      el.area.color = c.formatRgb();
-    }
-  }
-
-  if (el.categories.experimentType == "Astrophysical observations") {
-    el.line.color = colorSet[4];
-
-    if (el.area.color != null) {
-      const c = d3.color(colorSet[4]);
-      c.opacity = 0.8; // make area color more transparent
-      el.area.color = c.formatRgb();
-    }
-  }
-
-  if (el.categories.experimentType == "Laboratory experiments") {
-    el.line.color = colorSet[6];
-
-    if (el.area.color != null) {
-      const c = d3.color(colorSet[6]);
-      c.opacity = 0.8; // make area color more transparent
-      el.area.color = c.formatRgb();
-    }
-  }
-});
+rerenderLegendForKey(defaultKey);
 
 // === WIRE THE SELECT ===
 select.on("change", function () {
   const key = this.value;
-  const groupedData = groupByCategory(plotData, key);
-  renderLegend(groupedData);
+  rerenderLegendForKey(key);
 });
 
 
