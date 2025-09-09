@@ -138,6 +138,7 @@ html, body {
   padding: 1rem 0.7rem;
   width: 100%;
   max-width: 280px;
+  position: relative;
 }
 
 .sublist-of-models {
@@ -168,4 +169,19 @@ html, body {
   transform: translate(0, 0);
   transition: transform 0.4s ease, opacity 0.4s ease;
   z-index: 1;
+}
+
+.model-link.in-progress::after {
+  content: "In progress";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-15deg);
+  font-size: 1.2rem;
+  color: red;
+  pointer-events: none; /* so the text doesn't block clicks */
+  white-space: nowrap;
+  font-family: "Noto Sans JP", "Open Sans", sans-serif;
+  text-shadow: 0px 0px 10px rgba(0,0,0,0.7);
+  font-weight: 600;
 }

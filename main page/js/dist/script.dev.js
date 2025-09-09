@@ -2767,6 +2767,10 @@ function renderLegend(grouped) {
   groups.each(function () {
     var g = d3.select(this);
     var titleWidth = g.select(".legend-group-title").node().getBBox().width;
+    g.append("rect").attr("class", "legend-group-swatch").attr("x", 0).attr("y", 4).attr("width", swatchSize).attr("height", groupSwatchSize).attr("fill", color).attr("rx", 2) // small rounding looks nicer
+    .attr("ry", 2); // 2) small line symbol to the right of the swatch (represents the line color/style)
+
+    g.append("line").attr("class", "legend-group-line").attr("x1", groupSwatchSize + 4).attr("x2", groupSwatchSize + 4 + groupLineLength).attr("y1", groupTitleY).attr("y2", groupTitleY).attr("stroke", color).attr("stroke-width", 3).attr("stroke-linecap", "round");
     g.append("foreignObject").attr("x", titleWidth + 6).attr("y", 67) // aligned with your previous y
     .attr("width", 15).attr("height", 15).append("xhtml:div").attr("style", "width:100%; height:100%; margin:0; padding:0").append("input").attr("style", "width:15px; height:15px; margin:0; padding:0").attr("type", "checkbox").attr("class", "group-checkbox hidden-box").property("checked", true).on("change", function () {
       var isChecked = d3.select(this).property("checked");
@@ -2866,10 +2870,18 @@ var GROUP_PALETTES = {
   detectionType: new Map([["Direct detection", "#d62728"], ["Indirect detection", "#1f77b4"]]),
   timeType: new Map([["Past constraints", "#7f7f7f"], ["Recent constraints", "#1f77b4"], ["Planned/future constraints", "#d62728"]]),
   assumption: new Map([["None", "#d62728"], ["Dark Matter", "#1f77b4"]])
-};
-var fallbackOrdinal = d3.scaleOrdinal(d3.schemeTableau10);
-var colormap = d3.scaleSequential(d3.interpolateTurbo).domain([0, plotData.length - 1]);
-var AREA_OPACITY = 0.6;
+}; // tuning
+
+var HUE_MIN = 0; // fraction of circle, e.g. 0.06 -> avoid very red edge if you want
+
+var HUE_MAX = 1; // fraction of circle
+
+var SATURATION = 0.95;
+var LIGHTNESS = 0.6;
+var AREA_OPACITY = 0.6; // golden ratio conjugate for scrambling
+
+var PHI_CONJ = 0.6180339887498949;
+var colormap = d3.scaleSequential(d3.interpolateTurbo).domain([0, plotData.length - 1]); // stable hash to [0,1] (you already had this)
 
 function hashToUnit(str) {
   var h = 2166136261; // FNV-1a
@@ -2880,13 +2892,46 @@ function hashToUnit(str) {
   }
 
   return (h >>> 0) / 4294967295;
+} // produce a pleasing HSL color from a t in [0,1] mapped into the hue window
+
+
+function colorFromT(t) {
+  var tClamped = Math.max(0, Math.min(1, t));
+  var hueFrac = HUE_MIN + (HUE_MAX - HUE_MIN) * tClamped; // in [HUE_MIN,HUE_MAX]
+
+  var hueDeg = Math.round(hueFrac * 360);
+  return d3.hsl(hueDeg, SATURATION, LIGHTNESS).toString();
+} // distinct color for "all-data" mode; stable by id if id exists, otherwise scrambled index
+
+
+function colorForAllData(el, i, total) {
+  // prefer stable hashing by id
+  var base;
+
+  if (el.id != null) {
+    base = hashToUnit(String(el.id));
+  } else {
+    // fallback: scramble by golden ratio so adjacent indices are far in hue-space
+    base = i * PHI_CONJ % 1;
+  }
+
+  return colorFromT(base);
 }
 
-function colorForCategory(key, category) {
+function colorForCategory(key, category, i, total) {
   var map = GROUP_PALETTES[key];
-  if (map && map.has(category)) return map.get(category);
-  return colormap(category);
-}
+  if (map && map.has(category)) return map.get(category); // fallback: distinct HSV color based on index
+
+  return distinctColor(i, total);
+} // distinct color generator for N items (used for categories). Uses a scrambled index
+
+
+function distinctColorForIndex(idx, total) {
+  // use a scrambled order based on golden ratio to avoid neighbors being similar
+  var base = idx * PHI_CONJ % 1;
+  return colorFromT(base);
+} // apply color to an element's data structure (line + area)
+
 
 function applyElementColors(el, baseColor) {
   el.line = el.line || {};
@@ -2900,7 +2945,8 @@ function applyElementColors(el, baseColor) {
       el.area.color = c.formatRgb();
     }
   }
-}
+} // update existing DOM (unchanged)
+
 
 function updatePlotColorsInDOM(plotData, dataLayer) {
   plotData.forEach(function (d) {
@@ -2911,23 +2957,50 @@ function updatePlotColorsInDOM(plotData, dataLayer) {
     var text = dataLayer.select("#".concat(d.id, "-text"));
     if (!text.empty()) text.attr("fill", d.line && d.line.color ? d.line.color : null);
   });
-}
+} // MAIN: assign colors to plotData in-place according to key
+
 
 function applyColors(plotData, key) {
   if (key === "none") {
+    // All-data mode: one distinct color per plot (stable by id)
     plotData.forEach(function (el, i) {
-      var col = colormap(i);
+      var col = colorForAllData(el, i, plotData.length);
       applyElementColors(el, col);
     });
   } else {
+    // Grouped mode: determine unique categories, map category -> color
+    var seen = new Set();
+    var categories = [];
     plotData.forEach(function (el) {
-      // replace optional chaining with standard check
-      var category = el.categories && el.categories[key] ? el.categories[key] : null; // replace nullish coalescing
+      var cat = el.categories ? el.categories[key] : "∅";
 
-      var col = colorForCategory(key, category != null ? category : "∅");
+      if (!seen.has(cat)) {
+        seen.add(cat);
+        categories.push(cat);
+      }
+    }); // build colors per unique category: prefer GROUP_PALETTES, otherwise assign distinct color per category index
+
+    var categoryColors = new Map();
+
+    for (var ci = 0; ci < categories.length; ci++) {
+      var cat = categories[ci];
+      var palette = GROUP_PALETTES[key];
+
+      if (palette && palette.has(cat)) {
+        categoryColors.set(cat, palette.get(cat));
+      } else {
+        categoryColors.set(cat, distinctColorForIndex(ci, categories.length));
+      }
+    } // apply colors by looking up the category color
+
+
+    plotData.forEach(function (el) {
+      var cat = el.categories ? el.categories[key] : "∅";
+      var col = categoryColors.get(cat);
       applyElementColors(el, col);
     });
-  }
+  } // end grouped
+
 }
 
 function rerenderLegendForKey(key) {
@@ -2940,7 +3013,7 @@ function rerenderLegendForKey(key) {
   renderLegend(groupedData);
 }
 
-var defaultKey = "experimentType";
+var defaultKey = "none";
 select.property("value", defaultKey);
 rerenderLegendForKey(defaultKey); // === WIRE THE SELECT ===
 

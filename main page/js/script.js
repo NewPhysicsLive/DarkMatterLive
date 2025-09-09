@@ -173,13 +173,13 @@ const dataLayer = clipped.append("g")
 
 // Line generator
 const line = d3.line()
-  .x(d => x0(d.x))
-  .y(d => y0(d.y));
+  .x((d) => x0(d.x))
+  .y((d) => y0(d.y));
 
 const areaGen = d3.area()
-  .x(d => x0(d.x))
-  .y0(y0(1))
-  .y1(d => y0(d.y));
+  .x((d) => x0(d.x))
+  .y0((d) => y0(1))
+  .y1((d) => y0(d.y));
 
 
 //white filling background
@@ -1896,7 +1896,18 @@ select
   //   renderLegend(groupedData);
   // });
 
-const legendSvg = legend_wrapper
+// === Scrollable legend container ===
+const legend_scroll = legend_wrapper
+  .append("div")
+  .style("position", "absolute")
+  .style("top", "70px") // below the select
+  .style("left", "0px")
+  .style("right", "0px")
+  .style("bottom", "0px")
+  .style("overflow-y", "auto"); // scrollbar only here
+
+// Legend SVG inside scrollable container
+const legendSvg = legend_scroll
   .append("svg")
   .style("width", "100%")
   .attr("class", "legend");
@@ -1995,7 +2006,7 @@ function renderLegend(grouped) {
     .append("text")
     .attr("class", "legend-group-title")
     .attr("x", 0)
-    .attr("y", 80) // baseline; avoids clipping at y=0
+    .attr("y", 16) // baseline; avoids clipping at y=0
     .text((d) => d.group)
     .style("font-weight", "600")
     .style("font-size", "1.1em")
@@ -2008,18 +2019,49 @@ function renderLegend(grouped) {
     });
 
   groups.each(function () {
+
+    let titleShift = 0;
     const g = d3.select(this);
-    const titleWidth = g.select(".legend-group-title").node().getBBox().width;
+
+    const currentKey = select.property("value");
+    
+    if (currentKey !== "none") {
+
+    titleShift = 36;
+    g.append("rect")
+    .attr("class", "legend-group-swatch")
+    .attr("x", 0)
+    .attr("y", 2)
+    .attr("width", swatchSize)
+    .attr("height", 16)
+    .attr("fill", (d) => d.items[0].line.color)
+    .attr("opacity", AREA_OPACITY);
+
+  // 2) small line symbol to the right of the swatch (represents the line color/style)
+  g.append("line")
+    .attr("class", "legend-group-line")
+    .attr("x1", 0)
+    .attr("x2", swatchSize)
+    .attr("y1", 10 )
+    .attr("y2", 10 )
+    .attr("stroke", (d) => d.items[0].line.color)
+    .attr("stroke-width", (d) => d.items[0].line.width);
+
+    }
+
+    const titleWidth = g.select(".legend-group-title").node().getBBox().width + titleShift;
+
+    g.select(".legend-group-title").attr("x", titleShift);
 
     g.append("foreignObject")
       .attr("x", titleWidth + 6)
-      .attr("y", 67) // aligned with your previous y
-      .attr("width", 15)
-      .attr("height", 15)
+      .attr("y", 2) // aligned with your previous y
+      .attr("width", 16)
+      .attr("height", 16)
       .append("xhtml:div")
       .attr("style", "width:100%; height:100%; margin:0; padding:0")
       .append("input")
-      .attr("style", "width:15px; height:15px; margin:0; padding:0")
+      .attr("style", "width:16px; height:16px; margin:0; padding:0")
       .attr("type", "checkbox")
       .attr("class", "group-checkbox hidden-box")
       .property("checked", true)
@@ -2039,7 +2081,7 @@ function renderLegend(grouped) {
     .enter()
     .append("g")
     .attr("class", "legend-item")
-    .attr("transform", (d, i) => `translate(0, ${(i + 1) * itemHeight + 64})`);
+    .attr("transform", (d, i) => `translate(0, ${(i + 1) * itemHeight })`);
 
   // swatch (if area has fill color)
   items
@@ -2207,13 +2249,20 @@ const GROUP_PALETTES = {
   ]),
 };
 
-const fallbackOrdinal = d3.scaleOrdinal(d3.schemeTableau10);
+// tuning
+const HUE_MIN = 0;   // fraction of circle, e.g. 0.06 -> avoid very red edge if you want
+const HUE_MAX = 1;   // fraction of circle
+const SATURATION = 0.95;
+const LIGHTNESS = 0.6;
+const AREA_OPACITY = 0.6;
+
+// golden ratio conjugate for scrambling
+const PHI_CONJ = 0.6180339887498949;
 
 const colormap = d3.scaleSequential(d3.interpolateTurbo)
                      .domain([0, plotData.length - 1]);
 
-const AREA_OPACITY = 0.6;
-
+// stable hash to [0,1] (you already had this)
 function hashToUnit(str) {
   let h = 2166136261; // FNV-1a
   for (let i = 0; i < str.length; i++) {
@@ -2223,12 +2272,43 @@ function hashToUnit(str) {
   return (h >>> 0) / 4294967295;
 }
 
-function colorForCategory(key, category) {
-  const map = GROUP_PALETTES[key];
-  if (map && map.has(category)) return map.get(category);
-  return colormap(category);
+// produce a pleasing HSL color from a t in [0,1] mapped into the hue window
+function colorFromT(t) {
+  const tClamped = Math.max(0, Math.min(1, t));
+  const hueFrac = HUE_MIN + (HUE_MAX - HUE_MIN) * tClamped; // in [HUE_MIN,HUE_MAX]
+  const hueDeg = Math.round(hueFrac * 360);
+  return d3.hsl(hueDeg, SATURATION, LIGHTNESS).toString();
 }
 
+// distinct color for "all-data" mode; stable by id if id exists, otherwise scrambled index
+function colorForAllData(el, i, total) {
+  // prefer stable hashing by id
+  let base;
+  if (el.id != null) {
+    base = hashToUnit(String(el.id));
+  } else {
+    // fallback: scramble by golden ratio so adjacent indices are far in hue-space
+    base = ((i * PHI_CONJ) % 1);
+  }
+  return colorFromT(base);
+}
+
+function colorForCategory(key, category, i, total) {
+  const map = GROUP_PALETTES[key];
+  if (map && map.has(category)) return map.get(category);
+
+  // fallback: distinct HSV color based on index
+  return distinctColor(i, total);
+}
+
+// distinct color generator for N items (used for categories). Uses a scrambled index
+function distinctColorForIndex(idx, total) {
+  // use a scrambled order based on golden ratio to avoid neighbors being similar
+  const base = ((idx * PHI_CONJ) % 1);
+  return colorFromT(base);
+}
+
+// apply color to an element's data structure (line + area)
 function applyElementColors(el, baseColor) {
   el.line = el.line || {};
   el.line.color = baseColor;
@@ -2242,6 +2322,7 @@ function applyElementColors(el, baseColor) {
   }
 }
 
+// update existing DOM (unchanged)
 function updatePlotColorsInDOM(plotData, dataLayer) {
   plotData.forEach(d => {
     const line = dataLayer.select(`#${d.id}-line`);
@@ -2255,24 +2336,45 @@ function updatePlotColorsInDOM(plotData, dataLayer) {
   });
 }
 
+// MAIN: assign colors to plotData in-place according to key
 function applyColors(plotData, key) {
   if (key === "none") {
-
-  plotData.forEach((el, i) => {
-    const col = colormap(i);
-    applyElementColors(el, col);
-  });
-} else {
-    plotData.forEach(el => {
-      // replace optional chaining with standard check
-      const category = (el.categories && el.categories[key]) ? el.categories[key] : null;
-
-      // replace nullish coalescing
-      const col = colorForCategory(key, category != null ? category : "∅");
-
+    // All-data mode: one distinct color per plot (stable by id)
+    plotData.forEach((el, i) => {
+      const col = colorForAllData(el, i, plotData.length);
       applyElementColors(el, col);
     });
-  }
+  } else {
+    // Grouped mode: determine unique categories, map category -> color
+    const seen = new Set();
+    const categories = [];
+    plotData.forEach(el => {
+      const cat = el.categories ? el.categories[key] : "∅";
+      if (!seen.has(cat)) {
+        seen.add(cat);
+        categories.push(cat);
+      }
+    });
+
+    // build colors per unique category: prefer GROUP_PALETTES, otherwise assign distinct color per category index
+    const categoryColors = new Map();
+    for (let ci = 0; ci < categories.length; ci++) {
+      const cat = categories[ci];
+      const palette = GROUP_PALETTES[key];
+      if (palette && palette.has(cat)) {
+        categoryColors.set(cat, palette.get(cat));
+      } else {
+        categoryColors.set(cat, distinctColorForIndex(ci, categories.length));
+      }
+    }
+
+    // apply colors by looking up the category color
+    plotData.forEach((el) => {
+      const cat = el.categories ? el.categories[key] : "∅";
+      const col = categoryColors.get(cat);
+      applyElementColors(el, col);
+    });
+  } // end grouped
 }
 
 function rerenderLegendForKey(key) {
@@ -2289,7 +2391,7 @@ function rerenderLegendForKey(key) {
   renderLegend(groupedData);
 }
 
-const defaultKey = "experimentType";
+const defaultKey = "none";
 select.property("value", defaultKey);
 rerenderLegendForKey(defaultKey);
 
@@ -2604,25 +2706,15 @@ foY
       }
     )
   );
-  
-// Zoom behavior
-const zoom = d3.zoom()
-  .scaleExtent([0.1, 1e4])
-  .on('zoom', ({ transform }) => {
 
-    //changed axes
-    const zx = transform.rescaleX(x0);
-    const zy = transform.rescaleY(y0);
+let currentXMin = x0.domain()[0];
+let currentXMax = x0.domain()[1];
+let currentYMin = y0.domain()[0];
+let currentYMax = y0.domain()[1];
 
-    //supplementary variables for checking the values of zoom
-    const [xMin, xMax] = zx.domain();
-    const spanRatioX = xMax / xMin; 
-    const [yMin, yMax] = zy.domain();
-    const spanRatioY = yMax / yMin; 
-
-    let xTicks, xFormat, yTicks, yFormat;
-
-    //zoom behavior to x axis (very messy, but I dont have idea how to make it work better)
+function ticksChangerX(spanRatioX,xMin,xMax) {
+  let xTicks, xFormat;
+  //zoom behavior to x axis (very messy, but I dont have idea how to make it work better)
     if (spanRatioX > 50) {
       // Wide view → only decades, 10ⁿ labels
       xFormat = (d) => {
@@ -2691,22 +2783,14 @@ const zoom = d3.zoom()
       xFormat = d3.format(",.2~f"); // e.g. “1234.56”
     }
 
+    return [xTicks, xFormat];
+}
 
-    svg.select('.x-axis').call(
-      xAxis
-        .scale(zx)
-        .ticks(xTicks)
-        .tickFormat(xFormat)
-        .tickSize(7));
-      
-    svg.select(".x-axis-top").call(
-      xAxisTop
-      .scale(zx)
-      .ticks(xTicks)
-      .tickSize(7)
-    );
 
-    //zoom behavior to y axis
+function ticksChangerY(spanRatioY,yMin,yMax) {
+  let yFormat, yTicks;
+
+  //zoom behavior to y axis
     if (spanRatioY > 50) {
       // Wide view → only decades, 10ⁿ labels
       yFormat = (d) => {
@@ -2743,17 +2827,58 @@ const zoom = d3.zoom()
       yFormat = d3.format(".4~e"); // e.g. “1234.56”
     }
 
+    return [yTicks, yFormat];
+}
+  
+// Zoom behavior
+const zoom = d3.zoom()
+  .scaleExtent([0.2, 1e4])
+  .on('zoom', ({ transform }) => {
+
+    //changed axes
+    const zx = transform.rescaleX(x0);
+    const zy = transform.rescaleY(y0);
+
+    //supplementary variables for checking the values of zoom
+    const [xMin, xMax] = zx.domain();
+    const spanRatioX = xMax / xMin; 
+    const [yMin, yMax] = zy.domain();
+    const spanRatioY = yMax / yMin; 
+
+    currentXMin = xMin;
+    currentXMax = xMax;
+    currentYMin = yMin;
+    currentYMax = yMax;
+
+    const xTicks = ticksChangerX(spanRatioX, xMin, xMax);
+
+    svg.select('.x-axis').call(
+      xAxis
+        .scale(zx)
+        .ticks(xTicks[0])
+        .tickFormat(xTicks[1])
+        .tickSize(7));
+      
+    svg.select(".x-axis-top").call(
+      xAxisTop
+      .scale(zx)
+      .ticks(xTicks[0])
+      .tickSize(7)
+    );
+
+    const yTicks = ticksChangerY(spanRatioY, yMin, yMax);
+
     svg.select('.y-axis').call(
       yAxis
         .scale(zy)
-        .ticks(yTicks)
-        .tickFormat(yFormat)
+        .ticks(yTicks[0])
+        .tickFormat(yTicks[1])
         .tickSize(7));
       
     svg.select(".y-axis-right").call(
       yAxisRight
       .scale(zy)
-      .ticks(yTicks)
+      .ticks(yTicks[0])
       .tickSize(7)
     );
 
@@ -2766,6 +2891,7 @@ const zoom = d3.zoom()
       .y0(d => zy(1))      // same baseline as before, but scaled
       .y1(d => zy(d.y));
 
+      
     dataLayer.selectAll('path.line')
             .attr('d', d => zoomedLine(d));
 
@@ -2815,4 +2941,130 @@ function downloadSVG(svgSelector, filename = "plot.svg") {
 // Usage: pass your SVG’s CSS selector:
 document.getElementById("saveSvgBtn").addEventListener("click", () => {
   downloadSVG(".svg-content", "BC2.svg");
+});
+
+
+// === Create anchored popup (initially hidden) ===
+const popup = d3.select("body")
+  .append("div")
+  .attr("id", "axes-popup")
+  .style("display", "none")
+  .style("position", "absolute")   // << anchored to button
+  .style("background", "white")
+  .style("border", "1px solid #ccc")
+  .style("padding", "10px")
+  .style("z-index", "1000")
+  .style("box-shadow", "0px 4px 10px rgba(0,0,0,0.3)");
+
+// Add form content
+popup.html(`
+  <label class="fix-axes-label"><p class="fix-axes-text">X min: </p><input class="fix-axes-input" type="number" id="x-min"></label>
+  <label class="fix-axes-label"><p class="fix-axes-text">X min:</p><input class="fix-axes-input" type="number" id="x-max"></label>
+  <label class="fix-axes-label"><p class="fix-axes-text">Y min: </p><input class="fix-axes-input" type="number" id="y-min"></label>
+  <label class="fix-axes-label"><p class="fix-axes-text">Y max: </p><input class="fix-axes-input" type="number" id="y-max"></label>
+  <div class="popup-buttons"><button id="apply-axes">Apply</button>
+  <button id="cancel-axes">Close</button></div>
+`);
+
+// === Event listeners ===
+
+// Show popup just above the button
+d3.select("#fix-axes-btn").on("click", function () {
+  const isVisible = popup.style("display") === "flex";
+
+  if (isVisible) {
+    // Hide on second click
+    popup.style("display", "none");
+    return;
+  }
+
+  // Otherwise, show popup
+  const rect = this.getBoundingClientRect();
+
+  // First, make popup visible but hidden (to measure height)
+  popup.style("display", "flex").style("visibility", "hidden");
+
+  const popupHeight = popup.node().offsetHeight;
+
+  popup
+    .style("left", rect.left + "px")
+    .style("top", (window.scrollY + rect.top - popupHeight - 10) + "px")
+    .style("visibility", "visible");
+
+  console.log(currentXMin, currentXMax, currentYMin, currentYMax);
+
+  // Pre-fill inputs
+  d3.select("#x-min").property("value", currentXMin.toExponential(2));
+  d3.select("#x-max").property("value", currentXMax.toExponential(2));
+  d3.select("#y-min").property("value", currentYMin.toExponential(2));
+  d3.select("#y-max").property("value", currentYMax.toExponential(2));
+});
+
+// Hide popup
+d3.select("body").on("click", function (event) {
+  const target = event.target;
+  if (target.id !== "fix-axes-btn" && !popup.node().contains(target)) {
+    popup.style("display", "none");
+  }
+});
+
+// Apply new ranges
+d3.select("body").on("click", function (event) {
+  if (event.target.id === "apply-axes") {
+    const xMin = parseFloat(d3.select("#x-min").property("value"));
+    const xMax = parseFloat(d3.select("#x-max").property("value"));
+    const yMin = parseFloat(d3.select("#y-min").property("value"));
+    const yMax = parseFloat(d3.select("#y-max").property("value"));
+
+    if (!isNaN(xMin) && !isNaN(xMax)) x0.domain([xMin, xMax]);
+    if (!isNaN(yMin) && !isNaN(yMax)) y0.domain([yMin, yMax]);
+
+    x0.domain([xMin, xMax]);
+    y0.domain([yMin, yMax]);
+    const spanRatioX = xMax / xMin; 
+    const spanRatioY = yMax / yMin; 
+
+    const xTicks = ticksChangerX(spanRatioX, xMin, xMax);
+
+    svg.select('.x-axis').call(
+      xAxis
+        .scale(x0)
+        .ticks(xTicks[0])
+        .tickFormat(xTicks[1])
+        .tickSize(7));
+      
+    svg.select(".x-axis-top").call(
+      xAxisTop
+      .scale(x0)
+      .ticks(xTicks[0])
+      .tickSize(7)
+    );
+
+    const yTicks = ticksChangerY(spanRatioY, yMin, yMax);
+
+    svg.select('.y-axis').call(
+      yAxis
+        .scale(y0)
+        .ticks(yTicks[0])
+        .tickFormat(yTicks[1])
+        .tickSize(7));
+      
+    svg.select(".y-axis-right").call(
+      yAxisRight
+      .scale(y0)
+      .ticks(yTicks[0])
+      .tickSize(7)
+    );
+
+    dataLayer.selectAll('path.line')
+      .attr('d', d => line(d));
+
+    dataLayer.selectAll('path.area')
+      .attr('d', d => areaGen(d));
+
+    popup.style("display", "none");
+  }
+  if (event.target.id === "cancel-axes") {
+    popup.style("display", "none");
+  }
 });
