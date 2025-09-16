@@ -172,11 +172,15 @@ header {
   margin-bottom: 40px;
 }
 
+.interacting-buttons ul li:first-child {
+  display: none;
+}
+
 .option-button {
   background-color: #3c096c;
   color: white;
   border: none;
-  padding: 16px 12px;
+  padding: 12px 12px;
   font-size: 1rem;
   cursor: pointer;
 }
@@ -315,17 +319,17 @@ svg {
 
 
 .x-axis text {
-  font-size: 14px;     /* or whatever size you like */
+  font-size: 15px;     /* or whatever size you like */
   /* font-weight, font-family, etc., can go here too */
 }
 
 .y-axis text {
-  font-size: 14px;     /* or whatever size you like */
+  font-size: 15px;     /* or whatever size you like */
   /* font-weight, font-family, etc., can go here too */
 }
 .plot-title {
   font-family: "KaTeX_Main", sans-serif;
-  font-size: 22px;
+  font-size: 20px;
 }
 
 .wordbreaker {
@@ -343,6 +347,10 @@ svg {
 .no-break {
     white-space: nowrap;
   }
+
+.legend-group-title {
+  font-family: 'Open Sans', sans-serif;
+}
 
 .hidden-box{
   display: block;

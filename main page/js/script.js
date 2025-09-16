@@ -1861,6 +1861,7 @@ const legend_wrapper = svg
 legend_wrapper
   .append("label")
   .attr("for", "grouping-select")
+  .attr("class", "legend-grouping-label")
   .style("position", "absolute")
   .style("top", "5px") // position above the select
   .style("left", "0px")
@@ -2008,8 +2009,9 @@ function renderLegend(grouped) {
     .attr("x", 0)
     .attr("y", 16) // baseline; avoids clipping at y=0
     .text((d) => d.group)
-    .style("font-weight", "600")
+    .style("font-weight", "400")
     .style("font-size", "1.1em")
+    .style("font-family", '"Open Sans", sans-serif')
     .style("cursor", "pointer")
     .on("click", function () {
       const g = d3.select(this.parentNode);
@@ -2662,13 +2664,20 @@ const yAxisGright = svg.append('g')
   .call(yAxisRight);
   
 //Adding plot title
-svg
-  .append("text")
+const plotTitle = svg
+  .append("foreignObject")
   .attr("class", "plot-title")
-  .attr("x", (width - margin.left - margin.right) / 2 + margin.left)
-  .attr("y", margin.top - 25)
-  .attr("text-anchor", "middle")
-  .text("Dark Photon into invisible final states (BC1)");
+  .attr("x", (width - margin.left - margin.right) / 2 + margin.left-230)
+  .attr("y", margin.top - 45)
+  .attr("width", 460)
+  .attr("height", 40)
+  .attr("text-anchor", "middle");
+  
+plotTitle.append("xhtml:div").html(
+  katex.renderToString("\\mathrm{Dark\\,Photon\\,into\\,invisible\\,final\\,states\\,(BC1)}", {
+    throwOnError: false,
+  })
+);
 
 //Adding plot labels with TeX content
 const foX = xAxisG
@@ -2901,32 +2910,125 @@ const zoom = d3.zoom()
 
 dataLayer.call(zoom);
 
-function downloadSVG(svgSelector, filename = "plot.svg") {
+const fontMap = {
+  // KaTeX fonts
+  "KaTeX_Main-Regular.woff2": { family: "KaTeX_Main", weight: "400", style: "normal" },
+  "KaTeX_Main-Bold.woff2": { family: "KaTeX_Main", weight: "700", style: "normal" },
+  "KaTeX_Math-Italic.woff2": { family: "KaTeX_Math", weight: "400", style: "italic" },
+
+  // Open Sans fonts
+  "OpenSans-Regular.woff2": {
+    family: "Open Sans",
+    weight: "400",
+    style: "normal",
+    url: "https://fonts.gstatic.com/s/opensans/v43/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS-muw.woff2"
+  },
+  "OpenSans-Bold.woff2": {
+    family: "Open Sans",
+    weight: "700",
+    style: "normal",
+    url: "https://fonts.gstatic.com/s/opensans/v43/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS-muw.woff2"
+  },
+};
+
+async function embedFonts(svgEl) {
+  let cssRules = "";
+
+  for (const file in fontMap) {
+    const { family, weight, style, url } = fontMap[file];
+
+    // fetch font either from custom URL (for Open Sans) or from KaTeX CDN
+    const fontUrl = url || ("https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/fonts/" + file);
+    const res = await fetch(fontUrl);
+    const buffer = await res.arrayBuffer();
+    const base64 = btoa(String.fromCharCode(...new Uint8Array(buffer)));
+
+    cssRules += `
+      @font-face {
+        font-family: '${family}';
+        font-weight: ${weight};
+        font-style: ${style};
+        src: url(data:font/woff2;base64,${base64}) format('woff2');
+      }
+    `;
+  }
+
+  // Insert <defs><style> into SVG
+  let defs = svgEl.querySelector("defs");
+  if (!defs) {
+    defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
+    svgEl.insertBefore(defs, svgEl.firstChild);
+  }
+  const styleEl = document.createElementNS("http://www.w3.org/2000/svg", "style");
+  styleEl.textContent = cssRules;
+  defs.appendChild(styleEl);
+}
+
+async function downloadSVG(svgSelector, filename = "plot.svg") {
   const original = document.querySelector(svgSelector);
   const clone = original.cloneNode(true);
 
-  // 1) Strip out any embedded <style> or <link> tags
-  clone
-    .querySelectorAll('style, link[rel="stylesheet"]')
-    .forEach((el) => el.remove());
+  // --- 1) Copy only *non-default* computed styles ---
+  const originalElems = original.querySelectorAll("*");
+  const cloneElems = clone.querySelectorAll("*");
 
-  // 2) Now inline your CSS rules as <style> in the clone’s <defs>
-  const cssText = `
-    /* grab whatever axis rules you need from your stylesheet */
-    .axis path, .axis line { stroke: #000; }
-    .axis text { font-family: sans-serif; font-size: 12px; fill: #333; }
-  `;
-  const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
-  const style = document.createElementNS("http://www.w3.org/2000/svg", "style");
-  style.textContent = cssText;
-  defs.appendChild(style);
-  clone.insertBefore(defs, clone.firstChild);
+  await embedFonts(clone);
 
-  // 3) Serialize & download
+  function getDefaultStyles(tagName) {
+    const testEl = document.createElementNS("http://www.w3.org/2000/svg", tagName);
+    document.body.appendChild(testEl);
+    const styles = getComputedStyle(testEl);
+    const result = {};
+    for (let i = 0; i < styles.length; i++) {
+      const prop = styles[i];
+      result[prop] = styles.getPropertyValue(prop);
+    }
+    document.body.removeChild(testEl);
+    return result;
+  }
+
+const defaultCache = {};
+const alwaysInclude = ["font-family", "font-weight", "font-size"]; // force these
+
+originalElems.forEach((origEl, i) => {
+  const comp = getComputedStyle(origEl);
+  const tagName = origEl.tagName.toLowerCase();
+
+  if (!defaultCache[tagName]) {
+    defaultCache[tagName] = getDefaultStyles(tagName);
+  }
+  const defaults = defaultCache[tagName];
+
+  let styleStr = "";
+  for (let j = 0; j < comp.length; j++) {
+    const prop = comp[j];
+    const val = comp.getPropertyValue(prop);
+    const defVal = defaults[prop];
+
+    // Keep if different from default OR in alwaysInclude list
+    if ((val && val !== defVal) || alwaysInclude.includes(prop)) {
+      styleStr += `${prop}:${val};`;
+    }
+  }
+
+  if (styleStr) {
+    cloneElems[i].setAttribute("style", styleStr);
+  }
+});
+
+
+  // --- 2) Remove unwanted UI stuff (scrollbars, checkboxes, etc.) ---
+  clone.querySelectorAll("#grouping-select, .hidden-box, .legend-grouping-label")
+       .forEach((el) => el.remove());
+
+
+  // --- 3) Add XML header and serialize ---
   let source = new XMLSerializer().serializeToString(clone);
   if (!source.startsWith("<?xml")) {
     source = '<?xml version="1.0" standalone="no"?>\n' + source;
   }
+
+  // --- 4) Download ---
   const blob = new Blob([source], { type: "image/svg+xml;charset=utf-8" });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
