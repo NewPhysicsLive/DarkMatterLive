@@ -1,0 +1,28 @@
+{
+  "labelName": "INTEGRAL",
+  "longName": "INTEGRAL",
+  "id": "integral",
+  "text": {
+    "elementName": null
+  },
+  "line": {
+    "color": "rgba(5, 58, 133, 1)",
+    "dash": null,
+    "width": 2
+  },
+  "area": {
+    "color": "rgba(57, 130, 232, 1)"
+  },
+  "paperUrls": [
+    "https://arxiv.org/abs/2406.19445",
+    "https://arxiv.org/abs/2412.00180"
+  ],
+  "url": "../../data/BC1/INTEGRAL.csv",
+  "curveType": "excluded",
+  "categories": {
+    "detectionType": "Indirect detection",
+    "experimentType": "Astrophysical observations",
+    "timeType": "Recent constraints",
+    "assumption": "Dark Matter"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "labelName": "BaBar",
+  "longName": "BaBar",
+  "id": "babar",
+  "text": {
+    "elementName": null
+  },
+  "line": {
+    "color": "gray",
+    "dash": null,
+    "width": 2
+  },
+  "area": {
+    "color": "lightgray"
+  },
+  "paperUrls": [
+    "https://arxiv.org/abs/1406.2980"
+  ],
+  "url": "../../data/BC1/BaBar.csv",
+  "curveType": "excluded",
+  "categories": {
+    "detectionType": "Direct detection",
+    "experimentType": "Collider experiments",
+    "timeType": "Past constraints",
+    "assumption": "None"
+  }
+}

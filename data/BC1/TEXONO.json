@@ -1,0 +1,27 @@
+{
+  "labelName": "TEXONO",
+  "longName": "TEXONO",
+  "id": "texono",
+  "text": {
+    "elementName": null
+  },
+  "line": {
+    "color": "rgba(5, 58, 133, 1)",
+    "dash": null,
+    "width": 2
+  },
+  "area": {
+    "color": "rgba(57, 130, 232, 1)"
+  },
+  "paperUrls": [
+    "https://arxiv.org/abs/1804.10777"
+  ],
+  "url": "../../data/BC1/TEXONO.csv",
+  "curveType": "excluded",
+  "categories": {
+    "detectionType": "Indirect detection",
+    "experimentType": "Laboratory experiments",
+    "timeType": "Recent constraints",
+    "assumption": "None"
+  }
+}

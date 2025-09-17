@@ -1,0 +1,27 @@
+{
+  "labelName": "NA64(e)",
+  "longName": "NA64(e)",
+  "id": "na64e",
+  "text": {
+    "elementName": null
+  },
+  "line": {
+    "color": "rgba(5, 58, 133, 1)",
+    "dash": "20,7",
+    "width": 2
+  },
+  "area": {
+    "color": null
+  },
+  "paperUrls": [
+    "https://arxiv.org/abs/1204.3583"
+  ],
+  "url": "../../data/BC1/NA64(e).csv",
+  "curveType": "projection",
+  "categories": {
+    "detectionType": "Direct detection",
+    "experimentType": "Collider experiments",
+    "timeType": "Planned/future constraints",
+    "assumption": "None"
+  }
+}

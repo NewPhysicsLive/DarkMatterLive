@@ -1,0 +1,27 @@
+{
+  "labelName": "XENON1T SE",
+  "longName": "XENON1T SE",
+  "id": "xenon1t-se",
+  "text": {
+    "elementName": null
+  },
+  "line": {
+    "color": "rgba(5, 58, 133, 1)",
+    "dash": null,
+    "width": 2
+  },
+  "area": {
+    "color": "rgba(57, 130, 232, 1)"
+  },
+  "paperUrls": [
+    "https://arxiv.org/abs/2112.12116"
+  ],
+  "url": "../../data/BC1/XENON1T_SE.csv",
+  "curveType": "excluded",
+  "categories": {
+    "detectionType": "Direct detection",
+    "experimentType": "Laboratory experiments",
+    "timeType": "Recent constraints",
+    "assumption": "None"
+  }
+}

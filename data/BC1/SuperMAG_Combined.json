@@ -1,0 +1,29 @@
+{
+  "labelName": "SuperMAG",
+  "longName": "SuperMAG Combined",
+  "id": "supermag-combined",
+  "text": {
+    "elementName": null
+  },
+  "line": {
+    "color": "rgba(5, 58, 133, 1)",
+    "dash": null,
+    "width": 2
+  },
+  "area": {
+    "color": "rgba(57, 130, 232, 1)"
+  },
+  "paperUrls": [
+    "https://arxiv.org/abs/2106.00022",
+    "https://arxiv.org/abs/2408.16045",
+    "https://arxiv.org/abs/2108.08852"
+  ],
+  "url": "../../data/BC1/SuperMAG_Combined.csv",
+  "curveType": "excluded",
+  "categories": {
+    "detectionType": "Indirect detection",
+    "experimentType": "Astrophysical observations",
+    "timeType": "Recent constraints",
+    "assumption": "None"
+  }
+}
