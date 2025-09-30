@@ -1,0 +1,27 @@
+{
+  "labelName": "Caputo et al. (2020)",
+  "longName": "Caputo et al. (2020) (HeII reionisation)",
+  "id": "Caputo2020",
+  "text": {
+    "elementName": null
+  },
+  "line": {
+    "color": "rgba(5, 58, 133, 1)",
+    "dash": null,
+    "width": 2
+  },
+  "area": {
+    "color": "rgba(57, 130, 232, 1)"
+  },
+  "paperUrls": [
+    "https://arxiv.org/abs/2002.05165"
+  ],
+  "url": "../../data/BC1/Cosmology_Caputo_HeII_.csv",
+  "curveType": "excluded",
+  "categories": {
+    "detectionType": "Indirect detection",
+    "experimentType": "Cosmological measurements",
+    "timeType": "Recent constraints",
+    "assumption": "Dark Matter"
+  }
+}

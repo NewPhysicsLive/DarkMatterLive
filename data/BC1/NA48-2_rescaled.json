@@ -1,0 +1,27 @@
+{
+  "labelName": "NA48/2",
+  "longName": "NA48/2",
+  "id": "na48-2",
+  "text": {
+    "elementName": null
+  },
+  "line": {
+    "color": "rgba(5, 58, 133, 1)",
+    "dash": null,
+    "width": 2
+  },
+  "area": {
+    "color": "rgba(57, 130, 232, 1)"
+  },
+  "paperUrls": [
+    "https://arxiv.org/abs/1504.00607"
+  ],
+  "url": "../../data/BC1/NA48-2_rescaled.csv",
+  "curveType": "excluded",
+  "categories": {
+    "detectionType": "Direct detection",
+    "experimentType": "Collider experiments",
+    "timeType": "Recent constraints",
+    "assumption": "None"
+  }
+}

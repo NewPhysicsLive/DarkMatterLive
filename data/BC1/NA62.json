@@ -1,0 +1,27 @@
+{
+  "labelName": "NA62",
+  "longName": "NA62",
+  "id": "na62",
+  "text": {
+    "elementName": null
+  },
+  "line": {
+    "color": "rgba(5, 58, 133, 1)",
+    "dash": null,
+    "width": 2
+  },
+  "area": {
+    "color": "rgba(57, 130, 232, 1)"
+  },
+  "paperUrls": [
+    "https://arxiv.org/abs/2502.04241"
+  ],
+  "url": "../../data/BC1/NA62.csv",
+  "curveType": "excluded",
+  "categories": {
+    "detectionType": "Direct detection",
+    "experimentType": "Collider experiments",
+    "timeType": "Recent constraints",
+    "assumption": "None"
+  }
+}

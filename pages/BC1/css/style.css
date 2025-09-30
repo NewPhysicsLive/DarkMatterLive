@@ -1,0 +1,372 @@
+html.loading body {
+  visibility: hidden;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+#plot {
+  width: 90vw;
+  height: 90vh;
+}
+
+header {
+  width: 100%;
+  height: 80px;
+  background-color: #7b2cbf;
+  border-bottom: 2px solid #3c096c;
+}
+.navbar {
+  margin: 0;
+  list-style: none;
+  display: flex;
+  height: 100%;
+  max-width: 100%; 
+  align-items: center;
+  text-align: center;
+  flex-direction: row;
+  color: white;
+}
+
+.navbar .navbar-link a{
+  color: black;
+  text-decoration: none;
+  font-size: 1.4rem;
+}
+
+.navbar .navbar-link a.active{
+  color: white;
+  text-decoration: none;
+  font-size: 1.4rem;
+}
+
+.navbar .navbar-link { 
+  position:relative; 
+  padding: 0.5rem 2rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+/* dropdown root */
+.nav-dropdown { position:relative; }
+
+
+.nav-dropdown .dropdown {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 100%; /* places it below the nav item */
+  min-width: 330px;
+  background: #7b2cbf;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  display: none;
+  color: #000;
+  z-index: 1200;
+  transition: color .12s ease, opacity .12s ease, transform .12s ease;
+  transform-origin: top left;
+}
+
+/* show on hover or keyboard focus */
+.nav-dropdown:hover > .dropdown,
+.nav-dropdown:focus-within > .dropdown,
+.nav-dropdown.menu-open > .dropdown { /* menu-open used by JS for mobile */
+  display: block;
+}
+
+/* categories list */
+.model-categories { list-style:none; margin:0; padding:0px; }
+.category { position:relative; margin:0; }
+
+/* category button (left column) */
+.category-btn {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  width:100%;
+  background:none;
+  border:none;
+  padding:16px 12px;
+  cursor:pointer;
+  font: inherit;
+  font-size: 1.2rem;
+  color: #000;
+  text-align: center;
+  transition: color .12s ease, opacity .12s ease, transform .12s ease;
+}
+.category-btn:focus,
+.category-btn:hover { background: rgba(0,0,0,0.04); outline: none; color: #fff; }
+
+/* submodels panel (flyout to the right) */
+.submodels {
+  position:absolute;
+  top:0;
+  left:100%;
+  min-width:330px;
+  background:#7b2cbf;
+  padding:0px;
+  list-style:none;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  display:none;
+  z-index:1300;
+}
+
+.submodels li {
+  display: flex;
+  width: 100%;
+  justify-self: center;
+  align-items: center;
+}
+
+/* show submodels when the category is hovered / focused */
+.category:hover > .submodels,
+.category:focus-within > .submodels,
+.category.open > .submodels { display:block; }
+
+/* links */
+.category .submodels .model-link {
+  display:flex;
+  padding:16px 12px;
+  text-decoration:none;
+  color: #000;
+  width: 100%;
+  font-size: 1.2rem;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  transition: color .12s ease, opacity .12s ease, transform .12s ease;
+}
+
+.model-link:hover,
+.model-link:focus { background: rgba(0,0,0,0.06); color: #fff !important;}
+
+.category:hover > .category-btn,
+.category:focus-within > .category-btn {
+  color: #fff;
+  background: rgba(0,0,0,0.06);
+}
+
+/* small-screen behavior: dropdown becomes stacked and clickable */
+@media (max-width: 900px) {
+  .nav-dropdown .dropdown {
+    position: static;
+    box-shadow: none;
+    transform: none;
+    padding: 4px 0;
+    min-width: auto;
+  }
+  .submodels { position: static; margin-left:0; display:none; box-shadow:none; padding-left:16px; }
+  .category.open > .submodels { display:block; }
+  .nav-dropdown.menu-open > .dropdown { display:block; }
+}
+
+.interacting-buttons ul{
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding-right: 300px;
+  flex-direction: row;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+.interacting-buttons ul li:first-child {
+  display: none;
+}
+
+.option-button {
+  background-color: #3c096c;
+  color: white;
+  border: none;
+  padding: 12px 12px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+}
+
+.fix-axes-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+}
+
+#axes-popup {
+  width: 150px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-around;
+}
+
+.popup-buttons {
+  margin-top: 5px;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.fix-axes-text {
+  padding: 0;
+  margin: 0;
+  font-family: "Noto Sans JP", "Open Sans", sans-serif;
+  font-size: 16px;
+}
+
+.fix-axes-input {
+  width: 70px;
+  margin-top: 2px;
+  height: 18px;
+}
+
+#apply-axes {
+  margin-right: 5px;
+}
+
+.navbar-link.logo {
+  font-family: "Noto Sans JP", "Open Sans", sans-serif;
+}
+
+svg {
+  display: block;
+}
+.axis-label {
+  font-size: 18px;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.axis-label div {
+  display: flex;
+  height: 100%;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.wrapper {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  height: 100%;
+  align-items: center;
+  justify-self: center;
+}
+
+.sources {
+  width: 40vw
+}
+
+.model-title {
+  text-align: center;
+  font-weight: 600;
+  font-size: 2rem;
+}
+
+.description {
+  width: 100%;
+  border-top : 2px solid #808080;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.description-box {
+  display: block;
+  width: 60%;
+  padding: 20px;
+  background-color: #f0f0f0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: justify;           /* spreads words across each line */
+  text-justify: inter-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+
+  /* fallback for very long words/URLs */
+  overflow-wrap: break-word;   /* standard */
+  word-wrap: break-word;  
+}
+
+.description-title {
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+.description-subtitle {
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+
+.x-axis text {
+  font-size: 15px;     /* or whatever size you like */
+  /* font-weight, font-family, etc., can go here too */
+}
+
+.y-axis text {
+  font-size: 15px;     /* or whatever size you like */
+  /* font-weight, font-family, etc., can go here too */
+}
+.plot-title {
+  font-family: "KaTeX_Main", sans-serif;
+  font-size: 20px;
+}
+
+.wordbreaker {
+  text-align: justify;           /* spreads words across each line */
+  text-justify: inter-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+
+  /* fallback for very long words/URLs */
+  overflow-wrap: break-word;   /* standard */
+  word-wrap: break-word;  
+}
+
+.no-break {
+    white-space: nowrap;
+  }
+
+.legend-group-title {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.hidden-box{
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+
+footer {
+  width: 100%;
+  height: 70px;
+  text-align: center;
+  background-color: #7b2cbf;
+}
+
+footer p {
+  margin: 0;
+  padding: 0;
+  line-height: 70px; /* vertically center text */
+}

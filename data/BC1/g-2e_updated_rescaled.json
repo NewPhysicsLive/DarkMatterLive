@@ -1,0 +1,28 @@
+{
+  "labelName": "(g-2)e",
+  "longName": "(g-2)e",
+  "id": "g-2-e",
+  "text": {
+    "elementName": null
+  },
+  "line": {
+    "color": "rgba(5, 58, 133, 1)",
+    "dash": null,
+    "width": 2
+  },
+  "area": {
+    "color": "rgba(57, 130, 232, 1)"
+  },
+  "paperUrls": [
+    "https://arxiv.org/abs/0811.1030",
+    "https://arxiv.org/abs/1209.2558"
+  ],
+  "url": "../../data/BC1/g-2e_updated_rescaled.csv",
+  "curveType": "excluded",
+  "categories": {
+    "detectionType": "Direct detection",
+    "experimentType": "Collider experiments",
+    "timeType": "Past constraints",
+    "assumption": "None"
+  }
+}

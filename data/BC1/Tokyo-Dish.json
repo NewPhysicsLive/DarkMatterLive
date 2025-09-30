@@ -1,0 +1,27 @@
+{
+  "labelName": "Tokyo",
+  "longName": "Tokyo-dish",
+  "id": "tokyo",
+  "text": {
+    "elementName": null
+  },
+  "line": {
+    "color": "rgba(5, 58, 133, 1)",
+    "dash": null,
+    "width": 2
+  },
+  "area": {
+    "color": "rgba(57, 130, 232, 1)"
+  },
+  "paperUrls": [
+    "https://arxiv.org/abs/2003.13144"
+  ],
+  "url": "../../data/BC1/Tokyo-Dish.csv",
+  "curveType": "excluded",
+  "categories": {
+    "detectionType": "Direct detection",
+    "experimentType": "Laboratory experiments",
+    "timeType": "Recent constraints",
+    "assumption": "None"
+  }
+}

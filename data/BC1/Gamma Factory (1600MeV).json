@@ -1,0 +1,27 @@
+{
+  "labelName": "Gamma Factory (1600MeV)",
+  "longName": "Gamma Factory (1600MeV)",
+  "id": "gamma-factory-1600mev",
+  "text": {
+    "elementName": null
+  },
+  "line": {
+    "color": "rgba(5, 58, 133, 1)",
+    "dash": "20,7",
+    "width": 2
+  },
+  "area": {
+    "color": null
+  },
+  "paperUrls": [
+    "https://arxiv.org/abs/2105.10289"
+  ],
+  "url": "../../data/BC1/Gamma Factory (1600MeV).csv",
+  "curveType": "projection",
+  "categories": {
+    "detectionType": "Direct detection",
+    "experimentType": "Collider experiments",
+    "timeType": "Planned/future constraints",
+    "assumption": "None"
+  }
+}

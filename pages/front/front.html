@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+    rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/parallax-js@3.1.0/dist/parallax.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+  <link rel="manifest" href="../site.webmanifest">
+  <title>Dark Matter live</title>
+</head>
+<body>
+    <div id="scene">
+      <div class="layer layer-bg" data-depth="0.03">
+      </div>
+      <div class="wrapper" data-depth="0">
+        <div class="layer-title" data-depth="0">
+          <div class="inner">
+            <h1 class="title" >Dark Matter live</h1>
+            <p class="quote">In order for the light to shine so brightly, the darkness must be present. Francis Bacon</p>
+          </div>
+        </div>
+        <div class="choose-model" data-depth="0">
+          <button class="choose-button" id="toggleTypesOfModelsBtn">Choose dark matter model</button>
+          <ul class="list-of-models" id="modelList">
+            <li>
+              <div class="sublist-of-models">
+                <button class="model-button">Vector portal models (BC1-BC3)</button>
+                <ul class="similar-models">
+                  <li><button class="model-button model-link" onclick="location.href='../BC1/main.html';">Minimal dark photon model (BC1)</button></li>
+                  <li><button class="model-button model-link in-progress" onclick="location.href='../BC2/main.html';">Light DM coupled to dark photon (BC2)</button></li>
+                  <li><button class="model-button model-link in-progress" onclick="location.href='../BC3/main.html';">Millicharged particles (BC3)</button></li>
+                </ul>
+              </div>
+            </li>
+            <li>
+              <div class="sublist-of-models">
+                <button class="model-button">Scalar portal models (BC4-BC5)</button>
+                <ul class="similar-models">
+                  <li><button class="model-button model-link in-progress" onclick="location.href='../BC4/main.html';">Higgs-mixed scalar (BC4)</button></li>
+                  <li><button class="model-button model-link in-progress" onclick="location.href='../BC5/main.html';">Higgs-mixed scalar with large pair-production channel (BC5)</button></li>
+                </ul>
+              </div>
+            </li>
+            <li>
+              <div class="sublist-of-models">
+                <button class="model-button">Neutrino portal models (BC6-BC8)</button>
+                <ul class="similar-models">
+                  <li><button class="model-button model-link in-progress" onclick="location.href='../BC6/main.html';">Single HNL, electron dominance (BC6)</button></li>
+                  <li><button class="model-button model-link in-progress" onclick="location.href='../BC7/main.html';">Single HNL, muon dominance (BC7)</button></li>
+                  <li><button class="model-button model-link in-progress" onclick="location.href='../BC8/main.html';">Single HNL, tau dominance (BC8)</button></li>
+                </ul>
+              </div>
+            </li>
+            <li>
+              <div class="sublist-of-models">
+                <button class="model-button">Axion portal models (BC9-BC11)</button>
+                <ul class="similar-models">
+                  <li><button class="model-button model-link in-progress" onclick="location.href='../BC9/main.html';">ALP with photon dominance (BC9)</button></li>
+                  <li><button class="model-button model-link in-progress" onclick="location.href='../BC10/main.html';">ALP with fermion dominance (BC10)</button></li>
+                  <li><button class="model-button model-link in-progress" onclick="location.href='../BC11/main.html';">ALP with gluon dominance (BC11)</button></li>
+                </ul>
+              </div>
+            </li>
+            <li>
+              <div class="sublist-of-models">
+                <button class="model-button">Other models</button>
+                <ul class="similar-models">
+                  <li><button class="model-button model-link in-progress" onclick="location.href='../SUSY extention/main.html';">SUSY extention models</button></li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+  <script src="script.js"></script>
+</body>
+</html>

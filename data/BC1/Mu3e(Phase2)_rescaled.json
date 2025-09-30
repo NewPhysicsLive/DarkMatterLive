@@ -1,0 +1,27 @@
+{
+  "labelName": "Mu3e (Phase 2)",
+  "longName": "Mu3e (Phase 2)",
+  "id": "mu3e-phase2",
+  "text": {
+    "elementName": null
+  },
+  "line": {
+    "color": "rgba(5, 58, 133, 1)",
+    "dash": "20,7",
+    "width": 2
+  },
+  "area": {
+    "color": null
+  },
+  "paperUrls": [
+    "https://arxiv.org/abs/1411.1770"
+  ],
+  "url": "../../data/BC1/Mu3e(Phase2)_rescaled.csv",
+  "curveType": "projection",
+  "categories": {
+    "detectionType": "Direct detection",
+    "experimentType": "Collider experiments",
+    "timeType": "Planned/future constraints",
+    "assumption": "None"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "labelName": "E774",
+  "longName": "E774",
+  "id": "e774",
+  "text": {
+    "elementName": null
+  },
+  "line": {
+    "color": "rgba(5, 58, 133, 1)",
+    "dash": null,
+    "width": 2
+  },
+  "area": {
+    "color": "rgba(57, 130, 232, 1)"
+  },
+  "paperUrls": [
+    "https://arxiv.org/abs/1802.03794"
+  ],
+  "url": "../../data/BC1/E774.csv",
+  "curveType": "excluded",
+  "categories": {
+    "detectionType": "Direct detection",
+    "experimentType": "Collider experiments",
+    "timeType": "Past constraints",
+    "assumption": "None"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "labelName": "XENON1T S2S1",
+  "longName": "XENON1T S2S1",
+  "id": "xenon1t-s2s1",
+  "text": {
+    "elementName": null
+  },
+  "line": {
+    "color": "rgba(5, 58, 133, 1)",
+    "dash": null,
+    "width": 2
+  },
+  "area": {
+    "color": "rgba(57, 130, 232, 1)"
+  },
+  "paperUrls": [
+    "https://arxiv.org/abs/2006.09721"
+  ],
+  "url": "../../data/BC1/Xenon1T_S1S2.csv",
+  "curveType": "excluded",
+  "categories": {
+    "detectionType": "Direct detection",
+    "experimentType": "Laboratory experiments",
+    "timeType": "Recent constraints",
+    "assumption": "None"
+  }
+}

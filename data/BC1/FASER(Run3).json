@@ -1,0 +1,27 @@
+{
+  "labelName": "FASER (Run 3)",
+  "longName": "FASER (Run 3)",
+  "id": "faser-run3",
+  "text": {
+    "elementName": null
+  },
+  "line": {
+    "color": "rgba(5, 58, 133, 1)",
+    "dash": "20,7",
+    "width": 2
+  },
+  "area": {
+    "color": null
+  },
+  "paperUrls": [
+    "https://arxiv.org/abs/2203.05090"
+  ],
+  "url": "../../data/BC1/FASER(Run3).csv",
+  "curveType": "projection",
+  "categories": {
+    "detectionType": "Direct detection",
+    "experimentType": "Collider experiments",
+    "timeType": "Planned/future constraints",
+    "assumption": "None"
+  }
+}

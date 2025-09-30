@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+  <link rel="manifest" href="../site.webmanifest">
+  <title>FAQ | Dark Matter live</title>
+  <!-- D3.js CDN -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <!-- Link to our JS file -->
+  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script src="https://unpkg.com/@popperjs/core@2"></script>
+  <script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.min.js"></script>
+  <script src="https://unpkg.com/@tippyjs/plugin-follow-cursor/dist/umd/index.all.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/dist/tippy.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script defer src="./js/script.js"></script>
+</head>
+<body>
+  <header class="header">
+    <ul class="navbar">
+      <li class="logo navbar-link"><a href="../front/front.html">Dark Matter live</a></li>
+      <li class="navbar-link nav-dropdown">
+        <a class="nav-models" href="../BC1/main.html">Choose your model</a>
+
+        <!-- Dropdown panel (hidden by default, shows on hover / focus-within) -->
+        <div class="dropdown" aria-label="Choose model menu">
+          <ul class="model-categories">
+            <li class="category">
+              <button class="category-btn" aria-expanded="false">Vector portal models (BC1-BC3)</button>
+              <ul class="submodels">
+                <li><a class="model-link" href="../BC1/main.html">Minimal dark photon model (BC1)</a></li>
+                <li><a class="model-link" href="../BC2/main.html">Light DM coupled to dark photon (BC2)</a></li>
+                <li><a class="model-link" href="../BC3/main.html">Millicharged particles (BC3)</a></li>
+              </ul>
+            </li>
+
+            <li class="category">
+              <button class="category-btn" aria-expanded="false">Scalar portal models (BC4-BC5)</button>
+              <ul class="submodels">
+                <li><a class="model-link" href="../BC4/main.html">Higgs-mixed scalar (BC4)</a></li>
+                <li><a class="model-link" href="../BC5/main.html"Higgs-mixed scalar w/ large pair-production (BC5)</a></li>
+              </ul>
+            </li>
+
+            <li class="category">
+              <button class="category-btn" aria-expanded="false">Neutrino portal models (BC6-BC8)</button>
+              <ul class="submodels">
+                <li><a class="model-link" href="../BC6/main.html">Single HNL, electron dominance (BC6)</a></li>
+                <li><a class="model-link" href="../BC7/main.html">Single HNL, muon dominance (BC7)</a></li>
+                <li><a class="model-link" href="../BC8/main.html">Single HNL, tau dominance (BC8)</a></li>
+              </ul>
+            </li>
+
+            <li class="category">
+              <button class="category-btn" aria-expanded="false">Axion portal models (BC9-BC11)</button>
+              <ul class="submodels">
+                <li><a class="model-link" href="../BC9/main.html">ALP with photon dominance (BC9)</a></li>
+                <li><a class="model-link" href="../BC10/main.html">ALP with fermion dominance (BC10)</a></li>
+                <li><a class="model-link" href="../BC11/main.html">ALP with gluon dominance (BC11)</a></li>
+              </ul>
+            </li>
+
+            <li class="category">
+              <button class="category-btn" aria-expanded="false">Other models</button>
+              <ul class="submodels">
+                <li><a class="model-link " href="../SUSY extension/main.html">SUSY extension models</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li class="navbar-link"><a class="active" href="../faq/faq.html">How to add your results</a></li>
+    </ul>
+  </header>
+  <div class="wrapper">
+    <h1 class="model-title">How to add your results</h1>
+    <div class="description">
+      <h2 class="description-title">FAQ</h2>
+    </div>
+  </div>
+  <footer>
+    <p>Developed by Andrii Anatachuk and Brij Kishor Jashal. 2025</p>
+  </footer>
+</body>
+</html>
