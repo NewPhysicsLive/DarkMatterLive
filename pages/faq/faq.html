@@ -89,11 +89,63 @@
   <div class="wrapper">
     <h1 class="model-title">How to add your results</h1>
     <div class="description">
-      <h2 class="description-title">FAQ</h2>
+      <h2 class="description-title">Contributing</h2>
+      <p>Thank you for contributing to <strong>Dark-Matter-Live</strong>. This page explains how to add new constraint curves and how to validate your data before opening a Pull Request.</p>
+
+      <h3>Basic rules</h3>
+      <ul>
+        <li>Only add published results. Include at least one link to the published paper (arXiv, DOI, or official experiment note).</li>
+        <li>Add one CSV and one JSON metadata file per curve.</li>
+        <li>Keep file names clear and lowercase (use hyphens or underscores).</li>
+      </ul>
+
+      <h3>Folder layout</h3>
+      <p>Place files under <code>data/&lt;model&gt;/</code> — each model or model family gets its own folder. Put CSV and JSON pairs there.</p>
+
+      <h3>File formats</h3>
+      <ul>
+        <li>CSV must be a numeric two-column file with header <code>x,y</code>.</li>
+        <li>JSON must include at least the following keys:
+          <ul>
+            <li><code>labelName</code> (string)</li>
+            <li><code>id</code> (string)</li>
+            <li><code>url</code> (string) — relative path to the CSV file</li>
+            <li><code>paperUrls</code> (array) — at least one URL to the published result</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3>Validation</h3>
+      <p>Run the validator included in <code>scripts/validate_data.py</code> before opening a PR. It checks that JSON files parse, required fields exist, the CSV file exists, and the CSV contains a header <code>x,y</code> and numeric rows.</p>
+      <p>Run (PowerShell):</p>
+      <pre><code>python .\scripts\validate_data.py</code></pre>
+      <p>If the validator reports errors, fix them and re-run until there are no errors. The script exits with a non-zero exit code when issues are found so it can be used in CI.</p>
+
+      <h3>PR template suggestions</h3>
+      <ul>
+        <li>Short description of the curve and the dataset added.</li>
+        <li>Link(s) to the publication(s) used.</li>
+        <li>Any rescaling performed, with a short explanation and link to code or notes.</li>
+      </ul>
+
+      <p>If you need help, open an issue and mention the maintainers.</p>
     </div>
   </div>
   <footer>
-    <p>Developed by Andrii Anatachuk and Brij Kishor Jashal. 2025</p>
+    <p class="site-footer-links" style="display:inline-flex;align-items:center;gap:8px;white-space:nowrap">Find the project on 
+      <a href="https://github.com/NewPhysicsLive/DarkMatterLive" aria-label="GitHub repository" class="vlink" target="_blank" rel="noopener noreferrer">
+        <!-- GitHub SVG -->
+        <svg height="16" width="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path fill="#181717" d="M8 0C3.58 0 0 3.58 0 8a8 8 0 005.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2 .37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.86 2.33.66.07-.52.28-.86.51-1.06-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 014 0c1.53-1.03 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.19 0 .21.15.46.55.38A8 8 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
+        GitHub
+      </a>
+      &nbsp;|
+      <a href="https://gitlab.cern.ch/newphysicslive/DarkMatterLive" aria-label="GitLab repository" class="vlink" target="_blank" rel="noopener noreferrer">
+        <!-- GitLab SVG -->
+        <svg height="16" width="16" viewBox="0 0 36 36" aria-hidden="true" focusable="false"><path fill="#FC6D26" d="M18 2.25l3.1 8.85 3.98 11.37h-15.98L14.9 11.1 18 2.25z"></path><path fill="#E24329" d="M18 2.25L14.9 11.1 9.02 21.37h17.96L21.1 11.1 18 2.25z"></path></svg>
+        GitLab
+      </a>
+    </p>
   </footer>
+  <script src="../js/matomo-consent.js"></script>
 </body>
 </html>
