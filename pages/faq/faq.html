@@ -131,6 +131,49 @@
       <p>If you need help, open an issue and mention the maintainers.</p>
     </div>
   </div>
+    <section class="contribute-steps" style="margin:1.5rem 0;padding:1rem;border-top:1px solid #e6e6e6">
+      <h3>How to submit a Pull Request (PR)</h3>
+      <ol>
+        <li>Fork the repository on GitHub or GitLab and clone your fork locally.</li>
+        <li>Create a branch with a descriptive name, e.g. <code>feature/add-bc1-a1</code>:</li>
+        <pre><code>git checkout -b feature/add-<model>-&lt;short-name&gt;</code></pre>
+        <li>Add your CSV and JSON files under <code>data/&lt;model&gt;/</code>. See the "Data format" section below.</li>
+        <li>Run the validator locally to ensure files are correct:</li>
+        <pre><code>python .\scripts\validate_data.py</code></pre>
+        <li>Commit and push your branch, then open a PR against <code>main</code> on GitHub or GitLab. Include a clear description and links to the paper(s).</li>
+      </ol>
+
+      <h3>Data format (example)</h3>
+      <p>Provide one CSV and one JSON metadata file per curve. Example CSV (first lines):</p>
+      <pre><code>x,y
+  0.041234367,0.009904085015790202
+  0.041702887,0.0023137588465525095
+  ...</code></pre>
+
+      <p>Example JSON metadata (minimum required fields):</p>
+      <pre><code>{
+    "labelName": "A1",
+    "longName": "A1",
+    "id": "a1",
+    "line": { "color": "rgba(5, 58, 133, 1)", "width": 2 },
+    "area": { "color": "rgba(57, 130, 232, 1)" },
+    "paperUrls": ["https://arxiv.org/abs/1404.5502"],
+    "url": "../../data/BC1/A1_rescaled.csv",
+    "curveType": "excluded",
+    "categories": { "detectionType": "Direct detection" }
+  }
+  </code></pre>
+
+      <h3>References / paper links</h3>
+      <p>Include at least one URL in <code>paperUrls</code> that points to the published result (arXiv, DOI, or official experiment note). In your PR description, explain any rescalings or assumptions you applied.</p>
+
+      <h3>Where to open the PR</h3>
+      <p>You can open a PR on GitHub or a Merge Request on GitLab. Links to the repositories:</p>
+      <ul>
+        <li><a href="https://github.com/NewPhysicsLive/DarkMatterLive" target="_blank" rel="noopener noreferrer">GitHub repository</a></li>
+        <li><a href="https://gitlab.cern.ch/newphysicslive/DarkMatterLive" target="_blank" rel="noopener noreferrer">GitLab repository</a></li>
+      </ul>
+    </section>
   <footer>
     <p class="site-footer-links" style="display:inline-flex;align-items:center;gap:8px;white-space:nowrap">Find the project on 
       <a href="https://github.com/NewPhysicsLive/DarkMatterLive" aria-label="GitHub repository" class="vlink" target="_blank" rel="noopener noreferrer">

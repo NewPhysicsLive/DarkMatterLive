@@ -370,3 +370,20 @@ footer p {
   padding: 0;
   line-height: 70px; /* vertically center text */
 }
+
+/* Tippy tooltip link styling: ensure anchors inside tooltips are highly readable
+   on the default dark tooltip background. This overrides browser defaults
+   so links don't appear dark-blue against a dark background. */
+.tippy-box a,
+.tippy-box a:link,
+.tippy-box a:visited,
+.tippy-box a:active {
+  color: #e6f4ff; /* light, slightly bluish for good contrast */
+  text-decoration: underline;
+}
+.tippy-box a:hover {
+  color: #ffffff;
+}
+.tippy-box .wordbreaker a {
+  color: #e6f4ff;
+}

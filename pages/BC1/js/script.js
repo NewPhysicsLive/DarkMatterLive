@@ -456,28 +456,30 @@ function plotBuilder(plotData) {
                   content: "Loading…",
                   allowHTML: true,
                   onShow(instance) {
-                    // only fetch once
-                    if (instance.props.content === "Loading…") {
-                      fetch(
-                        `http://localhost:3000/preview?url=${encodeURIComponent(
-                          element.paperUrls[0]
-                        )}`
-                      )
+                    // show a usable link immediately (avoid sticking at "Loading…")
+                    const url = element.paperUrls && element.paperUrls[0];
+                    const domain = url ? (getSecondLevelDomain(url) || url) : 'source';
+                    instance.setContent(`\
+                <div class="wordbreaker" style="max-width:250px; font-family: sans-serif; display:flex;align-items:center;justify-content:start;flex-direction:column;gap:0.5rem">\
+                  <p style="margin:0; padding:0;"><a href="${url || '#'}" target="_blank" rel="noopener noreferrer">${domain}</a></p>\
+                </div>\
+              `);
+
+                    // optionally try to fetch richer metadata from the preview service,
+                    // but don't rely on it: update tooltip if fetch succeeds, otherwise keep the link
+                    if (url) {
+                      fetch(`http://localhost:3000/preview?url=${encodeURIComponent(url)}`)
                         .then((r) => r.json())
                         .then((meta) => {
-                          const fullTitle = meta.title || "";
-
-                          instance.setContent(`
-                <div class="wordbreaker" style="max-width:250px; font-family: sans-serif; display: flex; align-items: center;
-                  justify-content: start;flex-direction: column;gap:0.5rem">
-                  <p style="margin:0; padding:0;">${fullTitle}  <span class="no-break"> [ <a href="${
-                            element.paperUrls[0]
-                          }" target="_blank"
-                          rel="noopener noreferrer">${getSecondLevelDomain(
-                            element.paperUrls[0]
-                          )}</a> ] </span> </p>
-                </div>
+                          const fullTitle = meta.title || '';
+                          instance.setContent(`\
+                <div class="wordbreaker" style="max-width:250px; font-family: sans-serif; display:flex;align-items:center;justify-content:start;flex-direction:column;gap:0.5rem">\
+                  <p style="margin:0; padding:0;">${fullTitle}  <span class="no-break"> [ <a href="${url}" target="_blank" rel="noopener noreferrer">${getSecondLevelDomain(url)}</a> ] </span> </p>\
+                </div>\
               `);
+                        })
+                        .catch(() => {
+                          // ignore preview failures (e.g. no localhost preview server)
                         });
                     }
                   },
@@ -2174,49 +2176,39 @@ function attachPaperPreviews(scopeSelection) {
   scopeSelection.selectAll(".legend-item a").each(function (d) {
     const el = this;
     tippy(el, {
-      content: "Loading…",
+      // show a usable link immediately and then try to fetch richer metadata
+      content: (function(){
+        const url = d;
+        const domain = url ? (getSecondLevelDomain(url) || url) : 'source';
+        return `<div class="wordbreaker" style="max-width:250px;font-family:sans-serif;display:flex;align-items:center;justify-content:start;flex-direction:column;gap:0.5rem"><p style="margin:0;padding:0;"><a href="${url || '#'}" target="_blank" rel="noopener noreferrer">${domain}</a></p></div>`;
+      })(),
       allowHTML: true,
+      appendTo: document.body,
       onShow(instance) {
-        // only fetch once
-        if (instance.props.content === "Loading…") {
-          fetch(`http://localhost:3000/preview?url=${encodeURIComponent(d)}`)
-            .then((r) => r.json())
-            .then((meta) => {
-              const fullTitle = meta.title || "";
-              const maxTitleChars = 120; // “specific number of symbols”
-              const shortTitle =
-                fullTitle.length > maxTitleChars
-                  ? fullTitle.slice(0, maxTitleChars).trim() + "…"
-                  : fullTitle;
-
-              const fullDesc = meta.description || "";
-              const maxChars = 240; // “specific number of symbols”
-              const shortDesc =
-                fullDesc.length > maxChars
-                  ? fullDesc.slice(0, maxChars).trim() + "…"
-                  : fullDesc;
-
-              instance.setContent(`
-                <div class="wordbreaker" style="max-width:250px; font-family: sans-serif; display: flex; align-items: center;
-                  justify-content: start;flex-direction: column;gap:0.5rem">
-                  ${
-                    meta.image
-                      ? `<img src="${meta.image[0].url}"
-                               alt="${meta.siteName} logo"
-                               style="width:50%; height:auto;margin:0; padding:0;"/>`
-                      : ""
-                  }
+        const url = d;
+        if (!url) return;
+        // attempt to fetch preview metadata but don't block the tooltip
+        fetch(`http://localhost:3000/preview?url=${encodeURIComponent(url)}`)
+          .then((r) => r.json())
+          .then((meta) => {
+            const fullTitle = meta.title || "";
+            const maxTitleChars = 120;
+            const shortTitle = fullTitle.length > maxTitleChars ? fullTitle.slice(0, maxTitleChars).trim() + "…" : fullTitle;
+            const fullDesc = meta.description || "";
+            const maxChars = 240;
+            const shortDesc = fullDesc.length > maxChars ? fullDesc.slice(0, maxChars).trim() + "…" : fullDesc;
+            instance.setContent(`
+                <div class="wordbreaker" style="max-width:250px; font-family: sans-serif; display: flex; align-items: center; justify-content: start; flex-direction: column; gap:0.5rem">
+                  ${meta.image ? `<img src="${meta.image[0].url}" alt="${meta.siteName} logo" style="width:50%; height:auto;margin:0; padding:0;"/>` : ""}
                   <strong style="margin:0; padding:0;">${shortTitle}</strong>
-                  ${
-                    meta.authors && meta.authors.length
-                      ? `<em>By ${meta.authors.join(", ")}</em>`
-                      : ""
-                  }
+                  ${meta.authors && meta.authors.length ? `<em>By ${meta.authors.join(", ")}</em>` : ""}
                   <p class="wordbreaker" style="margin:0; padding:0;">${shortDesc}</p>
                 </div>
               `);
-            });
-        }
+          })
+          .catch(() => {
+            // preview service not available or failed — keep the immediate link
+          });
       },
     });
   });
