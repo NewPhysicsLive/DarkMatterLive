@@ -1,0 +1,11 @@
+{
+  "name": "dml-preview-generator",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "generate-previews": "node generate_previews.js"
+  },
+  "dependencies": {
+    "open-graph-scraper": "^6.10.0"
+  }
+}
