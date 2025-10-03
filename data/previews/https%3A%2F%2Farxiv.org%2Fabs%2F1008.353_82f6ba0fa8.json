@@ -1,0 +1,12 @@
+{
+  "title": "Spectroscopy as a test of Coulomb's law - A probe of the hidden sector",
+  "description": "High precision spectroscopy can provide a sensitive tool to test Coulomb's law on atomic length scales. This can then be used to constrain particles such as extra \"hidden\" photons or minicharged particles that are predicted in many extensions of the standard model, and which cause small deviations from Coulomb's law. In this paper we use a variety of transitions in atomic hydrogen, hydrogenic ions, and exotic atoms to probe Coulomb's law. This extends the region of pure Coulomb's law tests to larger masses. For hidden photons and minicharged particles this region is already tested by other astrophysical and laboratory probes. However, future tests of true muonium and muonic atoms are likely to probe new parameter space and therefore have good discovery potential for new physics. Finally, we investigate whether the discrepancy between the theoretical calculation of the 2s_{1/2}^{F=1} - 2p_{3/2}^{F=2} transition in muonic hydrogen and its recent experimental measurement at PSI can be explained by the existence of a hidden photon. This explanation is ruled out by measurements of the Lamb shift in ordinary hydrogen.",
+  "image": [
+    {
+      "url": "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    }
+  ],
+  "authors": [],
+  "siteName": "arXiv.org",
+  "resolvedUrl": "https://arxiv.org/abs/1008.3536"
+}

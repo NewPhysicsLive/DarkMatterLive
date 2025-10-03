@@ -1,0 +1,12 @@
+{
+  "title": "SHiP experiment at the SPS Beam Dump Facility",
+  "description": "In 2024, the SHiP experiment, together with the associated Beam Dump Facility (BDF) under the auspices of the High Intensity ECN3 (HI-ECN3) project, was selected for the future physics exploitation of the ECN3 experimental facility at the SPS. The SHiP experiment is a general-purpose intensity-frontier setup designed to search for physics beyond the Standard Model in the domain of Feebly Interacting Particles at the GeV-scale. It comprises a multi-system apparatus that provides discovery sensitivity to both decay and scattering signatures of models with feebly interacting particles, such as dark-sector mediators, both elastic and inelastic light dark matter, as well as millicharged particles. The experiment will also be able to perform both Standard Model measurements and Beyond Standard Model searches with neutrino interactions. In particular, it will have access to unprecedented statistics of tau and anti-tau neutrinos. The construction plan foresees commissioning of the facility and detector, and start of operation in advance of Long Shutdown 4, with a programme of exploration for 15 years of data taking. By exploring unique regions of parameter space for feebly interacting particles in the GeV/c$^2$ mass range, the SHiP experiment will complement ongoing searches at the LHC and searches at future colliders.",
+  "image": [
+    {
+      "url": "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    }
+  ],
+  "authors": [],
+  "siteName": "arXiv.org",
+  "resolvedUrl": "https://arxiv.org/abs/2504.06692v1"
+}

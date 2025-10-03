@@ -1,0 +1,12 @@
+{
+  "title": "A Search for Hidden Sector Photons with ADMX",
+  "description": "Hidden U(1) gauge symmetries are common to many extensions of the Standard Model proposed to explain dark matter. The hidden gauge vector bosons of such extensions may mix kinetically with Standard Model photons, providing a means for electromagnetic power to pass through conducting barriers. The ADMX detector was used to search for hidden vector bosons originating in an emitter cavity driven with microwave power. We exclude hidden vector bosons with kinetic couplings χ > 3.48x10-8 for masses less than 3 μeV. This limit represents an improvement of more than two orders of magnitude in sensitivity relative to previous cavity experiments.",
+  "image": [
+    {
+      "url": "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    }
+  ],
+  "authors": [],
+  "siteName": "arXiv.org",
+  "resolvedUrl": "https://arxiv.org/abs/1007.3766"
+}

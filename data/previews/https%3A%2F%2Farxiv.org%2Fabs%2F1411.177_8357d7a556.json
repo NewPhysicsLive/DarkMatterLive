@@ -1,0 +1,12 @@
+{
+  "title": "Projections for Dark Photon Searches at Mu3e",
+  "description": "We show that dark photons (A') with masses ~10-80 MeV can be probed in the decay $μ^+ \\to e^+ ν_e \\barν_μA', A' \\to e^+ e^-$, with the upcoming Mu3e experiment at the Paul Scherrer Institute (PSI) in Switzerland. With an expected 10^{15} (5.5 x 10^{16}) muon decays in 2015-2016 (2018 and beyond), Mu3e has the exciting opportunity to probe a substantial fraction of currently unexplored dark photon parameter space, probing kinetic-mixing parameter, epsilon, as low as epsilon^2 ~ 10^{-7} (10^{-8}). No modifications of the existing Mu3e setup are required.",
+  "image": [
+    {
+      "url": "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    }
+  ],
+  "authors": [],
+  "siteName": "arXiv.org",
+  "resolvedUrl": "https://arxiv.org/abs/1411.1770"
+}

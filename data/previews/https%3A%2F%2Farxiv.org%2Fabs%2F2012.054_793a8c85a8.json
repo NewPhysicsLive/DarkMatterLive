@@ -1,0 +1,12 @@
+{
+  "title": "Cooling of young neutron stars and dark gauge bosons",
+  "description": "The standard cooling scenario in the presence of nucleon superfluidity fits rather well to the observation of the neutron stars. It implies that the stellar cooling arguments could place a stringent constraint on the properties of novel particles. We study in particular the cooling rate induced by dark gauge bosons for very young neutron stars: remnants of Cassiopeia A and SN1987A. The cooling is dominantly contributed either by the nucleon pair breaking and formation in the core or by the electron bremsstrahlung in the crust, depending on the age of the stars and the form of the couplings. We compute how much the cooling curve of the young neutron stars could be modified by the extra dark gauge boson emission and obtain the bound for the dark gauge boson when its mass is lower than $\\mathcal{O}(0.1)\\,{\\rm MeV}$; for the dark photon we find the mixing parameter times its mass $\\varepsilon m_{γ^\\prime} < 1.5 \\times 10^{-8}\\,{\\rm MeV}$ and for the ${\\rm U}(1)_{B-L}$ gauge boson its coupling to nucleons and electrons $e^\\prime < 10^{-13}$. We also discuss the possibility that the rapid cooling of Cas A might provide a hint for the existence of the ${\\rm U}(1)_{B-L}$ gauge boson.",
+  "image": [
+    {
+      "url": "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    }
+  ],
+  "authors": [],
+  "siteName": "arXiv.org",
+  "resolvedUrl": "https://arxiv.org/abs/2012.05427"
+}

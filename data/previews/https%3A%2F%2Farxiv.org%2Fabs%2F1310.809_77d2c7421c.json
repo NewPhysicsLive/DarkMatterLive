@@ -1,0 +1,12 @@
+{
+  "title": "First results of the CERN Resonant WISP Search (CROWS)",
+  "description": "The CERN Resonant WISP Search (CROWS) probes the existence of Weakly Interacting Sub-eV Particles (WISPs) like axions or hidden sector photons. It is based on the principle of an optical light shining through the wall experiment, adapted to microwaves. Critical aspects of the experiment are electromagnetic shielding, design and operation of low loss cavity resonators and the detection of weak sinusoidal microwave signals. Lower bounds were set on the coupling constant $g = 4.5 \\cdot 10^{-8} $GeV$^{-1}$ for axion like particles with a mass of $m_a = 7.2 μ$eV. For hidden sector photons, lower bounds were set for the coupling constant $χ= 4.1 \\cdot 10^{-9}$ at a mass of $m_{γ'} = 10.8 μ$eV. For the latter we were probing a previously unexplored region in the parameter space.",
+  "image": [
+    {
+      "url": "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    }
+  ],
+  "authors": [],
+  "siteName": "arXiv.org",
+  "resolvedUrl": "https://arxiv.org/abs/1310.8098"
+}

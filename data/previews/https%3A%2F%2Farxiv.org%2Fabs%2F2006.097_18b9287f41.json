@@ -1,0 +1,12 @@
+{
+  "title": "Excess Electronic Recoil Events in XENON1T",
+  "description": "We report results from searches for new physics with low-energy electronic recoil data recorded with the XENON1T detector. With an exposure of 0.65 t-y and an unprecedentedly low background rate of $76\\pm2$ events/(t y keV) between 1 and 30 keV, the data enables sensitive searches for solar axions, an enhanced neutrino magnetic moment, and bosonic dark matter. An excess over known backgrounds is observed at low energies and most prominent between 2 and 3 keV. The solar axion model has a 3.4$σ$ significance, and a 3D 90% confidence surface is reported for axion couplings to electrons, photons, and nucleons. This surface is inscribed in the cuboid defined by $g_{ae}<3.8 \\times 10^{-12}$, $g_{ae}g_{an}^{eff}<4.8\\times 10^{-18}$, and $g_{ae}g_{aγ}<7.7\\times10^{-22} GeV^{-1}$, and excludes either $g_{ae}=0$ or $g_{ae}g_{aγ}=g_{ae}g_{an}^{eff}=0$. The neutrino magnetic moment signal is similarly favored over background at 3.2$σ$ and a confidence interval of $μ_ν \\in (1.4,2.9)\\times10^{-11}μ_B$ (90% C.L.) is reported. Both results are in strong tension with stellar constraints. The excess can also be explained by $β$ decays of tritium at 3.2$σ$ with a trace amount that can neither be confirmed nor excluded with current knowledge of its production and reduction mechanisms. The significances of the solar axion and neutrino magnetic moment hypotheses are reduced to 2.0$σ$ and 0.9$σ$, respectively, if an unconstrained tritium component is included in the fitting. With respect to bosonic dark matter, the excess favors a monoenergetic peak at ($2.3\\pm0.2$) keV (68% C.L.) with a 3.0$σ$ global (4.0$σ$ local) significance. We also consider the possibility that $^{37}$Ar may be present in the detector and yield a 2.82 keV peak. Contrary to tritium, the $^{37}$Ar concentration can be tightly constrained and is found to be negligible.",
+  "image": [
+    {
+      "url": "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    }
+  ],
+  "authors": [],
+  "siteName": "arXiv.org",
+  "resolvedUrl": "https://arxiv.org/abs/2006.09721"
+}

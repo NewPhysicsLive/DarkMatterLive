@@ -1,0 +1,12 @@
+{
+  "title": "DarkQuest: A dark sector upgrade to SpinQuest at the 120 GeV Fermilab Main Injector",
+  "description": "Expanding the mass range and techniques by which we search for dark matter is an important part of the worldwide particle physics program. Accelerator-based searches for dark matter and dark sector particles are a uniquely compelling part of this program as a way to both create and detect dark matter in the laboratory and explore the dark sector by searching for mediators and excited dark matter particles. This paper focuses on developing the DarkQuest experimental concept and gives an outlook on related enhancements collectively referred to as LongQuest. DarkQuest is a proton fixed-target experiment with leading sensitivity to an array of visible dark sector signatures in the MeV-GeV mass range. Because it builds off of existing accelerator and detector infrastructure, it offers a powerful but modest-cost experimental initiative that can be realized on a short timescale.",
+  "image": [
+    {
+      "url": "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    }
+  ],
+  "authors": [],
+  "siteName": "arXiv.org",
+  "resolvedUrl": "https://arxiv.org/abs/2203.08322"
+}

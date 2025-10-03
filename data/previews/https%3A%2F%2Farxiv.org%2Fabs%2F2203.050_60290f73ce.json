@@ -1,0 +1,12 @@
+{
+  "title": "The Forward Physics Facility at the High-Luminosity LHC",
+  "description": "High energy collisions at the High-Luminosity Large Hadron Collider (LHC) produce a large number of particles along the beam collision axis, outside of the acceptance of existing LHC experiments. The proposed Forward Physics Facility (FPF), to be located several hundred meters from the ATLAS interaction point and shielded by concrete and rock, will host a suite of experiments to probe Standard Model (SM) processes and search for physics beyond the Standard Model (BSM). In this report, we review the status of the civil engineering plans and the experiments to explore the diverse physics signals that can be uniquely probed in the forward region. FPF experiments will be sensitive to a broad range of BSM physics through searches for new particle scattering or decay signatures and deviations from SM expectations in high statistics analyses with TeV neutrinos in this low-background environment. High statistics neutrino detection will also provide valuable data for fundamental topics in perturbative and non-perturbative QCD and in weak interactions. Experiments at the FPF will enable synergies between forward particle production at the LHC and astroparticle physics to be exploited. We report here on these physics topics, on infrastructure, detector, and simulation studies, and on future directions to realize the FPF's physics potential.",
+  "image": [
+    {
+      "url": "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    }
+  ],
+  "authors": [],
+  "siteName": "arXiv.org",
+  "resolvedUrl": "https://arxiv.org/abs/2203.05090"
+}

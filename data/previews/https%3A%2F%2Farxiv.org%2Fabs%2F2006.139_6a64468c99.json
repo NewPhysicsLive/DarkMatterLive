@@ -1,0 +1,12 @@
+{
+  "title": "New limits on dark photons from solar emission and keV scale dark matter",
+  "description": "We provide updates to the limits on solar emission of dark photons, or more generally any light vector particle coupled to the electron vector current. The recent 2019 and 2020 electronic recoil data from XENON1T now provides more stringent constraints on these models than stellar energy loss in the sub-keV mass region. We also show that solar emission of dark photons does not provide a good fit to the recent XENON1T excess in the 2-5 keV energy bins. In contrast, the absorption of 2-4 keV mass dark photons that saturate the local dark matter mass density does provide a good fit to the excess, for mixing angles in the range $ε\\in (4-12)\\times 10^{-16}$, while satisfying astrophysical constraints. Similarly, other models utilizing the vector portal can fit the excess, including those with operators that directly couple the dark photon field strength to electron spin.",
+  "image": [
+    {
+      "url": "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    }
+  ],
+  "authors": [],
+  "siteName": "arXiv.org",
+  "resolvedUrl": "https://arxiv.org/abs/2006.13929"
+}

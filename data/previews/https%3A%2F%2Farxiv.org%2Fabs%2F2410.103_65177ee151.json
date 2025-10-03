@@ -1,0 +1,12 @@
+{
+  "title": "Shining Light on the Dark Sector: Search for Axion-like Particles and Other New Physics in Photonic Final States with FASER",
+  "description": "The first FASER search for a light, long-lived particle decaying into a pair of photons is reported. The search uses LHC proton-proton collision data at $\\sqrt{s}=13.6~\\text{TeV}$ collected in 2022 and 2023, corresponding to an integrated luminosity of $57.7\\text{fb}^{-1}$. A model with axion-like particles (ALPs) dominantly coupled to weak gauge bosons is the primary target. Signal events are characterised by high-energy deposits in the electromagnetic calorimeter and no signal in the veto scintillators. One event is observed, compared to a background expectation of $0.44 \\pm 0.39$ events, which is entirely dominated by neutrino interactions. World-leading constraints on ALPs are obtained for masses up to $300~\\text{MeV}$ and couplings to the Standard Model W gauge boson, $g_{aWW}$, around $10^{-4}$ GeV$^{-1}$, testing a previously unexplored region of parameter space. Other new particle models that lead to the same experimental signature, including ALPs coupled to gluons or photons, U(1)$_B$ gauge bosons, up-philic scalars, and a Type-I two-Higgs doublet model, are also considered for interpretation, and new constraints on previously viable parameter space are presented in this paper.",
+  "image": [
+    {
+      "url": "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    }
+  ],
+  "authors": [],
+  "siteName": "arXiv.org",
+  "resolvedUrl": "https://arxiv.org/abs/2410.10363"
+}

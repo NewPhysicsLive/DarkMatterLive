@@ -1,0 +1,12 @@
+{
+  "title": "New Exclusion Limit for Dark Photons from an SRF Cavity-Based Search (Dark SRF)",
+  "description": "We conduct the first ``light-shining-through-wall\" (LSW) search for dark photons using two state-of-the-art high quality-factor superconducting radio frequency (SRF) cavities and report the results of its pathfinder run. Our new experimental setup enables improvements in sensitivity over previous searches and covers new dark photon parameter space. We design delicate calibration and measurement protocols to utilize the high-$Q$ setup at Dark SRF. Using cavities operating at $1.3 \\ \\text{GHz}$, we establish a new exclusion limit for kinetic mixing as small as {$ε= 1.6\\times 10^{-9}$} and provide the world's best constraints on dark photons in the $2.1\\times 10^{-7} \\ \\text{eV} - 5.7\\times10^{-6} \\ \\text{eV}$ mass range. Our result is the first proof-of-concept for the enabling role of SRF cavities in LSW setups, with ample opportunities for further improvements. In addition, our data sets a competitive lab-based limit on the Standard Model photon mass by searching for longitudinal photon polarization.",
+  "image": [
+    {
+      "url": "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    }
+  ],
+  "authors": [],
+  "siteName": "arXiv.org",
+  "resolvedUrl": "https://arxiv.org/abs/2301.11512"
+}

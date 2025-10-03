@@ -1,0 +1,12 @@
+{
+  "title": "Dark photon limits from magnetic fields and astrophysical plasmas",
+  "description": "Dark photons may kinetically mix with our photon and modify Maxwell's equations. We examine their impact on the Lorentz force acting on the plasma in astrophysical magnetospheres. Solving the relevant magnetohydrodynamic equations, we show that any dark photon effect is negligible. The existing bound on dark photons with a mass below $10^{-14}$ eV, coming from Pioneer 10 observations of Jupiter's magnetosphere, relies on such an effect and is thus unreliable. To rectify this, we use recent Juno analyses to isolate any dark photon-induced modification of the Jovian magnetic field and hence place a numerically similar limit.",
+  "image": [
+    {
+      "url": "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    }
+  ],
+  "authors": [],
+  "siteName": "arXiv.org",
+  "resolvedUrl": "https://arxiv.org/abs/2110.02875"
+}

@@ -1,0 +1,12 @@
+{
+  "title": "Search for hadronic decays of feebly-interacting particles at NA62",
+  "description": "The NA62 experiment at CERN has the capability to collect data in a beam-dump mode, where 400 GeV protons are dumped on an absorber. In this configuration, New Physics particles, including dark photons, dark scalars, and axion-like particles, may be produced in the absorber and decay in the instrumented volume beginning approximately 80 m downstream of the dump. A search for these particles decaying in flight to hadronic final states is reported, based on an analysis of a sample of $1.4 \\times 10^{17}$ protons on dump collected in 2021. No evidence of a New Physics signal is observed, excluding new regions of parameter spaces of multiple models.",
+  "image": [
+    {
+      "url": "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    }
+  ],
+  "authors": [],
+  "siteName": "arXiv.org",
+  "resolvedUrl": "https://arxiv.org/abs/2502.04241"
+}

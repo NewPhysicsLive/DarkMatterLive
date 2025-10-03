@@ -1,0 +1,12 @@
+{
+  "title": "Search for dark matter particle interactions with electron final states with DarkSide-50",
+  "description": "We present a search for dark matter particles with sub-GeV/$c^2$ masses whose interactions have final state electrons using the DarkSide-50 experiment's (12306 $\\pm$ 184) kg d low-radioactivity liquid argon exposure. By analyzing the ionization signals, we exclude new parameter space for the dark matter-electron cross section $\\barσ_e$, the axioelectric coupling constant $g_{Ae}$, and the dark photon kinetic mixing parameter $κ$. We also set the first dark matter direct-detection constraints on the mixing angle $\\left|U_{e4}\\right|^2$ for keV sterile neutrinos.",
+  "image": [
+    {
+      "url": "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    }
+  ],
+  "authors": [],
+  "siteName": "arXiv.org",
+  "resolvedUrl": "https://arxiv.org/abs/2207.11968"
+}

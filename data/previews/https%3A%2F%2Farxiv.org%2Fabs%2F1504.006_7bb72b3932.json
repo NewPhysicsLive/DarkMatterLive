@@ -1,0 +1,12 @@
+{
+  "title": "Search for the dark photon in $π^0$ decays",
+  "description": "A sample of $1.69\\times 10^7$ fully reconstructed $π^0\\toγe^+e^-$ decay candidates collected by the NA48/2 experiment at CERN in 2003--2004 is analysed to search for the dark photon ($A'$) production in the $π^0\\toγA'$ decay followed by the prompt $A'\\to e^+e^-$ decay. No signal is observed, and an exclusion region in the plane of the dark photon mass $m_{A'}$ and mixing parameter $\\varepsilon^2$ is established. The obtained upper limits on $\\varepsilon^2$ are more stringent than the previous limits in the mass range $9~{\\rm MeV}/c^2<m_{A'}<70~{\\rm MeV}/c^2$. The NA48/2 sensitivity to the dark photon production in the $K^\\pm\\toπ^\\pm A'$ decay is also evaluated.",
+  "image": [
+    {
+      "url": "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    }
+  ],
+  "authors": [],
+  "siteName": "arXiv.org",
+  "resolvedUrl": "https://arxiv.org/abs/1504.00607"
+}

@@ -1,0 +1,12 @@
+{
+  "title": "Search for direct production of GeV-scale resonances decaying to a pair of muons in proton-proton collisions at $\\sqrt{s}$ = 13 TeV",
+  "description": "A search for direct production of low-mass dimuon resonances is performed using $\\sqrt{s}$ = 13 TeV proton-proton collision data collected by the CMS experiment during the 2017-2018 operation of the CERN LHC with an integrated luminosity of 96.6 fb$^{-1}$. The search exploits a dedicated high-rate trigger stream that records events with two muons with transverse momenta as low as 3 GeV but does not include the full event information. The search is performed by looking for narrow peaks in the dimuon mass spectrum in the ranges of 1.1-2.6 GeV and 4.2-7.9 GeV. No significant excess of events above the expectation from the standard model background is observed. Model-independent limits on production rates of dimuon resonances within the experimental fiducial acceptance are set. Competitive or world's best limits are set at 90% confidence level for a minimal dark photon model and for a scenario with two Higgs doublets and an extra complex scalar singlet (2HDM+S). Values of the squared kinetic mixing coefficient $\\varepsilon^2$ in the dark photon model above 10$^{-6}$ are excluded over most of the mass range of the search. In the 2HDM+S, values of the mixing angle $\\sin(θ_\\text{H})$ above 0.08 are excluded over most of the mass range of the search with a fixed ratio of the Higgs doublets vacuum expectation $\\tanβ$ = 0.5.",
+  "image": [
+    {
+      "url": "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    }
+  ],
+  "authors": [],
+  "siteName": "arXiv.org",
+  "resolvedUrl": "https://arxiv.org/abs/2309.16003"
+}

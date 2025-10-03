@@ -1,0 +1,12 @@
+{
+  "title": "Long-baseline quantum sensor network as dark matter haloscope",
+  "description": "Ultralight dark photons constitute a well-motivated candidate for dark matter. A coherent electromagnetic wave is expected to be induced by dark photons when coupled with Standard-Model photons through kinetic mixing mechanism, and should be spatially correlated within the de Broglie wavelength of dark photons. Here we report the first search for correlated dark-photon signals using a long-baseline network of 15 atomic magnetometers, which are situated in two separated meter-scale shield rooms with a distance of about 1700 km. Both the network's multiple sensors and the shields large size significantly enhance the expected dark-photon electromagnetic signals, and long-baseline measurements confidently reduce many local noise sources. Using this network, we constrain the kinetic mixing coefficient of dark photon dark matter over the mass range 4.1 feV-2.1 peV, which represents the most stringent constraints derived from any terrestrial experiments operating over the aforementioned mass range. Our prospect indicates that future data releases may go beyond the astrophysical constraints from the cosmic microwave background and the plasma heating.",
+  "image": [
+    {
+      "url": "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    }
+  ],
+  "authors": [],
+  "siteName": "arXiv.org",
+  "resolvedUrl": "https://arxiv.org/abs/2305.00890"
+}

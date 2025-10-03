@@ -1,0 +1,12 @@
+{
+  "title": "Secluded U(1) below the weak scale",
+  "description": "A secluded U(1) sector with weak admixture to photons, O(10^{-2}-10^{-3}), and the scale of the breaking below 1 GeV represents a natural yet poorly constrained extension of the Standard Model. We analyze g-2 of muons and electrons together with other precision QED data, as well as radiative decays of strange particles to constrain mass--mixing angle (m_V-κ) parameter space. We point out that m_V = 214 MeV and κ^2 > 3\\times 10^{-5} can be consistent with the hypothesis of HyperCP collaboration, that seeks to explain the anomalous energy distribution of muon pairs in the Σ^+ \\to p μ^+μ^- process by a resonance, without direct contradiction to the existing data on radiative kaon decays. The same parameters lead to O({\\rm few} \\times 10^{-9}) upward correction to the anomalous magnetic moment of the muon, possibly relaxing some tension between experimental value and theoretical determinations of g-2. The ultra-fine energy resolution scan of e^+e^-\\to μ^+μ^- cross section and dedicated analysis of lepton spectra from K^+\\to π^+ e^+e^- decays should be able to provide a conclusive test of this hypothesis and improve the constraints on the model.",
+  "image": [
+    {
+      "url": "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    }
+  ],
+  "authors": [],
+  "siteName": "arXiv.org",
+  "resolvedUrl": "https://arxiv.org/abs/0811.1030"
+}

@@ -1,0 +1,12 @@
+{
+  "title": "Search for dark photons using a multilayer dielectric haloscope equipped with a single-photon avalanche diode",
+  "description": "We report on the results of the search for dark photons with mass around 1.5$\\,\\rm eV/c^2$ using a multilayer dielectric haloscope equipped with an affordable and commercially available photosensor. The multilayer stack, which enables the conversion of dark photons (DP) to Standard Model photons, is made of 23 bilayers of alternating SiO$_2$ and Si$_3$N$_4$ thin films with linearly increasing thicknesses through the stack (a configuration known as a \"chirped stack\"). The thicknesses have been chosen according to an optimisation algorithm in order to maximise the DP-photon conversion in the energy region where the photosensor sensitivity peaks. This prototype experiment, baptised MuDHI (Multilayer Dielectric Haloscope Investigation) by the authors of this paper, has been designed, developed and run at the Astroparticle Laboratory of New York University Abu Dhabi, which marks the first time a dark matter experiment has been operated in the Middle East. No significant signal excess is observed, and the method of maximum log-likelihood is used to set exclusion limits at $90\\%$ confidence level on the kinetic mixing coupling constant between dark photons and ordinary photons.",
+  "image": [
+    {
+      "url": "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    }
+  ],
+  "authors": [],
+  "siteName": "arXiv.org",
+  "resolvedUrl": "https://arxiv.org/abs/2110.10497"
+}

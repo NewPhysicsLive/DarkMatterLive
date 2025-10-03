@@ -1,0 +1,12 @@
+{
+  "title": "Earth as a transducer for dark-photon dark-matter detection",
+  "description": "We propose the use of the Earth as a transducer for ultralight dark-matter detection. In particular we point out a novel signal of kinetically mixed dark-photon dark matter: a monochromatic oscillating magnetic field generated at the surface of the Earth. Similar to the signal in a laboratory experiment in a shielded box (or cavity), this signal arises because the lower atmosphere is a low-conductivity air gap sandwiched between the highly conductive interior of the Earth below and ionosphere or interplanetary medium above. At low masses (frequencies) the signal in a laboratory detector is usually suppressed by the size of the detector multiplied by the dark-matter mass. Crucially, in our case the suppression is by the radius of the Earth, and not by the (much smaller) height of the atmosphere. We compute the size and global vectorial pattern of our magnetic field signal, which enables sensitive searches for this signal using unshielded magnetometers dispersed over the surface of the Earth. In principle, the signal we compute exists for any dark photon in the mass range $10^{-21} \\text{eV}\\lesssim m_{A'} \\lesssim 3\\times 10^{-14} \\text{eV}$. We summarize the results of our companion paper [arXiv:2108.08852], in which we detail such a search using a publicly available dataset from the SuperMAG Collaboration: we report no robust signal candidates and so place constraints in the (more limited) dark-photon dark-matter mass range $2\\times 10^{-18} \\text{eV} \\lesssim m_{A'} \\lesssim 7\\times 10^{-17} \\text{eV}$ (corresponding to frequencies $6\\times 10^{-4} \\text{Hz}\\lesssim f \\lesssim 2\\times 10^{-2} \\text{Hz}$). These constraints are complementary to existing astrophysical bounds. Future searches for this signal may improve the sensitivity over a wide range of ultralight dark-matter candidates and masses.",
+  "image": [
+    {
+      "url": "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    }
+  ],
+  "authors": [],
+  "siteName": "arXiv.org",
+  "resolvedUrl": "https://arxiv.org/abs/2106.00022"
+}

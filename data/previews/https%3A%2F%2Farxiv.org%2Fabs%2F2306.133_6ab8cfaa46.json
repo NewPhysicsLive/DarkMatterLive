@@ -1,0 +1,12 @@
+{
+  "title": "Constraining Dark Photons with Self-consistent Simulations of Globular Cluster Stars",
+  "description": "We revisit stellar constraints on dark photons. We undertake dynamical stellar evolution simulations which incorporate the resonant and off-resonant production of transverse and longitudinal dark photons. We compare our results with observables derived from measurements of globular cluster populations, obtaining new constraints based on the luminosity of the tip of the red-giant branch (RGB), the ratio of populations of RGB to horizontal branch (HB) stars (the $R$-parameter), and the ratio of asymptotic giant branch to HB stars (the $R_2$-parameter). We find that previous bounds derived from static stellar models do not capture the effects of the resonant production of light dark photons leading to overly conservative constraints, and that they over-estimate the effects of heavier dark photons on the RGB-tip luminosity. This leads to differences in the constraints of up to an order of magnitude in the kinetic mixing parameter.",
+  "image": [
+    {
+      "url": "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    }
+  ],
+  "authors": [],
+  "siteName": "arXiv.org",
+  "resolvedUrl": "https://arxiv.org/abs/2306.13335"
+}

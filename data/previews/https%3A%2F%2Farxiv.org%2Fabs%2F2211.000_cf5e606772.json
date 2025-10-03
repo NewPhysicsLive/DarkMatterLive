@@ -1,0 +1,12 @@
+{
+  "title": "$A'$ view of the sunrise: Boosting helioscopes with angular information",
+  "description": "The Sun may copiously produce hypothetical light particles such as axions or dark photons, a scenario which can be experimentally probed with so-called helioscopes. Here we investigate the impact of the angular and spectral distribution of solar dark photons on the sensitivity of such instruments. For the first time we evaluate this spectral and angular dependence of the dark photon flux over the whole mass range and apply this information to existing data from the Hinode Solar X-Ray Telescope. Specifically we use calibration images for a classical helioscope analysis as well as data from a solar eclipse providing sensitivity to exceptionally large oscillation lengths. We demonstrate that exploiting the signal features can boost the constraints by more than one order of magnitude in terms of the mixing parameter compared to a naive counting experiment.",
+  "image": [
+    {
+      "url": "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    }
+  ],
+  "authors": [],
+  "siteName": "arXiv.org",
+  "resolvedUrl": "https://arxiv.org/abs/2211.00022"
+}

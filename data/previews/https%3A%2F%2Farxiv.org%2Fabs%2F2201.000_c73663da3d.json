@@ -1,0 +1,12 @@
+{
+  "title": "FACET: A new long-lived particle detector in the very forward region of the CMS experiment",
+  "description": "We describe a proposal to add a set of very forward detectors to the CMS experiment for the high-luminosity era of the Large Hadron Collider to search for beyond the standard model long-lived particles, such as dark photons, heavy neutral leptons, axion-like particles, and dark Higgs bosons. The proposed subsystem is called FACET for Forward-Aperture CMS ExTension, and will be sensitive to any particles that can penetrate at least 50 m of magnetized iron and decay in an 18 m long, 1 m diameter vacuum pipe. The decay products will be measured in detectors using identical technology to the planned CMS Phase-2 upgrade.",
+  "image": [
+    {
+      "url": "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    }
+  ],
+  "authors": [],
+  "siteName": "arXiv.org",
+  "resolvedUrl": "https://arxiv.org/abs/2201.00019"
+}

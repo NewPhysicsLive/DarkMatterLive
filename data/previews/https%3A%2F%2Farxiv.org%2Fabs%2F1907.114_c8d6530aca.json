@@ -1,0 +1,12 @@
+{
+  "title": "Light Dark Matter Search with Ionization Signals in XENON1T",
+  "description": "We report constraints on light dark matter (DM) models using ionization signals in the XENON1T experiment. We mitigate backgrounds with strong event selections, rather than requiring a scintillation signal, leaving an effective exposure of $(22 \\pm 3)$ tonne-days. Above $\\sim\\!0.4\\,\\mathrm{keV}_\\mathrm{ee}$, we observe $<1 \\, \\text{event}/(\\text{tonne} \\times \\text{day} \\times \\text{keV}_\\text{ee})$, which is more than one thousand times lower than in similar searches with other detectors. Despite observing a higher rate at lower energies, no DM or CEvNS detection may be claimed because we cannot model all of our backgrounds. We thus exclude new regions in the parameter spaces for DM-nucleus scattering for DM masses $m_χ$ within $3-6\\,\\mathrm{GeV}/\\mathrm{c}^2$, DM-electron scattering for $m_χ> 30\\,\\mathrm{MeV}/\\mathrm{c}^2$, and absorption of dark photons and axion-like particles for $m_χ$ within $0.186 - 1 \\, \\mathrm{keV}/\\mathrm{c}^2$.",
+  "image": [
+    {
+      "url": "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    }
+  ],
+  "authors": [],
+  "siteName": "arXiv.org",
+  "resolvedUrl": "https://arxiv.org/abs/1907.11485"
+}

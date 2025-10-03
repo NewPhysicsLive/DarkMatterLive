@@ -1,0 +1,12 @@
+{
+  "title": "Constraints on Light Dark Matter Particles Interacting with Electrons from DAMIC at SNOLAB",
+  "description": "We report direct-detection constraints on light dark matter particles interacting with electrons. The results are based on a method that exploits the extremely low levels of leakage current of the DAMIC detector at SNOLAB of 2-6$\\times$10$^{-22}$ A cm$^{-2}$. We evaluate the charge distribution of pixels that collect $<10~\\rm{e^-}$ for contributions beyond the leakage current that may be attributed to dark matter interactions. Constraints are placed on so-far unexplored parameter space for dark matter masses between 0.6 and 100 MeV$c^{-2}$. We also present new constraints on hidden-photon dark matter with masses in the range $1.2$-$30$ eV$c^{-2}$.",
+  "image": [
+    {
+      "url": "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    }
+  ],
+  "authors": [],
+  "siteName": "arXiv.org",
+  "resolvedUrl": "https://arxiv.org/abs/1907.12628"
+}

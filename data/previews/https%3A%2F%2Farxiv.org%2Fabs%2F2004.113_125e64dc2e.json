@@ -1,0 +1,12 @@
+{
+  "title": "SENSEI: Direct-Detection Results on sub-GeV Dark Matter from a New Skipper-CCD",
+  "description": "We present the first direct-detection search for eV-to-GeV dark matter using a new ~2-gram high-resistivity Skipper-CCD from a dedicated fabrication batch that was optimized for dark-matter searches. Using 24 days of data acquired in the MINOS cavern at the Fermi National Accelerator Laboratory, we measure the lowest rates in silicon detectors of events containing one, two, three, or four electrons, and achieve world-leading sensitivity for a large range of sub-GeV dark matter masses. Data taken with different thicknesses of the detector shield suggest a correlation between the rate of high-energy tracks and the rate of single-electron events previously classified as \"dark current.\" We detail key characteristics of the new Skipper-CCDs, which augur well for the planned construction of the ~100-gram SENSEI experiment at SNOLAB.",
+  "image": [
+    {
+      "url": "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    }
+  ],
+  "authors": [],
+  "siteName": "arXiv.org",
+  "resolvedUrl": "https://arxiv.org/abs/2004.11378"
+}

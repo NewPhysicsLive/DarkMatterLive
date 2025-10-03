@@ -1,0 +1,12 @@
+{
+  "title": "Search for a dark photon in e+e- collisions at BABAR",
+  "description": "Dark sectors charged under a new Abelian force have recently received much attention in the context of dark matter models. These models introduce a light new mediator, the so-called dark photon (A'), connecting the dark sector to the Standard Model. We present a search for a dark photon in the reaction e+e- -> gamma A', A'-> e+e-, mu+mu- using 514 fb-1 of data collected with the BABAR detector. We do not observe a significant signal and we set 90% confidence level upper limits on the mixing strength between the photon and dark photon at the level of 10^-4 - 10^-3 for dark photon masses in the range 0.02 - 10.2 GeV. We further constrain the range of the parameter space favored by interpretations of the discrepancy between the calculated and measured anomalous magnetic moment of the muon.",
+  "image": [
+    {
+      "url": "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    }
+  ],
+  "authors": [],
+  "siteName": "arXiv.org",
+  "resolvedUrl": "https://arxiv.org/abs/1406.2980"
+}

@@ -1,0 +1,12 @@
+{
+  "title": "Constraints on dark photons and axion-like particles from SuperCDMS Soudan",
+  "description": "We present an analysis of electron recoils in cryogenic germanium detectors operated during the SuperCDMS Soudan experiment. The data are used to set new constraints on the axioelectric coupling of axion-like particles and the kinetic mixing parameter of dark photons, assuming the respective species constitutes all of the galactic dark matter. This study covers the mass range from 40 eV/$c^2$ to 500 eV/$c^2$ for both candidates, excluding previously untested parameter space for masses below ~1 keV/$c^2$. For the kinetic mixing of dark photons, values below $10^{-15}$ are reached for particle masses around 100 eV/$c^2$; for the axioelectric coupling of axion-like particles, values below $10^{-12}$ are reached for particles with masses in the range of a few-hundred eV/$c^2$.",
+  "image": [
+    {
+      "url": "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    }
+  ],
+  "authors": [],
+  "siteName": "arXiv.org",
+  "resolvedUrl": "https://arxiv.org/abs/1911.11905"
+}

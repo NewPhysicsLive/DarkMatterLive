@@ -1,0 +1,12 @@
+{
+  "title": "Gamma Factory Searches for Extremely Weakly-Interacting Particles",
+  "description": "The Gamma Factory is a proposal to back-scatter laser photons off a beam of partially-stripped ions at the LHC, producing a beam of $\\sim 10$ MeV to $1$ GeV photons with intensities of $10^{16}$ to $10^{18}~\\text{s}^{-1}$. This implies $\\sim 10^{23}$ to $10^{25}$ photons on target per year, many orders of magnitude greater than existing accelerator light sources and also far greater than all current and planned electron and proton fixed target experiments. We determine the Gamma Factory's discovery potential through \"dark Compton scattering,\" $γe \\to e X$, where $X$ is a new, weakly-interacting particle. For dark photons and other new gauge bosons with masses in the 1~to~100 MeV range, the Gamma Factory has the potential to discover extremely weakly-interacting particles with just a few hours of data and will probe couplings as low as $\\sim 10^{-9}$ with a year of running. The Gamma Factory therefore may probe couplings lower than all other terrestrial experiments and is highly complementary to astrophysical probes. We outline the requirements of an experiment to realize this potential and determine the sensitivity reach for various experimental configurations.",
+  "image": [
+    {
+      "url": "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    }
+  ],
+  "authors": [],
+  "siteName": "arXiv.org",
+  "resolvedUrl": "https://arxiv.org/abs/2105.10289"
+}

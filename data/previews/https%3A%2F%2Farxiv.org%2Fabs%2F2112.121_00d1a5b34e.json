@@ -1,0 +1,12 @@
+{
+  "title": "Emission of Single and Few Electrons in XENON1T and Limits on Light Dark Matter",
+  "description": "Delayed single- and few-electron emissions plague dual-phase time projection chambers, limiting their potential to search for light-mass dark matter. This paper examines the origins of these events in the XENON1T experiment. Characterization of the intensity of delayed electron backgrounds shows that the resulting emissions are correlated, in time and position, with high-energy events and can effectively be vetoed. In this work we extend previous S2-only analyses down to a single electron. From this analysis, after removing the correlated backgrounds, we observe rates < 30 events/(electron*kg*day) in the region of interest spanning 1 to 5 electrons. We derive 90% confidence upper limits for dark matter-electron scattering, first direct limits on the electric dipole, magnetic dipole, and anapole interactions, and bosonic dark matter models, where we exclude new parameter space for dark photons and solar dark photons.",
+  "image": [
+    {
+      "url": "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    }
+  ],
+  "authors": [],
+  "siteName": "arXiv.org",
+  "resolvedUrl": "https://arxiv.org/abs/2112.12116"
+}

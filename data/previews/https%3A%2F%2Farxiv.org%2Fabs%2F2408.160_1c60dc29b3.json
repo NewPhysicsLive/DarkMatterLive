@@ -1,0 +1,12 @@
+{
+  "title": "Search for ultralight dark matter in the SuperMAG high-fidelity dataset",
+  "description": "Ultralight dark matter, such as kinetically mixed dark-photon dark matter (DPDM) or axionlike-particle dark matter (axion DM), can source an oscillating magnetic-field signal at Earth's surface. Previous work searched for this signal in a publicly available dataset of global magnetometer measurements maintained by the SuperMAG collaboration. This ``low-fidelity\" dataset reported measurements with a 1-minute time resolution, allowing the search to set leading direct constraints on DPDM and axion DM with Compton frequencies $f_\\mathrm{DM}\\leq1/(1\\,\\mathrm{min})$ [corresponding to masses $m_\\mathrm{DM}\\leq7\\times10^{-17}\\,\\mathrm{eV}$]. More recently, a dedicated experiment undertaken by the SNIPE Hunt collaboration has also searched for this same signal at higher frequencies $f_\\mathrm{DM}\\geq0.5\\,\\mathrm{Hz}$ (or $m_\\mathrm{DM}\\geq2\\times10^{-15}\\,\\mathrm{eV}$). In this work, we search for this signal of ultralight DM in the SuperMAG ``high-fidelity\" dataset, which features a 1-second time resolution, allowing us to probe the gap in parameter space between the low-fidelity dataset and the SNIPE Hunt experiment. The high-fidelity dataset exhibits lower geomagnetic noise than the low-fidelity dataset and features more data than the SNIPE Hunt experiment, making it a powerful probe of ultralight DM. Our search finds no robust DPDM or axion DM candidates. We set constraints on DPDM and axion DM parameter space for $10^{-3}\\,\\mathrm{Hz}\\leq f_\\mathrm{DM}\\leq0.98\\,\\mathrm{Hz}$ (or $4\\times10^{-18}\\,\\mathrm{eV}\\leq m_\\mathrm{DM}\\leq4\\times10^{-15}\\,\\mathrm{eV}$). Our results are the leading direct constraints on both DPDM and axion DM in this mass range, and our DPDM constraint surpasses the leading astrophysical constraint in a narrow range around $m_{A'}\\approx2\\times10^{-15}\\,\\mathrm{eV}$.",
+  "image": [
+    {
+      "url": "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    }
+  ],
+  "authors": [],
+  "siteName": "arXiv.org",
+  "resolvedUrl": "https://arxiv.org/abs/2408.16045"
+}

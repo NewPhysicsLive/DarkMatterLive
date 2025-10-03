@@ -1,0 +1,12 @@
+{
+  "title": "Search for New Physics in Electronic Recoil Data from XENONnT",
+  "description": "We report on a blinded analysis of low-energy electronic-recoil data from the first science run of the XENONnT dark matter experiment. Novel subsystems and the increased 5.9 tonne liquid xenon target reduced the background in the (1, 30) keV search region to $(15.8 \\pm 1.3)$ events/(tonne$\\times$year$\\times$keV), the lowest ever achieved in a dark matter detector and $\\sim$5 times lower than in XENON1T. With an exposure of 1.16 tonne-years, we observe no excess above background and set stringent new limits on solar axions, an enhanced neutrino magnetic moment, and bosonic dark matter.",
+  "image": [
+    {
+      "url": "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    }
+  ],
+  "authors": [],
+  "siteName": "arXiv.org",
+  "resolvedUrl": "https://arxiv.org/abs/2207.11330"
+}
