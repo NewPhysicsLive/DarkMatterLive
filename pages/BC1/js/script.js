@@ -109,13 +109,62 @@ async function loadLocalPreviewsIndex() {
 async function getLocalPreview(url) {
   try {
     const idx = await loadLocalPreviewsIndex();
-    const key = encodeURIComponent(url);
-    if (!idx || !idx[key]) return null;
-    const file = '/data/previews/' + idx[key];
-    const r = await fetch(file, { cache: 'no-store' });
-    if (!r.ok) return null;
-    return await r.json();
+    if (!idx) return null;
+
+    // Try several tolerant key variants to improve match rate between
+    // runtime page URLs and the build-time index keys.
+    const tried = [];
+
+    const variants = [
+      url,
+      url.replace(/#.*$/, ''), // strip fragment
+      url.replace(/\/?$/, '/'), // ensure trailing slash
+      url.replace(/\/$/, ''), // remove trailing slash
+      url.replace(/^http:\/\//i, 'https://'),
+      url.replace(/^https:\/\//i, 'http://'),
+    ];
+
+    // Also include encoded forms
+    const keys = variants.map((u) => encodeURIComponent(u));
+
+    for (const k of keys) {
+      tried.push(k);
+      if (idx[k]) {
+        const file = '/data/previews/' + idx[k];
+        try {
+          const r = await fetch(file, { cache: 'no-store' });
+          if (!r.ok) continue;
+          const j = await r.json();
+          // lightweight debug: attach which key matched
+          j.__preview_key__ = k;
+          return j;
+        } catch (e) {
+          // try next
+          continue;
+        }
+      }
+    }
+
+    // final fallback: try encodeURIComponent(original url) if not already tried
+    const origKey = encodeURIComponent(url);
+    if (!tried.includes(origKey) && idx[origKey]) {
+      try {
+        const r2 = await fetch('/data/previews/' + idx[origKey], { cache: 'no-store' });
+        if (r2.ok) {
+          const j2 = await r2.json();
+          j2.__preview_key__ = origKey;
+          return j2;
+        }
+      } catch (e) {
+        // ignore
+      }
+    }
+
+    // nothing matched
+    console.debug('[preview] no local preview for', url, 'tried keys', tried);
+    return null;
   } catch (e) {
+    console.debug('[preview] getLocalPreview error', e);
     return null;
   }
 }
@@ -555,21 +604,43 @@ function plotBuilder(plotData) {
 
                     // optionally try to fetch richer metadata from the preview service,
                     // but don't rely on it: update tooltip if fetch succeeds, otherwise keep the link
-                    if (url && PREVIEW_SERVER_BASE) {
-                      fetch(`${PREVIEW_SERVER_BASE}/preview?url=${encodeURIComponent(url)}`)
-                        .then((r) => r.json())
-                        .then((meta) => {
-                          const fullTitle = meta.title || '';
-                          instance.setContent(`\
-                <div class="wordbreaker" style="max-width:250px; font-family: sans-serif; display:flex;align-items:center;justify-content:start;flex-direction:column;gap:0.5rem">\
-                  <p style="margin:0; padding:0;">${fullTitle}  <span class="no-break"> [ <a href="${url}" target="_blank" rel="noopener noreferrer">${getSecondLevelDomain(url)}</a> ] </span> </p>\
-                </div>\
-              `);
-                        })
-                        .catch(() => {
-                          // ignore preview failures
-                        });
-                    }
+                      (async function () {
+                        if (!url) return;
+                        // Try local preview index first (fast and serverless)
+                        try {
+                          const local = await getLocalPreview(url);
+                          if (local) {
+                            const title = local.title || '';
+                            instance.setContent(`\
+                  <div class="wordbreaker" style="max-width:250px; font-family: sans-serif; display:flex;align-items:center;justify-content:start;flex-direction:column;gap:0.5rem">\
+                    <p style="margin:0; padding:0;">${title}  <span class="no-break"> [ <a href="${url}" target="_blank" rel="noopener noreferrer">${getSecondLevelDomain(url)}</a> ] </span> </p>\
+                  </div>\
+                `);
+                            console.debug('[preview] used local preview', url, local.__preview_key__ || 'unknown');
+                            return;
+                          }
+                        } catch (e) {
+                          console.debug('[preview] local preview lookup failed', e);
+                        }
+
+                        // Fall back to runtime preview server if configured
+                        if (url && PREVIEW_SERVER_BASE) {
+                          try {
+                            const r = await fetch(`${PREVIEW_SERVER_BASE}/preview?url=${encodeURIComponent(url)}`);
+                            if (!r.ok) throw new Error('preview fetch failed');
+                            const meta = await r.json();
+                            const fullTitle = meta.title || '';
+                            instance.setContent(`\
+                  <div class="wordbreaker" style="max-width:250px; font-family: sans-serif; display:flex;align-items:center;justify-content:start;flex-direction:column;gap:0.5rem">\
+                    <p style="margin:0; padding:0;">${fullTitle}  <span class="no-break"> [ <a href="${url}" target="_blank" rel="noopener noreferrer">${getSecondLevelDomain(url)}</a> ] </span> </p>\
+                  </div>\
+                `);
+                            console.debug('[preview] used remote preview', url, PREVIEW_SERVER_BASE);
+                          } catch (e) {
+                            console.debug('[preview] remote preview failed', e);
+                          }
+                        }
+                      })();
                   },
                 });
               });
