@@ -77,6 +77,49 @@ function getSecondLevelDomain(url) {
   }
 }
 
+// Preview server configuration: read from a <meta name="preview-server" content="https://...">
+// or from a global `window.PREVIEW_SERVER`. If neither exists, preview fetches are skipped.
+function getPreviewServerBase() {
+  try {
+    const meta = document.querySelector('meta[name="preview-server"]');
+    if (meta && meta.content) return meta.content.replace(/\/$/, '');
+    if (typeof window !== 'undefined' && window.PREVIEW_SERVER) return String(window.PREVIEW_SERVER).replace(/\/$/, '');
+  } catch (e) {
+    // ignore
+  }
+  return null;
+}
+const PREVIEW_SERVER_BASE = getPreviewServerBase();
+
+// Try to load a build-time previews index at /data/previews/index.json (if present).
+// This is populated by the CI job that runs `scripts/generate_previews.js`.
+let LOCAL_PREVIEWS_INDEX = null;
+async function loadLocalPreviewsIndex() {
+  if (LOCAL_PREVIEWS_INDEX !== null) return LOCAL_PREVIEWS_INDEX;
+  try {
+    const r = await fetch('/data/previews/index.json', { cache: 'no-store' });
+    if (!r.ok) return (LOCAL_PREVIEWS_INDEX = {});
+    const j = await r.json();
+    return (LOCAL_PREVIEWS_INDEX = j || {});
+  } catch (e) {
+    return (LOCAL_PREVIEWS_INDEX = {});
+  }
+}
+
+async function getLocalPreview(url) {
+  try {
+    const idx = await loadLocalPreviewsIndex();
+    const key = encodeURIComponent(url);
+    if (!idx || !idx[key]) return null;
+    const file = '/data/previews/' + idx[key];
+    const r = await fetch(file, { cache: 'no-store' });
+    if (!r.ok) return null;
+    return await r.json();
+  } catch (e) {
+    return null;
+  }
+}
+
 // Set up margins and dimensions
 const margin = { top: 60, right: 370, bottom: 80, left: 95 };
 const container = d3.select('#plot');
@@ -130,6 +173,48 @@ const svg = container.append('svg')
   .classed('svg-content', true)
   .attr("pointer-events", "all");
 
+// add a small clickable label inside the plotting axes (bottom-left)
+function createInSvgLabel(svgSelection, text, href) {
+  try {
+    // compute coordinates just inside the left and bottom axes area
+    const x = margin.left + 8; // a few px inside left axis
+    const y = height - margin.bottom - 8; // a few px above bottom axis
+
+    const g = svgSelection.append('g')
+      .attr('class', 'inplot-label')
+      .attr('transform', `translate(${x}, ${y})`)
+      .style('cursor', 'pointer');
+
+    // background rounded rect
+    g.append('rect')
+      .attr('x', -6)
+      .attr('y', -18)
+      .attr('rx', 4)
+      .attr('ry', 4)
+      .attr('fill', 'rgba(255,255,255,0.9)')
+      .attr('stroke', '#ddd')
+      .attr('width', 160)
+      .attr('height', 24);
+
+    // link text
+    const a = g.append('a')
+      .attr('href', href)
+      .attr('target', '_blank')
+      .attr('rel', 'noopener noreferrer');
+
+    a.append('text')
+      .attr('x', 0)
+      .attr('y', -2)
+      .attr('fill', '#3c096c')
+      .style('font-weight', '600')
+      .style('font-family', 'Open Sans, sans-serif')
+      .style('font-size', '13px')
+      .text(text);
+  } catch (e) {
+    console.warn('Failed to create in-SVG label', e);
+  }
+}
+
 // Define scales (logarithmic x, logarithmic y)
 const x0 = d3.scaleLog().domain([1e-32, 1e3]).range([margin.left, width - margin.right]);
 const y0 = d3.scaleLog().domain([1e-40, 1e-0]).range([height - margin.bottom, margin.top]);
@@ -163,6 +248,9 @@ svg.append('clipPath')
     .attr('y', margin.top)
     .attr('width', width - margin.left - margin.right)
     .attr('height', height - margin.top - margin.bottom);
+
+// create the in-plot label (clickable)
+createInSvgLabel(svg, 'Dark Matter live', 'https://darkmatter.web.cern.ch/');
 
 // Container for data
 const clipped = svg.append('g')
@@ -467,8 +555,8 @@ function plotBuilder(plotData) {
 
                     // optionally try to fetch richer metadata from the preview service,
                     // but don't rely on it: update tooltip if fetch succeeds, otherwise keep the link
-                    if (url) {
-                      fetch(`http://localhost:3000/preview?url=${encodeURIComponent(url)}`)
+                    if (url && PREVIEW_SERVER_BASE) {
+                      fetch(`${PREVIEW_SERVER_BASE}/preview?url=${encodeURIComponent(url)}`)
                         .then((r) => r.json())
                         .then((meta) => {
                           const fullTitle = meta.title || '';
@@ -479,7 +567,7 @@ function plotBuilder(plotData) {
               `);
                         })
                         .catch(() => {
-                          // ignore preview failures (e.g. no localhost preview server)
+                          // ignore preview failures
                         });
                     }
                   },
@@ -2187,10 +2275,10 @@ function attachPaperPreviews(scopeSelection) {
       onShow(instance) {
         const url = d;
         if (!url) return;
-        // attempt to fetch preview metadata but don't block the tooltip
-        fetch(`http://localhost:3000/preview?url=${encodeURIComponent(url)}`)
-          .then((r) => r.json())
-          .then((meta) => {
+        // Prefer build-time local preview JSON if present (no network needed)
+        getLocalPreview(url).then((localMeta) => {
+          if (localMeta) {
+            const meta = localMeta;
             const fullTitle = meta.title || "";
             const maxTitleChars = 120;
             const shortTitle = fullTitle.length > maxTitleChars ? fullTitle.slice(0, maxTitleChars).trim() + "…" : fullTitle;
@@ -2199,16 +2287,41 @@ function attachPaperPreviews(scopeSelection) {
             const shortDesc = fullDesc.length > maxChars ? fullDesc.slice(0, maxChars).trim() + "…" : fullDesc;
             instance.setContent(`
                 <div class="wordbreaker" style="max-width:250px; font-family: sans-serif; display: flex; align-items: center; justify-content: start; flex-direction: column; gap:0.5rem">
-                  ${meta.image ? `<img src="${meta.image[0].url}" alt="${meta.siteName} logo" style="width:50%; height:auto;margin:0; padding:0;"/>` : ""}
+                  ${meta.image && meta.image.length ? `<img src="${meta.image[0].url}" alt="${meta.siteName} logo" style="width:50%; height:auto;margin:0; padding:0;"/>` : ""}
                   <strong style="margin:0; padding:0;">${shortTitle}</strong>
                   ${meta.authors && meta.authors.length ? `<em>By ${meta.authors.join(", ")}</em>` : ""}
                   <p class="wordbreaker" style="margin:0; padding:0;">${shortDesc}</p>
                 </div>
               `);
-          })
-          .catch(() => {
-            // preview service not available or failed — keep the immediate link
-          });
+          } else {
+            // attempt to fetch preview metadata but don't block the tooltip
+            if (PREVIEW_SERVER_BASE) {
+              fetch(`${PREVIEW_SERVER_BASE}/preview?url=${encodeURIComponent(url)}`)
+                .then((r) => r.json())
+                .then((meta) => {
+                  const fullTitle = meta.title || "";
+                  const maxTitleChars = 120;
+                  const shortTitle = fullTitle.length > maxTitleChars ? fullTitle.slice(0, maxTitleChars).trim() + "…" : fullTitle;
+                  const fullDesc = meta.description || "";
+                  const maxChars = 240;
+                  const shortDesc = fullDesc.length > maxChars ? fullDesc.slice(0, maxChars).trim() + "…" : fullDesc;
+                  instance.setContent(`
+                    <div class="wordbreaker" style="max-width:250px; font-family: sans-serif; display: flex; align-items: center; justify-content: start; flex-direction: column; gap:0.5rem">
+                      ${meta.image ? `<img src="${meta.image[0].url}" alt="${meta.siteName} logo" style="width:50%; height:auto;margin:0; padding:0;"/>` : ""}
+                      <strong style="margin:0; padding:0;">${shortTitle}</strong>
+                      ${meta.authors && meta.authors.length ? `<em>By ${meta.authors.join(", ")}</em>` : ""}
+                      <p class="wordbreaker" style="margin:0; padding:0;">${shortDesc}</p>
+                    </div>
+                  `);
+                })
+                .catch(() => {
+                  // preview service not available or failed — keep the immediate link
+                });
+            } else {
+              // no preview server configured; keep the immediate link fallback
+            }
+          }
+        });
       },
     });
   });
@@ -2586,11 +2699,10 @@ select.on("change", function () {
 //       onShow(instance) {
 //         // only fetch once
 //         if (instance.props.content === 'Loading…') {
-//           fetch(
-//             `http://localhost:3000/preview?url=${encodeURIComponent(
-//               d
-//             )}`
-//           )
+//           // Example: use configured preview base instead of localhost
+//           // const base = PREVIEW_SERVER_BASE;
+//           // if (base) fetch(`${base}/preview?url=${encodeURIComponent(d)}`)
+//           //   .then(r => r.json())
 //             .then((r) => r.json())
 //             .then((meta) => {
 //               const fullTitle = meta.title || "";

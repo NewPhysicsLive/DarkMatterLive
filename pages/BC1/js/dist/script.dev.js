@@ -380,14 +380,21 @@ function plotBuilder(plotData) {
               allowHTML: true,
               onShow: function onShow(instance) {
                 // only fetch once
-                if (instance.props.content === "Loading…") {
-                  fetch("http://localhost:3000/preview?url=".concat(encodeURIComponent(element.paperUrls[0]))).then(function (r) {
-                    return r.json();
-                  }).then(function (meta) {
-                    var fullTitle = meta.title || "";
-                    instance.setContent("\n                <div class=\"wordbreaker\" style=\"max-width:250px; font-family: sans-serif; display: flex; align-items: center;\n                  justify-content: start;flex-direction: column;gap:0.5rem\">\n                  <p style=\"margin:0; padding:0;\">".concat(fullTitle, "  <span class=\"no-break\"> [ <a href=\"").concat(element.paperUrls[0], "\" target=\"_blank\"\n                          rel=\"noopener noreferrer\">").concat(getSecondLevelDomain(element.paperUrls[0]), "</a> ] </span> </p>\n                </div>\n              "));
-                  });
-                }
+                  if (instance.props.content === "Loading…") {
+                    try {
+                      var __preview_base = (typeof window !== 'undefined' && (window.PREVIEW_SERVER_BASE || window.PREVIEW_SERVER)) ? (window.PREVIEW_SERVER_BASE || window.PREVIEW_SERVER) : null;
+                      if (__preview_base) {
+                        fetch(__preview_base + "/preview?url=".concat(encodeURIComponent(element.paperUrls[0]))).then(function (r) {
+                          return r.json();
+                        }).then(function (meta) {
+                          var fullTitle = meta.title || "";
+                          instance.setContent("\n                <div class=\"wordbreaker\" style=\"max-width:250px; font-family: sans-serif; display: flex; align-items: center;\n                  justify-content: start;flex-direction: column;gap:0.5rem\">\n                  <p style=\"margin:0; padding:0;\">".concat(fullTitle, "  <span class=\"no-break\"> [ <a href=\"").concat(element.paperUrls[0], "\" target=\"_blank\"\n                          rel=\"noopener noreferrer\">\").concat(getSecondLevelDomain(element.paperUrls[0]), "</a> ] </span> </p>\n                </div>\n              "));
+                        });
+                      }
+                    } catch (e) {
+                      // ignore runtime errors and keep Loading… content
+                    }
+                  }
               }
             });
           });
@@ -2844,9 +2851,12 @@ function attachPaperPreviews(scopeSelection) {
       onShow: function onShow(instance) {
         // only fetch once
         if (instance.props.content === "Loading…") {
-          fetch("http://localhost:3000/preview?url=".concat(encodeURIComponent(d))).then(function (r) {
-            return r.json();
-          }).then(function (meta) {
+          try {
+            var __preview_base2 = (typeof window !== 'undefined' && (window.PREVIEW_SERVER_BASE || window.PREVIEW_SERVER)) ? (window.PREVIEW_SERVER_BASE || window.PREVIEW_SERVER) : null;
+            if (__preview_base2) {
+              fetch(__preview_base2 + "/preview?url=".concat(encodeURIComponent(d))).then(function (r) {
+                return r.json();
+              }).then(function (meta) {
             var fullTitle = meta.title || "";
             var maxTitleChars = 120; // “specific number of symbols”
 
@@ -2856,7 +2866,11 @@ function attachPaperPreviews(scopeSelection) {
 
             var shortDesc = fullDesc.length > maxChars ? fullDesc.slice(0, maxChars).trim() + "…" : fullDesc;
             instance.setContent("\n                <div class=\"wordbreaker\" style=\"max-width:250px; font-family: sans-serif; display: flex; align-items: center;\n                  justify-content: start;flex-direction: column;gap:0.5rem\">\n                  ".concat(meta.image ? "<img src=\"".concat(meta.image[0].url, "\"\n                               alt=\"").concat(meta.siteName, " logo\"\n                               style=\"width:50%; height:auto;margin:0; padding:0;\"/>") : "", "\n                  <strong style=\"margin:0; padding:0;\">").concat(shortTitle, "</strong>\n                  ").concat(meta.authors && meta.authors.length ? "<em>By ".concat(meta.authors.join(", "), "</em>") : "", "\n                  <p class=\"wordbreaker\" style=\"margin:0; padding:0;\">").concat(shortDesc, "</p>\n                </div>\n              "));
-          });
+              });
+            }
+          } catch (e) {
+            // ignore and keep Loading…
+          }
         }
       }
     });
@@ -3185,11 +3199,9 @@ select.on("change", function () {
 //       onShow(instance) {
 //         // only fetch once
 //         if (instance.props.content === 'Loading…') {
-//           fetch(
-//             `http://localhost:3000/preview?url=${encodeURIComponent(
-//               d
-//             )}`
-//           )
+//           // Example: use configured preview base instead of localhost
+//           // const base = (window.PREVIEW_SERVER_BASE || window.PREVIEW_SERVER);
+//           // if (base) fetch(`${base}/preview?url=${encodeURIComponent(d)}`).then(r => r.json())
 //             .then((r) => r.json())
 //             .then((meta) => {
 //               const fullTitle = meta.title || "";

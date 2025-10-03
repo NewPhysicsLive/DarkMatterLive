@@ -12,6 +12,34 @@ body {
   height: 90vh;
 }
 
+/* allow absolutely-positioned elements inside the plot area */
+#plot {
+  position: relative;
+}
+
+/* inner wrapper used on placeholder pages that contain the svg */
+.plot-inner {
+  position: relative;
+}
+
+/* label placed inside the plot area (bottom-left) */
+.plot-label {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  background: rgba(255,255,255,0.88);
+  padding: 6px 10px;
+  border-radius: 4px;
+  color: #3c096c;
+  font-weight: 600;
+  text-decoration: none;
+  z-index: 2000; /* above svg elements */
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+}
+
+.plot-label a { color: inherit; text-decoration: none; }
+.plot-label a:hover { text-decoration: underline; }
+
 header {
   width: 100%;
   height: 80px;
