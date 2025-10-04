@@ -2035,9 +2035,10 @@ const select = legend_wrapper
   .style("top", "35px")
   .style("left", "0px");
 
+
 // Add options
 const groupingOptions = [
-  { value: "none", label: "All data" },
+  { value: "none", label: "All data ▾" },
   { value: "experimentType", label: "Experiment Type" },
   { value: "detectionType", label: "Detection Type" },
   { value: "timeType", label: "Time Frame" },
@@ -2056,6 +2057,7 @@ select
   //   const groupedData = groupByCategory(plotData, key);
   //   renderLegend(groupedData);
   // });
+
 
 // === Scrollable legend container ===
 const legend_scroll = legend_wrapper
@@ -2168,15 +2170,23 @@ function renderLegend(grouped) {
     .attr("class", "legend-group-title")
     .attr("x", 0)
     .attr("y", 16) // baseline; avoids clipping at y=0
-    .text((d) => d.group)
     .style("font-weight", "400")
     .style("font-size", "1.1em")
     .style("font-family", '"Open Sans", sans-serif')
     .style("cursor", "pointer")
+    .each(function(d) {
+      // build the title text + caret tspan
+      const txt = d3.select(this);
+      txt.append('tspan').attr('class','legend-group-title-text').text(d.group);
+      txt.append('tspan').attr('class','legend-group-caret').attr('dx', 6).text(' ▸');
+    })
     .on("click", function () {
       const g = d3.select(this.parentNode);
       const isExpanded = g.attr("expanded") === "true";
-      g.attr("expanded", String(!isExpanded));
+      const newState = !isExpanded;
+      g.attr("expanded", String(newState));
+      // update caret glyph
+      d3.select(this).select('.legend-group-caret').text(newState ? ' ▾' : ' ▸');
       updateLegendLayout();
     });
 

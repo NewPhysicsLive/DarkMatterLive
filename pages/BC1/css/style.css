@@ -385,6 +385,12 @@ svg {
   font-family: 'Open Sans', sans-serif;
 }
 
+.legend-group-title .legend-group-caret {
+  font-size: 0.95em;
+  fill: #333333;
+}
+
+
 .hidden-box{
   display: block;
   width: 20px;
