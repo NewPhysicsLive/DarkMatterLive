@@ -3247,7 +3247,7 @@ var yAxisG = svg.append('g').attr('class', 'y-axis').attr('transform', "translat
 var xAxisGtop = svg.append('g').attr('class', 'x-axis-top').attr('transform', "translate(0,".concat(margin.top, ")")).call(xAxisTop);
 var yAxisGright = svg.append('g').attr('class', 'y-axis-right').attr('transform', "translate(".concat(width - margin.right, ",0)")).call(yAxisRight); //Adding plot title
 
-svg.append("text").attr("class", "plot-title").attr("x", (width - margin.left - margin.right) / 2 + margin.left).attr("y", margin.top - 25).attr("text-anchor", "middle").text("Dark Photon into invisible final states (BC1)"); //Adding plot labels with TeX content
+svg.append("text").attr("class", "plot-title").attr("x", (width - margin.left - margin.right) / 2 + margin.left).attr("y", margin.top - 25).attr("text-anchor", "middle").text("Minimal dark photon model (BC1)"); //Adding plot labels with TeX content
 
 var foX = xAxisG.append("foreignObject").attr("x", (width - margin.left - margin.right) / 2 + margin.left - 110).attr("y", 40).attr("width", 220).attr("class", "axis-label").attr("text-anchor", "middle").attr("height", 30); // DOMParser to turn that string into actual nodes
 
