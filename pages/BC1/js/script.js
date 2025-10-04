@@ -2858,7 +2858,7 @@ const plotTitle = svg
   .attr("text-anchor", "middle");
   
 plotTitle.append("xhtml:div").html(
-  katex.renderToString("\\mathrm{Dark\\,Photon\\,into\\,invisible\\,final\\,states\\,(BC1)}", {
+  katex.renderToString("\\mathrm{Minimal\\,dark\\,photon\\,model\\,(BC1)}", {
     throwOnError: false,
   })
 );
