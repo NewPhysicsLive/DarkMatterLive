@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return nd.classList.remove("menu-open");
       });
     }
-  }); // on small screens, clicking the "Choose your model" link toggles the whole menu
+  }); // on small screens, clicking the "Model explorer" link toggles the whole menu
 
   var navModels = document.querySelector(".nav-models");
   var navDropdown = document.querySelector(".nav-dropdown");

@@ -8,10 +8,6 @@ html.loading body {
   box-sizing: border-box; 
 }
 
-:root {
-  --header-height: 80px;
-}
-
 html, body {
   width: 100%;
   margin: 0;
@@ -27,58 +23,6 @@ body.front-page {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-}
-
-body.front-page .header {
-  width: 100%;
-  height: var(--header-height);
-  background-color: #333333;
-  border-bottom: 2px solid rgba(0, 0, 0, 0.2);
-}
-
-body.front-page .navbar {
-  margin: 0;
-  list-style: none;
-  display: flex;
-  height: 100%;
-  max-width: 100%;
-  align-items: center;
-  text-align: center;
-  flex-direction: row;
-  color: white;
-}
-
-body.front-page .navbar .navbar-link a {
-  color: white !important;
-  text-decoration: none;
-  font-size: 1.1rem;
-}
-
-body.front-page .navbar .logo a {
-  color: #ffffff !important;
-}
-
-body.front-page .navbar .navbar-link a.active {
-  color: white;
-}
-
-body.front-page .navbar .navbar-link {
-  position: relative;
-  padding: 0.5rem 1.5rem;
-  margin-left: 1.5rem;
-  margin-right: 1.5rem;
-}
-
-@media (max-width: 900px) {
-  body.front-page .navbar {
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 0.5rem 1rem;
-  }
-
-  body.front-page .navbar .navbar-link {
-    margin: 0.5rem 0.75rem;
-  }
 }
 
 body.front-page main {

@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // on small screens, clicking the "Choose your model" link toggles the whole menu
+  // on small screens, clicking the "Model explorer" link toggles the whole menu
   const navModels = document.querySelector(".nav-models");
   const navDropdown = document.querySelector(".nav-dropdown");
   if (navModels && navDropdown) {
