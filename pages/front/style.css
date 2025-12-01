@@ -8,52 +8,136 @@ html.loading body {
   box-sizing: border-box; 
 }
 
-html, body { 
-  height: 100%; 
+:root {
+  --header-height: 80px;
+}
+
+html, body {
   width: 100%;
-  overflow: hidden;
+  margin: 0;
+  padding: 0;
 }
 
-#scene {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-}
-
-.wrapper {
+body.front-page {
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
+  font-family: "Open Sans", sans-serif;
+  background: #1a1a1a;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+body.front-page .header {
+  width: 100%;
+  height: var(--header-height);
+  background-color: #333333;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+}
+
+body.front-page .navbar {
+  margin: 0;
+  list-style: none;
+  display: flex;
+  height: 100%;
+  max-width: 100%;
   align-items: center;
-  justify-content: center;
-  height: 100vh; 
-  width: 100%;       /* full‑screen centering */
-  overflow: hidden;     /* hide white edges */
+  text-align: center;
+  flex-direction: row;
+  color: white;
+}
+
+body.front-page .navbar .navbar-link a {
+  color: white !important;
+  text-decoration: none;
+  font-size: 1.1rem;
+}
+
+body.front-page .navbar .logo a {
+  color: #ffffff !important;
+}
+
+body.front-page .navbar .navbar-link a.active {
+  color: white;
+}
+
+body.front-page .navbar .navbar-link {
+  position: relative;
+  padding: 0.5rem 1.5rem;
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+}
+
+@media (max-width: 900px) {
+  body.front-page .navbar {
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+  }
+
+  body.front-page .navbar .navbar-link {
+    margin: 0.5rem 0.75rem;
+  }
+}
+
+body.front-page main {
+  flex: 1 0 auto;
+  position: relative;
+  background: url('heic2003b.png') no-repeat center top #050b16;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+body.front-page #scene {
+  position: relative;
+  width: 100%;
+  min-height: calc(100vh - var(--header-height));
+  display: block;
+  padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 4vw, 3rem) 4rem;
+  overflow: hidden;
 }
 
 .layer-bg {
-  position: absolute;
-  top: -5% !important; 
-  left: -5% !important;
-  width: 110%;   /* increased from 110% */
-  height: 110%;  /* increased from 110% */
-  background: url('heic2003b.png') no-repeat center/cover;
-  z-index: 0;
-  pointer-events: none;
-  will-change: transform;
+  display: none;
 }
 
-.layer-title {
-  padding-top: 20vh;
+body.front-page .front-wrapper {
+  width: min(1500px, 100%);
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
+  gap: 1.5rem;
+  padding: clamp(1rem, 4vw, 2rem) clamp(1rem, 4vw, 2.5rem) 2.5rem;
+  position: relative;
+  z-index: 2;
 }
 
-.inner  {
-  display: inline-block;
-  padding-left: 3rem;
-  padding-right: 3rem;
+body.front-page .layer-bg {
+  position: absolute;
+  inset: 0;
+  background: url('heic2003b.png') no-repeat center top;
+  background-size: cover;
+  background-attachment: fixed;
+  opacity: 0.95;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.layer-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 2rem;
 }
 
 .title {
@@ -62,23 +146,22 @@ html, body {
   color: black;
   font-weight: 600;
   text-align: center;
-  z-index: 1;
   transition: text-shadow 0.8s ease;
   pointer-events: all;
-  margin-block: 0;
-  text-align: center;
+  margin: 0;
 }
+
 .title:hover {
   text-shadow: 0px 0px 20px rgba(255, 255, 255, 0.5);
 }
+
 .quote {
   font-family: "Open Sans", sans-serif;
   font-size: 16px;
   color: white;
   font-weight: 400;
   text-align: right;
-  margin-block: 0;
-  z-index: 1;
+  margin: 0.5rem 0 0 0;
   opacity: 0;
   transition: opacity 1.2s ease;
 }
@@ -87,24 +170,31 @@ html, body {
   opacity: 1;
 }
 
-.choose-model {
+body.front-page .choose-model {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  position: relative;
   z-index: 1;
-  margin-top: 2rem;
-  pointer-events: all;
 }
 
-.choose-model button {
+body.front-page .choose-model button {
   font-family: "Open Sans", sans-serif;
   font-weight: 400;
-  color:#00C7FE;
+  color: #00C7FE;
   background-color: #1E0094;
   border: 2px solid #2E0B4F;
   border-radius: 10px;
   cursor: pointer;
+  transition: all 0.3s ease;
+  pointer-events: auto;
+}
+
+.choose-model button:hover {
+  background-color: #2a00c4;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .choose-button {
@@ -112,66 +202,132 @@ html, body {
   padding: 1rem 1.5rem;
 }
 
-.list-of-models {
+body.front-page .dropdown-panel {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
-  margin-top: 1rem;
+  padding: 0 1.5rem 3rem;
+  position: relative;
+  z-index: 1;
+}
+
+body.front-page .list-of-models {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  margin: 0 auto;
   list-style: none;
   gap: 1rem;
   max-width: 1460px;
-  flex-direction: row;
   justify-content: center;
-  transition: transform 0.4s ease, opacity 0.4s ease;
-  transform: translateY(-20px);
+  transition: max-height 0.4s ease, opacity 0.4s ease;
+  max-height: 0;
+  overflow: hidden;
   opacity: 0;
-  z-index: -1;
+  pointer-events: none;
+  padding: 0;
 }
 
-.list-of-models > li {
+body.front-page .list-of-models > li {
   flex: 1 1 0;
-  /* prevent shrinking based on content */
   min-width: 0;
 }
 
-.model-button {
+body.front-page .model-button {
+  font-family: "Open Sans", sans-serif;
   font-size: 1rem;
   padding: 1rem 0.7rem;
   width: 100%;
   max-width: 280px;
   position: relative;
+  background-color: #1E0094;
+  color: #00C7FE;
+  border: 2px solid #2E0B4F;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.sublist-of-models {
+body.front-page .model-button:not(:disabled):hover {
+  background-color: #2a00c4;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+body.front-page .model-link.populated {
+  font-weight: 700;
+  color: #ffffff;
+}
+
+body.front-page .model-link:not(.populated) {
+  font-weight: 400;
+  color: #c9c9c9;
+  opacity: 0.8;
+}
+
+body.front-page .sublist-of-models {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
 
-.similar-models {
+body.front-page .similar-models {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  transform: translate(0,-20px);
+  transform: translate(0, -20px);
   transition: transform 0.4s ease, opacity 0.4s ease;
   opacity: 0;
-  z-index: -1;
+  max-height: 0;
+  overflow: hidden;
 }
 
-.similar-models.visible-similar-models {
-  transform: translate(0,0);
-  opacity: 1;
-  transition: transform 0.4s ease, opacity 0.4s ease;
-  z-index: 1;
-}
-
-.list-of-models.visible-model-list {
-  opacity: 1;
+body.front-page .similar-models.visible-similar-models {
   transform: translate(0, 0);
-  transition: transform 0.4s ease, opacity 0.4s ease;
-  z-index: 1;
+  opacity: 1;
+  max-height: 1000px;
+  transition: transform 0.4s ease, opacity 0.4s ease, max-height 0.4s ease;
 }
 
-.model-link.in-progress::after {
+body.front-page .list-of-models.visible-model-list {
+  opacity: 1;
+  max-height: 3000px;
+  transition: max-height 0.4s ease, opacity 0.4s ease;
+  pointer-events: auto;
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+body.front-page footer {
+  flex-shrink: 0;
+  position: relative;
+  background: #333333;
+  margin-top: auto;
+}
+
+body.front-page .footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  color: #ffffff;
+}
+
+body.front-page .footer-inner a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+body.front-page .footer-inner a:hover {
+  text-decoration: underline;
+}
+
+body.front-page .model-link.in-progress::after {
   content: "In progress";
   position: absolute;
   top: 50%;
@@ -179,9 +335,9 @@ html, body {
   transform: translate(-50%, -50%) rotate(-15deg);
   font-size: 1.2rem;
   color: red;
-  pointer-events: none; /* so the text doesn't block clicks */
+  pointer-events: none;
   white-space: nowrap;
   font-family: "Noto Sans JP", "Open Sans", sans-serif;
-  text-shadow: 0px 0px 10px rgba(0,0,0,0.7);
+  text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.7);
   font-weight: 600;
 }

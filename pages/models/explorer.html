@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dark Matter Explorer: Physics & Classification</title>
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dark Matter Explorer: Physics & Classification</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="manifest" href="../site.webmanifest?v=20251130">
+    <link rel="stylesheet" href="../BC1/css/style.css?v=20251130" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+      body{background:#fafaf9;color:#334155;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+      .btn-nav{transition:.2s} .btn-nav:hover{transform:translateY(-2px)} .btn-nav.active{border-bottom:3px solid #4f46e5;color:#4f46e5;font-weight:700}
+      .fade-in{animation:fadeIn .45s ease}@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+      .chart-container{position:relative;width:100%;max-width:780px;margin:0 auto;height:400px}
+      @media (max-width:640px){.chart-container{height:300px}}
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <ul class="navbar">
+        <li class="logo navbar-link" style="margin-left:12px;">
+          <a href="https://home.cern" target="_blank" rel="noopener noreferrer" aria-label="CERN Accelerating Science">
+            <img src="../CERN-logo/Outline/SVG/LogoOutline-White.svg" alt="CERN" height="40" style="vertical-align:middle;">
+          </a>
+        </li>
+        <li class="logo navbar-link"><a href="../about/about.html" style="font-weight:700;color:#ffffff;margin-left:8px;">About</a></li>
+        <li class="logo navbar-link"><a href="../front/front.html">Dark Matter live</a></li>
+        <li class="navbar-link"><a class="nav-models active" href="./explorer.html">Choose your model</a></li>
+        <li class="navbar-link"><a href="../faq/faq.html">How to add your results</a></li>
+      </ul>
+    </header>
+    <div class="wrapper">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 min-h-screen flex flex-col">
+        <header class="mb-8 text-center sm:text-left border-b border-slate-200 pb-6">
+          <h1 class="text-4xl font-extrabold tracking-tight text-slate-900 mb-2">Dark Matter Explorer</h1>
+          <p class="text-lg text-slate-600 max-w-3xl">Classifying the invisible 27% of our Universe. Explore models based on <span class="text-indigo-600 font-semibold">cosmic velocity</span>, <span class="text-indigo-600 font-semibold">particle interactions</span>, and <span class="text-indigo-600 font-semibold">theoretical frameworks</span>.</p>
+        </header>
+        <nav class="flex flex-wrap gap-6 mb-8 border-b border-slate-200" role="tablist">
+          <button onclick="app.switchTab('cosmology')" id="tab-cosmology" class="btn-nav active pb-3 px-1 text-lg text-slate-500 hover:text-slate-800">1. Cosmic Velocity</button>
+          <button onclick="app.switchTab('portals')" id="tab-portals" class="btn-nav pb-3 px-1 text-lg text-slate-500 hover:text-slate-800">2. The Portals</button>
+          <button onclick="app.switchTab('models')" id="tab-models" class="btn-nav pb-3 px-1 text-lg text-slate-500 hover:text-slate-800">3. Model Frameworks</button>
+          <button onclick="app.switchTab('candidates')" id="tab-candidates" class="btn-nav pb-3 px-1 text-lg text-slate-500 hover:text-slate-800">4. Candidate Spectrum</button>
+        </nav>
+        <main class="flex-grow">
+          <section id="view-cosmology" class="fade-in block">
+            <div class="mb-6">
+              <h2 class="text-2xl font-bold text-slate-900 mb-2">Classification by Velocity &amp; Structure Formation</h2>
+              <p class="text-slate-600">Speed in the early universe sets the free-streaming length shaping hierarchical structure. Concordance cosmology is $\Lambda\mathrm{CDM}$.</p>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+              <div onclick="app.selectCosmo('cdm')" class="cursor-pointer bg-white p-6 rounded-xl shadow-sm border border-slate-200 hover:border-indigo-400 hover:shadow-md transition">
+                <div class="flex items-center justify-between mb-4"><h3 class="text-xl font-bold text-indigo-700">Cold Dark Matter</h3><span class="bg-indigo-100 text-indigo-800 text-xs font-semibold px-2.5 py-0.5 rounded">Consensus</span></div>
+                <p class="text-xs text-slate-500 mb-2">Non-Relativistic</p>
+                <div class="h-2 w-full bg-slate-100 rounded-full overflow-hidden mb-4"><div class="h-full bg-indigo-600 w-[10%]"></div></div>
+                <p class="text-sm text-slate-700">Bottom-up halo formation; matches observations at all scales.</p>
+              </div>
+              <div onclick="app.selectCosmo('wdm')" class="cursor-pointer bg-white p-6 rounded-xl shadow-sm border border-slate-200 hover:border-amber-400 hover:shadow-md transition">
+                <div class="flex items-center justify-between mb-4"><h3 class="text-xl font-bold text-amber-700">Warm Dark Matter</h3><span class="bg-amber-100 text-amber-800 text-xs font-semibold px-2.5 py-0.5 rounded">Contender</span></div>
+                <p class="text-xs text-slate-500 mb-2">Semi-Relativistic</p>
+                <div class="h-2 w-full bg-slate-100 rounded-full overflow-hidden mb-4"><div class="h-full bg-amber-500 w-[50%]"></div></div>
+                <p class="text-sm text-slate-700">Suppresses smallest halos; addresses some small-scale tensions.</p>
+              </div>
+              <div onclick="app.selectCosmo('hdm')" class="cursor-pointer bg-white p-6 rounded-xl shadow-sm border border-slate-200 hover:border-red-400 hover:shadow-md transition">
+                <div class="flex items-center justify-between mb-4"><h3 class="text-xl font-bold text-red-700">Hot Dark Matter</h3><span class="bg-red-100 text-red-800 text-xs font-semibold px-2.5 py-0.5 rounded">Ruled Out</span></div>
+                <p class="text-xs text-slate-500 mb-2">Ultra-Relativistic</p>
+                <div class="h-2 w-full bg-slate-100 rounded-full overflow-hidden mb-4"><div class="h-full bg-red-500 w-[100%]"></div></div>
+                <p class="text-sm text-slate-700">Erases small-scale structure; incompatible as dominant DM.</p>
+              </div>
+            </div>
+            <div id="cosmo-detail" class="bg-slate-50 border border-slate-200 rounded-xl p-6 lg:p-8">
+              <h3 id="cosmo-title" class="text-2xl font-bold text-slate-800 mb-4">Select a model above</h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                  <h4 class="font-semibold text-indigo-600 mb-2">Structure Formation Impact</h4>
+                  <p id="cosmo-structure" class="text-slate-600 mb-4">Click a card to update.</p>
+                  <h4 class="font-semibold text-indigo-600 mb-2">Key Candidates</h4>
+                  <ul id="cosmo-candidates" class="list-disc list-inside text-slate-600 space-y-1"><li>--</li></ul>
+                </div>
+                <div class="bg-white rounded-lg border border-slate-200 p-4 flex flex-col justify-center items-center text-center">
+                  <div id="formation-visual" class="text-6xl mb-4 opacity-50">🌌</div>
+                  <p id="cosmo-visual-text" class="text-sm font-medium text-slate-500">Visual Representation</p>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="view-portals" class="hidden fade-in">
+            <div class="mb-8">
+              <h2 class="text-2xl font-bold text-slate-900 mb-2">The Portals: Interaction Mechanisms</h2>
+              <p class="text-slate-600">Mediators enable Standard Model ↔ Dark Sector communication; they appear in interaction terms of the Lagrangian.</p>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+              <div class="lg:col-span-8 bg-white rounded-xl shadow-sm border border-slate-200 p-8 relative min-h-[400px] flex items-center justify-between">
+                <div class="z-10 w-1/4 bg-emerald-50 border-2 border-emerald-200 rounded-lg p-4 text-center">
+                  <h3 class="font-bold text-emerald-800 text-lg mb-2">Standard Model</h3>
+                  <div class="text-3xl mb-2">⚛️</div>
+                  <p class="text-xs text-emerald-600">Visible Matter & Higgs ($H$)</p>
+                </div>
+                <div class="flex-grow flex flex-col gap-6 relative px-4" id="portal-connectors">
+                  <button onclick="app.selectPortal('higgs')" class="w-full py-2 bg-slate-100 hover:bg-indigo-100 border border-slate-300 hover:border-indigo-400 rounded text-sm font-medium text-slate-700">Higgs Portal ($H$)</button>
+                  <button onclick="app.selectPortal('vector')" class="w-full py-2 bg-slate-100 hover:bg-indigo-100 border border-slate-300 hover:border-indigo-400 rounded text-sm font-medium text-slate-700">Vector Portal ($A'$)</button>
+                  <button onclick="app.selectPortal('axion')" class="w-full py-2 bg-slate-100 hover:bg-indigo-100 border border-slate-300 hover:border-indigo-400 rounded text-sm font-medium text-slate-700">Axion Portal ($a$)</button>
+                  <button onclick="app.selectPortal('neutrino')" class="w-full py-2 bg-slate-100 hover:bg-indigo-100 border border-slate-300 hover:border-indigo-400 rounded text-sm font-medium text-slate-700">Neutrino Portal ($N$)</button>
+                </div>
+                <div class="z-10 w-1/4 bg-indigo-50 border-2 border-indigo-200 rounded-lg p-4 text-center">
+                  <h3 class="font-bold text-indigo-800 text-lg mb-2">Dark Sector</h3>
+                  <div class="text-3xl mb-2">🌑</div>
+                  <p class="text-xs text-indigo-600">DM Candidate ($\chi$)</p>
+                </div>
+              </div>
+              <div class="lg:col-span-4 bg-slate-50 border border-slate-200 rounded-xl p-6">
+                <div id="portal-info">
+                  <div class="uppercase tracking-wide text-xs font-bold text-indigo-500 mb-2">Selected Portal</div>
+                  <h3 id="portal-name" class="text-2xl font-bold text-slate-900 mb-4">Select a Portal</h3>
+                  <p id="portal-desc" class="text-slate-600 mb-6">Click a bridge to view the interaction and related frameworks.</p>
+                  <div class="border-t border-slate-200 pt-4">
+                    <h4 class="font-semibold text-slate-800 mb-2">Mediator</h4>
+                    <div id="portal-mediator" class="bg-white p-3 rounded border border-slate-200 text-center font-mono text-indigo-600">--</div>
+                  </div>
+                  <div class="mt-4">
+                    <h4 class="font-semibold text-slate-800 mb-2">Key Candidate & Type</h4>
+                    <span id="portal-candidate" class="inline-block bg-indigo-100 text-indigo-800 text-sm px-3 py-1 rounded-full">--</span>
+                  </div>
+                  <div class="mt-4">
+                    <h4 class="font-semibold text-slate-800 mb-2">Related Frameworks</h4>
+                    <p id="portal-detection" class="text-sm text-slate-600 italic">--</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="view-models" class="hidden fade-in">
+            <div class="mb-8">
+              <h2 class="text-2xl font-bold text-slate-900 mb-2">Theoretical Model Frameworks</h2>
+              <p class="text-slate-600">Groupings by spin, field content & coupling structure used for experimental interpretation.</p>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div class="bg-white p-6 rounded-xl shadow-md border border-slate-200">
+                <h3 class="text-xl font-bold text-indigo-700 mb-4">1. Simplified Models</h3>
+                <p class="text-slate-600 mb-4">Minimal Lagrangians capturing collider + detection phenomenology.</p>
+                <div class="space-y-4">
+                  <div class="border-l-4 border-indigo-400 pl-4 bg-indigo-50 p-3 rounded"><h4 class="font-semibold text-indigo-800">Spin-0 DM (Scalar $\phi$)</h4><p class="text-sm text-indigo-600">Higgs portal: $\lambda\,\phi^2 |H|^2$.</p></div>
+                  <div class="border-l-4 border-indigo-400 pl-4 bg-indigo-50 p-3 rounded"><h4 class="font-semibold text-indigo-800">Spin-1/2 DM (Fermion $\psi$)</h4><p class="text-sm text-indigo-600">Higgs or vector portals; neutralino-like cases.</p></div>
+                  <div class="border-l-4 border-indigo-400 pl-4 bg-indigo-50 p-3 rounded"><h4 class="font-semibold text-indigo-800">Spin-1 DM (Vector $V_\mu$)</h4><p class="text-sm text-indigo-600">Kinetic mixing via vector portal.</p></div>
+                  <div class="border-l-4 border-indigo-400 pl-4 bg-indigo-50 p-3 rounded"><h4 class="font-semibold text-indigo-800">Effective Field Theory (EFT)</h4><p class="text-sm text-indigo-600">Heavy mediator integrated out → higher-dimension operators.</p></div>
+                </div>
+              </div>
+              <div class="bg-white p-6 rounded-xl shadow-md border border-slate-200">
+                <h3 class="text-xl font-bold text-amber-700 mb-4">2. Extended Sector Models</h3>
+                <p class="text-slate-600 mb-4">Additional fields address DM plus auxiliary puzzles (hierarchy, neutrino mass).</p>
+                <div class="space-y-4">
+                  <div class="border-l-4 border-amber-400 pl-4 bg-amber-50 p-3 rounded"><h4 class="font-semibold text-amber-800">Extended Higgs (2HDM, etc.)</h4><p class="text-sm text-amber-600">Extra doublets/pseudoscalars; DM couples to second Higgs $a$.</p></div>
+                  <div class="border-l-4 border-amber-400 pl-4 bg-amber-50 p-3 rounded"><h4 class="font-semibold text-amber-800">Dark Higgs + Dark Photon</h4><p class="text-sm text-amber-600">Dark Higgs gives mass to $A'$ enabling multi-mediator signals.</p></div>
+                  <div class="border-l-4 border-amber-400 pl-4 bg-amber-50 p-3 rounded"><h4 class="font-semibold text-amber-800">Axion-Like Particles (ALPs)</h4><p class="text-sm text-amber-600">Generalized axion field $a$ with variable decay constants.</p></div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="view-candidates" class="hidden fade-in">
+            <div class="mb-6"><h2 class="text-2xl font-bold text-slate-900 mb-2">Candidate Mass Spectrum</h2><p class="text-slate-600">Illustrative relation of mass scale vs conceptual interaction strength.</p></div>
+            <div class="bg-white p-4 sm:p-6 rounded-xl border border-slate-200 shadow-sm mb-6"><div class="chart-container"><canvas id="candidatesChart"></canvas></div></div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div class="bg-indigo-50 p-4 rounded-lg border border-indigo-100"><h4 class="font-bold text-indigo-900 mb-2">WIMPs ($\chi$)</h4><p class="text-xs text-indigo-700">Spin 0/1/2 simplified & extended Higgs.</p></div>
+              <div class="bg-amber-50 p-4 rounded-lg border border-amber-100"><h4 class="font-bold text-amber-900 mb-2">Axions / ALPs ($a$)</h4><p class="text-xs text-amber-700">Axion portal & extended sector.</p></div>
+              <div class="bg-slate-100 p-4 rounded-lg border border-slate-200"><h4 class="font-bold text-slate-900 mb-2">Sterile Neutrinos ($N$)</h4><p class="text-xs text-slate-700">Neutrino portal; warm DM.</p></div>
+            </div>
+          </section>
+        </main>
+      
+      </div>
+    </div>
+    <footer>
+      <div class="footer-inner">
+        <div class="footer-left"><a href="https://home.cern" target="_blank" rel="noopener noreferrer"><img src="../CERN-logo/Outline/SVG/LogoOutline-White.svg" alt="CERN" height="36"></a></div>
+        <div class="footer-right" style="text-align:right">
+          <div style="margin-bottom:6px">Find the project on: <a href="https://github.com/NewPhysicsLive/DarkMatterLive" target="_blank" rel="noopener noreferrer">GitHub</a> | <a href="https://gitlab.cern.ch/newphysicslive/DarkMatterLive" target="_blank" rel="noopener noreferrer">GitLab</a></div>
+          <div style="font-size:0.95em">&copy; CERN — <a href="https://home.cern/data-privacy-protection-policy" target="_blank" rel="noopener noreferrer">Privacy policy</a> | Contact: Brij Kishor Jashal at <a href="mailto:brij@cern.ch">brij@cern.ch</a></div>
+        </div>
+      </div>
+    </footer>
+    <script>
+      const data = {
+        cosmology: {
+          cdm: {title: "Cold Dark Matter (CDM)", color: "text-indigo-700", structure: "Non-relativistic; bottom-up halo assembly matches observations.", candidates: ["WIMPs","Axions/ALPs","Primordial Black Holes"], visual: "🌌", visualText: "Rich filament network; many dwarf halos."},
+          wdm: {title: "Warm Dark Matter (WDM)", color: "text-amber-700", structure: "Semi-relativistic; suppresses smallest halos; moderate free-streaming.", candidates: ["Sterile Neutrinos","Gravitinos"], visual: "🌫️", visualText: "Slight smoothing of small-scale structure."},
+          hdm: {title: "Hot Dark Matter (HDM)", color: "text-red-700", structure: "Ultra-relativistic; erases small structure; large-scale only.", candidates: ["SM Neutrinos (sub-component)"], visual: "💨", visualText: "Blurry large-scale only."}
+        },
+        portals: {
+          higgs: {name: "Higgs Portal", desc: "Coupling to Higgs field: $\\mathcal{L} \sim \lambda \chi^2 |H|^2$. Natural for scalar & fermionic DM.", mediator: "Higgs ($H$)", candidate: "Scalar/Fermion WIMPs", model_link: "Simplified (Spin-0,1/2) & Extended Higgs"},
+          vector: {name: "Vector Portal", desc: "Kinetic mixing: $-\\tfrac{\\epsilon}{2} F_{\\mu\\nu}F'^{\\mu\\nu}$. Dark photon mediator.", mediator: "Dark Photon ($A'$)", candidate: "Vector/Fermion DM ($\\chi$)", model_link: "Simplified (Spin-1) & Dark Higgs + $A'$"},
+          axion: {name: "Axion Portal", desc: "Axion–photon coupling: $g_{a\\gamma\\gamma} a F_{\\mu\\nu}\\tilde{F}^{\\mu\\nu}$.", mediator: "Axion ($a$)", candidate: "Axions / ALPs", model_link: "ALP Extended Sector"},
+          neutrino: {name: "Neutrino Portal", desc: "Mixing with sterile $N$: $y L H N$ → warm DM phenomenology.", mediator: "Sterile Neutrino ($N$)", candidate: "Warm DM (Sterile $N$)", model_link: "Portal-defined class"}
+        }
+      };
+      const app = {
+        activeTab: 'cosmology', chart: null,
+        init(){this.selectCosmo('cdm');this.initChart();this.selectPortal('higgs');},
+        switchTab(tab){this.activeTab=tab;document.querySelectorAll('.btn-nav').forEach(b=>b.classList.remove('active','text-indigo-600','font-bold'));document.querySelectorAll('.btn-nav').forEach(b=>b.classList.add('text-slate-500'));const ab=document.getElementById(`tab-${tab}`);if(ab){ab.classList.add('active','text-indigo-600','font-bold');ab.classList.remove('text-slate-500');}document.querySelectorAll('main section').forEach(s=>s.classList.add('hidden'));const v=document.getElementById(`view-${tab}`);if(v){v.classList.remove('hidden');v.classList.add('fade-in');}if(tab==='candidates'&&this.chart){this.chart.update();this.chart.resize();}if(window.MathJax){MathJax.typesetPromise();}},
+        selectCosmo(key){const info=data.cosmology[key];if(!info)return;const box=document.getElementById('cosmo-detail');box.classList.remove('fade-in');void box.offsetWidth;box.classList.add('fade-in');const t=document.getElementById('cosmo-title');t.textContent=info.title;t.className=`text-2xl font-bold mb-4 ${info.color}`;document.getElementById('cosmo-structure').textContent=info.structure;const ul=document.getElementById('cosmo-candidates');ul.innerHTML='';info.candidates.forEach(c=>{const li=document.createElement('li');li.textContent=c;ul.appendChild(li);});document.getElementById('formation-visual').textContent=info.visual;document.getElementById('cosmo-visual-text').textContent=info.visualText;if(window.MathJax){MathJax.typesetPromise([box]);}},
+        selectPortal(key){const p=data.portals[key];if(!p)return;const panel=document.getElementById('portal-info');panel.classList.remove('fade-in');void panel.offsetWidth;panel.classList.add('fade-in');document.getElementById('portal-name').textContent=p.name;document.getElementById('portal-desc').innerHTML=p.desc;document.getElementById('portal-mediator').textContent=p.mediator;document.getElementById('portal-candidate').textContent=p.candidate;document.getElementById('portal-detection').textContent=p.model_link;if(window.MathJax){MathJax.typesetPromise([panel]);}Array.from(document.getElementById('portal-connectors').children).forEach(b=>{b.classList.remove('bg-indigo-600','text-white','border-indigo-700');b.classList.add('bg-slate-100','text-slate-700','border-slate-300');});const active=document.querySelector(`[onclick="app.selectPortal('${key}')"]`);if(active){active.classList.remove('bg-slate-100','text-slate-700','border-slate-300');active.classList.add('bg-indigo-600','text-white','border-indigo-700');}},
+        initChart(){const ctx=document.getElementById('candidatesChart').getContext('2d');this.chart=new Chart(ctx,{type:'bubble',data:{datasets:[{label:'Axions / ALPs',data:[{x:-5,y:2,r:15}],backgroundColor:'rgba(245,158,11,0.7)',borderColor:'rgba(245,158,11,1)'},{label:'Sterile Neutrinos',data:[{x:4,y:1,r:10}],backgroundColor:'rgba(100,116,139,0.7)',borderColor:'rgba(100,116,139,1)'},{label:'WIMPs',data:[{x:11,y:5,r:20}],backgroundColor:'rgba(79,70,229,0.7)',borderColor:'rgba(79,70,229,1)'},{label:'Primordial Black Holes',data:[{x:18,y:0.5,r:25}],backgroundColor:'rgba(15,23,42,0.7)',borderColor:'rgba(15,23,42,1)'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{title:{display:true,text:'Mass vs Interaction (schematic log)'},tooltip:{callbacks:{label:(ctx)=>{const l=ctx.dataset.label;const x=ctx.parsed.x;let m;if(x<0){m=`~10^${x} eV`;}else if(x<10){m=`~${Math.pow(10,x)} eV`;}else{m=`~${Math.pow(10,x-9)} GeV`;}return [l,`Mass: ${m}`];}}}},scales:{x:{title:{display:true,text:'Log Mass (eV)'},min:-10,max:20,grid:{color:'#e2e8f0'}},y:{title:{display:true,text:'Conceptual Interaction'},min:0,max:10,display:false}}}});}
+      };
+      window.addEventListener('load',()=>app.init());
+    </script>
+    <script src="../js/matomo-consent.js"></script>
+  </body>
+  </html>

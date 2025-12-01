@@ -1,227 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
-    rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/parallax-js@3.1.0/dist/parallax.min.js"></script>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="../BC1/css/style.css">
-  <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
-  <link rel="manifest" href="../site.webmanifest">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png" />
+  <link rel="manifest" href="../site.webmanifest?v=20251130" />
   <title>Dark Matter live</title>
 </head>
-<body>
+<body class="front-page">
   <header class="header">
     <ul class="navbar">
-      <li class="logo navbar-link" style="margin-left:12px;">
-  <a href="https://home.cern" target="_blank" rel="noopener noreferrer" aria-label="CERN Accelerating Science">
-          <img src="../CERN-logo/Outline/SVG/LogoOutline-White.svg" alt="CERN" height="40" style="vertical-align:middle;">
+      <li class="logo navbar-link" style="margin-left: 12px">
+        <a href="https://home.cern" target="_blank" rel="noopener noreferrer" aria-label="CERN Accelerating Science">
+          <img src="../CERN-logo/Outline/SVG/LogoOutline-White.svg" alt="CERN" height="40" style="vertical-align: middle" />
         </a>
       </li>
-      <li class="logo navbar-link"><a href="../about/about.html" style="font-weight:700;color:#ffffff;margin-left:8px;">About</a></li>
-      <li class="logo navbar-link"><a href="../front/front.html">Dark Matter live</a></li>
-      <li class="navbar-link nav-dropdown">
-        <a class="nav-models active" href="../BC1/main.html">Choose your model</a>
-
-        <!-- Dropdown panel (hidden by default, shows on hover / focus-within) -->
-        <div class="dropdown" aria-label="Choose model menu">
-          <ul class="model-categories">
-            <li class="category">
-              <button class="category-btn" aria-expanded="false">Vector portal models (BC1-BC3)</button>
-              <ul class="submodels">
-                <li><a class="model-link" href="../BC1/main.html">Minimal dark photon model (BC1)</a></li>
-                <li><a class="model-link" href="../BC2/main.html">Light DM coupled to dark photon (BC2)</a></li>
-                <li><a class="model-link" href="../BC3/main.html">Millicharged particles (BC3)</a></li>
-              </ul>
-            </li>
-
-            <li class="category">
-              <button class="category-btn" aria-expanded="false">Scalar portal models (BC4-BC5)</button>
-              <ul class="submodels">
-                <li><a class="model-link" href="../BC4/main.html">Higgs-mixed scalar (BC4)</a></li>
-                <li><a class="model-link" href="../BC5/main.html"Higgs-mixed scalar w/ large pair-production (BC5)</a></li>
-              </ul>
-            </li>
-
-            <li class="category">
-              <button class="category-btn" aria-expanded="false">Neutrino portal models (BC6-BC8)</button>
-              <ul class="submodels">
-                <li><a class="model-link" href="../BC6/main.html">Single HNL, electron dominance (BC6)</a></li>
-                <li><a class="model-link" href="../BC7/main.html">Single HNL, muon dominance (BC7)</a></li>
-                <li><a class="model-link" href="../BC8/main.html">Single HNL, tau dominance (BC8)</a></li>
-              </ul>
-            </li>
-
-            <li class="category">
-              <button class="category-btn" aria-expanded="false">Axion portal models (BC9-BC11)</button>
-              <ul class="submodels">
-                <li><a class="model-link" href="../BC9/main.html">ALP with photon dominance (BC9)</a></li>
-                <li><a class="model-link" href="../BC10/main.html">ALP with fermion dominance (BC10)</a></li>
-                <li><a class="model-link" href="../BC11/main.html">ALP with gluon dominance (BC11)</a></li>
-              </ul>
-            </li>
-
-            <li class="category">
-              <button class="category-btn" aria-expanded="false">Other models</button>
-              <ul class="submodels">
-                <li><a class="model-link" href="../SUSY extension/main.html">SUSY extension models</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
+      <li class="logo navbar-link">
+        <a href="../about/about.html" style="font-weight: 700; color: #ffffff; margin-left: 8px">About</a>
       </li>
-      <li class="navbar-link"><a href="../faq/faq.html">How to add your results</a></li>
+      <li class="logo navbar-link">
+        <a href="../front/front.html">Dark Matter live</a>
+      </li>
+      <li class="navbar-link nav-dropdown">
+        <a class="nav-models active" href="../models/explorer.html">Choose your model</a>
+      </li>
+      <li class="navbar-link">
+        <a href="../faq/faq.html">How to add your results</a>
+      </li>
     </ul>
   </header>
-    <div id="scene">
-      <div class="layer layer-bg" data-depth="0.03">
-      </div>
-      <div class="wrapper" data-depth="0">
-        <div class="layer-title" data-depth="0">
-              <div class="inner">
-                <a href="https://home.cern" target="_blank" rel="noopener noreferrer" aria-label="CERN Accelerating Science">
-                  <img src="../CERN-logo/Outline/SVG/LogoOutline-White.svg" alt="CERN" height="40" style="vertical-align:middle;">
-                </a>
-                <h1 class="title">Dark Matter live</h1>
-                <p style="margin:0.25rem 0 0; font-size:0.95rem"></p>
-                <p class="quote">In order for the light to shine so brightly, the darkness must be present. Francis Bacon</p>
-              </div>
-            </div>
-        <div class="choose-model" data-depth="0">
+
+  <main id="main">
+    <section id="scene">
+      <div class="front-wrapper">
+        <div class="layer-title">
+          <div class="inner">
+            <a href="https://home.cern" target="_blank" rel="noopener noreferrer" aria-label="CERN Accelerating Science">
+              <img src="../CERN-logo/Outline/SVG/LogoOutline-White.svg" alt="CERN" height="40" style="vertical-align: middle" />
+            </a>
+            <h1 class="title">Dark Matter live</h1>
+            <p class="quote">In order for the light to shine so brightly, the darkness must be present. Francis Bacon</p>
+          </div>
+        </div>
+        <div class="choose-model">
           <button class="choose-button" id="toggleTypesOfModelsBtn">Choose dark matter model</button>
+        </div>
+        <div class="dropdown-panel">
           <ul class="list-of-models" id="modelList">
-            <li>
-              <div class="sublist-of-models">
-                <button class="model-button">Vector portal models (BC1-BC3)</button>
-                <ul class="similar-models">
-                  <li><button class="model-button model-link" onclick="location.href='../BC1/main.html';">Minimal dark photon model (BC1)</button></li>
-                  <li><button class="model-button model-link in-progress" onclick="location.href='../BC2/main.html';">Light DM coupled to dark photon (BC2)</button></li>
-                  <li><button class="model-button model-link in-progress" onclick="location.href='../BC3/main.html';">Millicharged particles (BC3)</button></li>
+                  <!-- 1. Cosmic Velocity -->
+                  <li>
+                    <div class="sublist-of-models">
+                      <button class="model-button">Cosmic Velocity Classes</button>
+                      <ul class="similar-models">
+                        <li><button class="model-button" disabled style="opacity:0.85">Cold Dark Matter (CDM) — non‑relativistic</button></li>
+                        <li><button class="model-button" disabled style="opacity:0.85">Warm Dark Matter (WDM) — semi‑relativistic</button></li>
+                        <li><button class="model-button" disabled style="opacity:0.85">Hot Dark Matter (HDM) — ultra‑relativistic (ruled out)</button></li>
+                        <li><button class="model-button" disabled style="opacity:0.65">Free‑streaming length sets structure hierarchy</button></li>
+                      </ul>
+                    </div>
+                  </li>
+                  <!-- 2. Portals -->
+                  <li>
+                    <div class="sublist-of-models">
+                      <button class="model-button">Interaction Portals</button>
+                      <ul class="similar-models">
+                        <li><button class="model-button" disabled style="opacity:0.85">Higgs Portal: L ≈ λ χ² |H|²</button></li>
+                        <li><button class="model-button model-link" onclick="location.href='../BC4/main.html';">Higgs‑mixed scalar (BC4)</button></li>
+                        <li><button class="model-button model-link" onclick="location.href='../BC5/main.html';">Higgs‑mixed scalar (pair) (BC5)</button></li>
+                        <li><button class="model-button" disabled style="opacity:0.85">Vector Portal: −(ε/2) F_{μν}F′^{μν}</button></li>
+                        <li><button class="model-button model-link populated" onclick="location.href='../BC1/main.html';">Minimal dark photon (BC1)</button></li>
+                        <li><button class="model-button model-link" onclick="location.href='../BC2/main.html';">Light DM + dark photon (BC2)</button></li>
+                        <li><button class="model-button model-link" onclick="location.href='../BC3/main.html';">Millicharged particles (BC3)</button></li>
+                        <li><button class="model-button" disabled style="opacity:0.85">Axion Portal: g_{aγγ} a F_{μν} \u007eF^{μν}</button></li>
+                        <li><button class="model-button model-link" onclick="location.href='../BC9/main.html';">ALP photon dominance (BC9)</button></li>
+                        <li><button class="model-button model-link" onclick="location.href='../BC10/main.html';">ALP fermion dominance (BC10)</button></li>
+                        <li><button class="model-button model-link" onclick="location.href='../BC11/main.html';">ALP gluon dominance (BC11)</button></li>
+                        <li><button class="model-button" disabled style="opacity:0.85">Neutrino Portal: y L H N</button></li>
+                        <li><button class="model-button model-link" onclick="location.href='../BC6/main.html';">Single HNL e‑dominance (BC6)</button></li>
+                        <li><button class="model-button model-link" onclick="location.href='../BC7/main.html';">Single HNL μ‑dominance (BC7)</button></li>
+                        <li><button class="model-button model-link" onclick="location.href='../BC8/main.html';">Single HNL τ‑dominance (BC8)</button></li>
+                      </ul>
+                    </div>
+                  </li>
+                  <!-- 3. Model Frameworks -->
+                  <li>
+                    <div class="sublist-of-models">
+                      <button class="model-button">Model Frameworks</button>
+                      <ul class="similar-models">
+                        <li><button class="model-button" disabled style="opacity:0.85">Simplified: Spin‑0 (φ) Higgs portal</button></li>
+                        <li><button class="model-button" disabled style="opacity:0.85">Simplified: Spin‑1/2 (ψ) Higgs / Vector</button></li>
+                        <li><button class="model-button" disabled style="opacity:0.85">Simplified: Spin‑1 (V_μ) kinetic mixing</button></li>
+                        <li><button class="model-button" disabled style="opacity:0.85">EFT: heavy mediator integrated out</button></li>
+                        <li><button class="model-button" disabled style="opacity:0.85">Extended Higgs (2HDM, pseudoscalars)</button></li>
+                        <li><button class="model-button" disabled style="opacity:0.85">Dark Higgs + Dark Photon sector</button></li>
+                        <li><button class="model-button" disabled style="opacity:0.85">Axion‑Like Particles (ALPs)</button></li>
+                      </ul>
+                    </div>
+                  </li>
+                  <!-- 4. Candidate Spectrum (direct BC links) -->
+                  <li>
+                    <div class="sublist-of-models">
+                      <button class="model-button">Candidate Spectrum (BC Pages)</button>
+                      <ul class="similar-models">
+                        <li><button class="model-button model-link populated" onclick="location.href='../BC1/main.html';">BC1 Dark Photon Minimal</button></li>
+                        <li><button class="model-button model-link" onclick="location.href='../BC2/main.html';">BC2 Light DM + Dark Photon</button></li>
+                        <li><button class="model-button model-link" onclick="location.href='../BC3/main.html';">BC3 Millicharged Particles</button></li>
+                        <li><button class="model-button model-link" onclick="location.href='../BC4/main.html';">BC4 Higgs‑Mixed Scalar</button></li>
+                        <li><button class="model-button model-link" onclick="location.href='../BC5/main.html';">BC5 Higgs‑Mixed Scalar (Pair)</button></li>
+                        <li><button class="model-button model-link" onclick="location.href='../BC6/main.html';">BC6 Sterile Neutrino (e)</button></li>
+                        <li><button class="model-button model-link" onclick="location.href='../BC7/main.html';">BC7 Sterile Neutrino (μ)</button></li>
+                        <li><button class="model-button model-link" onclick="location.href='../BC8/main.html';">BC8 Sterile Neutrino (τ)</button></li>
+                        <li><button class="model-button model-link" onclick="location.href='../BC9/main.html';">BC9 ALP Photon</button></li>
+                        <li><button class="model-button model-link" onclick="location.href='../BC10/main.html';">BC10 ALP Fermion</button></li>
+                        <li>
+                          <button class="model-button model-link" onclick="location.href='../BC11/main.html';">BC11 ALP Gluon</button>
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
                 </ul>
-              </div>
-            </li>
-            <li>
-              <div class="sublist-of-models">
-                <button class="model-button">Scalar portal models (BC4-BC5)</button>
-                <ul class="similar-models">
-                  <li><button class="model-button model-link in-progress" onclick="location.href='../BC4/main.html';">Higgs-mixed scalar (BC4)</button></li>
-                  <li><button class="model-button model-link in-progress" onclick="location.href='../BC5/main.html';">Higgs-mixed scalar with large pair-production channel (BC5)</button></li>
-                </ul>
-              </div>
-            </li>
-            <li>
-              <div class="sublist-of-models">
-                <button class="model-button">Neutrino portal models (BC6-BC8)</button>
-                <ul class="similar-models">
-                  <li><button class="model-button model-link in-progress" onclick="location.href='../BC6/main.html';">Single HNL, electron dominance (BC6)</button></li>
-                  <li><button class="model-button model-link in-progress" onclick="location.href='../BC7/main.html';">Single HNL, muon dominance (BC7)</button></li>
-                  <li><button class="model-button model-link in-progress" onclick="location.href='../BC8/main.html';">Single HNL, tau dominance (BC8)</button></li>
-                </ul>
-              </div>
-            </li>
-            <li>
-              <div class="sublist-of-models">
-                <button class="model-button">Axion portal models (BC9-BC11)</button>
-                <ul class="similar-models">
-                  <li><button class="model-button model-link in-progress" onclick="location.href='../BC9/main.html';">ALP with photon dominance (BC9)</button></li>
-                  <li><button class="model-button model-link in-progress" onclick="location.href='../BC10/main.html';">ALP with fermion dominance (BC10)</button></li>
-                  <li><button class="model-button model-link in-progress" onclick="location.href='../BC11/main.html';">ALP with gluon dominance (BC11)</button></li>
-                </ul>
-              </div>
-            </li>
-            <li>
-              <div class="sublist-of-models">
-                <button class="model-button">Other models</button>
-                <ul class="similar-models">
-                  <li><button class="model-button model-link in-progress" onclick="location.href='../SUSY extention/main.html';">SUSY extention models</button></li>
-                </ul>
-              </div>
-            </li>
-          </ul>
         </div>
       </div>
-    </div>
-    
-  <!-- bottom banner (same as BC1 header) -->
-  <div class="header" style="margin-top:12px;">
-    <ul class="navbar">
-      <li class="logo navbar-link" style="margin-left:12px;">
-  <a href="https://home.cern" target="_blank" rel="noopener noreferrer" aria-label="CERN Accelerating Science">
-          <img src="../CERN-logo/Outline/SVG/LogoOutline-White.svg" alt="CERN" height="36" style="vertical-align:middle;">
-        </a>
-      </li>
-      <li class="logo navbar-link"><a href="../about/about.html" style="font-weight:700;color:#ffffff;margin-left:8px;">About</a></li>
-      <li class="logo navbar-link"><a href="../front/front.html">Dark Matter live</a></li>
-      <li class="navbar-link nav-dropdown">
-        <a class="nav-models active" href="../BC1/main.html">Choose your model</a>
-        <div class="dropdown" aria-label="Choose model menu">
-          <ul class="model-categories">
-            <li class="category">
-              <button class="category-btn" aria-expanded="false">Vector portal models (BC1-BC3)</button>
-              <ul class="submodels">
-                <li><a class="model-link" href="../BC1/main.html">Minimal dark photon model (BC1)</a></li>
-                <li><a class="model-link" href="../BC2/main.html">Light DM coupled to dark photon (BC2)</a></li>
-                <li><a class="model-link" href="../BC3/main.html">Millicharged particles (BC3)</a></li>
-              </ul>
-            </li>
-            <li class="category">
-              <button class="category-btn" aria-expanded="false">Scalar portal models (BC4-BC5)</button>
-              <ul class="submodels">
-                <li><a class="model-link" href="../BC4/main.html">Higgs-mixed scalar (BC4)</a></li>
-                <li><a class="model-link" href="../BC5/main.html"Higgs-mixed scalar w/ large pair-production (BC5)</a></li>
-              </ul>
-            </li>
-            <li class="category">
-              <button class="category-btn" aria-expanded="false">Neutrino portal models (BC6-BC8)</button>
-              <ul class="submodels">
-                <li><a class="model-link" href="../BC6/main.html">Single HNL, electron dominance (BC6)</a></li>
-                <li><a class="model-link" href="../BC7/main.html">Single HNL, muon dominance (BC7)</a></li>
-                <li><a class="model-link" href="../BC8/main.html">Single HNL, tau dominance (BC8)</a></li>
-              </ul>
-            </li>
-            <li class="category">
-              <button class="category-btn" aria-expanded="false">Axion portal models (BC9-BC11)</button>
-              <ul class="submodels">
-                <li><a class="model-link" href="../BC9/main.html">ALP with photon dominance (BC9)</a></li>
-                <li><a class="model-link" href="../BC10/main.html">ALP with fermion dominance (BC10)</a></li>
-                <li><a class="model-link" href="../BC11/main.html">ALP with gluon dominance (BC11)</a></li>
-              </ul>
-            </li>
-            <li class="category">
-              <button class="category-btn" aria-expanded="false">Other models</button>
-              <ul class="submodels">
-                <li><a class="model-link" href="../SUSY extension/main.html">SUSY extension models</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </li>
-      <li class="navbar-link"><a href="../faq/faq.html">How to add your results</a></li>
-    </ul>
-  </div>
+            <div class="layer-bg" data-depth="0.2" aria-hidden="true"></div>
+    </section>
+  </main>
 
   <footer>
     <div class="footer-inner">
       <div class="footer-left">
-        <a href="https://home.cern" target="_blank" rel="noopener noreferrer"><img src="../CERN-logo/Outline/SVG/LogoOutline-White.svg" alt="CERN" height="36"></a>
+        <a href="https://home.cern" target="_blank" rel="noopener noreferrer">
+          <img src="../CERN-logo/Outline/SVG/LogoOutline-White.svg" alt="CERN" height="36" />
+        </a>
       </div>
-      <div class="footer-right" style="text-align:right">
-        <div style="margin-bottom:6px">Find the project on: <a href="https://github.com/NewPhysicsLive/DarkMatterLive" target="_blank" rel="noopener noreferrer">GitHub</a> | <a href="https://gitlab.cern.ch/newphysicslive/DarkMatterLive" target="_blank" rel="noopener noreferrer">GitLab</a></div>
-  <div style="font-size:0.95em">&copy; CERN — <a href="https://home.cern/data-privacy-protection-policy" target="_blank" rel="noopener noreferrer">Privacy policy</a> | <a href="https://github.com/NewPhysicsLive/DarkMatterLive" target="_blank" rel="noopener noreferrer">GitHub</a> | <a href="https://gitlab.cern.ch/newphysicslive/DarkMatterLive" target="_blank" rel="noopener noreferrer">GitLab</a> | Contact: Brij Kishor Jashal at <a href="mailto:brij@cern.ch">brij@cern.ch</a></div>
+      <div class="footer-right" style="text-align: right">
+        <div style="margin-bottom: 6px">
+          Find the project on:
+          <a href="https://github.com/NewPhysicsLive/DarkMatterLive" target="_blank" rel="noopener noreferrer">GitHub</a> |
+          <a href="https://gitlab.cern.ch/newphysicslive/DarkMatterLive" target="_blank" rel="noopener noreferrer">GitLab</a>
+        </div>
+        <div style="font-size: 0.95em">
+          &copy; CERN —
+          <a href="https://home.cern/data-privacy-protection-policy" target="_blank" rel="noopener noreferrer">Privacy policy</a> |
+          <a href="https://github.com/NewPhysicsLive/DarkMatterLive" target="_blank" rel="noopener noreferrer">GitHub</a> |
+          <a href="https://gitlab.cern.ch/newphysicslive/DarkMatterLive" target="_blank" rel="noopener noreferrer">GitLab</a> |
+          Contact: Brij Kishor Jashal at <a href="mailto:brij@cern.ch">brij@cern.ch</a>
+        </div>
       </div>
     </div>
   </footer>
+
   <script src="script.js"></script>
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <script src="../js/matomo-consent.js"></script>
 </body>
 </html>

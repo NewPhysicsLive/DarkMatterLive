@@ -7,20 +7,26 @@ window.addEventListener("load", () => {
 const scene = document.getElementById("scene");
 const parallaxInstance = new Parallax(scene, {
   relativeInput: true, // makes it follow the mouse
+  pointerEvents: true,
+  selector: ".layer-bg",
 });
 
 // Toggle list visibility with animation
 const toggleBtn = document.getElementById("toggleTypesOfModelsBtn");
 const list = document.getElementById("modelList");
 toggleBtn.addEventListener("click", () => {
+  const wasVisible = list.classList.contains("visible-model-list");
   list.classList.toggle("visible-model-list");
+  // Do not auto-scroll; keep user in control to avoid header disappearing
 });
 
-modelList.addEventListener("click", (e) => {
+list.addEventListener("click", (e) => {
   if (e.target.matches(".model-button")) {
     const similarModels = e.target.nextElementSibling;
     if (similarModels && similarModels.matches(".similar-models")) {
+      const wasOpen = similarModels.classList.contains("visible-similar-models");
       similarModels.classList.toggle("visible-similar-models");
+      // Avoid auto-scrolling sublists to keep page position stable
     }
   }
 });
