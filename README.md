@@ -1,6 +1,6 @@
 # Dark-Matter-Live
 
-Dark-Matter-Live is a collaborative framework for building and providing interactive visualisations of published experimental and observational constraints on dark-matter models, enabling side-by-side comparison across experiments.
+Dark-Matter-Live is a collaborative framework for building and providing interactive visualisations of unified constraints on dark-matter models, based on published experimental and observational results.
 
 This repository contains the website pages and the underlying data used to render exclusion/constraint curves. New constraints can be added by submitting a Pull Request (PR) with the required data files and references.
 
@@ -15,9 +15,9 @@ Example: `data/BC1/` contains JSON metadata files and CSVs used by the BC1 model
 
 - Loads JSON metadata files and CSV curve data from `data/<model>/`.
 - Renders exclusion/constraint curves (lines and filled areas) on interactive plots.
-- Provides a single place to compare published constraints across many experiments.
+- Helps address the scaling and visualisation challenges of increasingly busy global limit plots by organising and rendering unified constraints in an interactive way.
 
-Dark matter studies and search results published by experimental, collider and cosmological communities are frequently reported using different conventions, units and parameterisations. One of the objectives of Dark-Matter-Live is to renormalise and map incoming results onto a consistent, model-aware parameter space so they can be compared coherently, while recording the original source, the assumptions made in any translation, and any additional caveats so users can trace how a displayed curve was derived.
+Dark matter studies and search results published by experimental, collider and cosmological communities are frequently reported using different conventions, units and parameterisations. One of the objectives of Dark-Matter-Live is to reinterpret and renormalise incoming results and map them onto a consistent, model-aware parameter space, while recording the original source, the assumptions made in any translation, and any additional caveats so users can trace how a displayed curve was derived.
 
 Website preview (static): open `pages/front/front.html` in your browser, or serve the repository locally (see below).
 
