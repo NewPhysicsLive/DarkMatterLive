@@ -1,7 +1,7 @@
 {
   "title": "Dark-Matter-Live",
   "upload_type": "software",
-  "description": "Dark-Matter-Live is a framework for building and providing interactive visualisations of published experimental and observational constraints on dark-matter models, enabling side-by-side comparison across experiments.",
+  "description": "Dark-Matter-Live is a collaborative framework for building and providing interactive visualisations of published experimental and observational constraints on dark-matter models",
   "creators": [
     {
       "name": "Jashal, Brij Kishor",
@@ -23,9 +23,12 @@
     "dark matter",
     "constraints",
     "exclusion limits",
+    "interactive visualisation",
+    "Reinterpretation and normalisation",
     "particle physics",
     "cosmology",
-    "data visualisation"
+    "astrophysics",
+    "collaborative framework"
   ],
   "related_identifiers": [
     {

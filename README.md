@@ -1,6 +1,6 @@
 # Dark-Matter-Live
 
-Dark-Matter-Live is a static website project (hosted at https://darkmatter.web.cern.ch) that provides interactive, dynamic visualisations of unified dark-matter constraints collected from published experimental and observational results.
+Dark-Matter-Live is a collaborative framework for building and providing interactive visualisations of published experimental and observational constraints on dark-matter models, enabling side-by-side comparison across experiments.
 
 This repository contains the website pages and the underlying data used to render exclusion/constraint curves. New constraints can be added by submitting a Pull Request (PR) with the required data files and references.
 
@@ -17,7 +17,13 @@ Example: `data/BC1/` contains JSON metadata files and CSVs used by the BC1 model
 - Renders exclusion/constraint curves (lines and filled areas) on interactive plots.
 - Provides a single place to compare published constraints across many experiments.
 
+Dark matter studies and search results published by experimental, collider and cosmological communities are frequently reported using different conventions, units and parameterisations. One of the objectives of Dark-Matter-Live is to renormalise and map incoming results onto a consistent, model-aware parameter space so they can be compared coherently, while recording the original source, the assumptions made in any translation, and any additional caveats so users can trace how a displayed curve was derived.
+
 Website preview (static): open `pages/front/front.html` in your browser, or serve the repository locally (see below).
+
+## Talks and slides
+
+- DMUK talk slides (01-12-2025): https://indico.global/event/15936/contributions/140187/attachments/65004/125777/DMUK_Brij_01-12-2025.pdf
 
 ## Data formats
 
