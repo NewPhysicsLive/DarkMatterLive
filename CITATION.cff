@@ -4,9 +4,12 @@ message: >-
 title: Dark-Matter-Live
 type: software
 abstract: >-
-  Dark-Matter-Live is a static website and dataset that provides interactive
-  visualisations of published experimental and observational constraints on
-  dark-matter models, enabling side-by-side comparison across experiments.
+  Dark-Matter-Live is a collaborative framework for building and providing
+  interactive visualisations of unified constraints on dark-matter models, based
+  on published experimental and observational results. It addresses the scaling
+  and visualisation challenges of increasingly busy global limit plots by
+  supporting reinterpretation and renormalisation of incoming results and
+  mapping them onto a consistent, model-aware parameter space.
 authors:
   - family-names: Jashal
     given-names: Brij Kishor
