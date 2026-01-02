@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+message: >-
+  If you use Dark-Matter-Live, please cite it using this metadata.
+title: Dark-Matter-Live
+type: software
+abstract: >-
+  Dark-Matter-Live is a static website and dataset that provides interactive
+  visualisations of published experimental and observational constraints on
+  dark-matter models, enabling side-by-side comparison across experiments.
+authors:
+  - family-names: Jashal
+    given-names: Brij Kishor
+    orcid: https://orcid.org/0000-0002-0025-4663
+    email: brij@cern.ch
+    affiliation: Rutherford Appleton Laboratory, UK
+license: Apache-2.0
+url: https://darkmatter.web.cern.ch
+repository-code: https://github.com/NewPhysicsLive/DarkMatterLive
+keywords:
+  - dark matter
+  - constraints
+  - exclusion limits
+  - particle physics
+  - cosmology
+  - data visualisation

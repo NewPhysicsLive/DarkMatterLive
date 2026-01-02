@@ -1,0 +1,43 @@
+{
+  "title": "Dark-Matter-Live",
+  "upload_type": "software",
+  "description": "Dark-Matter-Live is a framework for building and providing interactive visualisations of published experimental and observational constraints on dark-matter models, enabling side-by-side comparison across experiments.",
+  "creators": [
+    {
+      "name": "Jashal, Brij Kishor",
+      "orcid": "0000-0002-0025-4663",
+      "affiliation": "Rutherford Appleton Laboratory, UK",
+      "type": "ProjectLeader"
+    }
+  ],
+  "contributors": [
+    {
+      "name": "Anataichuk, Andrii",
+      "affiliation": "IRIS-HEP Fellow 2025",
+      "type": "Student"
+    }
+  ],
+  "access_right": "open",
+  "license": "Apache-2.0",
+  "keywords": [
+    "dark matter",
+    "constraints",
+    "exclusion limits",
+    "particle physics",
+    "cosmology",
+    "data visualisation"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/NewPhysicsLive/DarkMatterLive",
+      "relation": "isSupplementTo",
+      "resource_type": "other"
+    },
+    {
+      "identifier": "https://darkmatter.web.cern.ch",
+      "relation": "isSupplementTo",
+      "resource_type": "other"
+    }
+  ],
+  "language": "eng"
+}
