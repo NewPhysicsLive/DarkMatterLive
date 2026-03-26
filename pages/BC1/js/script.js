@@ -596,9 +596,10 @@ function plotBuilder(plotData) {
                     // show a usable link immediately (avoid sticking at "Loading…")
                     const url = element.paperUrls && element.paperUrls[0];
                     const domain = url ? (getSecondLevelDomain(url) || url) : 'source';
+                    const title = element.labelName;
                     instance.setContent(`\
                 <div class="wordbreaker" style="max-width:250px; font-family: sans-serif; display:flex;align-items:center;justify-content:start;flex-direction:column;gap:0.5rem">\
-                  <p style="margin:0; padding:0;"><a href="${url || '#'}" target="_blank" rel="noopener noreferrer">${domain}</a></p>\
+                  <p style="margin:0; padding:0;">${title} <a href="${url || '#'}" target="_blank" rel="noopener noreferrer">${domain}</a></p>\
                 </div>\
               `);
 
