@@ -38,4 +38,10 @@ PR template suggestions
 - Link(s) to the publication(s) used.
 - Any rescaling performed, with a short explanation and link to code or notes.
 
+If you are reviewing or adapting machine-generated data update branches, see:
+
+- `.github/PULL_REQUEST_TEMPLATE/bot_data_update.md` for the review checklist template
+- `docs/draft-ingestion-workflow.md` for how draft data updates are currently generated
+- `docs/adding-model-family-transform.md` for transformation implementation guidance
+
 If you need help, open an issue and mention the maintainers.

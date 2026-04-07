@@ -1,0 +1,29 @@
+{
+  "records": [
+    {
+      "id": "ins1234567",
+      "version": "1",
+      "updated_at": "2026-04-03T10:00:00Z",
+      "url": "https://www.hepdata.net/record/ins1234567",
+      "checksum": "abc123examplechecksum",
+      "assets": [
+        {
+          "path": "https://www.hepdata.net/download/table1.csv"
+        },
+        {
+          "url": "https://www.hepdata.net/download/metadata.yaml"
+        }
+      ]
+    },
+    {
+      "record_id": "ins2345678",
+      "record_version": "2",
+      "last_updated": "2026-04-04T09:15:00Z",
+      "landing_page": "https://www.hepdata.net/record/ins2345678",
+      "sha256": "def456examplechecksum",
+      "assets": [
+        "https://www.hepdata.net/download/table2.csv"
+      ]
+    }
+  ]
+}

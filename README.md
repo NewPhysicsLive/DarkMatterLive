@@ -19,6 +19,27 @@ Example: `data/BC1/` contains JSON metadata files and CSVs used by the BC1 model
 
 Dark matter studies and search results published by experimental, collider and cosmological communities are frequently reported using different conventions, units and parameterisations. One of the objectives of Dark-Matter-Live is to reinterpret and renormalise incoming results and map them onto a consistent, model-aware parameter space, while recording the original source, the assumptions made in any translation, and any additional caveats so users can trace how a displayed curve was derived.
 
+## Backend automation scaffold
+
+The repository now also contains an early backend scaffold under `backend/` for automated source ingestion, expert-reviewed draft updates, deterministic transformation pipelines, and future MCP tooling.
+
+What is implemented today:
+
+- canonical backend models for source records, curves, reviews, transformations, and export artifacts
+- a HEPData-style JSON connector for feed snapshots
+- a CLI command that generates local draft review artifacts under `.draft-data-prs/`
+- an exporter that writes generated site metadata with provenance and review fields
+- stricter validation for generated JSON metadata in `scripts/validate_data.py`
+
+Documentation:
+
+- `backend/README.md` for the implemented backend package and CLI
+- `docs/data-platform-architecture.md` for the architecture and review model
+- `docs/draft-ingestion-workflow.md` for the current draft-ingestion flow
+- `docs/implementation-status.md` for a concrete inventory of implemented code and limitations
+- `docs/adding-model-family-transform.md` for adding a deterministic model-family transform
+- `backend/examples/hepdata-records.sample.json` and `backend/examples/draft-pr-example.md` for concrete draft-ingestion examples
+
 Website preview (static): open `pages/front/front.html` in your browser, or serve the repository locally (see below).
 
 ## Talks and slides
@@ -62,6 +83,7 @@ x,y
 Notes:
 - `url` is a relative path from the page that reads the JSON to the CSV data file.
 - `paperUrls` must contain a link to the published result (arXiv, journal DOI, or experiment page).
+- generated JSON artifacts may also include provenance and review metadata used by the backend automation scaffold
 
 If you add new fields, keep them backwards compatible with the rendering code in `pages/`.
 
@@ -128,6 +150,11 @@ npx http-server -p 8000
 - Ensure CSV files are valid numeric CSVs. Small parsing errors will cause the plotting code to fail silently or skip the curve.
 - Keep colours accessible (avoid only red/green differences). Use RGBA with alpha for filled areas if possible.
 - If you rescale or reinterpret published limits, document the rescaling and assumptions clearly in the PR description and include a link to any code or notes used.
+- If a JSON file is machine-generated and sets `generated: true`, the validator now also expects provenance and review metadata.
+
+Backend validation and draft-ingestion notes are documented in `backend/README.md` and `docs/draft-ingestion-workflow.md`.
+
+Bot-generated data update PRs can use `.github/PULL_REQUEST_TEMPLATE/bot_data_update.md` as the review checklist template.
 
 ## License & contact
 

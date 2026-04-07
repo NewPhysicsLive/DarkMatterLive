@@ -1,0 +1,30 @@
+{
+  "curve_id": "ins1234567-hepdata-table1",
+  "label_name": "Example HEPData Constraint",
+  "long_name": "Example Constraint From HEPData Table",
+  "observable": "sigma_chi_nucleon",
+  "curve_type": "excluded",
+  "origin": "official",
+  "categories": {
+    "modelFamily": "BC1",
+    "detectionType": "Direct detection",
+    "experimentType": "Example HEPData experiment",
+    "timeType": "Past constraints"
+  },
+  "paper_urls": [
+    "https://arxiv.org/abs/1234.56789"
+  ],
+  "publication": {
+    "title": "Example HEPData Dark Matter Constraint",
+    "collaboration": "Example Collaboration",
+    "arxiv_id": "1234.56789",
+    "journal": "Example Journal",
+    "publication_date": "2026-04-01",
+    "urls": [
+      "https://arxiv.org/abs/1234.56789"
+    ]
+  },
+  "assumptions": [
+    "Example metadata for HEPData table normalization"
+  ]
+}

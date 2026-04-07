@@ -1,0 +1,45 @@
+{
+  "curve_id": "ins1234567-table1-example",
+  "label_name": "Example Constraint",
+  "long_name": "Example Constraint From Local CSV",
+  "observable": "sigma_chi_nucleon",
+  "confidence_level": "90% CL",
+  "curve_type": "excluded",
+  "origin": "official",
+  "x_axis": {
+    "name": "dark_matter_mass",
+    "symbol": "m_chi",
+    "unit": "GeV",
+    "scale": "log10",
+    "description": "Dark matter mass"
+  },
+  "y_axis": {
+    "name": "cross_section",
+    "symbol": "sigma",
+    "unit": "cm^2",
+    "scale": "log10",
+    "description": "Spin-independent scattering cross section"
+  },
+  "categories": {
+    "modelFamily": "BC1",
+    "detectionType": "Direct detection",
+    "experimentType": "Example experiment",
+    "timeType": "Past constraints"
+  },
+  "paper_urls": [
+    "https://arxiv.org/abs/1234.56789"
+  ],
+  "publication": {
+    "title": "Example Dark Matter Constraint",
+    "collaboration": "Example Collaboration",
+    "arxiv_id": "1234.56789",
+    "journal": "Example Journal",
+    "publication_date": "2026-04-01",
+    "urls": [
+      "https://arxiv.org/abs/1234.56789"
+    ]
+  },
+  "assumptions": [
+    "Example metadata for the draft local normalization path"
+  ]
+}

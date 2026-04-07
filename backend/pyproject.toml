@@ -1,0 +1,23 @@
+[project]
+name = "darkmatterlive-backend"
+version = "0.1.0"
+description = "Backend ingestion and transformation scaffolding for Dark-Matter-Live"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "pydantic>=2.8,<3.0",
+  "PyYAML>=6.0,<7.0",
+]
+
+[project.scripts]
+dml-backend = "dml_backend.cli:main"
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]

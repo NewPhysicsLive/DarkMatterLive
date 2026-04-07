@@ -1,0 +1,39 @@
+independent_variables:
+  - header:
+      name: m_chi
+      units: GeV
+    values:
+      - value: 0.1
+      - value: 1.0
+      - value: 10.0
+dependent_variables:
+  - header:
+      name: sigma
+      units: cm^2
+    qualifiers:
+      - name: CL
+        value: 90% CL
+      - name: channel
+        value: electron
+    values:
+      - value: 1.0e-4
+        errors:
+          - label: stat
+            symerror: 1.0e-5
+      - value: 3.0e-5
+        errors:
+          - label: syst
+            symerror: 3.0e-6
+      - value: 8.0e-6
+  - header:
+      name: sigma
+      units: cm^2
+    qualifiers:
+      - name: CL
+        value: 95% CL
+      - name: channel
+        value: muon
+    values:
+      - value: 2.0e-4
+      - value: 5.0e-5
+      - value: 1.1e-5

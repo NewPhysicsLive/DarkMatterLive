@@ -19,6 +19,71 @@ ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = ROOT / "data"
 
 required_json_fields = ["labelName", "id", "url", "paperUrls"]
+required_generated_fields = ["origin", "observable", "assumptions", "provenance", "review"]
+
+
+def _is_non_empty_string(value):
+    return isinstance(value, str) and value.strip() != ""
+
+
+def _looks_like_iso_datetime(value):
+    if not isinstance(value, str):
+        return False
+    try:
+        from datetime import datetime
+
+        datetime.fromisoformat(value.replace("Z", "+00:00"))
+        return True
+    except Exception:
+        return False
+
+
+def validate_generated_metadata(path: Path, data: dict):
+    errors = []
+    for field in required_generated_fields:
+        if field not in data:
+            errors.append(f"Generated artifact is missing required field '{field}'")
+
+    if "assumptions" in data and not isinstance(data["assumptions"], list):
+        errors.append("Generated artifact field 'assumptions' must be a list")
+
+    provenance = data.get("provenance")
+    if provenance is not None:
+        if not isinstance(provenance, dict):
+            errors.append("Generated artifact field 'provenance' must be an object")
+        else:
+            if not _is_non_empty_string(provenance.get("sourceSystem")):
+                errors.append("Generated artifact provenance.sourceSystem must be a non-empty string")
+            if not _is_non_empty_string(provenance.get("sourceRecordId")):
+                errors.append("Generated artifact provenance.sourceRecordId must be a non-empty string")
+            fetched_at = provenance.get("fetchedAt")
+            if fetched_at is not None and not _looks_like_iso_datetime(fetched_at):
+                errors.append("Generated artifact provenance.fetchedAt must be an ISO-8601 datetime")
+            raw_assets = provenance.get("rawAssetPaths")
+            if raw_assets is not None and not isinstance(raw_assets, list):
+                errors.append("Generated artifact provenance.rawAssetPaths must be a list when present")
+
+    review = data.get("review")
+    if review is not None:
+        if not isinstance(review, dict):
+            errors.append("Generated artifact field 'review' must be an object")
+        else:
+            allowed_statuses = {"draft", "needs-review", "approved", "rejected", "superseded"}
+            status = review.get("status")
+            if status not in allowed_statuses:
+                errors.append(
+                    "Generated artifact review.status must be one of: "
+                    + ", ".join(sorted(allowed_statuses))
+                )
+            required_checks = review.get("requiredChecks")
+            if required_checks is not None and not isinstance(required_checks, list):
+                errors.append("Generated artifact review.requiredChecks must be a list when present")
+
+    publication = data.get("publication")
+    if publication is not None and not isinstance(publication, dict):
+        errors.append("Generated artifact field 'publication' must be an object when present")
+
+    return errors
 
 
 def validate_json_file(path: Path):
@@ -26,7 +91,7 @@ def validate_json_file(path: Path):
     try:
         j = json.loads(path.read_text(encoding="utf-8"))
     except Exception as e:
-        return [f"JSON parse error: {e}"]
+        return [f"JSON parse error: {e}"], None
 
     for f in required_json_fields:
         if f not in j:
@@ -35,6 +100,9 @@ def validate_json_file(path: Path):
     # paperUrls must be a non-empty list
     if "paperUrls" in j and (not isinstance(j["paperUrls"], list) or len(j["paperUrls"]) == 0):
         errors.append("'paperUrls' must be a non-empty list of URLs")
+
+    if j.get("generated") is True:
+        errors.extend(validate_generated_metadata(path, j))
 
     # url should point to a CSV
     if "url" in j:
