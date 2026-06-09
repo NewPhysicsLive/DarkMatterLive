@@ -170,10 +170,28 @@ async function getLocalPreview(url) {
 }
 
 // Set up margins and dimensions
-const margin = { top: 60, right: 370, bottom: 80, left: 95 };
 const container = d3.select('#plot');
 const width = container.node().clientWidth;
 const height = container.node().clientHeight;
+const isMobile = (width < 800);
+
+const padding = (isMobile ? 5 : 20);
+const titleHeight = 30;
+const axisLabelHeight = 30;
+const axisLabelSize = 10;
+const tickSize = 7;
+const tickLabelSize = {h: 10, w: 25};
+const legendWidth = 320;
+
+const margin = {
+  top:    (titleHeight + padding),
+  right:  (isMobile ? tickSize : (tickSize + padding + legendWidth)),
+  bottom: (axisLabelHeight + padding + tickSize + tickLabelSize.h + (isMobile ? height/2 : 0)),
+  left:   (axisLabelHeight + padding + tickSize + tickLabelSize.w)
+};
+
+// Position buttons releative to center of plot
+document.querySelector('.interacting-buttons ul').style.paddingRight = `${(isMobile ? 0 : legendWidth)}px`;
 
 let superscript = "⁰¹²³⁴⁵⁶⁷⁸⁹",
     formatPower = function(d) { return (d + "").split("").map(function(c) { return superscript[c]; }).join("");
@@ -272,20 +290,20 @@ const y0 = d3.scaleLog().domain([1e-40, 1e-0]).range([height - margin.bottom, ma
 const xAxis = d3.axisBottom(x0)
       .ticks(10)
       .tickFormat(powerTickFormatter({ labelEveryMantissa: false }))
-      .tickSize(7);
+      .tickSize(tickSize);
 const yAxis = d3.axisLeft(y0)
       .ticks(10)
       .tickFormat(powerTickFormatter({ labelEveryMantissa: false }))
-      .tickSize(7);
+      .tickSize(tickSize);
 
 const xAxisTop = d3.axisTop(x0)
       .ticks(10)
       .tickFormat("")
-      .tickSize(7);
+      .tickSize(tickSize);
 const yAxisRight = d3.axisRight(y0)
       .ticks(10)
       .tickFormat("")
-      .tickSize(7);
+      .tickSize(tickSize);
 
 
 
@@ -1992,10 +2010,9 @@ Promise.all(
 });
 
 // === config ===
-const legendX = width - margin.right + 50;
-const legendY = 0;
-const legendHeight = height - margin.bottom;
-const legendWidth  = 320;
+const legendX = (isMobile ? padding : width - margin.right + padding);
+const legendY = (isMobile ? height/2 : 0);
+const legendHeight = (isMobile ? height/2 : height - margin.bottom);
 const itemHeight   = 25;  // row height for title/items
 const swatchSize   = 30;
 
@@ -2852,10 +2869,11 @@ const yAxisGright = svg.append('g')
 const plotTitle = svg
   .append("foreignObject")
   .attr("class", "plot-title")
-  .attr("x", (width - margin.left - margin.right) / 2 + margin.left-230)
-  .attr("y", margin.top - 45)
-  .attr("width", 460)
-  .attr("height", 40)
+  .attr("x", (isMobile ? 0 : margin.left ))
+  .attr("y", 0)
+  .attr("width", (isMobile ? width : width - margin.right - margin.left))
+  .attr("height", titleHeight)
+  .style("font-size", `${titleHeight*0.65}px`); // font-size != line height
   
 plotTitle.append("xhtml:div").html(
   katex.renderToString("\\mathrm{Minimal\\,dark\\,photon\\,model\\,(BC1)}", {
@@ -2866,11 +2884,12 @@ plotTitle.append("xhtml:div").html(
 
 //Adding plot labels with TeX content
 const foX = svg.append("foreignObject")
-    .attr("x", (width - margin.left-margin.right) / 2 + margin.left - 110)
-    .attr("y", height - margin.bottom + 40)
-    .attr("width", 220)
-    .attr("class", "axis-label")
-    .attr("height", 30)
+  .attr("x", margin.left)
+  .attr("y", (isMobile ? (height/2 - axisLabelHeight) : height - axisLabelHeight))
+  .attr("width", width - margin.right - margin.left)
+  .attr("height", axisLabelHeight)
+  .attr("class", "axis-label")
+  .style("font-size", `${axisLabelHeight*0.65}px`); // font-size != line height
 
 // DOMParser to turn that string into actual nodes
 foX.append("xhtml:div").html(
@@ -2881,11 +2900,12 @@ foX.append("xhtml:div").html(
  .style("margin-inline", "auto");
 
 const foY = svg.append("foreignObject")
-    .attr("x", 0)
-    .attr("y", height / 2 - margin.top + 25)
-    .attr("width", 50)
-    .attr("class", "axis-label")
-    .attr("height", 50)
+  .attr("x", 0)
+  .attr("y", margin.top)
+  .attr("width", axisLabelHeight)
+  .attr("height", height - margin.top - margin.bottom)
+  .attr("class", "axis-label")
+  .style("font-size", `${axisLabelHeight*0.65}px`); // font-size != line height
 
 // DOMParser to turn that string into actual nodes
 foY.append("xhtml:div").html(
@@ -3046,13 +3066,13 @@ const zoom = d3.zoom()
         .scale(zx)
         .ticks(xTicks[0])
         .tickFormat(xTicks[1])
-        .tickSize(7));
+        .tickSize(tickSize));
       
     svg.select(".x-axis-top").call(
       xAxisTop
       .scale(zx)
       .ticks(xTicks[0])
-      .tickSize(7)
+      .tickSize(tickSize)
     );
 
     const yTicks = ticksChangerY(spanRatioY, yMin, yMax);
@@ -3062,13 +3082,13 @@ const zoom = d3.zoom()
         .scale(zy)
         .ticks(yTicks[0])
         .tickFormat(yTicks[1])
-        .tickSize(7));
+        .tickSize(tickSize));
       
     svg.select(".y-axis-right").call(
       yAxisRight
       .scale(zy)
       .ticks(yTicks[0])
-      .tickSize(7)
+      .tickSize(tickSize)
     );
 
     const zoomedLine = d3.line()
@@ -3313,13 +3333,13 @@ d3.select("body").on("click", function (event) {
         .scale(x0)
         .ticks(xTicks[0])
         .tickFormat(xTicks[1])
-        .tickSize(7));
+        .tickSize(tickSize));
       
     svg.select(".x-axis-top").call(
       xAxisTop
       .scale(x0)
       .ticks(xTicks[0])
-      .tickSize(7)
+      .tickSize(tickSize)
     );
 
     const yTicks = ticksChangerY(spanRatioY, yMin, yMax);
@@ -3329,13 +3349,13 @@ d3.select("body").on("click", function (event) {
         .scale(y0)
         .ticks(yTicks[0])
         .tickFormat(yTicks[1])
-        .tickSize(7));
+        .tickSize(tickSize));
       
     svg.select(".y-axis-right").call(
       yAxisRight
       .scale(y0)
       .ticks(yTicks[0])
-      .tickSize(7)
+      .tickSize(tickSize)
     );
 
     dataLayer.selectAll('path.line')
