@@ -2043,8 +2043,8 @@ const legend_wrapper = svg
   .attr("class", "legend-fo")
   .attr("x", legendX)
   .attr("y", legendY)
-  .style("width", `${legendWidth}px`)
-  .style("height", `${legendHeight}px`)
+  .attr("width", legendWidth)
+  .attr("height", legendHeight)
   .style("overflow-x", "hidden")
   .append("xhtml:div")
   .style("width", "100%")
@@ -2884,50 +2884,45 @@ const plotTitle = svg
   .attr("y", margin.top - 45)
   .attr("width", 460)
   .attr("height", 40)
-  .attr("text-anchor", "middle");
   
 plotTitle.append("xhtml:div").html(
   katex.renderToString("\\mathrm{Minimal\\,dark\\,photon\\,model\\,(BC1)}", {
     throwOnError: false,
   })
-);
+).style("max-width", "fit-content")
+ .style("margin-inline", "auto");
 
 //Adding plot labels with TeX content
-const foX = xAxisG
-  .append("foreignObject")
-  .attr("x", (width - margin.left-margin.right) / 2 + margin.left - 110)
-  .attr("y", 40)
-  .attr("width", 220)
-  .attr("class", "axis-label")
-  .attr("text-anchor", "middle")
-  .attr("height", 30);
-  // DOMParser to turn that string into actual nodes
+const foX = svg.append("foreignObject")
+    .attr("x", (width - margin.left-margin.right) / 2 + margin.left - 110)
+    .attr("y", height - margin.bottom + 40)
+    .attr("width", 220)
+    .attr("class", "axis-label")
+    .attr("height", 30)
+
+// DOMParser to turn that string into actual nodes
 foX.append("xhtml:div").html(
   katex.renderToString("\\mathrm{Mass\\,of\\,DM},\\,m_{\\chi}\\,[\\mathrm{GeV}]", {
     throwOnError: false,
   })
-);
+).style("max-width", "fit-content")
+ .style("margin-inline", "auto");
 
-const foY = yAxisG
-  .append("foreignObject")
-  .attr("x", -(height - margin.top - margin.bottom) / 2 - margin.top - 100)
-  .attr("y", -margin.left)
-  .style("transform", "rotate(-90deg)")
-  .attr("width", 200)
-  .attr("class", "axis-label")
-  .attr("text-anchor", "middle")
-  .attr("height", 50);
+const foY = svg.append("foreignObject")
+    .attr("x", 0)
+    .attr("y", height / 2 - margin.top + 25)
+    .attr("width", 50)
+    .attr("class", "axis-label")
+    .attr("height", 50)
+
 // DOMParser to turn that string into actual nodes
-foY
-  .append("xhtml:div")
-  .html(
-    katex.renderToString(
-      "\\varepsilon",
-      {
-        throwOnError: false,
-      }
-    )
-  );
+foY.append("xhtml:div").html(
+    katex.renderToString("\\varepsilon", {
+     throwOnError: false,
+  })
+).style("transform", "rotate(-90deg)")
+ .style("max-width", "fit-content")
+ .style("margin-inline", "auto");
 
 let currentXMin = x0.domain()[0];
 let currentXMax = x0.domain()[1];
