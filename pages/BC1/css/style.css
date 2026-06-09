@@ -199,7 +199,6 @@ body {
   display: flex;
   justify-content: center;
   gap: 2rem;
-  padding-right: 300px;
   flex-direction: row;
   margin-top: 20px;
   margin-bottom: 40px;
