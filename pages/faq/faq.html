@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=0.8" />
   <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -12,7 +12,7 @@
   <!-- D3.js CDN -->
   <script src="../vendor/d3.v7.min.js"></script>
   <!-- Link to canonical CSS/JS used by BC1 pages -->
-   <link rel="stylesheet" href="../shared/header.css" />
+   <link rel="stylesheet" href="../shared/navbar.css" />
    <link rel="stylesheet" href="../BC1/css/style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,31 +28,31 @@
   <link rel="stylesheet" href="../vendor/tippy.css" />
   <script defer src="../vendor/katex.min.js"></script>
   <script defer src="../BC1/js/script.js"></script>
+  <script defer src="../shared/navbar.js"></script>
   <!-- Page-local override: force single-column layout for FAQ description -->
   <style>
     /* Keep other pages' layout unchanged; this only affects faq.html */
-    .description { display: block; padding: 1rem 0; }
+    .description { padding: 1rem 0; }
     /* Make the FAQ content span the full available width but cap it for readability */
     .description .description-box { margin: 0 auto; width: 100%; max-width: 1100px; padding: 20px; background-color: #f0f0f0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); text-align: left; }
     .description .description-box p, .description .description-box ul, .description .description-box ol, .description .description-box h3 { text-align: left; }
   </style>
 </head>
 <body>
-  <header class="header">
-    <ul class="navbar">
-      <li class="logo navbar-link" style="margin-left:12px;">
-  <a href="https://home.cern" target="_blank" rel="noopener noreferrer" aria-label="CERN Accelerating Science">
-          <img src="../CERN-logo/Outline/SVG/LogoOutline-White.svg" alt="CERN" height="40" style="vertical-align:middle;">
-        </a>
-      </li>
-      <li class="logo navbar-link"><a href="../about/about.html" style="font-weight:700;color:#ffffff;margin-left:8px;">About</a></li>
-      <li class="logo navbar-link"><a href="../front/front.html">Dark Matter live</a></li>
-      <li class="navbar-link nav-dropdown">
-        <a class="nav-models active" href="../models/explorer.html">Model explorer</a>
-      </li>
-      <li class="navbar-link"><a href="../faq/faq.html">How to add your results</a></li>
-    </ul>
-  </header>
+  <nav class="navbar">
+    <div class="logo">
+	  <a href="https://home.cern" target="_blank" rel="noopener noreferrer" aria-label="CERN Accelerating Science">
+        <img src="../CERN-logo/Outline/SVG/LogoOutline-White.svg" alt="CERN" height="40" style="vertical-align: middle" />
+      </a>
+    </div>
+    <div class="menu" id="menu">
+      <a href="../about/about.html">About</a>
+      <a href="../front/front.html">Dark Matter live</a>
+      <a href="../models/explorer.html">Model explorer</a>
+      <a href="../faq/faq.html">How to add your results</a>
+    </div>
+    <div class="hamburger" id="hamburger">Menu</div>
+  </nav>
   <div class="wrapper">
     <h1 class="model-title">How to add your results</h1>
     <div class="description">

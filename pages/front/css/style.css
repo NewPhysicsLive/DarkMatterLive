@@ -8,7 +8,7 @@ html.loading body {
   box-sizing: border-box; 
 }
 
-html, body {
+body {
   width: 100%;
   margin: 0;
   padding: 0;
@@ -28,7 +28,7 @@ body.front-page {
 body.front-page main {
   flex: 1 0 auto;
   position: relative;
-  background: url('heic2003b.png') no-repeat center top #050b16;
+  background: url('../heic2003b.png') no-repeat center top #050b16;
   background-size: cover;
   background-attachment: fixed;
 }
@@ -62,7 +62,7 @@ body.front-page .front-wrapper {
 body.front-page .layer-bg {
   position: absolute;
   inset: 0;
-  background: url('heic2003b.png') no-repeat center top;
+  background: url('../heic2003b.png') no-repeat center top;
   background-size: cover;
   background-attachment: fixed;
   opacity: 0.95;
@@ -230,7 +230,7 @@ body.front-page .similar-models {
 body.front-page .similar-models.visible-similar-models {
   transform: translate(0, 0);
   opacity: 1;
-  max-height: 1000px;
+  max-height: 2000px;
   transition: transform 0.4s ease, opacity 0.4s ease, max-height 0.4s ease;
 }
 
