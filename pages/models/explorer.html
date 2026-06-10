@@ -1,21 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dark Matter Explorer: Physics & Classification</title>
-  <!DOCTYPE html>
-  <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.8" />
     <title>Dark Matter Explorer: Physics & Classification</title>
     <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
     <link rel="manifest" href="../site.webmanifest?v=20251130">
-    <link rel="stylesheet" href="../shared/header.css" />
+    <link rel="stylesheet" href="../shared/navbar.css" />
     <link rel="stylesheet" href="../BC1/css/style.css?v=20251130" />
+    <script defer src="../shared/navbar.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -28,19 +23,20 @@
     </style>
   </head>
   <body>
-    <header class="header">
-      <ul class="navbar">
-        <li class="logo navbar-link" style="margin-left:12px;">
-          <a href="https://home.cern" target="_blank" rel="noopener noreferrer" aria-label="CERN Accelerating Science">
-            <img src="../CERN-logo/Outline/SVG/LogoOutline-White.svg" alt="CERN" height="40" style="vertical-align:middle;">
-          </a>
-        </li>
-        <li class="logo navbar-link"><a href="../about/about.html" style="font-weight:700;color:#ffffff;margin-left:8px;">About</a></li>
-        <li class="logo navbar-link"><a href="../front/front.html">Dark Matter live</a></li>
-        <li class="navbar-link"><a class="nav-models active" href="./explorer.html">Model explorer</a></li>
-        <li class="navbar-link"><a href="../faq/faq.html">How to add your results</a></li>
-      </ul>
-    </header>
+    <nav class="navbar">
+    <div class="logo">
+	  <a href="https://home.cern" target="_blank" rel="noopener noreferrer" aria-label="CERN Accelerating Science">
+        <img src="../CERN-logo/Outline/SVG/LogoOutline-White.svg" alt="CERN" class="inline-block h-10" />
+      </a>
+    </div>
+    <div class="menu" id="menu">
+      <a href="../about/about.html">About</a>
+      <a href="../front/front.html">Dark Matter live</a>
+      <a href="../models/explorer.html">Model explorer</a>
+      <a href="../faq/faq.html">How to add your results</a>
+    </div>
+    <div class="hamburger" id="hamburger">Menu</div>
+    </nav>
     <div class="wrapper">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 min-h-screen flex flex-col">
         <header class="mb-8 text-center sm:text-left border-b border-slate-200 pb-6">
