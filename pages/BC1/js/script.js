@@ -306,9 +306,6 @@ svg.append('clipPath')
     .attr('width', width - margin.left - margin.right)
     .attr('height', height - margin.top - margin.bottom);
 
-// create the in-plot label (clickable)
-createInSvgLabel(svg, 'Dark Matter live', 'https://darkmatter.web.cern.ch/');
-
 // Container for data
 const clipped = svg.append('g')
   .attr('clip-path', 'url(#clip)');
@@ -413,7 +410,8 @@ function groupByCategory(data, key) {
   return Array.from(map, ([group, items]) => ({ group, items }));
 }
 
-
+// create the in-plot label (clickable)
+createInSvgLabel(svg, 'Dark Matter live', 'https://darkmatter.web.cern.ch/');
 
 //building all the plots from the plotData
 function plotBuilder(plotData) {
