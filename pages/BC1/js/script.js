@@ -180,7 +180,7 @@ const svg = container.append('svg')
   .attr("pointer-events", "all");
 
 // add a small clickable label inside the plotting axes (bottom-left)
-function createInSvgLabel(svgSelection, text, href) {
+function createInSvgLabel(svgSelection, title, href) {
   try {
     // compute coordinates just inside the left and bottom axes area
     const x = margin.left + 8; // a few px inside left axis
@@ -194,13 +194,13 @@ function createInSvgLabel(svgSelection, text, href) {
     // background rounded rect
     g.append('rect')
       .attr('x', -6)
-      .attr('y', -18)
+      .attr('y', -34)
       .attr('rx', 4)
       .attr('ry', 4)
       .attr('fill', 'rgba(255,255,255,0.9)')
       .attr('stroke', '#ddd')
-      .attr('width', 160)
-      .attr('height', 24);
+      .attr('width', 220)
+      .attr('height', 40);
 
     // link text
     const a = g.append('a')
@@ -208,14 +208,23 @@ function createInSvgLabel(svgSelection, text, href) {
       .attr('target', '_blank')
       .attr('rel', 'noopener noreferrer');
 
-    a.append('text')
+    const text = a.append('text')
       .attr('x', 0)
-      .attr('y', -2)
+      .attr('y', '-1.5em')
       .attr('fill', '#3c096c')
       .style('font-weight', '600')
       .style('font-family', 'Open Sans, sans-serif')
-      .style('font-size', '13px')
-      .text(text);
+      .style('font-size', '13px');
+
+    const tspan1 = text.append('tspan')
+      .attr('x', 0)
+      .attr('dy', '0')
+      .text(title);
+
+    const tspan2 = text.append('tspan')
+      .attr('x', 0)
+      .attr('dy', '1.3em')
+      .text(href);
   } catch (e) {
     console.warn('Failed to create in-SVG label', e);
   }
