@@ -11,10 +11,6 @@ body {
 #plot {
   width: 90vw;
   height: 90vh;
-}
-
-/* allow absolutely-positioned elements inside the plot area */
-#plot {
   position: relative;
 }
 

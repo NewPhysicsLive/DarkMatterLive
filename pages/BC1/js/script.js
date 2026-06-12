@@ -162,8 +162,7 @@ async function getLocalPreview(url) {
 // Set up margins and dimensions
 const container = d3.select('#plot');
 const width = container.node().clientWidth;
-const height = container.node().clientHeight;
-const isMobile = (width < 800);
+const isMobile = (width < 1000);
 
 const padding = (isMobile ? 5 : 20);
 const titleHeight = 30;
@@ -176,9 +175,17 @@ const legendWidth = 320;
 const margin = {
   top:    (titleHeight + padding),
   right:  (isMobile ? tickSize : (tickSize + padding + legendWidth)),
-  bottom: (axisLabelHeight + padding + tickSize + tickLabelSize.h + (isMobile ? height/2 : 0)),
+  bottom: (axisLabelHeight + padding + tickSize + tickLabelSize.h),
   left:   (axisLabelHeight + padding + tickSize + tickLabelSize.w)
 };
+
+const ratio_h = (width - margin.right)*(2/3); // height via ratio
+const max_height = container.node().clientHeight - (margin.top + margin.bottom);
+const height = (ratio_h > max_height ? max_height : ratio_h) + margin.top + margin.bottom;
+
+// Set heigh of svg
+document.querySelector('#plot').style.height = `${(isMobile ? height*2 : height)}px`;
+
 
 // Position buttons releative to center of plot
 document.querySelector('.interacting-buttons ul').style.paddingRight = `${(isMobile ? 0 : legendWidth)}px`;
@@ -226,7 +233,7 @@ function powerTickFormatter({ labelEveryMantissa = false } = {}) {
 
 // Create SVG with viewBox for responsiveness
 const svg = container.append('svg')
-  .attr('viewBox', `0 0 ${width} ${height}`)
+  .attr('viewBox', `0 0 ${width} ${(isMobile ? height*2 : height)}`)
   .classed('svg-content', true)
   .attr("pointer-events", "all");
 
@@ -1992,8 +1999,8 @@ Promise.all(
 
 // === config ===
 const legendX = (isMobile ? padding : width - margin.right + padding);
-const legendY = (isMobile ? height/2 : 0);
-const legendHeight = (isMobile ? height/2 : height - margin.bottom);
+const legendY = (isMobile ? height : 0);
+const legendHeight = (isMobile ? height : height - margin.bottom);
 const itemHeight   = 25;  // row height for title/items
 const swatchSize   = 30;
 
@@ -2859,7 +2866,7 @@ plotTitle.append("xhtml:div").html(
 //Adding plot labels with TeX content
 const foX = svg.append("foreignObject")
   .attr("x", margin.left)
-  .attr("y", (isMobile ? (height/2 - axisLabelHeight) : height - axisLabelHeight))
+  .attr("y", height - axisLabelHeight)
   .attr("width", width - margin.right - margin.left)
   .attr("height", axisLabelHeight)
   .attr("class", "axis-label")
