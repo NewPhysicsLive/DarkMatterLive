@@ -11,7 +11,7 @@ body {
 #plot {
   width: 90vw;
   height: 90vh;
-  position: relative;
+  position: relative; /* allow absolutely-positioned elements inside the plot area */
 }
 
 /* inner wrapper used on placeholder pages that contain the svg */
