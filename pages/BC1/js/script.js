@@ -446,7 +446,18 @@ function plotBuilder(plotData) {
               .attr("fill", `${element.area.color}`)
               .attr("d", areaGen)
               .attr("id", `${element.id}-area`);
-          }
+          } else {
+            dataLayer
+              .append("path")
+              .datum(data)
+              .attr("fill", "none")
+              .attr("stroke", "rgba(0, 0, 0, 0)")
+              .attr("class", "line")
+              .attr("stroke-width", element.line.width*10)
+              .attr("stroke-dasharray", null)
+              .attr("d", line)
+              .attr("id", `${element.id}-backline`);
+		  }
           if (element.line.color) {
             dataLayer
               .append("path")
@@ -474,6 +485,9 @@ function plotBuilder(plotData) {
           if (element.area.color) {
             dataLayer.select(`#${element.id}-area`).node().__originalIndex__ =
               getZIndex(dataLayer.select(`#${element.id}-area`));
+          } else {
+            dataLayer.select(`#${element.id}-backline`).node().__originalIndex__ =
+              getZIndex(dataLayer.select(`#${element.id}-backline`));
           }
 
           dataLayer.select(`#${element.id}-line`).node().__originalIndex__ =
@@ -505,8 +519,6 @@ function plotBuilder(plotData) {
                   d3.select(this).raise(); // z-order change after the delay
                 })
                 .attr("stroke-width", element.line.width * 2);
-                           
-
             })
             .on("mouseout", function (event, d) {
               if (!event.relatedTarget) return;
@@ -543,6 +555,67 @@ function plotBuilder(plotData) {
               
             });
 
+          dataLayer
+            .select(`#${element.id}-backline`)
+            .attr("pointer-events", "stroke")
+            .on("mouseover", function (event, d) {
+              if (!event.relatedTarget) return;
+
+              if (element.area.color) {
+
+                dataLayer
+                  .select(`#${element.id}-area`)
+                  .transition()
+                  .delay(200)
+                  .duration(200)
+                  .on("start", function () {
+                    dataLayer.select(`#${element.id}-area`).raise(); // z-order change after the delay
+                  });
+              }
+
+              d3.select(`#${element.id}-line`)
+                .transition()
+                .delay(200)
+                .duration(200)
+                .on("start", function () {
+                  d3.select(this).raise(); // z-order change after the delay
+                })
+                .attr("stroke-width", element.line.width * 2);
+            })
+            .on("mouseout", function (event, d) {
+              if (!event.relatedTarget) return;
+              // 3) Revert styling
+
+              if (element.area.color) {
+                dataLayer
+                  .select(`#${element.id}-area`)
+                  .transition()
+                  .duration(200)
+                  .on("end", function () {
+                    if (
+                      typeof dataLayer.select(`#${element.id}-area`).node()
+                        .__originalIndex__ === "number"
+                    ) {
+                      setZIndex(
+                        dataLayer.select(`#${element.id}-area`),
+                        dataLayer.select(`#${element.id}-area`).node()
+                          .__originalIndex__
+                      );
+                    }
+                  });
+              }
+
+              d3.select(`#${element.id}-line`)
+                .transition()
+                .duration(200)
+                .on("end", function () {
+                  if (typeof this.__originalIndex__ === "number") {
+                    setZIndex(d3.select(this), this.__originalIndex__);
+                  }
+                })
+                .attr("stroke-width", element.line.width);
+            });
+
             dataLayer
               .select(`#${element.id}-area`)
               .on("mouseover", function (event, d) {
@@ -566,7 +639,6 @@ function plotBuilder(plotData) {
                     dataLayer.select(`#${element.id}-line`).raise(); // z-order change after the delay
                   })
                   .attr("stroke-width", element.line.width * 2);
-
               })
               .on("mouseout", function (event, d) {
                 if (!event.relatedTarget) return;
@@ -597,11 +669,10 @@ function plotBuilder(plotData) {
                     }
                   })
                   .attr("stroke-width", element.line.width);
-                
               }); 
 
             dataLayer
-              .selectAll(`#${element.id}-line, #${element.id}-area`)
+              .selectAll(`#${element.id}-line, #${element.id}-area, #${element.id}-backline`)
               .each(function (d) {
                 const el = this;
                 tippy(el, {
@@ -1033,6 +1104,9 @@ function renderLegend(grouped) {
           .style("display", isChecked ? "block" : "none");
         dataLayer
           .select(`#${d.id}-area`)
+          .style("display", isChecked ? "block" : "none");
+        dataLayer
+          .select(`#${d.id}-backline`)
           .style("display", isChecked ? "block" : "none");
         dataLayer
           .select(`#${d.id}-text`)
