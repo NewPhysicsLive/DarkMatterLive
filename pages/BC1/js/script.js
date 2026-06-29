@@ -288,9 +288,15 @@ function createInSvgLabel(svgSelection, title, href) {
   }
 }
 
+const X_MIN = 1e-32;
+const X_MAX = 1e3;
+const Y_MIN = 1e-30;
+const Y_MAX = 1e-0;
+
 // Define scales (logarithmic x, logarithmic y)
-const x0 = d3.scaleLog().domain([1e-32, 1e3]).range([margin.left, width - margin.right]);
-const y0 = d3.scaleLog().domain([1e-40, 1e-0]).range([height - margin.bottom, margin.top]);
+const x0 = d3.scaleLog().domain([X_MIN, X_MAX]).range([margin.left, width - margin.right]);
+const y0 = d3.scaleLog().domain([Y_MIN, Y_MAX]).range([height - margin.bottom, margin.top]);
+
 
 // Create axis generators
 const xAxis = d3.axisBottom(x0)
@@ -729,6 +735,43 @@ function plotBuilder(plotData) {
       return 0;
     }
   } 
+}
+
+function getPlotBounds() {
+  let allX = [];
+  let allY = [];
+
+  // Select all line and area paths created inside dataLayer
+  d3.selectAll(".data-layer path.line, .data-layer path.area").each(function () {
+  const element = d3.select(this);
+
+    // Don't process hiden curves
+    const displayStyle = element.style("display");
+    if (displayStyle === "none") {
+      return;
+    }
+
+    // Read X and Y values from element
+    const data = element.datum();
+    if (data && Array.isArray(data)) {
+      data.forEach(d => {
+        if (d.x !== null && d.x !== undefined && !isNaN(d.x)) allX.push(d.x);
+        if (d.y !== null && d.y !== undefined && !isNaN(d.y)) allY.push(d.y);
+      });
+    }
+  });
+
+  // Get min and max for X and Y
+  const xExtent = d3.extent(allX); // returns [minX, maxX]
+  const yExtent = d3.extent(allY); // returns [minY, maxY]
+
+  // If no values found (all curves disabled), return null values
+  return {
+    xMin: xExtent[0] !== undefined ? xExtent[0] : null,
+    xMax: xExtent[1] !== undefined ? xExtent[1] : null,
+    yMin: yExtent[0] !== undefined ? yExtent[0] : null,
+    yMax: yExtent[1] !== undefined ? yExtent[1] : null
+  };
 }
 
 const colorSet = [
@@ -1836,8 +1879,13 @@ popup.html(`
   <label class="fix-axes-label"><p class="fix-axes-text">X min:</p><input class="fix-axes-input" type="number" id="x-max"></label>
   <label class="fix-axes-label"><p class="fix-axes-text">Y min: </p><input class="fix-axes-input" type="number" id="y-min"></label>
   <label class="fix-axes-label"><p class="fix-axes-text">Y max: </p><input class="fix-axes-input" type="number" id="y-max"></label>
-  <div class="popup-buttons"><button id="apply-axes">Apply</button>
-  <button id="cancel-axes">Close</button></div>
+  <div class="popup-buttons">
+    <button id="apply-axes">Apply</button>
+    <button id="reset-axes">Reset</button>
+    <button id="fit-axes">Fit</button>
+    <button id="close-axes">Close</button>
+  </div>
+
 `);
 
 // === Event listeners ===
@@ -1884,6 +1932,53 @@ d3.select("body").on("click", function (event) {
 
 // Apply new ranges
 d3.select("body").on("click", function (event) {
+  if (event.target.id === "fit-axes") {
+    const bounds = getPlotBounds();
+
+	if (bounds.xMin == null) {
+		return;
+	}
+
+	// Add some area around curves
+	bounds.yMax *= 10;
+	bounds.yMin /= 100;
+
+	bounds.yMax *= 10;
+	if (bounds.yMax >= 1e0) {
+		bounds.yMax = 1e0;
+	}
+
+    x0.domain([bounds.xMin, bounds.xMax]);
+    y0.domain([bounds.yMin, bounds.yMax]);
+
+    currentXMin = x0.domain()[0];
+    currentXMax = x0.domain()[1];
+    currentYMin = y0.domain()[0];
+    currentYMax = y0.domain()[1];
+
+    dataLayer.transition()
+      .duration(1000)
+      .ease(d3.easeCubicInOut)
+      .call(zoom.transform, d3.zoomIdentity);
+
+    popup.style("display", "none");
+  }
+  if (event.target.id === "reset-axes") {
+    x0.domain([X_MIN, X_MAX]);
+    y0.domain([Y_MIN, Y_MAX]);
+
+    currentXMin = x0.domain()[0];
+    currentXMax = x0.domain()[1];
+    currentYMin = y0.domain()[0];
+    currentYMax = y0.domain()[1];
+
+    dataLayer.transition()
+      .duration(750)
+      .ease(d3.easeCubicInOut)
+      .call(zoom.transform, d3.zoomIdentity);
+
+    popup.style("display", "none");
+  }
   if (event.target.id === "apply-axes") {
     const xMin = parseFloat(d3.select("#x-min").property("value"));
     const xMax = parseFloat(d3.select("#x-max").property("value"));
@@ -1938,7 +2033,7 @@ d3.select("body").on("click", function (event) {
 
     popup.style("display", "none");
   }
-  if (event.target.id === "cancel-axes") {
+  if (event.target.id === "close-axes") {
     popup.style("display", "none");
   }
 });
