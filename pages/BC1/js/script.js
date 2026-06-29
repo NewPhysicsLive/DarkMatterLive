@@ -948,8 +948,7 @@ function renderLegend(grouped) {
     .attr("y", 2)
     .attr("width", swatchSize)
     .attr("height", 16)
-    .attr("fill", (d) => d.items[0].line.color)
-    .attr("opacity", AREA_OPACITY);
+    .attr("fill", (d) => (d.items[0].area.color ? d.items[0].area.color : d.items[0].line.color));
 
   // 2) small line symbol to the right of the swatch (represents the line color/style)
   g.append("line")
@@ -958,7 +957,7 @@ function renderLegend(grouped) {
     .attr("x2", swatchSize)
     .attr("y1", 10 )
     .attr("y2", 10 )
-    .attr("stroke", (d) => d.items[0].line.color)
+    .attr("stroke", "rgba(90, 90, 90, 1)")
     .attr("stroke-width", (d) => d.items[0].line.width);
 
     }
@@ -1304,6 +1303,9 @@ function applyColors(plotData, key) {
       const cat = el.categories ? el.categories[key] : "∅";
       const col = categoryColors.get(cat);
       applyElementColors(el, col);
+      if (el.curveType == "excluded") {
+        el.line.color = "rgba(90, 90, 90, 1)";
+      }
     });
   } // end grouped
 }
