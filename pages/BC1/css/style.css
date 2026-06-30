@@ -8,83 +8,6 @@ body {
   padding: 0;
 }
 
-#plot {
-  width: 90vw;
-  height: 90vh;
-  position: relative; /* allow absolutely-positioned elements inside the plot area */
-}
-
-/* inner wrapper used on placeholder pages that contain the svg */
-.plot-inner {
-  position: relative;
-}
-
-/* label placed inside the plot area (bottom-left) */
-.plot-label {
-  position: absolute;
-  left: 12px;
-  bottom: 12px;
-  background: rgba(255,255,255,0.88);
-  padding: 6px 10px;
-  border-radius: 4px;
-  color: #3c096c;
-  font-weight: 600;
-  text-decoration: none;
-  z-index: 2000; /* above svg elements */
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12);
-}
-
-.plot-label a { color: inherit; text-decoration: none; }
-.plot-label a:hover { text-decoration: underline; }
-
-.interacting-buttons ul{
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  flex-direction: row;
-  margin-top: 20px;
-  margin-bottom: 40px;
-}
-
-.interacting-buttons ul li:first-child {
-  display: none;
-}
-
-.option-button {
-  background-color: #3c096c;
-  color: white;
-  border: none;
-  padding: 12px 12px;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-.legend-item {
-  display: flex;
-  align-items: center;
-}
-
-.fix-axes-label {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-direction: row;
-}
-
-#axes-popup {
-  width: 150px;
-  height: 150px;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  justify-content: space-around;
-}
-
-.popup-buttons {
-  margin-top: 5px;
-}
-
 /* Chrome, Safari, Edge, Opera */
 input[type=number]::-webkit-outer-spin-button,
 input[type=number]::-webkit-inner-spin-button {
@@ -96,42 +19,6 @@ input[type=number]::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
   appearance: textfield;
-}
-
-.fix-axes-text {
-  padding: 0;
-  margin: 0;
-  font-family: "Noto Sans JP", "Open Sans", sans-serif;
-  font-size: 16px;
-}
-
-.fix-axes-input {
-  width: 70px;
-  margin-top: 2px;
-  height: 18px;
-}
-
-#apply-axes {
-  margin-right: 5px;
-}
-
-svg {
-  display: block;
-}
-
-.axis-label {
-  font-size: 18px;
-  margin: 0;
-  padding: 0;
-  text-align: center;
-}
-
-.axis-label div {
-  display: flex;
-  height: 100%;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
 }
 
 .wrapper {
@@ -186,21 +73,6 @@ svg {
   font-weight: 600;
 }
 
-
-.x-axis text {
-  font-size: 15px;     /* or whatever size you like */
-  /* font-weight, font-family, etc., can go here too */
-}
-
-.y-axis text {
-  font-size: 15px;     /* or whatever size you like */
-  /* font-weight, font-family, etc., can go here too */
-}
-.plot-title {
-  font-family: "KaTeX_Main", sans-serif;
-  font-size: 20px;
-}
-
 .wordbreaker {
   text-align: justify;           /* spreads words across each line */
   text-justify: inter-word;
@@ -215,15 +87,6 @@ svg {
 
 .no-break {
     white-space: nowrap;
-  }
-
-.legend-group-title {
-  font-family: 'Open Sans', sans-serif;
-}
-
-.legend-group-title .legend-group-caret {
-  font-size: 0.95em;
-  fill: #333333;
 }
 
 .hidden-box{
