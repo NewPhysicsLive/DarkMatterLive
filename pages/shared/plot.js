@@ -943,22 +943,10 @@ function renderLegend(grouped) {
     .attr("class", "legend-group")
     .attr("expanded", "false"); // collapsed by default
 
-  groups
-    .append("text")
-    .attr("class", "legend-group-title")
-    .attr("x", 0)
-    .attr("y", 16) // baseline; avoids clipping at y=0
-    .style("font-weight", "400")
-    .style("font-size", "1.1em")
-    .style("font-family", '"Open Sans", sans-serif')
-    .style("cursor", "pointer")
-    .each(function(d) {
-      // build the title text + caret tspan
-      const txt = d3.select(this);
-      txt.append('tspan').attr('class','legend-group-title-text').text(d.group);
-      txt.append('tspan').attr('class','legend-group-caret').attr('dx', 6).text(' ▸');
-    })
-    .on("click", function () {
+  const groupTitles = groups
+    .append("g")
+    .attr("class", "legend-title-button-container")
+    .on("click", function (event, d) {
       const g = d3.select(this.parentNode);
       const isExpanded = g.attr("expanded") === "true";
       const newState = !isExpanded;
@@ -968,8 +956,31 @@ function renderLegend(grouped) {
       updateLegendLayout();
     });
 
-  groups.each(function () {
+  // Background rectangle to make it look like a button
+  groupTitles
+    .append("rect")
+    .attr("class", "legend-group-button-bg")
+    .attr("rx", 4)
+    .attr("ry", 4)
+    .attr("height", 24)
+    .attr("y", 2);
 
+  groupTitles
+    .append("text")
+    .attr("class", "legend-group-title")
+    .attr("x", 8)
+    .attr("y", 18)
+    .style("font-family", '"Open Sans", sans-serif')
+    .style("cursor", "pointer")
+    .style("user-select", "none")
+    .each(function(d) {
+      // build the title text + caret tspan
+      const txt = d3.select(this);
+      txt.append('tspan').attr('class','legend-group-title-text').text(d.group);
+      txt.append('tspan').attr('class','legend-group-caret').attr('dx', 6).text(' ▸');
+    });
+
+  groups.each(function () {
     let titleShift = 0;
     const g = d3.select(this);
 
@@ -996,14 +1007,22 @@ function renderLegend(grouped) {
     .attr("stroke-width", (d) => d.items[0].line.width);
 
     }
+	
+    // Set width of button according to text length
+    const titleNode = g.select(".legend-group-title").node();
+    const textWidth = titleNode ? titleNode.getBBox().width : 0;
+    const buttonWidth = textWidth + 16; // text width + horizontal padding
 
-    const titleWidth = g.select(".legend-group-title").node().getBBox().width + titleShift;
+    g.select(".legend-group-button-bg")
+      .attr("width", buttonWidth)
+      .attr("x", titleShift);
 
-    g.select(".legend-group-title").attr("x", titleShift);
+    g.select(".legend-group-title").attr("x", titleShift + 8);
+    const titleWidth = textWidth + titleShift + 16;
 
     g.append("foreignObject")
       .attr("x", titleWidth + 6)
-      .attr("y", 2) // aligned with your previous y
+      .attr("y", 6) // aligned with your previous y
       .attr("width", 16)
       .attr("height", 16)
       .append("xhtml:div")
