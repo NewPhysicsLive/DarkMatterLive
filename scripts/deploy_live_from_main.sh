@@ -5,6 +5,9 @@ set -euo pipefail
 DESTINATION="/eos/project-d/darkmatter/www/"
 REF="origin/main"
 DRY_RUN=1
+GIT_CMD=""
+RSYNC_CMD=""
+TAR_CMD=""
 
 usage() {
   cat <<'EOF'
@@ -50,25 +53,42 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-if ! command -v git >/dev/null 2>&1; then
-  echo "git is required" >&2
+if command -v git >/dev/null 2>&1; then
+  GIT_CMD="git"
+elif command -v git.exe >/dev/null 2>&1; then
+  GIT_CMD="git.exe"
+fi
+
+if command -v rsync >/dev/null 2>&1; then
+  RSYNC_CMD="rsync"
+elif command -v rsync.exe >/dev/null 2>&1; then
+  RSYNC_CMD="rsync.exe"
+fi
+
+if command -v tar >/dev/null 2>&1; then
+  TAR_CMD="tar"
+elif command -v tar.exe >/dev/null 2>&1; then
+  TAR_CMD="tar.exe"
+fi
+
+missing=()
+[[ -z "$GIT_CMD" ]] && missing+=("git")
+[[ -z "$RSYNC_CMD" ]] && missing+=("rsync")
+[[ -z "$TAR_CMD" ]] && missing+=("tar")
+
+if [[ ${#missing[@]} -gt 0 ]]; then
+  echo "Missing required command(s): ${missing[*]}" >&2
+  echo "Detected shell: ${SHELL:-unknown}" >&2
+  echo "Hint: run this script in Git Bash/WSL where git, rsync, and tar are available in PATH." >&2
   exit 1
 fi
 
-if ! command -v rsync >/dev/null 2>&1; then
-  echo "rsync is required" >&2
-  exit 1
-fi
+echo "Using commands: git=$GIT_CMD, rsync=$RSYNC_CMD, tar=$TAR_CMD"
 
-if ! command -v tar >/dev/null 2>&1; then
-  echo "tar is required" >&2
-  exit 1
-fi
-
-git rev-parse --verify "$REF" >/dev/null
+"$GIT_CMD" rev-parse --verify "$REF" >/dev/null
 
 echo "Refreshing $REF from origin"
-git fetch origin main >/dev/null
+"$GIT_CMD" fetch origin main >/dev/null
 
 tmpdir="$(mktemp -d)"
 cleanup() {
@@ -77,7 +97,7 @@ cleanup() {
 trap cleanup EXIT
 
 echo "Exporting $REF into $tmpdir"
-git archive "$REF" | tar -x -C "$tmpdir"
+"$GIT_CMD" archive "$REF" | "$TAR_CMD" -x -C "$tmpdir"
 
 rsync_args=(
   -avh
@@ -117,5 +137,19 @@ if [[ "$DRY_RUN" -eq 1 ]]; then
   echo "Running in dry-run mode. Use --apply to deploy for real."
 fi
 
+if [[ "$DRY_RUN" -eq 0 ]]; then
+  if [[ ! -d "$DESTINATION" ]]; then
+    echo "Destination directory not found: $DESTINATION" >&2
+    echo "Hint: ensure EOS is mounted and this path exists before running --apply." >&2
+    exit 1
+  fi
+
+  if [[ ! -w "$DESTINATION" ]]; then
+    echo "Destination is not writable: $DESTINATION" >&2
+    echo "Hint: check permissions (or AFS/EOS credentials) for the target path." >&2
+    exit 1
+  fi
+fi
+
 echo "Syncing $REF to $DESTINATION"
-rsync "${rsync_args[@]}" "$tmpdir/" "$DESTINATION"
+"$RSYNC_CMD" "${rsync_args[@]}" "$tmpdir/" "$DESTINATION"
