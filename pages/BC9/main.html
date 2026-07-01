@@ -1,4 +1,4 @@
-<!-- BC9 placeholder -->
+﻿<!-- BC9 placeholder -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,9 +8,29 @@
   <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
   <title>ALP with photon dominance (BC9) | Dark Matter live</title>
   <link rel="stylesheet" href="../shared/navbar.css" />
-  <script defer src="../shared/navbar.js"></script>
+  <link rel="stylesheet" href="../shared/plot.css" />
   <link rel="stylesheet" href="../BC1/css/style.css" />
   <link rel="manifest" href="../site.webmanifest">
+  
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="../vendor/katex.min.css">
+  <script src="../vendor/popper.min.js"></script>
+  <script src="../vendor/tippy-bundle.umd.min.js"></script>
+  <link rel="stylesheet" href="../vendor/tippy.css" />
+  <script defer src="../vendor/katex.min.js"></script>
+  <script defer src="../vendor/auto-render.min.js"
+    onload="renderMathInElement(document.body);"></script>
+  <script defer src="../shared/navbar.js"></script>
+  <script defer src="./js/script.js"></script>
+  <script defer src="../shared/plot.js"></script>
 </head>
 <body>
   <nav class="navbar">
@@ -29,6 +49,81 @@
   </nav>
   <div class="wrapper">
     <h1 class="model-title">ALP with photon dominance (BC9)</h1>
+
+	<div id="plot"></div>
+    <div class="interacting-buttons"><ul>
+      <li><button class="option-button fullscreen">Fullscreen</button></li>
+      <li><button class="option-button fix-axes" id="fix-axes-btn">Fix Axes</button></li>
+      <li><button class="option-button download" id="saveSvgBtn">Download</button></li>
+      <li><button class="option-button add-data-link" onclick="location.href='../faq/faq.html';">Add your data</button></li>
+    </ul></div>
+    <div class="description">
+      <div class="description-box">
+        <h2 class="description-title">Description of the model</h2>
+        <p>Axion-Like Particles (ALPs) are pseudo-Nambu–Goldstone bosons arising from the spontaneous breaking of a global
+        \(\mathrm{U}(1)\) symmetry at a high scale \(f_a\). Unlike the QCD axion, ALPs do not need to solve the strong CP
+        problem, so their mass \(m_a\) and photon coupling \(g_{a\gamma\gamma}\) are independent free parameters.
+        In the photon-dominance scenario (BC9), the dominant interaction is the two-photon vertex:</p>
+        \[
+        \mathcal{L} \;\supset\; -\tfrac{1}{4}\,g_{a\gamma\gamma}\,a\,F_{\mu\nu}\tilde{F}^{\mu\nu}
+        \;=\; g_{a\gamma\gamma}\,a\,\vec{E}\cdot\vec{B}\,,
+        \]
+        <p>where \(a\) is the ALP field, \(F_{\mu\nu}\) is the electromagnetic field strength,
+        \(\tilde{F}^{\mu\nu} = \tfrac{1}{2}\epsilon^{\mu\nu\rho\sigma}F_{\rho\sigma}\) its dual, and
+        \(g_{a\gamma\gamma}\) (units: GeV\(^{-1}\)) is the effective photon coupling. This coupling relates to the
+        Peccei–Quinn scale as \(g_{a\gamma\gamma} = \frac{\alpha_{\mathrm{EM}}}{\pi f_a}\,C_{a\gamma}\),
+        where \(C_{a\gamma}\) is a model-dependent coefficient of order unity.</p>
+
+        <p>The two free parameters of the model are \(m_a\) and \(g_{a\gamma\gamma}\), spanning an enormous range:
+        \(m_a \in [10^{-30},\,10^{3}]\,\text{eV}\) and \(g_{a\gamma\gamma} \in [10^{-30},\,1]\,\text{GeV}^{-1}\).</p>
+
+        <h3 class="description-subtitle">Detection</h3>
+        <p>The photon coupling enables three main detection strategies:</p>
+        <ul>
+          <li><strong>Haloscopes</strong> (direct detection): resonant microwave cavities or LC circuits placed in a
+          strong static magnetic field convert ambient ALP dark matter into photons via the inverse Primakoff effect.
+          Examples include ADMX, CAPP, HAYSTAC, and QUAX.</li>
+          <li><strong>Helioscopes &amp; light-shining-through-a-wall</strong> (laboratory): solar ALPs produced in the
+          Sun's core are reconverted into X-rays in a laboratory magnet (CAST, BabyIAXO, IAXO), or laser photons are
+          converted, propagated through a wall, and reconverted (ALPS&#8209;II, OSQAR, PVLAS).</li>
+          <li><strong>Astrophysical &amp; cosmological observations</strong> (indirect detection): ALP–photon oscillations
+          in cosmic or stellar magnetic fields leave imprints such as spectral irregularities in blazar spectra,
+          anomalous stellar cooling, or polarisation signals (Chandra, Fermi, SN 1987A, globular clusters, white dwarfs).</li>
+        </ul>
+
+        <p>The classification used on this page follows the same convention as the rest of the site:</p>
+        <p><strong>By detection type:</strong></p>
+        <ul>
+          <li>Direct detection: haloscopes, helioscopes, and light-shining-through-a-wall experiments;</li>
+          <li>Indirect detection: astrophysical observations and cosmological measurements.</li>
+        </ul>
+        <p><strong>By experiment type:</strong></p>
+        <ul>
+          <li>Laboratory experiments: haloscopes, helioscopes, LSW experiments, magnetometers;</li>
+          <li>Astrophysical observations: stellar cooling (globular clusters, white dwarfs, neutron stars), SN 1987A, X-ray telescopes;</li>
+          <li>Cosmological measurements: CMB spectral distortions, BBN, extragalactic background light;</li>
+          <li>Collider experiments: LHC heavy-ion runs, BaBar, beam-dump searches.</li>
+        </ul>
+        <p><strong>By time frame:</strong></p>
+        <ul>
+          <li>Past constraints: results published before 2015;</li>
+          <li>Recent constraints: 2015 to present;</li>
+          <li>Planned/future constraints: projected sensitivities of proposed experiments (e.g., IAXO, DMRadio, AION).</li>
+        </ul>
+        <p><strong>By assumption:</strong></p>
+        <ul>
+          <li>None\(^*\): model-independent constraints (laboratory and collider searches);</li>
+          <li>Dark Matter: constraints that assume ALPs constitute all or part of the observed dark matter density.</li>
+        </ul>
+        <p>\(^*\) As with all models, simplifying assumptions are always present; "None" here means the constraint does not
+        require ALPs to make up the dark matter.</p>
+      </div>
+    </div>
+  </div>
+
+
+
+
     <section class="classification-context" style="margin:12px 0 28px;padding:12px 18px;border:1px solid #ddd;border-radius:8px;background:#f8f9fa;font-size:0.9rem;line-height:1.35;">
       <strong style="display:block;margin-bottom:6px;font-size:1.05rem;">Dark Matter Classification Context</strong>
       <div style="display:flex;flex-wrap:wrap;gap:18px;">
@@ -47,8 +142,6 @@
         <div style="flex:1 1 260px;min-width:240px;">
           <em style="font-weight:600;color:#444;">Related BC Pages:</em>
           <ul style="margin:4px 0 0;padding-left:18px;">
-            <li><a href="../BC10/main.html">BC10 ALP Fermion Dominance</a></li>
-            <li><a href="../BC11/main.html">BC11 ALP Gluon Dominance</a></li>
             <li><a href="../BC1/main.html">BC1 Dark Photon (minimal)</a></li>
             <li><a href="../BC2/main.html">BC2 Light DM + Dark Photon</a></li>
             <li><a href="../BC3/main.html">BC3 Millicharged Particles</a></li>
@@ -57,6 +150,8 @@
             <li><a href="../BC6/main.html">BC6 Sterile Neutrino (e)</a></li>
             <li><a href="../BC7/main.html">BC7 Sterile Neutrino (μ)</a></li>
             <li><a href="../BC8/main.html">BC8 Sterile Neutrino (τ)</a></li>
+            <li><a href="../BC10/main.html">BC10 ALP Fermion Dominance</a></li>
+            <li><a href="../BC11/main.html">BC11 ALP Gluon Dominance</a></li>
           </ul>
         </div>
         <div style="flex:1 1 260px;min-width:240px;">
@@ -67,27 +162,17 @@
         </div>
       </div>
     </section>
-    <div id="plot" style="display:flex;align-items:center;justify-content:center;">
-      <div class="plot-inner" style="text-align:center;max-width:720px;padding:2rem;">
-        <svg width="720" height="540" role="img" aria-label="Blank plot - awaiting data">
-          <rect x="0" y="0" width="100%" height="100%" fill="#ffffff" stroke="#ccc"></rect>
-          <text x="50%" y="45%" text-anchor="middle" fill="#666" style="font-size:18px;font-family:Open Sans, sans-serif;">Awaiting data — please open a PR to populate this model</text>
-          <text x="50%" y="60%" text-anchor="middle" fill="#333" style="font-size:14px;font-family:Open Sans, sans-serif;">y-axis: g_{aγ} (GeV⁻¹)</text>
-          <g transform="translate(28,500)">
-            <rect x="-6" y="-18" rx="4" ry="4" width="160" height="24" fill="rgba(255,255,255,0.9)" stroke="#ddd"></rect>
-            <a href="https://darkmatter.web.cern.ch/" target="_blank" rel="noopener noreferrer">
-              <text x="0" y="-2" fill="#3c096c" style="font-weight:600;font-family:Open Sans, sans-serif;font-size:13px">Dark Matter live</text>
-            </a>
-          </g>
-        </svg>
-        <div class="plot-label" aria-hidden="false">
-          <a href="https://darkmatter.web.cern.ch/" target="_blank" rel="noopener noreferrer">Dark Matter live</a>
-        </div>
-      </div>
-    </div>
-  </div>
+
+          <section class="credits" style="margin:12px 0 28px;padding:12px 18px;border:1px solid #ddd;border-radius:8px;background:#f8f9fa;font-size:0.9rem;line-height:1.35;">
+    <strong style="display:block;margin-bottom:6px;font-size:1.05rem;">Data sources</strong>
+    Individual curve credits belong to their original authors; paper links are available in the plot tooltips.
+    Most curves were compiled by <strong>Ciaran O'Hare</strong> in the
+    <a href="https://cajohare.github.io/AxionLimits/" target="_blank" rel="noopener noreferrer">AxionLimits</a> project.
+    Full reference:
+    <a href="https://doi.org/10.5281/zenodo.3932430" target="_blank" rel="noopener noreferrer">doi:10.5281/zenodo.3932430</a>.
+  </section>
   <div class="disclaimer" style="font-size:0.9em;color:#555;margin:1rem 0;padding:0.75rem 1rem;border-top:1px solid #eee;font-style:italic">
-  <strong>Disclaimer:</strong> The plots on this page are not approved or reviewed by any official CERN or dark-matter working group. For queries, contact Brij Kishor Jashal at <a href="mailto:brij@cern.ch">brij@cern.ch</a>.
+  <strong>Disclaimer:</strong> The plots on this page are not approved or reviewed by any official CERN or dark-matter working group. For queries, contact Brij at <a href="mailto:brij&#64;cern.ch">brij[at]cern.ch</a>.
   </div>
   <footer>
     <div class="footer-inner">
@@ -95,8 +180,9 @@
   <a href="https://home.cern" target="_blank" rel="noopener noreferrer"><img src="../CERN-logo/Outline/SVG/LogoOutline-White.svg" alt="CERN" height="36"></a>
       </div>
       <div class="footer-right" style="text-align:right">
+        <div style="margin-bottom:6px">Cite this project: <a href="https://doi.org/10.5281/zenodo.18135859" target="_blank" rel="noopener noreferrer">doi:10.5281/zenodo.18135859</a></div>
         <div style="margin-bottom:6px">Find the project on: <a href="https://github.com/NewPhysicsLive/DarkMatterLive" target="_blank" rel="noopener noreferrer">GitHub</a> | <a href="https://gitlab.cern.ch/newphysicslive/DarkMatterLive" target="_blank" rel="noopener noreferrer">GitLab</a></div>
-  <div style="font-size:0.95em">&copy; CERN — <a href="https://home.cern/data-privacy-protection-policy" target="_blank" rel="noopener noreferrer">Privacy policy</a> | <a href="https://copyright.web.cern.ch/" target="_blank" rel="noopener noreferrer">Copyright</a> | Contact: Brij Kishor Jashal at <a href="mailto:brij@cern.ch">brij@cern.ch</a></div>
+  <div style="font-size:0.95em">&copy; CERN — <a href="https://home.cern/data-privacy-protection-policy" target="_blank" rel="noopener noreferrer">Privacy policy</a> | <a href="https://copyright.web.cern.ch/" target="_blank" rel="noopener noreferrer">Copyright</a> | Contact: Brij at <a href="mailto:brij&#64;cern.ch">brij[at]cern.ch</a></div>
       </div>
     </div>
   </footer>

@@ -1,0 +1,27 @@
+{
+  "labelName": "Low-E SNe",
+  "longName": "SNe (low-energy) ALP decay",
+  "id": "sne_decay",
+  "text": {
+    "elementName": null
+  },
+  "line": {
+    "color": "rgba(5, 58, 133, 1)",
+    "dash": null,
+    "width": 2
+  },
+  "area": {
+    "color": "rgba(57, 130, 232, 1)"
+  },
+  "paperUrls": [
+    "https://arxiv.org/abs/2201.09890"
+  ],
+  "url": "../../data/BC9/SNe-decay.csv",
+  "curveType": "excluded",
+  "categories": {
+    "detectionType": "Indirect detection",
+    "experimentType": "Astrophysical observations",
+    "timeType": "Past constraints",
+    "assumption": "None"
+  }
+}

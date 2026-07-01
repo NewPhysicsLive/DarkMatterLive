@@ -1,0 +1,27 @@
+{
+  "labelName": "Fermi-LAT (Galactic SN)",
+  "longName": "Fermi-LAT gammma ray observation of galactic SN",
+  "id": "fermisn",
+  "text": {
+    "elementName": null
+  },
+  "line": {
+    "color": "rgba(5, 58, 133, 1)",
+    "dash": "20,7",
+    "width": 2
+  },
+  "area": {
+    "color": null
+  },
+  "paperUrls": [
+    "https://arxiv.org/abs/1609.02350"
+  ],
+  "url": "../../data/BC9/FermiSN.csv",
+  "curveType": "projection",
+  "categories": {
+    "detectionType": "Indirect detection",
+    "experimentType": "Astrophysical observations",
+    "timeType": "Planned/future constraints",
+    "assumption": "None"
+  }
+}

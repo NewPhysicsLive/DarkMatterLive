@@ -1,0 +1,27 @@
+{
+  "labelName": "Belle II",
+  "longName": "Belle II e+e-",
+  "id": "belleii",
+  "text": {
+    "elementName": null
+  },
+  "line": {
+    "color": "rgba(5, 58, 133, 1)",
+    "dash": null,
+    "width": 2
+  },
+  "area": {
+    "color": "rgba(57, 130, 232, 1)"
+  },
+  "paperUrls": [
+    "https://arxiv.org/abs/2007.13071"
+  ],
+  "url": "../../data/BC9/BelleII.csv",
+  "curveType": "excluded",
+  "categories": {
+    "detectionType": "Direct detection",
+    "experimentType": "Collider experiments",
+    "timeType": "Recent constraints",
+    "assumption": "None"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "labelName": "TOORAD",
+  "longName": "TOORAD 2025 nature paper",
+  "id": "toorad_2025",
+  "text": {
+    "elementName": null
+  },
+  "line": {
+    "color": "rgba(5, 58, 133, 1)",
+    "dash": "20,7",
+    "width": 2
+  },
+  "area": {
+    "color": null
+  },
+  "paperUrls": [
+    "https://arxiv.org/abs/2504.12572"
+  ],
+  "url": "../../data/BC9/TOORAD_2025.csv",
+  "curveType": "projection",
+  "categories": {
+    "detectionType": "Direct detection",
+    "experimentType": "Laboratory experiments",
+    "timeType": "Planned/future constraints",
+    "assumption": "None"
+  }
+}

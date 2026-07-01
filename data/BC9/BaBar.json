@@ -1,0 +1,27 @@
+{
+  "labelName": "BaBar",
+  "longName": "BaBar",
+  "id": "babar",
+  "text": {
+    "elementName": null
+  },
+  "line": {
+    "color": "rgba(5, 58, 133, 1)",
+    "dash": null,
+    "width": 2
+  },
+  "area": {
+    "color": "rgba(57, 130, 232, 1)"
+  },
+  "paperUrls": [
+    "https://link.springer.com/content/pdf/10.1007/JHEP03(2021)190.pdf?pdf=button"
+  ],
+  "url": "../../data/BC9/BaBar.csv",
+  "curveType": "excluded",
+  "categories": {
+    "detectionType": "Direct detection",
+    "experimentType": "Collider experiments",
+    "timeType": "Recent constraints",
+    "assumption": "None"
+  }
+}

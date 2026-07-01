@@ -1,0 +1,27 @@
+{
+  "labelName": "Planck + unWISE",
+  "longName": "Planck + unWISE CMB patchy screening",
+  "id": "planck_unwise",
+  "text": {
+    "elementName": null
+  },
+  "line": {
+    "color": "rgba(5, 58, 133, 1)",
+    "dash": null,
+    "width": 2
+  },
+  "area": {
+    "color": "rgba(57, 130, 232, 1)"
+  },
+  "paperUrls": [
+    "https://arxiv.org/abs/2409.10514"
+  ],
+  "url": "../../data/BC9/Planck_unWISE.csv",
+  "curveType": "excluded",
+  "categories": {
+    "detectionType": "Indirect detection",
+    "experimentType": "Cosmological measurements",
+    "timeType": "Recent constraints",
+    "assumption": "None"
+  }
+}

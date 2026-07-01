@@ -1,0 +1,27 @@
+{
+  "labelName": "CAST (2007)",
+  "longName": "CAST older high mass limit (2007ish)",
+  "id": "cast_highm",
+  "text": {
+    "elementName": null
+  },
+  "line": {
+    "color": "rgba(5, 58, 133, 1)",
+    "dash": null,
+    "width": 2
+  },
+  "area": {
+    "color": "rgba(57, 130, 232, 1)"
+  },
+  "paperUrls": [
+    "https://arxiv.org/abs/hep-ex/0702006"
+  ],
+  "url": "../../data/BC9/CAST_highm.csv",
+  "curveType": "excluded",
+  "categories": {
+    "detectionType": "Direct detection",
+    "experimentType": "Laboratory experiments",
+    "timeType": "Past constraints",
+    "assumption": "None"
+  }
+}

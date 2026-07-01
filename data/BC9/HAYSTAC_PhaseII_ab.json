@@ -1,0 +1,28 @@
+{
+  "labelName": "HAYSTAC Phase II-a/b",
+  "longName": "HAYSTAC Phase II-a/b",
+  "id": "haystac_phaseii_ab",
+  "text": {
+    "elementName": null
+  },
+  "line": {
+    "color": "rgba(5, 58, 133, 1)",
+    "dash": null,
+    "width": 2
+  },
+  "area": {
+    "color": "rgba(57, 130, 232, 1)"
+  },
+  "paperUrls": [
+    "https://arxiv.org/abs/2008.01853",
+    "https://arxiv.org/abs/2301.09721"
+  ],
+  "url": "../../data/BC9/HAYSTAC_PhaseII_ab.csv",
+  "curveType": "excluded",
+  "categories": {
+    "detectionType": "Direct detection",
+    "experimentType": "Laboratory experiments",
+    "timeType": "Recent constraints",
+    "assumption": "Dark Matter"
+  }
+}

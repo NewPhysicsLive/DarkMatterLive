@@ -1,0 +1,27 @@
+{
+    "labelName": "Black hole polarimetry",
+    "longName": "BlackHolePolarimetry",
+    "id": "black_hole_polarimetry",
+    "text": {
+        "elementName": null
+    },
+    "line": {
+        "color": "rgba(5, 58, 133, 1)",
+        "dash": "20,7",
+        "width": 2
+    },
+    "area": {
+        "color": null
+    },
+    "paperUrls": [
+        "https://arxiv.org/abs/2311.02149"
+    ],
+    "url": "../../data/BC9/BlackHolePolarimetry.csv",
+    "curveType": "projection",
+    "categories": {
+        "detectionType": "Indirect detection",
+        "experimentType": "Astrophysical observations",
+        "timeType": "Planned/future constraints",
+        "assumption": "Dark Matter"
+    }
+}

@@ -1,0 +1,27 @@
+{
+  "labelName": "SN1987A (PVO)",
+  "longName": "SN1987A X/gamma-rays (PVO)",
+  "id": "sn1987a_pvo",
+  "text": {
+    "elementName": null
+  },
+  "line": {
+    "color": "rgba(5, 58, 133, 1)",
+    "dash": null,
+    "width": 2
+  },
+  "area": {
+    "color": "rgba(57, 130, 232, 1)"
+  },
+  "paperUrls": [
+    "https://arxiv.org/abs/2303.11395"
+  ],
+  "url": "../../data/BC9/SN1987A_PVO.csv",
+  "curveType": "excluded",
+  "categories": {
+    "detectionType": "Indirect detection",
+    "experimentType": "Astrophysical observations",
+    "timeType": "Recent constraints",
+    "assumption": "None"
+  }
+}

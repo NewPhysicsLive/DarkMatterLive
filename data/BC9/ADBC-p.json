@@ -1,0 +1,27 @@
+{
+  "labelName": "ADBC",
+  "longName": "ADBC",
+  "id": "adbc-p",
+  "text": {
+    "elementName": null
+  },
+  "line": {
+    "color": "rgba(5, 58, 133, 1)",
+    "dash": "20,7",
+    "width": 2
+  },
+  "area": {
+    "color": null
+  },
+  "paperUrls": [
+    "https://arxiv.org/abs/1809.01656"
+  ],
+  "url": "../../data/BC9/ADBC-p.csv",
+  "curveType": "projection",
+  "categories": {
+    "detectionType": "Direct detection",
+    "experimentType": "Laboratory experiments",
+    "timeType": "Planned/future constraints",
+    "assumption": "Dark Matter"
+  }
+}

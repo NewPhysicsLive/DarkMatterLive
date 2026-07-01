@@ -1,0 +1,27 @@
+{
+  "labelName": "Star cluster (NuSTAR)",
+  "longName": "Super star clusters (NuSTAR Xray)",
+  "id": "star_cluster_xray",
+  "text": {
+    "elementName": null
+  },
+  "line": {
+    "color": "rgba(5, 58, 133, 1)",
+    "dash": null,
+    "width": 2
+  },
+  "area": {
+    "color": "rgba(57, 130, 232, 1)"
+  },
+  "paperUrls": [
+    "https://arxiv.org/abs/2008.03305"
+  ],
+  "url": "../../data/BC9/Xray-SuperStarClusters.csv",
+  "curveType": "excluded",
+  "categories": {
+    "detectionType": "Indirect detection",
+    "experimentType": "Astrophysical observations",
+    "timeType": "Recent constraints",
+    "assumption": "None"
+  }
+}

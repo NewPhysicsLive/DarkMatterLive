@@ -1,0 +1,27 @@
+{
+  "labelName": "FASER (LLP)",
+  "longName": "FASER (LLP)",
+  "id": "faser_llp",
+  "text": {
+    "elementName": null
+  },
+  "line": {
+    "color": "rgba(5, 58, 133, 1)",
+    "dash": "20,7",
+    "width": 2
+  },
+  "area": {
+    "color": null
+  },
+  "paperUrls": [
+    "https://arxiv.org/abs/1811.12522"
+  ],
+  "url": "../../data/BC9/FASER_LLP.csv",
+  "curveType": "projection",
+  "categories": {
+    "detectionType": "Direct detection",
+    "experimentType": "Collider experiments",
+    "timeType": "Planned/future constraints",
+    "assumption": "None"
+  }
+}

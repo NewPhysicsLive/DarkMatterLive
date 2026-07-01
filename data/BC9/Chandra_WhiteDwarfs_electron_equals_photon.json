@@ -1,0 +1,27 @@
+{
+  "labelName": "Chandra (White dwarfs) 2",
+  "longName": "Chandra (White dwarfs) 2",
+  "id": "chandra_wd2",
+  "text": {
+    "elementName": null
+  },
+  "line": {
+    "color": "rgba(5, 58, 133, 1)",
+    "dash": null,
+    "width": 2
+  },
+  "area": {
+    "color": "rgba(57, 130, 232, 1)"
+  },
+  "paperUrls": [
+    "https://arxiv.org/abs/2104.12772"
+  ],
+  "url": "../../data/BC9/Chandra_WhiteDwarfs_electron_equals_photon.csv",
+  "curveType": "excluded",
+  "categories": {
+    "detectionType": "Indirect detection",
+    "experimentType": "Astrophysical observations",
+    "timeType": "Recent constraints",
+    "assumption": "None"
+  }
+}

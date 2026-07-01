@@ -1,0 +1,27 @@
+{
+    "labelName": "Telescope (Haystack)",
+    "longName": "Haystack radio search for DM",
+    "id": "telescopes_haystack",
+    "text": {
+        "elementName": null
+    },
+    "line": {
+        "color": "rgba(5, 58, 133, 1)",
+        "dash": null,
+        "width": 2
+    },
+    "area": {
+        "color": "rgba(57, 130, 232, 1)"
+    },
+    "paperUrls": [
+        "https://iopscience.iop.org/article/10.1086/318310"
+    ],
+    "url": "../../data/BC9/Telescopes_Haystack.csv",
+    "curveType": "excluded",
+    "categories": {
+        "detectionType": "Indirect detection",
+        "experimentType": "Astrophysical observations",
+        "timeType": "Past constraints",
+        "assumption": "Dark Matter"
+    }
+}

@@ -1,0 +1,27 @@
+{
+  "labelName": "ADBC",
+  "longName": "ADBC First results",
+  "id": "adbc",
+  "text": {
+    "elementName": null
+  },
+  "line": {
+    "color": "rgba(5, 58, 133, 1)",
+    "dash": null,
+    "width": 2
+  },
+  "area": {
+    "color": "rgba(57, 130, 232, 1)"
+  },
+  "paperUrls": [
+    "https://arxiv.org/pdf/2404.12517"
+  ],
+  "url": "../../data/BC9/ADBC.csv",
+  "curveType": "excluded",
+  "categories": {
+    "detectionType": "Direct detection",
+    "experimentType": "Laboratory experiments",
+    "timeType": "Recent constraints",
+    "assumption": "Dark Matter"
+  }
+}

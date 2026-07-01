@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -55,7 +55,15 @@
                     <div class="sublist-of-models">
                       <button class="model-button">Cosmic Velocity Classes</button>
                       <ul class="similar-models">
-                        <li><button class="model-button" disabled style="opacity:0.85">Cold Dark Matter (CDM) — non‑relativistic</button></li>
+                        <li>
+                          <div class="sublist-of-models">
+                            <button class="model-button">Cold Dark Matter (CDM) — non‑relativistic</button>
+                            <ul class="similar-models">
+                              <li><button class="model-button model-link populated" onclick="location.href='../BC1/main.html';">BC1 Minimal dark photon</button></li>
+                              <li><button class="model-button model-link populated" onclick="location.href='../BC9/main.html';">BC9 ALP photon dominance</button></li>
+                            </ul>
+                          </div>
+                        </li>
                         <li><button class="model-button" disabled style="opacity:0.85">Warm Dark Matter (WDM) — semi‑relativistic</button></li>
                         <li><button class="model-button" disabled style="opacity:0.85">Hot Dark Matter (HDM) — ultra‑relativistic (ruled out)</button></li>
                         <li><button class="model-button" disabled style="opacity:0.65">Free‑streaming length sets structure hierarchy</button></li>
@@ -75,7 +83,7 @@
                         <li><button class="model-button model-link" onclick="location.href='../BC2/main.html';">Light DM + dark photon (BC2)</button></li>
                         <li><button class="model-button model-link" onclick="location.href='../BC3/main.html';">Millicharged particles (BC3)</button></li>
                         <li><button class="model-button" disabled style="opacity:0.85">Axion Portal: g_{aγγ} a F_{μν} \u007eF^{μν}</button></li>
-                        <li><button class="model-button model-link" onclick="location.href='../BC9/main.html';">ALP photon dominance (BC9)</button></li>
+                        <li><button class="model-button model-link populated" onclick="location.href='../BC9/main.html';">ALP photon dominance (BC9)</button></li>
                         <li><button class="model-button model-link" onclick="location.href='../BC10/main.html';">ALP fermion dominance (BC10)</button></li>
                         <li><button class="model-button model-link" onclick="location.href='../BC11/main.html';">ALP gluon dominance (BC11)</button></li>
                         <li><button class="model-button" disabled style="opacity:0.85">Neutrino Portal: y L H N</button></li>
@@ -95,8 +103,25 @@
                         <li><button class="model-button" disabled style="opacity:0.85">Simplified: Spin‑1 (V_μ) kinetic mixing</button></li>
                         <li><button class="model-button" disabled style="opacity:0.85">EFT: heavy mediator integrated out</button></li>
                         <li><button class="model-button" disabled style="opacity:0.85">Extended Higgs (2HDM, pseudoscalars)</button></li>
-                        <li><button class="model-button" disabled style="opacity:0.85">Dark Higgs + Dark Photon sector</button></li>
-                        <li><button class="model-button" disabled style="opacity:0.85">Axion‑Like Particles (ALPs)</button></li>
+                        <li>
+                          <div class="sublist-of-models">
+                            <button class="model-button">Dark Higgs + Dark Photon sector</button>
+                            <ul class="similar-models">
+                              <li><button class="model-button model-link populated" onclick="location.href='../BC1/main.html';">BC1 Minimal dark photon</button></li>
+                              <li><button class="model-button model-link" onclick="location.href='../BC2/main.html';">BC2 Light DM + dark photon</button></li>
+                            </ul>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="sublist-of-models">
+                            <button class="model-button">Axion‑Like Particles (ALPs)</button>
+                            <ul class="similar-models">
+                              <li><button class="model-button model-link populated" onclick="location.href='../BC9/main.html';">BC9 ALP photon dominance</button></li>
+                              <li><button class="model-button model-link" onclick="location.href='../BC10/main.html';">BC10 ALP fermion dominance</button></li>
+                              <li><button class="model-button model-link" onclick="location.href='../BC11/main.html';">BC11 ALP gluon dominance</button></li>
+                            </ul>
+                          </div>
+                        </li>
                       </ul>
                     </div>
                   </li>
@@ -113,7 +138,7 @@
                         <li><button class="model-button model-link" onclick="location.href='../BC6/main.html';">BC6 Sterile Neutrino (e)</button></li>
                         <li><button class="model-button model-link" onclick="location.href='../BC7/main.html';">BC7 Sterile Neutrino (μ)</button></li>
                         <li><button class="model-button model-link" onclick="location.href='../BC8/main.html';">BC8 Sterile Neutrino (τ)</button></li>
-                        <li><button class="model-button model-link" onclick="location.href='../BC9/main.html';">BC9 ALP Photon</button></li>
+                        <li><button class="model-button model-link populated" onclick="location.href='../BC9/main.html';">BC9 ALP Photon</button></li>
                         <li><button class="model-button model-link" onclick="location.href='../BC10/main.html';">BC10 ALP Fermion</button></li>
                         <li>
                           <button class="model-button model-link" onclick="location.href='../BC11/main.html';">BC11 ALP Gluon</button>
@@ -136,6 +161,7 @@
         </a>
       </div>
       <div class="footer-right" style="text-align: right">
+        <div style="margin-bottom: 6px">Cite this project: <a href="https://doi.org/10.5281/zenodo.18135859" target="_blank" rel="noopener noreferrer">doi:10.5281/zenodo.18135859</a></div>
         <div style="margin-bottom: 6px">
           Find the project on:
           <a href="https://github.com/NewPhysicsLive/DarkMatterLive" target="_blank" rel="noopener noreferrer">GitHub</a> |
@@ -146,7 +172,7 @@
           <a href="https://home.cern/data-privacy-protection-policy" target="_blank" rel="noopener noreferrer">Privacy policy</a> |
           <a href="https://github.com/NewPhysicsLive/DarkMatterLive" target="_blank" rel="noopener noreferrer">GitHub</a> |
           <a href="https://gitlab.cern.ch/newphysicslive/DarkMatterLive" target="_blank" rel="noopener noreferrer">GitLab</a> |
-          Contact: Brij Kishor Jashal at <a href="mailto:brij@cern.ch">brij@cern.ch</a>
+          Contact: Brij at <a href="mailto:brij&#64;cern.ch">brij[at]cern.ch</a>
         </div>
       </div>
     </div>

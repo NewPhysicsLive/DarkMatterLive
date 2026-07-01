@@ -1,0 +1,27 @@
+{
+    "labelName": "IAXO (Galactic SN)",
+    "longName": "Axion SNscope Spica-1",
+    "id": "iaxo_plus_sn_spica1",
+    "text": {
+        "elementName": null
+    },
+    "line": {
+        "color": "rgba(5, 58, 133, 1)",
+        "dash": "20,7",
+        "width": 2
+    },
+    "area": {
+        "color": null
+    },
+    "paperUrls": [
+        "https://arxiv.org/abs/2008.03924"
+    ],
+    "url": "../../data/BC9/IAXO_plus_SN_Spica1.csv",
+    "curveType": "projection",
+    "categories": {
+        "detectionType": "Direct detection",
+        "experimentType": "Laboratory experiments",
+        "timeType": "Planned/future constraints",
+        "assumption": "None"
+    }
+}

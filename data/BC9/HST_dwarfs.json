@@ -1,0 +1,27 @@
+{
+    "labelName": "HST dwarfs",
+    "longName": "HST Dwarf decay search in UV",
+    "id": "hst_dwarfs",
+    "text": {
+        "elementName": null
+    },
+    "line": {
+        "color": "rgba(5, 58, 133, 1)",
+        "dash": null,
+        "width": 2
+    },
+    "area": {
+        "color": "rgba(57, 130, 232, 1)"
+    },
+    "paperUrls": [
+        "https://arxiv.org/abs/2412.02543"
+    ],
+    "url": "../../data/BC9/HST_dwarfs.csv",
+    "curveType": "excluded",
+    "categories": {
+        "detectionType": "Indirect detection",
+        "experimentType": "Astrophysical observations",
+        "timeType": "Recent constraints",
+        "assumption": "Dark Matter"
+    }
+}

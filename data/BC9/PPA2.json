@@ -1,0 +1,27 @@
+{
+    "labelName": "Pulsar polarisation arrays 2",
+    "longName": "Pulsar polarisation arrays 2",
+    "id": "ppa2",
+    "text": {
+        "elementName": null
+    },
+    "line": {
+        "color": "rgba(5, 58, 133, 1)",
+        "dash": "20,7",
+        "width": 2
+    },
+    "area": {
+        "color": null
+    },
+    "paperUrls": [
+        "https://arxiv.org/abs/2111.10615"
+    ],
+    "url": "../../data/BC9/PPA2.csv",
+    "curveType": "projection",
+    "categories": {
+        "detectionType": "Indirect detection",
+        "experimentType": "Astrophysical observations",
+        "timeType": "Planned/future constraints",
+        "assumption": "Dark Matter"
+    }
+}

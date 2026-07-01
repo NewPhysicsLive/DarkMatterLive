@@ -1,0 +1,27 @@
+{
+    "labelName": "BRASS",
+    "longName": "BRASS Dish antenna",
+    "id": "brass",
+    "text": {
+        "elementName": null
+    },
+    "line": {
+        "color": "rgba(5, 58, 133, 1)",
+        "dash": "20,7",
+        "width": 2
+    },
+    "area": {
+        "color": null
+    },
+    "paperUrls": [
+        "https://www.physik.uni-hamburg.de/iexp/gruppe-horns/forschung/brass.html"
+    ],
+    "url": "../../data/BC9/BRASS.csv",
+    "curveType": "projection",
+    "categories": {
+        "detectionType": "Direct detection",
+        "experimentType": "Laboratory experiments",
+        "timeType": "Planned/future constraints",
+        "assumption": "Dark Matter"
+    }
+}

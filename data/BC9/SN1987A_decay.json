@@ -1,0 +1,28 @@
+{
+  "labelName": "SN1987A (gamma)",
+  "longName": "SN1987A ALP decay to gammas",
+  "id": "sn1987a_decay",
+  "text": {
+    "elementName": null
+  },
+  "line": {
+    "color": "rgba(5, 58, 133, 1)",
+    "dash": null,
+    "width": 2
+  },
+  "area": {
+    "color": "rgba(57, 130, 232, 1)"
+  },
+  "paperUrls": [
+    "https://arxiv.org/abs/2304.01060",
+    "https://arxiv.org/abs/2212.09764"
+  ],
+  "url": "../../data/BC9/SN1987A_decay.csv",
+  "curveType": "excluded",
+  "categories": {
+    "detectionType": "Indirect detection",
+    "experimentType": "Astrophysical observations",
+    "timeType": "Recent constraints",
+    "assumption": "None"
+  }
+}

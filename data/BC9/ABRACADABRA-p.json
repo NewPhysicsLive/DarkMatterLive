@@ -1,0 +1,27 @@
+{
+  "labelName": "ABRACADABRA (projection)",
+  "longName": "ABRACADABRA (QCD, 75 cm, 10 cm, resonant+broadband)",
+  "id": "abracadabra-p",
+  "text": {
+    "elementName": null
+  },
+  "line": {
+    "color": "rgba(5, 58, 133, 1)",
+    "dash": "20,7",
+    "width": 2
+  },
+  "area": {
+    "color": null
+  },
+  "paperUrls": [
+    "https://abracadabra.mit.edu/"
+  ],
+  "url": "../../data/BC9/ABRACADABRA-p.csv",
+  "curveType": "projection",
+  "categories": {
+    "detectionType": "Direct detection",
+    "experimentType": "Laboratory experiments",
+    "timeType": "Planned/future constraints",
+    "assumption": "Dark Matter"
+  }
+}

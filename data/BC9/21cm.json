@@ -1,0 +1,27 @@
+{
+    "labelName": "21cm",
+    "longName": "21 cm power spectrum energy injection projected",
+    "id": "p21cm",
+    "text": {
+        "elementName": null
+    },
+    "line": {
+        "color": "rgba(5, 58, 133, 1)",
+        "dash": "20,7",
+        "width": 2
+    },
+    "area": {
+        "color": null
+    },
+    "paperUrls": [
+        "https://arxiv.org/abs/2312.11608"
+    ],
+    "url": "../../data/BC9/21cm.csv",
+    "curveType": "projection",
+    "categories": {
+        "detectionType": "Indirect detection",
+        "experimentType": "Astrophysical observations",
+        "timeType": "Planned/future constraints",
+        "assumption": "Dark Matter"
+    }
+}

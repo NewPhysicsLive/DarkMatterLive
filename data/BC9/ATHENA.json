@@ -1,0 +1,27 @@
+{
+  "labelName": "ATHENA",
+  "longName": "Athena/X − IFU NGC1275 optimal calibration",
+  "id": "athena",
+  "text": {
+    "elementName": null
+  },
+  "line": {
+    "color": "rgba(5, 58, 133, 1)",
+    "dash": "20,7",
+    "width": 2
+  },
+  "area": {
+    "color": null
+  },
+  "paperUrls": [
+    "https://arxiv.org/abs/2211.05136"
+  ],
+  "url": "../../data/BC9/ATHENA.csv",
+  "curveType": "projection",
+  "categories": {
+    "detectionType": "Indirect detection",
+    "experimentType": "Astrophysical observations",
+    "timeType": "Planned/future constraints",
+    "assumption": "None"
+  }
+}
