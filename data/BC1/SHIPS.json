@@ -1,7 +1,7 @@
 {
-  "labelName": "Planck + unWISE",
-  "longName": "Planck + unWISE CMB",
-  "id": "planck-unwise",
+  "labelName": "SHIPS",
+  "longName": "SHIPS",
+  "id": "ships",
   "text": {
     "elementName": null
   },
@@ -14,12 +14,12 @@
     "color": "rgba(57, 130, 232, 1)"
   },
   "paperUrls": [
-    "https://arxiv.org/abs/2406.02546"
+    "https://arxiv.org/abs/1502.04490"
   ],
-  "url": "../../data/BC1/Planck_unWISE.csv",
+  "url": "../../data/BC1/SHIPS.csv",
   "curveType": "excluded",
   "categories": {
-    "detectionType": "Indirect detection",
+    "detectionType": "Direct detection",
     "experimentType": "Astrophysical observations",
     "timeType": "Recent constraints",
     "assumption": "None"
