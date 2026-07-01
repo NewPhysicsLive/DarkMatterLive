@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [ main ]
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -36,7 +39,9 @@ jobs:
           git add data/previews || true
           if ! git diff --staged --quiet; then
             git commit -m "ci: update preview metadata" || true
-            git push origin HEAD:main
+            if ! git push origin HEAD:main; then
+              echo "::warning::Preview metadata changed but auto-push was blocked (likely branch protection)."
+            fi
           else
             echo "No preview changes"
           fi
