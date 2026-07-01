@@ -35,7 +35,12 @@ jobs:
           git add data/previews || true
           if ! git diff --staged --quiet; then
             git commit -m "ci: update preview metadata" || true
-            git push origin HEAD:main
+            # Only push to main when running on main branch, not on PRs
+            if [ "${{ github.event_name }}" = "push" ]; then
+              git push origin HEAD:main
+            else
+              echo "Skipping push on PR - previews would be committed after merge"
+            fi
           else
             echo "No preview changes"
           fi
