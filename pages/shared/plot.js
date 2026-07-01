@@ -10,25 +10,6 @@ function getSecondLevelDomain(url) {
   }
 }
 
-function escapeHtml(value) {
-  return String(value ?? "")
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/\"/g, "&quot;")
-    .replace(/'/g, "&#39;");
-}
-
-function sanitizeHttpUrl(value) {
-  if (!value) return null;
-  try {
-    const u = new URL(String(value));
-    return (u.protocol === 'http:' || u.protocol === 'https:') ? u.toString() : null;
-  } catch {
-    return null;
-  }
-}
-
 // Preview server configuration: read from a <meta name="preview-server" content="https://...">
 // or from a global `window.PREVIEW_SERVER`. If neither exists, preview fetches are skipped.
 function getPreviewServerBase() {
@@ -649,9 +630,9 @@ function plotBuilder(plotData) {
                   allowHTML: true,
                   onShow(instance) {
                     // show a usable link immediately (avoid sticking at "Loading…")
-                    const url = sanitizeHttpUrl(element.paperUrls && element.paperUrls[0]);
-                    const domain = escapeHtml(url ? (getSecondLevelDomain(url) || url) : 'source');
-                    const title = escapeHtml(element.labelName);
+                    const url = element.paperUrls && element.paperUrls[0];
+                    const domain = url ? (getSecondLevelDomain(url) || url) : 'source';
+                    const title = element.labelName;
                     instance.setContent(`\
                 <div class="wordbreaker" style="max-width:250px; font-family: sans-serif; display:flex;align-items:center;justify-content:start;flex-direction:column;gap:0.5rem">\
                   <p style="margin:0; padding:0;">${title} <a href="${url || '#'}" target="_blank" rel="noopener noreferrer">${domain}</a></p>\
@@ -666,10 +647,10 @@ function plotBuilder(plotData) {
                         try {
                           const local = await getLocalPreview(url);
                           if (local) {
-                            const title = escapeHtml(local.title || '');
+                            const title = local.title || '';
                             instance.setContent(`\
                   <div class="wordbreaker" style="max-width:250px; font-family: sans-serif; display:flex;align-items:center;justify-content:start;flex-direction:column;gap:0.5rem">\
-                    <p style="margin:0; padding:0;">${title}  <span class="no-break"> [ <a href="${url}" target="_blank" rel="noopener noreferrer">${escapeHtml(getSecondLevelDomain(url) || url)}</a> ] </span> </p>\
+                    <p style="margin:0; padding:0;">${title}  <span class="no-break"> [ <a href="${url}" target="_blank" rel="noopener noreferrer">${getSecondLevelDomain(url)}</a> ] </span> </p>\
                   </div>\
                 `);
                             console.debug('[preview] used local preview', url, local.__preview_key__ || 'unknown');
@@ -685,10 +666,10 @@ function plotBuilder(plotData) {
                             const r = await fetch(`${PREVIEW_SERVER_BASE}/preview?url=${encodeURIComponent(url)}`);
                             if (!r.ok) throw new Error('preview fetch failed');
                             const meta = await r.json();
-                            const fullTitle = escapeHtml(meta.title || '');
+                            const fullTitle = meta.title || '';
                             instance.setContent(`\
                   <div class="wordbreaker" style="max-width:250px; font-family: sans-serif; display:flex;align-items:center;justify-content:start;flex-direction:column;gap:0.5rem">\
-                    <p style="margin:0; padding:0;">${fullTitle}  <span class="no-break"> [ <a href="${url}" target="_blank" rel="noopener noreferrer">${escapeHtml(getSecondLevelDomain(url) || url)}</a> ] </span> </p>\
+                    <p style="margin:0; padding:0;">${fullTitle}  <span class="no-break"> [ <a href="${url}" target="_blank" rel="noopener noreferrer">${getSecondLevelDomain(url)}</a> ] </span> </p>\
                   </div>\
                 `);
                             console.debug('[preview] used remote preview', url, PREVIEW_SERVER_BASE);
@@ -1164,14 +1145,14 @@ function attachPaperPreviews(scopeSelection) {
     tippy(el, {
       // show a usable link immediately and then try to fetch richer metadata
       content: (function(){
-        const url = sanitizeHttpUrl(d);
-        const domain = escapeHtml(url ? (getSecondLevelDomain(url) || url) : 'source');
+        const url = d;
+        const domain = url ? (getSecondLevelDomain(url) || url) : 'source';
         return `<div class="wordbreaker" style="max-width:250px;font-family:sans-serif;display:flex;align-items:center;justify-content:start;flex-direction:column;gap:0.5rem"><p style="margin:0;padding:0;"><a href="${url || '#'}" target="_blank" rel="noopener noreferrer">${domain}</a></p></div>`;
       })(),
       allowHTML: true,
       appendTo: document.body,
       onShow(instance) {
-        const url = sanitizeHttpUrl(d);
+        const url = d;
         if (!url) return;
         // Prefer build-time local preview JSON if present (no network needed)
         getLocalPreview(url).then((localMeta) => {
@@ -1179,21 +1160,16 @@ function attachPaperPreviews(scopeSelection) {
             const meta = localMeta;
             const fullTitle = meta.title || "";
             const maxTitleChars = 120;
-            const shortTitle = (fullTitle.length > maxTitleChars ? fullTitle.slice(0, maxTitleChars).trim() + "…" : fullTitle);
+            const shortTitle = fullTitle.length > maxTitleChars ? fullTitle.slice(0, maxTitleChars).trim() + "…" : fullTitle;
             const fullDesc = meta.description || "";
             const maxChars = 240;
-            const shortDesc = (fullDesc.length > maxChars ? fullDesc.slice(0, maxChars).trim() + "…" : fullDesc);
-            const safeTitle = escapeHtml(shortTitle);
-            const safeDesc = escapeHtml(shortDesc);
-            const safeAuthors = Array.isArray(meta.authors) ? meta.authors.map((a) => escapeHtml(a)).join(", ") : "";
-            const safeImage = Array.isArray(meta.image) && meta.image.length ? sanitizeHttpUrl(meta.image[0].url) : null;
-            const safeSiteName = escapeHtml(meta.siteName || "source");
+            const shortDesc = fullDesc.length > maxChars ? fullDesc.slice(0, maxChars).trim() + "…" : fullDesc;
             instance.setContent(`
                 <div class="wordbreaker" style="max-width:250px; font-family: sans-serif; display: flex; align-items: center; justify-content: start; flex-direction: column; gap:0.5rem">
-                  ${safeImage ? `<img src="${safeImage}" alt="${safeSiteName} logo" style="width:50%; height:auto;margin:0; padding:0;"/>` : ""}
-                  <strong style="margin:0; padding:0;">${safeTitle}</strong>
-                  ${safeAuthors ? `<em>By ${safeAuthors}</em>` : ""}
-                  <p class="wordbreaker" style="margin:0; padding:0;">${safeDesc}</p>
+                  ${meta.image && meta.image.length ? `<img src="${meta.image[0].url}" alt="${meta.siteName} logo" style="width:50%; height:auto;margin:0; padding:0;"/>` : ""}
+                  <strong style="margin:0; padding:0;">${shortTitle}</strong>
+                  ${meta.authors && meta.authors.length ? `<em>By ${meta.authors.join(", ")}</em>` : ""}
+                  <p class="wordbreaker" style="margin:0; padding:0;">${shortDesc}</p>
                 </div>
               `);
           } else {
@@ -1204,21 +1180,16 @@ function attachPaperPreviews(scopeSelection) {
                 .then((meta) => {
                   const fullTitle = meta.title || "";
                   const maxTitleChars = 120;
-                  const shortTitle = (fullTitle.length > maxTitleChars ? fullTitle.slice(0, maxTitleChars).trim() + "…" : fullTitle);
+                  const shortTitle = fullTitle.length > maxTitleChars ? fullTitle.slice(0, maxTitleChars).trim() + "…" : fullTitle;
                   const fullDesc = meta.description || "";
                   const maxChars = 240;
-                  const shortDesc = (fullDesc.length > maxChars ? fullDesc.slice(0, maxChars).trim() + "…" : fullDesc);
-                  const safeTitle = escapeHtml(shortTitle);
-                  const safeDesc = escapeHtml(shortDesc);
-                  const safeAuthors = Array.isArray(meta.authors) ? meta.authors.map((a) => escapeHtml(a)).join(", ") : "";
-                  const safeImage = Array.isArray(meta.image) && meta.image.length ? sanitizeHttpUrl(meta.image[0].url) : null;
-                  const safeSiteName = escapeHtml(meta.siteName || "source");
+                  const shortDesc = fullDesc.length > maxChars ? fullDesc.slice(0, maxChars).trim() + "…" : fullDesc;
                   instance.setContent(`
                     <div class="wordbreaker" style="max-width:250px; font-family: sans-serif; display: flex; align-items: center; justify-content: start; flex-direction: column; gap:0.5rem">
-                      ${safeImage ? `<img src="${safeImage}" alt="${safeSiteName} logo" style="width:50%; height:auto;margin:0; padding:0;"/>` : ""}
-                      <strong style="margin:0; padding:0;">${safeTitle}</strong>
-                      ${safeAuthors ? `<em>By ${safeAuthors}</em>` : ""}
-                      <p class="wordbreaker" style="margin:0; padding:0;">${safeDesc}</p>
+                      ${meta.image ? `<img src="${meta.image[0].url}" alt="${meta.siteName} logo" style="width:50%; height:auto;margin:0; padding:0;"/>` : ""}
+                      <strong style="margin:0; padding:0;">${shortTitle}</strong>
+                      ${meta.authors && meta.authors.length ? `<em>By ${meta.authors.join(", ")}</em>` : ""}
+                      <p class="wordbreaker" style="margin:0; padding:0;">${shortDesc}</p>
                     </div>
                   `);
                 })
