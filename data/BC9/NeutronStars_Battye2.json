@@ -1,0 +1,27 @@
+{
+    "labelName": "Neutron stars 2",
+    "longName": "Neutron stars, Battye et al. 2023 PSR J2144−3933",
+    "id": "neutronstars_battye2",
+    "text": {
+        "elementName": null
+    },
+    "line": {
+        "color": "rgba(5, 58, 133, 1)",
+        "dash": null,
+        "width": 2
+    },
+    "area": {
+        "color": "rgba(57, 130, 232, 1)"
+    },
+    "paperUrls": [
+        "https://arxiv.org/abs/2303.11792"
+    ],
+    "url": "../../data/BC9/NeutronStars_Battye2.csv",
+    "curveType": "excluded",
+    "categories": {
+        "detectionType": "Indirect detection",
+        "experimentType": "Astrophysical observations",
+        "timeType": "Recent constraints",
+        "assumption": "Dark Matter"
+    }
+}

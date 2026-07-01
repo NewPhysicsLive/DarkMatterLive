@@ -1,0 +1,27 @@
+{
+  "labelName": "NOMAD",
+  "longName": "NOMAD",
+  "id": "nomad",
+  "text": {
+    "elementName": null
+  },
+  "line": {
+    "color": "rgba(5, 58, 133, 1)",
+    "dash": null,
+    "width": 2
+  },
+  "area": {
+    "color": "rgba(57, 130, 232, 1)"
+  },
+  "paperUrls": [
+    "https://www.sciencedirect.com/science/article/abs/pii/S0370269300003750?via%3Dihub"
+  ],
+  "url": "../../data/BC9/NOMAD.csv",
+  "curveType": "excluded",
+  "categories": {
+    "detectionType": "Direct detection",
+    "experimentType": "Laboratory experiments",
+    "timeType": "Past constraints",
+    "assumption": "None"
+  }
+}

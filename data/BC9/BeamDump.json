@@ -1,0 +1,31 @@
+{
+  "labelName": "Beam dump",
+  "longName": "Beam dump (combined)",
+  "id": "beamdump",
+  "text": {
+    "elementName": null
+  },
+  "line": {
+    "color": "rgba(5, 58, 133, 1)",
+    "dash": null,
+    "width": 2
+  },
+  "area": {
+    "color": "rgba(57, 130, 232, 1)"
+  },
+  "paperUrls": [
+    "https://www.sciencedirect.com/science/article/abs/pii/0370269385904009?via%3Dihub",
+    "https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.59.755",
+    "https://arxiv.org/abs/1709.00009",
+    "https://link.springer.com/article/10.1007/BF01548556",
+    "https://arxiv.org/abs/2005.02710"
+  ],
+  "url": "../../data/BC9/BeamDump.csv",
+  "curveType": "excluded",
+  "categories": {
+    "detectionType": "Direct detection",
+    "experimentType": "Laboratory experiments",
+    "timeType": "Past constraints",
+    "assumption": "None"
+  }
+}

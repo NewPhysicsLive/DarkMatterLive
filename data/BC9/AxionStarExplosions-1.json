@@ -1,0 +1,27 @@
+{
+    "labelName": "AS explosion (higher mass)",
+    "longName": "Axion Star Explosions - region 1 (higher mass)",
+    "id": "as_explosions_1",
+    "text": {
+        "elementName": null
+    },
+    "line": {
+        "color": "rgba(5, 58, 133, 1)",
+        "dash": null,
+        "width": 2
+    },
+    "area": {
+        "color": "rgba(57, 130, 232, 1)"
+    },
+    "paperUrls": [
+        "https://arxiv.org/abs/2302.10206"
+    ],
+    "url": "../../data/BC9/AxionStarExplosions-1.csv",
+    "curveType": "excluded",
+    "categories": {
+        "detectionType": "Indirect detection",
+        "experimentType": "Astrophysical observations",
+        "timeType": "Recent constraints",
+        "assumption": "Dark Matter"
+    }
+}

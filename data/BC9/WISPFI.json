@@ -1,0 +1,27 @@
+{
+    "labelName": "WISPFI",
+    "longName": "WISPFI - magnetised fibre interferometer",
+    "id": "wispfi",
+    "text": {
+        "elementName": null
+    },
+    "line": {
+        "color": "rgba(5, 58, 133, 1)",
+        "dash": "20,7",
+        "width": 2
+    },
+    "area": {
+        "color": null
+    },
+    "paperUrls": [
+        "https://arxiv.org/abs/2305.12969"
+    ],
+    "url": "../../data/BC9/WISPFI.csv",
+    "curveType": "projection",
+    "categories": {
+        "detectionType": "Direct detection",
+        "experimentType": "Laboratory experiments",
+        "timeType": "Planned/future constraints",
+        "assumption": "None"
+    }
+}

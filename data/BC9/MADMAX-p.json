@@ -1,0 +1,27 @@
+{
+  "labelName": "MADMAX (projection)",
+  "longName": "MADMAX (projection)",
+  "id": "madmax-p",
+  "text": {
+    "elementName": null
+  },
+  "line": {
+    "color": "rgba(5, 58, 133, 1)",
+    "dash": "20,7",
+    "width": 2
+  },
+  "area": {
+    "color": null
+  },
+  "paperUrls": [
+    "https://arxiv.org/abs/2003.10894"
+  ],
+  "url": "../../data/BC9/MADMAX-p.csv",
+  "curveType": "projection",
+  "categories": {
+    "detectionType": "Direct detection",
+    "experimentType": "Laboratory experiments",
+    "timeType": "Planned/future constraints",
+    "assumption": "Dark Matter"
+  }
+}

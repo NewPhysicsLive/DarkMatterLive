@@ -1,0 +1,27 @@
+{
+  "labelName": "CADEx",
+  "longName": "CADEx",
+  "id": "cadex",
+  "text": {
+    "elementName": null
+  },
+  "line": {
+    "color": "rgba(5, 58, 133, 1)",
+    "dash": "20,7",
+    "width": 2
+  },
+  "area": {
+    "color": null
+  },
+  "paperUrls": [
+    "https://arxiv.org/abs/2206.02980"
+  ],
+  "url": "../../data/BC9/CADEx.csv",
+  "curveType": "projection",
+  "categories": {
+    "detectionType": "Direct detection",
+    "experimentType": "Laboratory experiments",
+    "timeType": "Planned/future constraints",
+    "assumption": "Dark Matter"
+  }
+}

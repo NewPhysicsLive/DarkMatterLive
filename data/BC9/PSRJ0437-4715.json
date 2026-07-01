@@ -1,0 +1,27 @@
+{
+    "labelName": "PSR J0437-4715",
+    "longName": "PSR J0437-4715",
+    "id": "psrj0437-4715",
+    "text": {
+        "elementName": null
+    },
+    "line": {
+        "color": "rgba(5, 58, 133, 1)",
+        "dash": null,
+        "width": 2
+    },
+    "area": {
+        "color": "rgba(57, 130, 232, 1)"
+    },
+    "paperUrls": [
+        "https://arxiv.org/abs/1902.02695"
+    ],
+    "url": "../../data/BC9/PSRJ0437-4715.csv",
+    "curveType": "excluded",
+    "categories": {
+        "detectionType": "Indirect detection",
+        "experimentType": "Astrophysical observations",
+        "timeType": "Recent constraints",
+        "assumption": "Dark Matter"
+    }
+}

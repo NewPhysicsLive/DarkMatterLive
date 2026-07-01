@@ -1,0 +1,27 @@
+{
+    "labelName": "XRISM 2",
+    "longName": "XRISM projection",
+    "id": "xrism2",
+    "text": {
+        "elementName": null
+    },
+    "line": {
+        "color": "rgba(5, 58, 133, 1)",
+        "dash": "20,7",
+        "width": 2
+    },
+    "area": {
+        "color": null
+    },
+    "paperUrls": [
+        "https://arxiv.org/abs/2305.17160"
+    ],
+    "url": "../../data/BC9/XRISM2.csv",
+    "curveType": "projection",
+    "categories": {
+        "detectionType": "Indirect detection",
+        "experimentType": "Astrophysical observations",
+        "timeType": "Planned/future constraints",
+        "assumption": "Dark Matter"
+    }
+}

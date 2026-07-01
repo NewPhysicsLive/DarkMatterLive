@@ -1,0 +1,27 @@
+{
+    "labelName": "Neutron stars 1",
+    "longName": "Neutron star breakthrough listen",
+    "id": "neutronstars_breakthroughlisten",
+    "text": {
+        "elementName": null
+    },
+    "line": {
+        "color": "rgba(5, 58, 133, 1)",
+        "dash": null,
+        "width": 2
+    },
+    "area": {
+        "color": "rgba(57, 130, 232, 1)"
+    },
+    "paperUrls": [
+        "https://arxiv.org/abs/2202.08274"
+    ],
+    "url": "../../data/BC9/NeutronStars_BreakthroughListen.csv",
+    "curveType": "excluded",
+    "categories": {
+        "detectionType": "Indirect detection",
+        "experimentType": "Astrophysical observations",
+        "timeType": "Recent constraints",
+        "assumption": "Dark Matter"
+    }
+}

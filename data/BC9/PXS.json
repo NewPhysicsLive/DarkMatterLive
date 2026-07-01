@@ -1,0 +1,27 @@
+{
+  "labelName": "PXS",
+  "longName": "PXS",
+  "id": "pxs",
+  "text": {
+    "elementName": null
+  },
+  "line": {
+    "color": "rgba(5, 58, 133, 1)",
+    "dash": "20,7",
+    "width": 2
+  },
+  "area": {
+    "color": null
+  },
+  "paperUrls": [
+    "https://indico.slac.stanford.edu/event/9065/contributions/9796/attachments/4462/11862/PXSUpdate_08062024_v0.pdf"
+  ],
+  "url": "../../data/BC9/PXS.csv",
+  "curveType": "projection",
+  "categories": {
+    "detectionType": "Direct detection",
+    "experimentType": "Laboratory experiments",
+    "timeType": "Planned/future constraints",
+    "assumption": "None"
+  }
+}

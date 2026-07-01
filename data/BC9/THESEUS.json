@@ -1,0 +1,27 @@
+{
+    "labelName": "THESEUS",
+    "longName": "THESEUS (ALP DM decay to Xrays)",
+    "id": "theseus",
+    "text": {
+        "elementName": null
+    },
+    "line": {
+        "color": "rgba(5, 58, 133, 1)",
+        "dash": "20,7",
+        "width": 2
+    },
+    "area": {
+        "color": null
+    },
+    "paperUrls": [
+        "https://arxiv.org/abs/2008.08306"
+    ],
+    "url": "../../data/BC9/THESEUS.csv",
+    "curveType": "projection",
+    "categories": {
+        "detectionType": "Indirect detection",
+        "experimentType": "Astrophysical observations",
+        "timeType": "Planned/future constraints",
+        "assumption": "Dark Matter"
+    }
+}

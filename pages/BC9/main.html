@@ -8,9 +8,29 @@
   <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
   <title>ALP with photon dominance (BC9) | Dark Matter live</title>
   <link rel="stylesheet" href="../shared/navbar.css" />
-  <script defer src="../shared/navbar.js"></script>
+  <link rel="stylesheet" href="../shared/plot.css" />
   <link rel="stylesheet" href="../BC1/css/style.css" />
   <link rel="manifest" href="../site.webmanifest">
+  
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="../vendor/katex.min.css">
+  <script src="../vendor/popper.min.js"></script>
+  <script src="../vendor/tippy-bundle.umd.min.js"></script>
+  <link rel="stylesheet" href="../vendor/tippy.css" />
+  <script defer src="../vendor/katex.min.js"></script>
+  <script defer src="../vendor/auto-render.min.js"
+    onload="renderMathInElement(document.body);"></script>
+  <script defer src="../shared/navbar.js"></script>
+  <script defer src="./js/script.js"></script>
+  <script defer src="../shared/plot.js"></script>
 </head>
 <body>
   <nav class="navbar">
@@ -67,25 +87,36 @@
         </div>
       </div>
     </section>
-    <div id="plot" style="display:flex;align-items:center;justify-content:center;">
-      <div class="plot-inner" style="text-align:center;max-width:720px;padding:2rem;">
-        <svg width="720" height="540" role="img" aria-label="Blank plot - awaiting data">
-          <rect x="0" y="0" width="100%" height="100%" fill="#ffffff" stroke="#ccc"></rect>
-          <text x="50%" y="45%" text-anchor="middle" fill="#666" style="font-size:18px;font-family:Open Sans, sans-serif;">Awaiting data — please open a PR to populate this model</text>
-          <text x="50%" y="60%" text-anchor="middle" fill="#333" style="font-size:14px;font-family:Open Sans, sans-serif;">y-axis: g_{aγ} (GeV⁻¹)</text>
-          <g transform="translate(28,500)">
-            <rect x="-6" y="-18" rx="4" ry="4" width="160" height="24" fill="rgba(255,255,255,0.9)" stroke="#ddd"></rect>
-            <a href="https://darkmatter.web.cern.ch/" target="_blank" rel="noopener noreferrer">
-              <text x="0" y="-2" fill="#3c096c" style="font-weight:600;font-family:Open Sans, sans-serif;font-size:13px">Dark Matter live</text>
-            </a>
-          </g>
-        </svg>
-        <div class="plot-label" aria-hidden="false">
-          <a href="https://darkmatter.web.cern.ch/" target="_blank" rel="noopener noreferrer">Dark Matter live</a>
-        </div>
-      </div>
-    </div>
+
+	<div id="plot"></div>
+    <div class="interacting-buttons"><ul>
+      <li><button class="option-button fullscreen">Fullscreen</button></li>
+      <li><button class="option-button fix-axes" id="fix-axes-btn">Fix Axes</button></li>
+      <li><button class="option-button download" id="saveSvgBtn">Download</button></li>
+      <li><button class="option-button add-data-link" onclick="location.href='../faq/faq.html';">Add your data</button></li>
+    </ul></div>
+    
   </div>
+
+  <section class="credits" style="margin:12px 0 28px;padding:12px 18px;border:1px solid #ddd;border-radius:8px;background:#f8f9fa;font-size:0.9rem;line-height:1.35;">
+    <strong style="display:block;margin-bottom:6px;font-size:1.05rem;">Credits</strong>
+    All credit for the curves goes to their original authors. The corresponding papers and their links can be found in the plot section.
+    <br>
+    <br>
+    Credit for compiling most of these curves in one place goes to Ciaran O'Hare.
+<pre>
+@misc{AxionLimits,
+  author       = {Ciaran O'Hare},
+  title        = {cajohare/AxionLimits: AxionLimits},
+  month        = jul,
+  year         = 2020,
+  publisher    = {Zenodo},
+  version      = {v1.0},
+  doi          = {10.5281/zenodo.3932430},
+  howpublished = {\url{https://cajohare.github.io/AxionLimits/}}
+}
+</pre>
+  </section>
   <div class="disclaimer" style="font-size:0.9em;color:#555;margin:1rem 0;padding:0.75rem 1rem;border-top:1px solid #eee;font-style:italic">
   <strong>Disclaimer:</strong> The plots on this page are not approved or reviewed by any official CERN or dark-matter working group. For queries, contact Brij Kishor Jashal at <a href="mailto:brij@cern.ch">brij@cern.ch</a>.
   </div>

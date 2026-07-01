@@ -1,0 +1,28 @@
+{
+  "labelName": "ALPHA",
+  "longName": "ALPHA phase 1+2",
+  "id": "alpha",
+  "text": {
+    "elementName": null
+  },
+  "line": {
+    "color": "rgba(5, 58, 133, 1)",
+    "dash": "20,7",
+    "width": 2
+  },
+  "area": {
+    "color": null
+  },
+  "paperUrls": [
+    "https://arxiv.org/abs/1904.11872",
+    "https://raw.githubusercontent.com/cajohare/AxionLimits/master/limit_data/AxionPhoton/Projections/ALPHA.txt"
+  ],
+  "url": "../../data/BC9/ALPHA.csv",
+  "curveType": "projection",
+  "categories": {
+    "detectionType": "Direct detection",
+    "experimentType": "Laboratory experiments",
+    "timeType": "Planned/future constraints",
+    "assumption": "Dark Matter"
+  }
+}

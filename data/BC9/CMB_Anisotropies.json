@@ -1,0 +1,28 @@
+{
+    "labelName": "CMB Anisotropies",
+    "longName": "COBE/FIRAS + Planck spectral distortions (axion decay)",
+    "id": "cmb_anisotropies",
+    "text": {
+        "elementName": null
+    },
+    "line": {
+        "color": "rgba(5, 58, 133, 1)",
+        "dash": null,
+        "width": 2
+    },
+    "area": {
+        "color": "rgba(57, 130, 232, 1)"
+    },
+    "paperUrls": [
+        "https://arxiv.org/abs/2303.07370",
+        "https://arxiv.org/abs/2303.07426"
+    ],
+    "url": "../../data/BC9/CMB_Anisotropies.csv",
+    "curveType": "excluded",
+    "categories": {
+        "detectionType": "Indirect detection",
+        "experimentType": "Cosmological measurements",
+        "timeType": "Recent constraints",
+        "assumption": "Dark Matter"
+    }
+}

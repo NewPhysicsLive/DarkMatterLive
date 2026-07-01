@@ -1,0 +1,27 @@
+{
+  "labelName": "GW170817 (fireball)",
+  "longName": "GW170817 (fireball)",
+  "id": "gw170817",
+  "text": {
+    "elementName": null
+  },
+  "line": {
+    "color": "rgba(5, 58, 133, 1)",
+    "dash": null,
+    "width": 2
+  },
+  "area": {
+    "color": "rgba(57, 130, 232, 1)"
+  },
+  "paperUrls": [
+    "https://arxiv.org/abs/2305.10327"
+  ],
+  "url": "../../data/BC9/GW170817.csv",
+  "curveType": "excluded",
+  "categories": {
+    "detectionType": "Indirect detection",
+    "experimentType": "Astrophysical observations",
+    "timeType": "Recent constraints",
+    "assumption": "None"
+  }
+}

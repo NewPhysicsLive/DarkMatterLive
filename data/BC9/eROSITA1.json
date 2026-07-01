@@ -1,0 +1,27 @@
+{
+    "labelName": "eROSITA (ALP decay) 1",
+    "longName": "eROSITA early data release (ALP decay)",
+    "id": "erosita1",
+    "text": {
+        "elementName": null
+    },
+    "line": {
+        "color": "rgba(5, 58, 133, 1)",
+        "dash": "20,7",
+        "width": 2
+    },
+    "area": {
+        "color": null
+    },
+    "paperUrls": [
+        "https://arxiv.org/abs/2401.16747"
+    ],
+    "url": "../../data/BC9/eROSITA1.csv",
+    "curveType": "projection",
+    "categories": {
+        "detectionType": "Indirect detection",
+        "experimentType": "Astrophysical observations",
+        "timeType": "Planned/future constraints",
+        "assumption": "Dark Matter"
+    }
+}

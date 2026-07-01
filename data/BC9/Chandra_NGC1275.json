@@ -1,0 +1,27 @@
+{
+  "labelName": "Chandra (NGC1275)",
+  "longName": "Chandra (NGC1275)",
+  "id": "chandra_ngc1275",
+  "text": {
+    "elementName": null
+  },
+  "line": {
+    "color": "rgba(5, 58, 133, 1)",
+    "dash": null,
+    "width": 2
+  },
+  "area": {
+    "color": "rgba(57, 130, 232, 1)"
+  },
+  "paperUrls": [
+    "https://arxiv.org/abs/1907.05475"
+  ],
+  "url": "../../data/BC9/Chandra_NGC1275.csv",
+  "curveType": "excluded",
+  "categories": {
+    "detectionType": "Indirect detection",
+    "experimentType": "Astrophysical observations",
+    "timeType": "Recent constraints",
+    "assumption": "None"
+  }
+}

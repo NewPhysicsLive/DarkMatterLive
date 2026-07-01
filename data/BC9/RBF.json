@@ -1,0 +1,28 @@
+{
+  "labelName": "RBF",
+  "longName": "RBF",
+  "id": "rbf",
+  "text": {
+    "elementName": null
+  },
+  "line": {
+    "color": "rgba(5, 58, 133, 1)",
+    "dash": null,
+    "width": 2
+  },
+  "area": {
+    "color": "rgba(57, 130, 232, 1)"
+  },
+  "paperUrls": [
+    "https://inspirehep.net/literature/283328",
+    "https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.59.839"
+  ],
+  "url": "../../data/BC9/RBF.csv",
+  "curveType": "excluded",
+  "categories": {
+    "detectionType": "Direct detection",
+    "experimentType": "Laboratory experiments",
+    "timeType": "Past constraints",
+    "assumption": "None"
+  }
+}

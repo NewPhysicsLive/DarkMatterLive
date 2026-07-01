@@ -1,0 +1,27 @@
+{
+  "labelName": "ADMX (2018)",
+  "longName": "ADMX 2018 nearly DFSZ run",
+  "id": "admx2018",
+  "text": {
+    "elementName": null
+  },
+  "line": {
+    "color": "rgba(5, 58, 133, 1)",
+    "dash": null,
+    "width": 2
+  },
+  "area": {
+    "color": "rgba(57, 130, 232, 1)"
+  },
+  "paperUrls": [
+    "https://arxiv.org/abs/1804.05750"
+  ],
+  "url": "../../data/BC9/ADMX2018.csv",
+  "curveType": "excluded",
+  "categories": {
+    "detectionType": "Direct detection",
+    "experimentType": "Laboratory experiments",
+    "timeType": "Recent constraints",
+    "assumption": "Dark Matter"
+  }
+}

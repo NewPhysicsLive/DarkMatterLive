@@ -1,0 +1,27 @@
+{
+    "labelName": "HST COB (Carenza et al.)",
+    "longName": "HST Cosmic optical background anisotropies (Carenza et al.)",
+    "id": "hst",
+    "text": {
+        "elementName": null
+    },
+    "line": {
+        "color": "rgba(5, 58, 133, 1)",
+        "dash": null,
+        "width": 2
+    },
+    "area": {
+        "color": "rgba(57, 130, 232, 1)"
+    },
+    "paperUrls": [
+        "https://arxiv.org/abs/2301.06560"
+    ],
+    "url": "../../data/BC9/HST.csv",
+    "curveType": "excluded",
+    "categories": {
+        "detectionType": "Indirect detection",
+        "experimentType": "Astrophysical observations",
+        "timeType": "Recent constraints",
+        "assumption": "Dark Matter"
+    }
+}

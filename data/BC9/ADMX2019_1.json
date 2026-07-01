@@ -1,0 +1,27 @@
+{
+  "labelName": "ADMX (2019) 1",
+  "longName": "ADMX 2019 DFSZ Run 1",
+  "id": "admx2019_1",
+  "text": {
+    "elementName": null
+  },
+  "line": {
+    "color": "rgba(5, 58, 133, 1)",
+    "dash": null,
+    "width": 2
+  },
+  "area": {
+    "color": "rgba(57, 130, 232, 1)"
+  },
+  "paperUrls": [
+    "https://arxiv.org/abs/1910.08638"
+  ],
+  "url": "../../data/BC9/ADMX2019_1.csv",
+  "curveType": "excluded",
+  "categories": {
+    "detectionType": "Direct detection",
+    "experimentType": "Laboratory experiments",
+    "timeType": "Recent constraints",
+    "assumption": "Dark Matter"
+  }
+}

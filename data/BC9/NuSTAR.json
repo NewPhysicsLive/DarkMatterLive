@@ -1,0 +1,29 @@
+{
+    "labelName": "NuSTAR (comb.)",
+    "longName": "NuSTAR decaying ALP dark matter; Combined (and recast) limits on sterile neutrinos from",
+    "id": "nustar",
+    "text": {
+        "elementName": null
+    },
+    "line": {
+        "color": "rgba(5, 58, 133, 1)",
+        "dash": null,
+        "width": 2
+    },
+    "area": {
+        "color": "rgba(57, 130, 232, 1)"
+    },
+    "paperUrls": [
+        "https://arxiv.org/abs/1609.00667",
+        "https://arxiv.org/abs/1901.01262",
+        "https://arxiv.org/abs/2207.04572"
+    ],
+    "url": "../../data/BC9/NuSTAR.csv",
+    "curveType": "excluded",
+    "categories": {
+        "detectionType": "Indirect detection",
+        "experimentType": "Astrophysical observations",
+        "timeType": "Recent constraints",
+        "assumption": "Dark Matter"
+    }
+}

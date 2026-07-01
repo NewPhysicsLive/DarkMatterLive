@@ -1,0 +1,27 @@
+{
+  "labelName": "Low-E SNe (2025)",
+  "longName": "SNe (low-energy) ALP decay - Fiorillo et al. 2025 update",
+  "id": "sne_decay_fiorillo",
+  "text": {
+    "elementName": null
+  },
+  "line": {
+    "color": "rgba(5, 58, 133, 1)",
+    "dash": null,
+    "width": 2
+  },
+  "area": {
+    "color": "rgba(57, 130, 232, 1)"
+  },
+  "paperUrls": [
+    "https://arxiv.org/abs/2503.13653"
+  ],
+  "url": "../../data/BC9/SNe-decay-Fiorillo.csv",
+  "curveType": "excluded",
+  "categories": {
+    "detectionType": "Indirect detection",
+    "experimentType": "Astrophysical observations",
+    "timeType": "Recent constraints",
+    "assumption": "None"
+  }
+}

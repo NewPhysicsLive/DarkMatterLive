@@ -1,0 +1,27 @@
+{
+  "labelName": "Mrk421 (Fermi+ HAWC)",
+  "longName": "Mrk 421 (Fermi + HAWC)",
+  "id": "mrk421-fermi-hawc",
+  "text": {
+    "elementName": null
+  },
+  "line": {
+    "color": "rgba(5, 58, 133, 1)",
+    "dash": null,
+    "width": 2
+  },
+  "area": {
+    "color": "rgba(57, 130, 232, 1)"
+  },
+  "paperUrls": [
+    "https://arxiv.org/abs/2406.00387"
+  ],
+  "url": "../../data/BC9/Mrk421-Fermi-HAWC.csv",
+  "curveType": "excluded",
+  "categories": {
+    "detectionType": "Indirect detection",
+    "experimentType": "Astrophysical observations",
+    "timeType": "Recent constraints",
+    "assumption": "None"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "labelName": "SRF",
+  "longName": "SRF upconversion cubic metre",
+  "id": "srf",
+  "text": {
+    "elementName": null
+  },
+  "line": {
+    "color": "rgba(5, 58, 133, 1)",
+    "dash": "20,7",
+    "width": 2
+  },
+  "area": {
+    "color": null
+  },
+  "paperUrls": [
+    "https://arxiv.org/abs/2007.15656"
+  ],
+  "url": "../../data/BC9/SRF.csv",
+  "curveType": "projection",
+  "categories": {
+    "detectionType": "Direct detection",
+    "experimentType": "Laboratory experiments",
+    "timeType": "Planned/future constraints",
+    "assumption": "None"
+  }
+}

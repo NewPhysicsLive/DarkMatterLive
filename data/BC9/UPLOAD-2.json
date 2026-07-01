@@ -1,0 +1,27 @@
+{
+  "labelName": "UPLOAD 2",
+  "longName": "UPLOAD 2",
+  "id": "upload-2",
+  "text": {
+    "elementName": null
+  },
+  "line": {
+    "color": "rgba(5, 58, 133, 1)",
+    "dash": null,
+    "width": 2
+  },
+  "area": {
+    "color": "rgba(57, 130, 232, 1)"
+  },
+  "paperUrls": [
+    "https://arxiv.org/abs/2301.06778"
+  ],
+  "url": "../../data/BC9/UPLOAD-2.csv",
+  "curveType": "excluded",
+  "categories": {
+    "detectionType": "Direct detection",
+    "experimentType": "Laboratory experiments",
+    "timeType": "Recent constraints",
+    "assumption": "None"
+  }
+}

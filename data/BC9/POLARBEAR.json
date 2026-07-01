@@ -1,0 +1,27 @@
+{
+    "labelName": "POLARBEAR (CMB)",
+    "longName": "POLARBEAR axion birefringence",
+    "id": "polarbear",
+    "text": {
+        "elementName": null
+    },
+    "line": {
+        "color": "rgba(5, 58, 133, 1)",
+        "dash": null,
+        "width": 2
+    },
+    "area": {
+        "color": "rgba(57, 130, 232, 1)"
+    },
+    "paperUrls": [
+        "https://arxiv.org/abs/2303.08410"
+    ],
+    "url": "../../data/BC9/POLARBEAR.csv",
+    "curveType": "excluded",
+    "categories": {
+        "detectionType": "Indirect detection",
+        "experimentType": "Cosmological measurements",
+        "timeType": "Recent constraints",
+        "assumption": "Dark Matter"
+    }
+}

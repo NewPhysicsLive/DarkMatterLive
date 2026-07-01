@@ -1,0 +1,28 @@
+{
+  "labelName": "DM-Radio",
+  "longName": "DM-Radio (50L + m^3 + GUT)",
+  "id": "dmradio",
+  "text": {
+    "elementName": null
+  },
+  "line": {
+    "color": "rgba(5, 58, 133, 1)",
+    "dash": "20,7",
+    "width": 2
+  },
+  "area": {
+    "color": null
+  },
+  "paperUrls": [
+    "https://arxiv.org/abs/2204.13781",
+    "https://indico.mit.edu/event/151/contributions/295/attachments/96/172/Dark%20Matter%20Radio_CambridgeAxions2021.pdf"
+  ],
+  "url": "../../data/BC9/DMRadio.csv",
+  "curveType": "projection",
+  "categories": {
+    "detectionType": "Direct detection",
+    "experimentType": "Laboratory experiments",
+    "timeType": "Planned/future constraints",
+    "assumption": "Dark Matter"
+  }
+}

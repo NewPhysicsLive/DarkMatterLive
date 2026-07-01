@@ -1,0 +1,28 @@
+{
+  "labelName": "UF",
+  "longName": "UF haloscope",
+  "id": "uf",
+  "text": {
+    "elementName": null
+  },
+  "line": {
+    "color": "rgba(5, 58, 133, 1)",
+    "dash": null,
+    "width": 2
+  },
+  "area": {
+    "color": "rgba(57, 130, 232, 1)"
+  },
+  "paperUrls": [
+    "https://journals.aps.org/prd/abstract/10.1103/PhysRevD.42.1297",
+    "https://inspirehep.net/literature/420476"
+  ],
+  "url": "../../data/BC9/UF.csv",
+  "curveType": "excluded",
+  "categories": {
+    "detectionType": "Direct detection",
+    "experimentType": "Laboratory experiments",
+    "timeType": "Past constraints",
+    "assumption": "None"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "labelName": "DUNE",
+  "longName": "DUNE GAr 7 yr",
+  "id": "dune",
+  "text": {
+    "elementName": null
+  },
+  "line": {
+    "color": "rgba(5, 58, 133, 1)",
+    "dash": "20,7",
+    "width": 2
+  },
+  "area": {
+    "color": null
+  },
+  "paperUrls": [
+    "https://arxiv.org/abs/2011.07054"
+  ],
+  "url": "../../data/BC9/DUNE.csv",
+  "curveType": "projection",
+  "categories": {
+    "detectionType": "Direct detection",
+    "experimentType": "Laboratory experiments",
+    "timeType": "Planned/future constraints",
+    "assumption": "None"
+  }
+}

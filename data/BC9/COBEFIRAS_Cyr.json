@@ -1,0 +1,27 @@
+{
+    "labelName": "COBE/FIRAS (AP conversion)",
+    "longName": "Axion Photon COBE/FIRAS 2024 Cyr et al. with CosmoTherm",
+    "id": "cebefiras_cyr",
+    "text": {
+        "elementName": null
+    },
+    "line": {
+        "color": "rgba(5, 58, 133, 1)",
+        "dash": null,
+        "width": 2
+    },
+    "area": {
+        "color": "rgba(57, 130, 232, 1)"
+    },
+    "paperUrls": [
+        "https://arxiv.org/abs/2411.13701"
+    ],
+    "url": "../../data/BC9/COBEFIRAS_Cyr.csv",
+    "curveType": "excluded",
+    "categories": {
+        "detectionType": "Indirect detection",
+        "experimentType": "Cosmological measurements",
+        "timeType": "Recent constraints",
+        "assumption": "Dark Matter"
+    }
+}
