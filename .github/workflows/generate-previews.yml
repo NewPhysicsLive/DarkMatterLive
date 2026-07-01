@@ -29,18 +29,14 @@ jobs:
         run: npm run generate-previews
 
       - name: Commit previews (if changed)
+        if: github.event_name == 'push'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/previews || true
           if ! git diff --staged --quiet; then
             git commit -m "ci: update preview metadata" || true
-            # Only push to main when running on main branch, not on PRs
-            if [ "${{ github.event_name }}" = "push" ]; then
-              git push origin HEAD:main
-            else
-              echo "Skipping push on PR - previews would be committed after merge"
-            fi
+            git push origin HEAD:main
           else
             echo "No preview changes"
           fi
