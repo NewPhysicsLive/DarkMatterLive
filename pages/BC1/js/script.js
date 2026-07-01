@@ -91,6 +91,57 @@ function getPreviewServerBase() {
 }
 const PREVIEW_SERVER_BASE = getPreviewServerBase();
 
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function sanitizeHttpUrl(value) {
+  if (!value) return null;
+  try {
+    const parsed = new URL(String(value), window.location.href);
+    if (parsed.protocol === 'http:' || parsed.protocol === 'https:') {
+      return parsed.toString();
+    }
+  } catch (e) {
+    // ignore invalid URLs
+  }
+  return null;
+}
+
+function renderPreviewTooltip(meta, url) {
+  const safeUrl = sanitizeHttpUrl(url);
+  const safeTitle = escapeHtml(meta?.title || '');
+  const safeDescription = escapeHtml(meta?.description || '');
+  const safeAuthors = Array.isArray(meta?.authors)
+    ? meta.authors.map((author) => escapeHtml(author)).join(', ')
+    : '';
+  const safeSiteName = escapeHtml(meta?.siteName || 'Preview');
+  const safeImageUrl = sanitizeHttpUrl(Array.isArray(meta?.image) && meta.image.length ? meta.image[0].url : null);
+  const domainLabel = safeUrl ? escapeHtml(getSecondLevelDomain(safeUrl)) : '';
+
+  return `
+    <div class="wordbreaker" style="max-width:250px; font-family: sans-serif; display: flex; align-items: center; justify-content: start; flex-direction: column; gap:0.5rem">
+      ${safeImageUrl ? `<img src="${safeImageUrl}" alt="${safeSiteName} logo" style="width:50%; height:auto;margin:0; padding:0;"/>` : ''}
+      ${safeTitle ? `<strong style="margin:0; padding:0;">${safeTitle}</strong>` : ''}
+      ${safeAuthors ? `<em>By ${safeAuthors}</em>` : ''}
+      ${safeDescription ? `<p class="wordbreaker" style="margin:0; padding:0;">${safeDescription}</p>` : ''}
+      ${safeUrl ? `<p style="margin:0; padding:0;"><span class="no-break">[ <a href="${safeUrl}" target="_blank" rel="noopener noreferrer">${domainLabel}</a> ]</span></p>` : ''}
+    </div>
+  `;
+}
+
+function renderPreviewLinkOnly(url) {
+  const safeUrl = sanitizeHttpUrl(url);
+  const domain = safeUrl ? escapeHtml(getSecondLevelDomain(safeUrl) || safeUrl) : 'source';
+  const href = safeUrl || '#';
+  return `<div class="wordbreaker" style="max-width:250px;font-family:sans-serif;display:flex;align-items:center;justify-content:start;flex-direction:column;gap:0.5rem"><p style="margin:0;padding:0;"><a href="${href}" target="_blank" rel="noopener noreferrer">${domain}</a></p></div>`;
+}
+
 // Try to load a build-time previews index at /data/previews/index.json (if present).
 // This is populated by the CI job that runs `scripts/generate_previews.js`.
 let LOCAL_PREVIEWS_INDEX = null;
@@ -595,13 +646,7 @@ function plotBuilder(plotData) {
                   onShow(instance) {
                     // show a usable link immediately (avoid sticking at "Loading…")
                     const url = element.paperUrls && element.paperUrls[0];
-                    const domain = url ? (getSecondLevelDomain(url) || url) : 'source';
-                    const title = element.labelName;
-                    instance.setContent(`\
-                <div class="wordbreaker" style="max-width:250px; font-family: sans-serif; display:flex;align-items:center;justify-content:start;flex-direction:column;gap:0.5rem">\
-                  <p style="margin:0; padding:0;">${title} <a href="${url || '#'}" target="_blank" rel="noopener noreferrer">${domain}</a></p>\
-                </div>\
-              `);
+                    instance.setContent(renderPreviewTooltip({ title: element.labelName }, url));
 
                     // optionally try to fetch richer metadata from the preview service,
                     // but don't rely on it: update tooltip if fetch succeeds, otherwise keep the link
@@ -611,12 +656,7 @@ function plotBuilder(plotData) {
                         try {
                           const local = await getLocalPreview(url);
                           if (local) {
-                            const title = local.title || '';
-                            instance.setContent(`\
-                  <div class="wordbreaker" style="max-width:250px; font-family: sans-serif; display:flex;align-items:center;justify-content:start;flex-direction:column;gap:0.5rem">\
-                    <p style="margin:0; padding:0;">${title}  <span class="no-break"> [ <a href="${url}" target="_blank" rel="noopener noreferrer">${getSecondLevelDomain(url)}</a> ] </span> </p>\
-                  </div>\
-                `);
+                            instance.setContent(renderPreviewTooltip(local, url));
                             console.debug('[preview] used local preview', url, local.__preview_key__ || 'unknown');
                             return;
                           }
@@ -630,12 +670,7 @@ function plotBuilder(plotData) {
                             const r = await fetch(`${PREVIEW_SERVER_BASE}/preview?url=${encodeURIComponent(url)}`);
                             if (!r.ok) throw new Error('preview fetch failed');
                             const meta = await r.json();
-                            const fullTitle = meta.title || '';
-                            instance.setContent(`\
-                  <div class="wordbreaker" style="max-width:250px; font-family: sans-serif; display:flex;align-items:center;justify-content:start;flex-direction:column;gap:0.5rem">\
-                    <p style="margin:0; padding:0;">${fullTitle}  <span class="no-break"> [ <a href="${url}" target="_blank" rel="noopener noreferrer">${getSecondLevelDomain(url)}</a> ] </span> </p>\
-                  </div>\
-                `);
+                            instance.setContent(renderPreviewTooltip(meta, url));
                             console.debug('[preview] used remote preview', url, PREVIEW_SERVER_BASE);
                           } catch (e) {
                             console.debug('[preview] remote preview failed', e);
@@ -2349,8 +2384,7 @@ function attachPaperPreviews(scopeSelection) {
       // show a usable link immediately and then try to fetch richer metadata
       content: (function(){
         const url = d;
-        const domain = url ? (getSecondLevelDomain(url) || url) : 'source';
-        return `<div class="wordbreaker" style="max-width:250px;font-family:sans-serif;display:flex;align-items:center;justify-content:start;flex-direction:column;gap:0.5rem"><p style="margin:0;padding:0;"><a href="${url || '#'}" target="_blank" rel="noopener noreferrer">${domain}</a></p></div>`;
+        return renderPreviewLinkOnly(url);
       })(),
       allowHTML: true,
       appendTo: document.body,
@@ -2367,14 +2401,11 @@ function attachPaperPreviews(scopeSelection) {
             const fullDesc = meta.description || "";
             const maxChars = 240;
             const shortDesc = fullDesc.length > maxChars ? fullDesc.slice(0, maxChars).trim() + "…" : fullDesc;
-            instance.setContent(`
-                <div class="wordbreaker" style="max-width:250px; font-family: sans-serif; display: flex; align-items: center; justify-content: start; flex-direction: column; gap:0.5rem">
-                  ${meta.image && meta.image.length ? `<img src="${meta.image[0].url}" alt="${meta.siteName} logo" style="width:50%; height:auto;margin:0; padding:0;"/>` : ""}
-                  <strong style="margin:0; padding:0;">${shortTitle}</strong>
-                  ${meta.authors && meta.authors.length ? `<em>By ${meta.authors.join(", ")}</em>` : ""}
-                  <p class="wordbreaker" style="margin:0; padding:0;">${shortDesc}</p>
-                </div>
-              `);
+            instance.setContent(renderPreviewTooltip({
+              ...meta,
+              title: shortTitle,
+              description: shortDesc,
+            }, url));
           } else {
             // attempt to fetch preview metadata but don't block the tooltip
             if (PREVIEW_SERVER_BASE) {
@@ -2387,14 +2418,11 @@ function attachPaperPreviews(scopeSelection) {
                   const fullDesc = meta.description || "";
                   const maxChars = 240;
                   const shortDesc = fullDesc.length > maxChars ? fullDesc.slice(0, maxChars).trim() + "…" : fullDesc;
-                  instance.setContent(`
-                    <div class="wordbreaker" style="max-width:250px; font-family: sans-serif; display: flex; align-items: center; justify-content: start; flex-direction: column; gap:0.5rem">
-                      ${meta.image ? `<img src="${meta.image[0].url}" alt="${meta.siteName} logo" style="width:50%; height:auto;margin:0; padding:0;"/>` : ""}
-                      <strong style="margin:0; padding:0;">${shortTitle}</strong>
-                      ${meta.authors && meta.authors.length ? `<em>By ${meta.authors.join(", ")}</em>` : ""}
-                      <p class="wordbreaker" style="margin:0; padding:0;">${shortDesc}</p>
-                    </div>
-                  `);
+                  instance.setContent(renderPreviewTooltip({
+                    ...meta,
+                    title: shortTitle,
+                    description: shortDesc,
+                  }, url));
                 })
                 .catch(() => {
                   // preview service not available or failed — keep the immediate link
@@ -3097,22 +3125,22 @@ dataLayer.call(zoom);
 
 const fontMap = {
   // KaTeX fonts
-  "KaTeX_Main-Regular.woff2": { family: "KaTeX_Main", weight: "400", style: "normal" },
-  "KaTeX_Main-Bold.woff2": { family: "KaTeX_Main", weight: "700", style: "normal" },
-  "KaTeX_Math-Italic.woff2": { family: "KaTeX_Math", weight: "400", style: "italic" },
+  "KaTeX_Main-Regular.woff2": { family: "KaTeX_Main", weight: "400", style: "normal", url: "../vendor/fonts/KaTeX_Main-Regular.woff2" },
+  "KaTeX_Main-Bold.woff2": { family: "KaTeX_Main", weight: "700", style: "normal", url: "../vendor/fonts/KaTeX_Main-Bold.woff2" },
+  "KaTeX_Math-Italic.woff2": { family: "KaTeX_Math", weight: "400", style: "italic", url: "../vendor/fonts/KaTeX_Math-Italic.woff2" },
 
   // Open Sans fonts
   "OpenSans-Regular.woff2": {
     family: "Open Sans",
     weight: "400",
     style: "normal",
-    url: "https://fonts.gstatic.com/s/opensans/v43/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS-muw.woff2"
+    url: "../vendor/fonts/OpenSans-Regular.ttf"
   },
   "OpenSans-Bold.woff2": {
     family: "Open Sans",
     weight: "700",
     style: "normal",
-    url: "https://fonts.gstatic.com/s/opensans/v43/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS-muw.woff2"
+    url: "../vendor/fonts/OpenSans-Bold.ttf"
   },
 };
 
@@ -3122,8 +3150,7 @@ async function embedFonts(svgEl) {
   for (const file in fontMap) {
     const { family, weight, style, url } = fontMap[file];
 
-    // fetch font either from custom URL (for Open Sans) or from KaTeX CDN
-    const fontUrl = url || ("https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/fonts/" + file);
+    const fontUrl = url;
     const res = await fetch(fontUrl);
     const buffer = await res.arrayBuffer();
     const base64 = btoa(String.fromCharCode(...new Uint8Array(buffer)));
