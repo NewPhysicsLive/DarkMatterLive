@@ -21,7 +21,7 @@
     "categories": {
         "detectionType": "Indirect detection",
         "experimentType": "Astrophysical observations",
-        "timeType": "Recent constraints",
+        "timeType": "Past constraints",
         "assumption": "Dark Matter"
     }
 }

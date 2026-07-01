@@ -21,7 +21,7 @@
   "categories": {
     "detectionType": "Direct detection",
     "experimentType": "Laboratory experiments",
-    "timeType": "Past constraints",
+    "timeType": "Recent constraints",
     "assumption": "Dark Matter"
   }
 }
