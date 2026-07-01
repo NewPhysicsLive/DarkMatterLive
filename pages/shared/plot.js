@@ -1745,17 +1745,17 @@ const fontMap = {
   "KaTeX_Math-Italic.woff2": { family: "KaTeX_Math", weight: "400", style: "italic" },
 
   // Open Sans fonts
-  "OpenSans-Regular.woff2": {
+  "OpenSans-Regular.ttf": {
     family: "Open Sans",
     weight: "400",
     style: "normal",
-    url: "https://fonts.gstatic.com/s/opensans/v43/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS-muw.woff2"
+    format: "truetype"
   },
-  "OpenSans-Bold.woff2": {
+  "OpenSans-Bold.ttf": {
     family: "Open Sans",
     weight: "700",
     style: "normal",
-    url: "https://fonts.gstatic.com/s/opensans/v43/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS-muw.woff2"
+    format: "truetype"
   },
 };
 
@@ -1763,10 +1763,10 @@ async function embedFonts(svgEl) {
   let cssRules = "";
 
   for (const file in fontMap) {
-    const { family, weight, style, url } = fontMap[file];
+    const { family, weight, style, format = "woff2" } = fontMap[file];
 
-    // fetch font either from custom URL (for Open Sans) or from KaTeX CDN
-    const fontUrl = url || ("https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/fonts/" + file);
+    // Keep export fully local by loading from vendored font files only.
+    const fontUrl = "../vendor/fonts/" + file;
     const res = await fetch(fontUrl);
     const buffer = await res.arrayBuffer();
     const base64 = btoa(String.fromCharCode(...new Uint8Array(buffer)));
@@ -1776,7 +1776,7 @@ async function embedFonts(svgEl) {
         font-family: '${family}';
         font-weight: ${weight};
         font-style: ${style};
-        src: url(data:font/woff2;base64,${base64}) format('woff2');
+        src: url(data:font/${format};base64,${base64}) format('${format}');
       }
     `;
   }
