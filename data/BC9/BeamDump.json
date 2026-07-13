@@ -24,7 +24,7 @@
   "curveType": "excluded",
   "categories": {
     "detectionType": "Direct detection",
-    "experimentType": "Laboratory experiments",
+    "experimentType": "Collider experiments",
     "timeType": "Past constraints",
     "assumption": "None"
   }
